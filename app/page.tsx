@@ -6,12 +6,16 @@ export default async function Home() {
     "\n",
   );
   const body = html.match(/<body>([\s\S]*)<\/body>/)?.[1] || "";
+  const connectedBody = body.replace(
+    '<nav class="mobile-nav" id="mobileNav" aria-label="Navigasi mobile">',
+    '$&<a href="/workspace">Masuk</a>',
+  );
   return (
     <>
       <link rel="stylesheet" href="/marketing/styles.css" />
       <div
         dangerouslySetInnerHTML={{
-          __html: body
+          __html: connectedBody
             .replace('<script src="app.js"></script>', "")
             .replaceAll('src="assets/', 'src="/marketing/assets/')
             .replaceAll('href="assets/', 'href="/marketing/assets/'),

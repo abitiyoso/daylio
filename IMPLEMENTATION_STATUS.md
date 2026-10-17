@@ -14,6 +14,10 @@ Remaining scope: cursor pagination beyond the 1,500-record workspace window, his
 
 ## Baseline and decisions
 
+### Landing-to-workspace recheck
+
+Desktop **Masuk** and the application preview already linked to `/workspace`. Recheck found the mobile header hides desktop actions but its menu lacked a login link. The landing SSR now adds **Masuk** to the mobile menu without changing the v4 source, stylesheet, imagery or logo. `scripts/browser-entry-test.mjs` passed for all four roles: public landing → desktop/mobile login entry → real authenticated role dashboard → `/api/v1/workspace/context` with persisted authorized children. Anonymous API returns 401; returning through the public application preview with an active session retains the authenticated role. Evidence: `evidence/entry-browser-results.json` and `evidence/screenshots/entry/`. This verifies the local application, not a hosted production deployment.
+
 The supplied ZIP had static HTML/CSS/JS, local sample metrics/scripted LEO/still-image CCTV and no backend or existing Elenio source. This implementation adds Next.js/TypeScript, PostgreSQL RLS, Supabase Auth boundaries, real API-backed workspace workflows, private media and automated tests. v4 source/layout/assets are retained. Local sandbox fixtures are explicit and production-disabled. The API adapts the proposed endpoint names; the generated OpenAPI inventory documents actual paths. Domain workflow records share a constrained JSONB table with tenant and child foreign keys, rather than adding a physical table for each suggested name.
 
 Evidence: `tests/contracts.test.mjs`, `tests/workflows.test.mjs`, `tests/reliability.test.mjs`, `evidence/automated-tests.txt`, `evidence/browser-results.json`, and `evidence/screenshots/`. Browser identity is a synthetic local fixture, not real Supabase verification. The embedded PostgreSQL tests execute migrations/RLS; they are not a hosted disaster recovery drill. A missing evidence file means that check has not yet completed, never an implicit pass.

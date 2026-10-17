@@ -48,6 +48,7 @@ pnpm build
 node scripts/browser-test.mjs
 node scripts/browser-v3-test.mjs
 node scripts/browser-v3-business-test.mjs
+node scripts/browser-entry-test.mjs
 ```
 
 Database tests apply every SQL migration to an actual embedded PostgreSQL engine and use restricted roles. Browser tests use synthetic identities, real HTTP routes, persistent database records and real image processing. They are not evidence of deployed Supabase/Elenio integration. Screenshots and machine-readable evidence are under `evidence/`.
