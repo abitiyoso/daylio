@@ -53,6 +53,7 @@ type Props = {
   memberships: Item[];
   request: Request;
   onTools: () => void;
+  onAccess: () => void;
   onLogout: () => Promise<void>;
   onOrganization: (id: string) => Promise<void>;
 };
@@ -278,6 +279,7 @@ export default function OperationsWorkspace({
   memberships,
   request,
   onTools,
+  onAccess,
   onLogout,
   onOrganization,
 }: Props) {
@@ -1405,6 +1407,12 @@ export default function OperationsWorkspace({
     return (
       <div className="op-columns">
         <div className="op-stack">
+          {management && (
+            <button onClick={onAccess}>
+              <UsersThree size={18} />
+              Akun & hak akses
+            </button>
+          )}
           {!isParent && (
             <Card title="Draf kegiatan kelompok">{reviewBatches()}</Card>
           )}
@@ -2028,6 +2036,12 @@ export default function OperationsWorkspace({
               <Empty>Rapor belum tersedia untuk anak ini.</Empty>
             )}
           </Card>
+          {management && (
+            <button onClick={onAccess}>
+              <UsersThree size={18} />
+              Akun & hak akses
+            </button>
+          )}
           {!isParent && (
             <Card
               title="Observasi guru"
@@ -3168,6 +3182,12 @@ export default function OperationsWorkspace({
               )}
             </button>
           ))}
+          {management && (
+            <button onClick={onAccess}>
+              <UsersThree size={18} />
+              Akun & hak akses
+            </button>
+          )}
           {!isParent && (
             <>
               <span className="op-nav-label">PENGELOLAAN</span>

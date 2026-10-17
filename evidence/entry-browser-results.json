@@ -1,10 +1,10 @@
 {
-  "at": "2026-10-17T13:22:52.317Z",
+  "at": "2026-10-17T13:38:25.432Z",
   "environment": "Local synthetic sandbox; actual HTTP API and persisted database. No hosted deployment claimed.",
   "passed": [
-    "owner: landing → desktop/mobile Masuk → authenticated Business Pulse → authorized API/persisted children; anonymous API denied; active-session reentry retains role.",
-    "manager: landing → desktop/mobile Masuk → authenticated Control Tower → authorized API/persisted children; anonymous API denied; active-session reentry retains role.",
-    "caregiver: landing → desktop/mobile Masuk → authenticated Catat Aktivitas → authorized API/persisted children; anonymous API denied; active-session reentry retains role.",
-    "parent: landing → desktop/mobile Masuk → authenticated My Child Today → authorized API/persisted children; anonymous API denied; active-session reentry retains role."
+    "owner: authenticated dashboard, scoped persisted API, responsive entry",
+    "manager: authenticated dashboard, scoped persisted API, responsive entry",
+    "caregiver: authenticated dashboard, scoped persisted API, responsive entry",
+    "parent: authenticated dashboard, scoped persisted API, responsive entry"
   ]
 }

@@ -3,7 +3,13 @@ const config: NextConfig = {
   poweredByHeader: false,
   devIndicators: false,
   logging: {
-    incomingRequests: { ignore: [/\/api\/v1\/media\//, /\/auth\/confirm/] },
+    incomingRequests: {
+      ignore: [
+        /\/api\/v1\/media\//,
+        /\/auth\/(confirm|complete)/,
+        /\/api\/v1\/invitations\/[a-f0-9]{64}\/accept/,
+      ],
+    },
   },
   serverExternalPackages: ["postgres", "@electric-sql/pglite"],
   async headers() {

@@ -87,6 +87,7 @@ add("public/demo-requests", "post", {
     "Persist contact consent + lead; honeypot, rate limit and fingerprint dedup. Returns recorded, never claims WhatsApp sent.",
 });
 for (const action of [
+  "session",
   "signup",
   "login",
   "recover",
@@ -118,6 +119,10 @@ add("public/tours/{organizationId}", "post", {
   publicRoute: true,
   description:
     "Private prospect token authorizes a requested survey; staff confirmation is separate.",
+});
+add("invitations/{id}/email", "post", {
+  description:
+    "Manager/owner requests provider verification email for a valid invitation; activation requires verified matching identity.",
 });
 add("staff/{id}", "patch");
 add("staff-assignments", "get,post");

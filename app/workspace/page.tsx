@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 import "./workspace.css";
 import OperationsWorkspace from "./operations";
+import AccessPanel from "./access-panel";
 type Row = {
   id: string;
   name?: string;
@@ -431,6 +432,7 @@ export default function Workspace() {
     [answer, setAnswer] = useState<any>(null),
     [resetMode, setResetMode] = useState(false),
     [authMode, setAuthMode] = useState("login");
+  const [accessOpen, setAccessOpen] = useState(false);
   const config = configs[view];
   const role = user?.role;
   async function api(
@@ -513,6 +515,11 @@ export default function Workspace() {
   }
   async function session() {
     try {
+      const invitation = new URLSearchParams(location.search).get("invitation");
+      if (invitation) {
+        await api(`invitations/${invitation}/accept`, "POST", {});
+        history.replaceState({}, "", "/workspace");
+      }
       const list = await api("me/memberships");
       setMemberships(list);
       if (list[0]) {
@@ -838,8 +845,12 @@ export default function Workspace() {
         <a href="/" className="wordmark">
           Daylio <small>by Elenio</small>
         </a>
-        <h1>{authMode === "signup" ? "Daftarkan akun" : "Selamat datang"}</h1>
-        <p>Kelola daycare dan ikuti kabar si kecil.</p>
+        <h1>
+          {authMode === "recover" ? "Pulihkan kata sandi" : "Selamat datang"}
+        </h1>
+        <p>
+          Masuk ke akun Daylio Anda untuk membuka dashboard sesuai hak akses.
+        </p>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -878,11 +889,11 @@ export default function Workspace() {
               ? "Memproses…"
               : authMode === "recover"
                 ? "Kirim pemulihan"
-                : "Lanjutkan"}
+                : "Masuk"}
           </button>
         </form>
         <div className="actions">
-          {["login", "signup", "recover"].map((mode) => (
+          {(authMode === "login" ? ["recover"] : ["login"]).map((mode) => (
             <button
               className="secondary"
               key={mode}
@@ -896,6 +907,15 @@ export default function Workspace() {
             </button>
           ))}
         </div>
+        <aside className="auth-invitation">
+          <strong>Belum memiliki akses?</strong>
+          <p>
+            Admin daycare mengundang Anda melalui email dan menentukan peran.
+            Buka tautan pada email tersebut untuk verifikasi, lalu buat kata
+            sandi pribadi.
+          </p>
+        </aside>
+        <a href="/">← Kembali ke beranda</a>
         <p role="status">{message}</p>
       </main>
     );
@@ -948,6 +968,14 @@ export default function Workspace() {
         <p role="status">{message}</p>
       </main>
     );
+  if (accessOpen && managers.includes(role))
+    return (
+      <AccessPanel
+        role={role}
+        request={(path, method, body) => api(path, method, body)}
+        onBack={() => setAccessOpen(false)}
+      />
+    );
   if (!legacyTools)
     return (
       <OperationsWorkspace
@@ -955,6 +983,7 @@ export default function Workspace() {
         organizationId={org}
         memberships={memberships}
         request={(path, method, body, key) => api(path, method, body, org, key)}
+        onAccess={() => setAccessOpen(true)}
         onTools={() => setLegacyTools(true)}
         onLogout={async () => {
           await api("auth/logout", "POST", {});

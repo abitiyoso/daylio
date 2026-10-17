@@ -60,7 +60,7 @@ try {
     await p
       .getByLabel("Kata sandi", { exact: true })
       .fill("Sandbox-only-2026!");
-    await p.getByRole("button", { name: "Lanjutkan", exact: true }).click();
+    await p.getByRole("button", { name: "Masuk", exact: true }).click();
     try {
       await p.getByRole("button", { name: "Keluar", exact: true }).waitFor();
     } catch {

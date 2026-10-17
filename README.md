@@ -56,3 +56,5 @@ Database tests apply every SQL migration to an actual embedded PostgreSQL engine
 API inventory: `docs/openapi.json`. Security/storage decisions: `docs/ARCHITECTURE.md`. Deployment, workers and restore procedure: `docs/OPERATIONS.md`. External integration gaps: `ELENIO_API_DISCOVERY.md`. P2: `docs/P2_MILESTONES.md`.
 
 All included photographs are retained source assets. Their production license/provenance has not been verified; the original kit explicitly identifies concept fallback crops. No public-stock hotlinks are loaded at runtime. Replacing them with licensed production photos is a launch gate, separate from preserving the supplied v4 design.
+
+Email access configuration and local evidence: [docs/EMAIL_ACCESS.md](docs/EMAIL_ACCESS.md). Run `node scripts/browser-access-test.mjs` against the isolated sandbox to verify the invitation workflow.

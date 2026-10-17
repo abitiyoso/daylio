@@ -3,6 +3,7 @@ import { createHash, randomBytes } from "node:crypto";
 import { z } from "zod";
 import { cookies } from "next/headers";
 import { database, scoped, type DB } from "../../../../lib/db";
+import { verifyIdentity } from "../../../../lib/identity.mjs";
 import { identity, sameOrigin } from "../../../../lib/auth";
 import { service, fail } from "../../../../lib/service.mjs";
 import { acceptInvitation } from "../../../../lib/invitations.mjs";
@@ -106,13 +107,55 @@ async function handler(
         jar.delete("daylio_refresh");
         return NextResponse.json({ loggedOut: true });
       }
+      if (action === "session") {
+        const access = z.string().min(16).max(8192).parse(body.access_token);
+        const refresh = z.string().min(16).max(8192).parse(body.refresh_token);
+        await verifyIdentity(access, { url: base, key });
+        // Bind both tokens to the same verified identity through the provider.
+        const refreshed = await fetch(
+          `${base}/auth/v1/token?grant_type=refresh_token`,
+          {
+            method: "POST",
+            headers: { apikey: key!, "Content-Type": "application/json" },
+            body: JSON.stringify({ refresh_token: refresh }),
+            signal: AbortSignal.timeout(8000),
+            cache: "no-store",
+          },
+        );
+        if (!refreshed.ok) fail(401, "SESSION_EXPIRED");
+        const session = await refreshed.json();
+        const first = await verifyIdentity(access, { url: base, key });
+        const second = await verifyIdentity(session.access_token, {
+          url: base,
+          key,
+        });
+        if (first.id !== second.id) fail(403, "SESSION_MISMATCH");
+        const options = {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "lax" as const,
+          path: "/",
+        };
+        jar.set("daylio_access", session.access_token, {
+          ...options,
+          maxAge: session.expires_in || 3600,
+        });
+        jar.set("daylio_refresh", session.refresh_token, {
+          ...options,
+          maxAge: 604800,
+        });
+        return NextResponse.json(
+          { ok: true },
+          { headers: { "Cache-Control": "no-store" } },
+        );
+      }
       let endpoint = "",
         payload: any;
       if (action === "refresh") {
         endpoint = "token?grant_type=refresh_token";
         payload = { refresh_token: jar.get("daylio_refresh")?.value };
       } else if (action === "recover") {
-        endpoint = "recover";
+        endpoint = `recover?redirect_to=${encodeURIComponent(new URL("/auth/complete", process.env.APP_ORIGIN || request.url).href)}`;
         payload = { email: z.email().parse(body.email) };
       } else if (action === "signup" || action === "login") {
         endpoint = action === "signup" ? "signup" : "token?grant_type=password";
@@ -365,6 +408,54 @@ async function handler(
       );
     }
     const orgId = z.uuid().parse(request.headers.get("x-organization-id"));
+    if (
+      segments[0] === "invitations" &&
+      segments[2] === "email" &&
+      method === "POST"
+    ) {
+      await limited("invitation-email:" + user.id, 20);
+      const token = z
+        .string()
+        .regex(/^[a-f0-9]{64}$/)
+        .parse(body.token);
+      const invitation = await scoped(user.id, orgId, async (tx: DB) => {
+        const [{ role }] = await tx`select app_role() role`;
+        if (!["owner", "manager"].includes(role)) fail(403, "FORBIDDEN");
+        const [row] =
+          await tx`select id,email,role from invitations where id=${z.uuid().parse(segments[1])} and organization_id=${orgId} and token_hash=${digest(token)} and revoked_at is null and accepted_by is null and expires_at>now()`;
+        if (!row) fail(403, "INVITATION_INVALID");
+        if (role === "manager" && row.role === "manager")
+          fail(403, "FORBIDDEN");
+        return row;
+      });
+      const base = process.env.SUPABASE_URL,
+        key = process.env.SUPABASE_ANON_KEY;
+      if (!base || !key || !process.env.APP_ORIGIN)
+        fail(503, "AUTH_UNAVAILABLE");
+      const redirect = new URL("/auth/complete", process.env.APP_ORIGIN);
+      redirect.searchParams.set("invitation", token);
+      const delivery = await fetch(
+        `${base}/auth/v1/otp?redirect_to=${encodeURIComponent(redirect.href)}`,
+        {
+          method: "POST",
+          headers: { apikey: key!, "Content-Type": "application/json" },
+          body: JSON.stringify({ email: invitation.email, create_user: true }),
+          signal: AbortSignal.timeout(8000),
+          cache: "no-store",
+        },
+      );
+      if (!delivery.ok)
+        fail(
+          503,
+          "EMAIL_DELIVERY_FAILED",
+          "Email belum terkirim. Periksa konfigurasi email autentikasi lalu coba lagi.",
+        );
+      await sql`insert into audit_logs(organization_id,actor_id,action,resource_id) values(${orgId},${user.id},'invitation.email_requested',${invitation.id})`;
+      return NextResponse.json(
+        { data: { requested: true, invitationId: invitation.id } },
+        { headers: { "Cache-Control": "no-store" } },
+      );
+    }
     const result = await scoped(user.id, orgId, async (tx: DB) => {
       const [{ role }] = await tx`select app_role() role`;
       const [caps] =

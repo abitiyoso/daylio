@@ -60,7 +60,7 @@ try {
     await page
       .getByLabel("Kata sandi", { exact: true })
       .fill("Sandbox-only-2026!");
-    await page.getByRole("button", { name: "Lanjutkan", exact: true }).click();
+    await page.getByRole("button", { name: "Masuk", exact: true }).click();
     await page.getByRole("heading", { name: title, exact: true }).waitFor();
     await page.locator('.op-content > div[aria-busy="false"]').waitFor();
     assert.equal(await page.locator('.op-alert[role="alert"]').count(), 0);
@@ -84,16 +84,18 @@ try {
     await page.screenshot({
       path: `evidence/screenshots/entry/${role}-dashboard.png`,
     });
-    // Clicking the public entry again with an active session should retain the real role.
+    passed.push(
+      `${role}: authenticated dashboard, scoped persisted API, responsive entry`,
+    );
+    // The phone is a labeled showcase.
     await page.goto(base);
     await page
       .locator("#phoneContent")
-      .getByRole("link", { name: "Masuk ke Daylio", exact: false })
-      .click();
-    await page.getByRole("heading", { name: title, exact: true }).waitFor();
-    assert.deepEqual(errors, []);
-    passed.push(
-      `${role}: landing → desktop/mobile Masuk → authenticated ${title} → authorized API/persisted children; anonymous API denied; active-session reentry retains role.`,
+      .getByText(/SHOWCASE/)
+      .waitFor();
+    assert.equal(
+      await page.locator("#phoneContent a[href='/workspace']").count(),
+      0,
     );
     await context.close();
   }

@@ -28,7 +28,7 @@ try {
     await page
       .getByLabel("Kata sandi", { exact: true })
       .fill("Sandbox-only-2026!");
-    await page.getByRole("button", { name: "Lanjutkan", exact: true }).click();
+    await page.getByRole("button", { name: "Masuk", exact: true }).click();
     await page.locator('.op-content > div[aria-busy="false"]').waitFor();
     const actor = { page, context };
     actors.push(actor);
