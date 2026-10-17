@@ -55,7 +55,7 @@ try {
         faults.push(`${new URL(r.url()).pathname}: ${r.status()}`);
     });
     p.on("pageerror", (error) => faults.push(error.message));
-    await p.goto(base + "/workspace");
+    await p.goto(base + "/workspace?tools=1");
     await p.getByLabel("Email", { exact: true }).fill(role + "@daylio.test");
     await p
       .getByLabel("Kata sandi", { exact: true })
@@ -199,7 +199,7 @@ try {
     404,
   );
   assert.equal(
-    (await api(caregiver, `activities/${meal.body.id}/publish`, "POST", {}))
+    (await api(owner, `activities/${meal.body.id}/publish`, "POST", {}))
       .status,
     201,
   );

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import "./workspace.css";
+import OperationsWorkspace from "./operations";
 type Row = {
   id: string;
   name?: string;
@@ -416,6 +417,7 @@ const configs: Record<string, Config> = {
 };
 export default function Workspace() {
   const [user, setUser] = useState<any>(null),
+    [legacyTools, setLegacyTools] = useState(false),
     [org, setOrg] = useState(""),
     [memberships, setMemberships] = useState<any[]>([]),
     [view, setView] = useState("home"),
@@ -431,11 +433,19 @@ export default function Workspace() {
     [authMode, setAuthMode] = useState("login");
   const config = configs[view];
   const role = user?.role;
-  async function api(path: string, method = "GET", body?: any, tenant = org) {
+  async function api(
+    path: string,
+    method = "GET",
+    body?: any,
+    tenant = org,
+    key?: string,
+  ) {
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
       ...(tenant ? { "x-organization-id": tenant } : {}),
-      ...(method === "POST" ? { "idempotency-key": crypto.randomUUID() } : {}),
+      ...(method === "POST"
+        ? { "idempotency-key": key || crypto.randomUUID() }
+        : {}),
     };
     const options = {
       method,
@@ -453,7 +463,11 @@ export default function Workspace() {
       else setUser(null);
     }
     const json = await res.json();
-    if (!res.ok) throw new Error(json.error?.message || "Permintaan gagal");
+    if (!res.ok)
+      throw Object.assign(
+        new Error(json.error?.message || "Permintaan gagal"),
+        { status: res.status, code: json.error?.code },
+      );
     return json.data ?? json;
   }
   async function run(fn: () => Promise<void>) {
@@ -477,7 +491,9 @@ export default function Workspace() {
     if (managers.includes(me.role)) {
       const [classrooms, branches, members, leads] = await Promise.all(
         ["classrooms", "branches", "staff", "leads"].map((endpoint) =>
-          api(endpoint, "GET", undefined, tenant),
+          endpoint === "leads" && !me.capabilities.crm
+            ? Promise.resolve([])
+            : api(endpoint, "GET", undefined, tenant),
         ),
       );
       setReferences({
@@ -503,8 +519,9 @@ export default function Workspace() {
         setOrg(list[0].organization_id);
         await load(list[0].organization_id);
       } else setUser({ role: "unconfigured" });
-    } catch {
+    } catch (error: any) {
       setUser(null);
+      if (error.status !== 401) setMessage(error.message);
     }
   }
   const initialSession = useRef(false);
@@ -512,6 +529,7 @@ export default function Workspace() {
     if (initialSession.current) return;
     initialSession.current = true;
     setResetMode(new URLSearchParams(location.search).get("reset") === "1");
+    setLegacyTools(new URLSearchParams(location.search).get("tools") === "1");
     if (new URLSearchParams(location.search).has("authError"))
       setMessage("Tautan verifikasi tidak berlaku. Minta tautan baru.");
     void session().finally(() => setBusy(false));
@@ -659,7 +677,14 @@ export default function Workspace() {
         if (!note) return;
         endpoint = `activities/${row.id}`;
         method = "PATCH";
-        body = { data: { ...row.data, note } };
+        body = {
+          data: {
+            type: row.data?.type,
+            occurredAt: row.data?.occurredAt,
+            ...(row.data?.result ? { result: row.data.result } : {}),
+            note,
+          },
+        };
       }
       if (action === "guardian") {
         const userId = prompt("ID pengguna wali yang telah menerima undangan");
@@ -688,6 +713,13 @@ export default function Workspace() {
         body = { note };
       }
       if (action === "handover") {
+        const verifiedPersonName = prompt(
+            "Nama orang yang hadir (harus sesuai izin penjemput)",
+          ),
+          identityNote = prompt(
+            "Catatan pemeriksaan identitas fisik (minimal 8 karakter)",
+          );
+        if (!verifiedPersonName || !identityNote) return;
         if (
           !confirm(
             "Identitas penjemput telah diperiksa secara langsung dan cocok dengan izin?",
@@ -695,7 +727,12 @@ export default function Workspace() {
         )
           return;
         endpoint = `pickups/${row.id}/verify-handover`;
-        body = { identityVerified: true };
+        body = {
+          verifiedPersonName,
+          identityNote,
+          verificationMethod: "physical-id",
+          handoverConfirmed: true,
+        };
       }
       if (action === "payment") {
         const reference = prompt("Referensi transfer yang sudah diverifikasi");
@@ -708,7 +745,30 @@ export default function Workspace() {
           classroomId = prompt("ID kelas"),
           email = prompt("Email wali");
         if (!name || !classroomId || !email) return;
-        body = { name, classroomId, email };
+        const packageName = prompt("Paket yang disepakati"),
+          packagePrice = Number(prompt("Harga paket disepakati (Rp)")),
+          emergencyName = prompt("Nama kontak darurat"),
+          emergencyPhone = prompt("Telepon darurat");
+        if (
+          !packageName ||
+          !packagePrice ||
+          !emergencyName ||
+          !emergencyPhone ||
+          !confirm(
+            "Slot, harga paket dan kontak darurat sudah dikonfirmasi wali?",
+          )
+        )
+          return;
+        body = {
+          name,
+          classroomId,
+          email,
+          packageName,
+          packagePrice,
+          emergencyName,
+          emergencyPhone,
+          confirmed: true,
+        };
       }
       if (action === "read") method = "PATCH";
       if (action === "deactivate") {
@@ -888,6 +948,24 @@ export default function Workspace() {
         <p role="status">{message}</p>
       </main>
     );
+  if (!legacyTools)
+    return (
+      <OperationsWorkspace
+        user={user}
+        organizationId={org}
+        memberships={memberships}
+        request={(path, method, body, key) => api(path, method, body, org, key)}
+        onTools={() => setLegacyTools(true)}
+        onLogout={async () => {
+          await api("auth/logout", "POST", {});
+          setUser(null);
+        }}
+        onOrganization={async (tenant) => {
+          setOrg(tenant);
+          await load(tenant);
+        }}
+      />
+    );
   const readOnly =
     (view === "consents" && role !== "parent") ||
     (role === "parent" &&
@@ -897,6 +975,9 @@ export default function Workspace() {
   return (
     <div className="workspace">
       <header>
+        <button onClick={() => setLegacyTools(false)}>
+          Kembali ke dashboard
+        </button>
         <a href="/" className="wordmark">
           Daylio <small>by Elenio</small>
         </a>

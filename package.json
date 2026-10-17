@@ -17,6 +17,7 @@
     "api:generate": "node scripts/openapi.mjs"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.10",
     "next": "^16.0.0",
     "postgres": "^3.4.7",
     "react": "^19.0.0",

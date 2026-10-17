@@ -3188,7 +3188,7 @@
     "/api/v1/pickup-authorizations": {
       "get": {
         "operationId": "get_pickup_authorizations",
-        "description": "Daylio pickup-authorizations. Data is scoped by verified membership and database RLS.",
+        "description": "Backend v3 scoped workflow. See docs/BACKEND_V3_API.md for strict command payloads, permissions and transitions.",
         "security": [
           {
             "BearerAuth": []
@@ -3237,7 +3237,7 @@
       },
       "post": {
         "operationId": "post_pickup_authorizations",
-        "description": "Daylio pickup-authorizations. Data is scoped by verified membership and database RLS.",
+        "description": "Backend v3 scoped workflow. See docs/BACKEND_V3_API.md for strict command payloads, permissions and transitions.",
         "security": [
           {
             "BearerAuth": []
@@ -3302,18 +3302,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {
-                  "childId": {
-                    "type": "string",
-                    "format": "uuid"
-                  },
-                  "data": {
-                    "$ref": "#/components/schemas/pickup-authorization"
-                  }
-                },
-                "required": [
-                  "data"
-                ]
+                "additionalProperties": true
               }
             }
           }
@@ -6932,7 +6921,7 @@
     "/api/v1/pickup-authorizations/{id}/approve": {
       "post": {
         "operationId": "post_pickup_authorizations__id__approve",
-        "description": "Daylio pickup-authorizations/{id}/approve. Data is scoped by verified membership and database RLS.",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
         "security": [
           {
             "BearerAuth": []
@@ -7015,7 +7004,7 @@
     "/api/v1/pickups/{id}/verify-handover": {
       "post": {
         "operationId": "post_pickups__id__verify_handover",
-        "description": "Daylio pickups/{id}/verify-handover. Data is scoped by verified membership and database RLS.",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
         "security": [
           {
             "BearerAuth": []
@@ -10454,6 +10443,2809 @@
           }
         }
       }
+    },
+    "/api/v1/workspace/context": {
+      "get": {
+        "operationId": "get_workspace_context",
+        "description": "Daylio workspace/context. Data is scoped by verified membership and database RLS.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/care/today": {
+      "get": {
+        "operationId": "get_care_today",
+        "description": "Daylio care/today. Data is scoped by verified membership and database RLS.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/care/policy": {
+      "get": {
+        "operationId": "get_care_policy",
+        "description": "Daylio care/policy. Data is scoped by verified membership and database RLS.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/manager/exceptions": {
+      "get": {
+        "operationId": "get_manager_exceptions",
+        "description": "Daylio manager/exceptions. Data is scoped by verified membership and database RLS.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/manager/closing": {
+      "get": {
+        "operationId": "get_manager_closing",
+        "description": "Daylio manager/closing. Data is scoped by verified membership and database RLS.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      },
+      "post": {
+        "operationId": "post_manager_closing",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/owner/business-pulse": {
+      "get": {
+        "operationId": "get_owner_business_pulse",
+        "description": "Daylio owner/business-pulse. Data is scoped by verified membership and database RLS.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/parent/today": {
+      "get": {
+        "operationId": "get_parent_today",
+        "description": "Daylio parent/today. Data is scoped by verified membership and database RLS.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/passports/{childId}": {
+      "get": {
+        "operationId": "get_passports__childId_",
+        "description": "Daylio passports/{childId}. Data is scoped by verified membership and database RLS.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "childId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/crm/overview": {
+      "get": {
+        "operationId": "get_crm_overview",
+        "description": "Daylio crm/overview. Data is scoped by verified membership and database RLS.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/development-reports/{id}/pdf": {
+      "get": {
+        "operationId": "get_development_reports__id__pdf",
+        "description": "Daylio development-reports/{id}/pdf. Data is scoped by verified membership and database RLS.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/morning-notes": {
+      "get": {
+        "operationId": "get_morning_notes",
+        "description": "Backend v3 scoped workflow. See docs/BACKEND_V3_API.md for strict command payloads, permissions and transitions.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      },
+      "post": {
+        "operationId": "post_morning_notes",
+        "description": "Backend v3 scoped workflow. See docs/BACKEND_V3_API.md for strict command payloads, permissions and transitions.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/daily-stories": {
+      "get": {
+        "operationId": "get_daily_stories",
+        "description": "Backend v3 scoped workflow. See docs/BACKEND_V3_API.md for strict command payloads, permissions and transitions.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      },
+      "post": {
+        "operationId": "post_daily_stories",
+        "description": "Backend v3 scoped workflow. See docs/BACKEND_V3_API.md for strict command payloads, permissions and transitions.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/passport-changes": {
+      "get": {
+        "operationId": "get_passport_changes",
+        "description": "Backend v3 scoped workflow. See docs/BACKEND_V3_API.md for strict command payloads, permissions and transitions.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      },
+      "post": {
+        "operationId": "post_passport_changes",
+        "description": "Backend v3 scoped workflow. See docs/BACKEND_V3_API.md for strict command payloads, permissions and transitions.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/observations": {
+      "get": {
+        "operationId": "get_observations",
+        "description": "Backend v3 scoped workflow. See docs/BACKEND_V3_API.md for strict command payloads, permissions and transitions.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      },
+      "post": {
+        "operationId": "post_observations",
+        "description": "Backend v3 scoped workflow. See docs/BACKEND_V3_API.md for strict command payloads, permissions and transitions.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/development-reports": {
+      "get": {
+        "operationId": "get_development_reports",
+        "description": "Backend v3 scoped workflow. See docs/BACKEND_V3_API.md for strict command payloads, permissions and transitions.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      },
+      "post": {
+        "operationId": "post_development_reports",
+        "description": "Backend v3 scoped workflow. See docs/BACKEND_V3_API.md for strict command payloads, permissions and transitions.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/development-rubrics": {
+      "get": {
+        "operationId": "get_development_rubrics",
+        "description": "Backend v3 scoped workflow. See docs/BACKEND_V3_API.md for strict command payloads, permissions and transitions.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      },
+      "post": {
+        "operationId": "post_development_rubrics",
+        "description": "Backend v3 scoped workflow. See docs/BACKEND_V3_API.md for strict command payloads, permissions and transitions.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/morning-notes/{id}": {
+      "patch": {
+        "operationId": "patch_morning_notes__id_",
+        "description": "Daylio morning-notes/{id}. Data is scoped by verified membership and database RLS.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/daily-stories/{id}": {
+      "patch": {
+        "operationId": "patch_daily_stories__id_",
+        "description": "Daylio daily-stories/{id}. Data is scoped by verified membership and database RLS.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/activities/batches/{batchId}/publish": {
+      "post": {
+        "operationId": "post_activities_batches__batchId__publish",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "batchId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/morning-notes/{id}/acknowledge": {
+      "post": {
+        "operationId": "post_morning_notes__id__acknowledge",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/daily-stories/{id}/publish": {
+      "post": {
+        "operationId": "post_daily_stories__id__publish",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pickup-authorizations/{id}/revoke": {
+      "post": {
+        "operationId": "post_pickup_authorizations__id__revoke",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/passport-changes/{id}/approve": {
+      "post": {
+        "operationId": "post_passport_changes__id__approve",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/passport-changes/{id}/reject": {
+      "post": {
+        "operationId": "post_passport_changes__id__reject",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/observations/{id}/submit": {
+      "post": {
+        "operationId": "post_observations__id__submit",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/observations/{id}/approve": {
+      "post": {
+        "operationId": "post_observations__id__approve",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/observations/{id}/reject": {
+      "post": {
+        "operationId": "post_observations__id__reject",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/development-reports/{id}/publish": {
+      "post": {
+        "operationId": "post_development_reports__id__publish",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/crm/leads/{id}/qualify": {
+      "post": {
+        "operationId": "post_crm_leads__id__qualify",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/crm/leads/{id}/whatsapp-draft": {
+      "post": {
+        "operationId": "post_crm_leads__id__whatsapp_draft",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/crm/leads/{id}/confirm-enrollment": {
+      "post": {
+        "operationId": "post_crm_leads__id__confirm_enrollment",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/crm/whatsapp-drafts/{id}/copy": {
+      "post": {
+        "operationId": "post_crm_whatsapp_drafts__id__copy",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/crm/whatsapp-drafts/{id}/open": {
+      "post": {
+        "operationId": "post_crm_whatsapp_drafts__id__open",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/leo/caregiver/query": {
+      "post": {
+        "operationId": "post_leo_caregiver_query",
+        "description": "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -10486,6 +13278,22 @@
           "timezone": {
             "type": "string",
             "const": "Asia/Jakarta"
+          },
+          "routinePublishing": {
+            "type": "string",
+            "enum": [
+              "caregiver",
+              "manager-review"
+            ]
+          },
+          "substituteReview": {
+            "type": "boolean"
+          },
+          "managerFinance": {
+            "type": "boolean"
+          },
+          "managerCrm": {
+            "type": "boolean"
           }
         },
         "required": [
@@ -10618,6 +13426,19 @@
             "type": "string",
             "format": "date-time",
             "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+          },
+          "result": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "batchId": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+          },
+          "reviewRequired": {
+            "type": "boolean"
           }
         },
         "required": [
@@ -10648,6 +13469,16 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 5242880
+          },
+          "depictedChildIds": {
+            "minItems": 1,
+            "maxItems": 30,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+            }
           }
         },
         "required": [

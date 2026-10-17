@@ -16,6 +16,14 @@ Open `http://127.0.0.1:3100`, then **Masuk**. Synthetic accounts: `owner@daylio.
 
 The sandbox persists under ignored `data/sandbox`, binds the app and identity fixture to localhost, displays a sandbox banner and refuses production mode. It cannot verify real emails or stream cameras. Port 4011 is the isolated identity fixture. Do not deploy either fixture or put real child information in it.
 
+## Backend v3 workspace
+
+The approved reference package is preserved under `design-reference/`. The existing workspace now opens a role-specific operations view, backed by the same authenticated API and database. Earlier administrative tools remain available through **Administrasi lanjutan** or `/workspace?tools=1`.
+
+See `docs/DAYLIO_V3_GAP_ANALYSIS.md`, `docs/DAYLIO_V3_WORKFLOW_MAP.md`, and `docs/BACKEND_V3_API.md`. Local evidence and responsive screenshots are tracked in `IMPLEMENTATION_STATUS.md`. Migration 011 adds care/development records and permission policy after the original ten migrations without replacing existing records. The synthetic sandbox uses a one-time versioned six-present/one-absent fixture; it does not re-create attendance after every checkout. Sandbox-only HTTP rate allowances are larger for repeated UI acceptance runs; production limits are unchanged.
+
+CCTV and Video Analytics are explicitly deferred; see `docs/ELENIO_INTEGRATION_NEXT.md`. Do not deploy the reference prototype or sandbox identity/data as production.
+
 ## Production-shaped environment
 
 Copy `.env.example` to `.env.local`; populate the database, Supabase Auth and media settings. Configure email templates as described in `docs/OPERATIONS.md`.
@@ -38,6 +46,8 @@ pnpm test
 pnpm build
 # With the localhost sandbox running and Chrome installed:
 node scripts/browser-test.mjs
+node scripts/browser-v3-test.mjs
+node scripts/browser-v3-business-test.mjs
 ```
 
 Database tests apply every SQL migration to an actual embedded PostgreSQL engine and use restricted roles. Browser tests use synthetic identities, real HTTP routes, persistent database records and real image processing. They are not evidence of deployed Supabase/Elenio integration. Screenshots and machine-readable evidence are under `evidence/`.

@@ -6,13 +6,19 @@ import { database, scoped, type DB } from "../../../../lib/db";
 import { identity, sameOrigin } from "../../../../lib/auth";
 import { service, fail } from "../../../../lib/service.mjs";
 import { acceptInvitation } from "../../../../lib/invitations.mjs";
+import { authorizeReplay } from "../../../../lib/replay-authorization.mjs";
 export const runtime = "nodejs";
 const digest = (s: string) => createHash("sha256").update(s).digest("hex");
 async function limited(key: string, max: number) {
   const sql = database();
   const [row] =
     await sql`insert into rate_limits(key,count) values(${key},1) on conflict(key) do update set count=case when rate_limits.window_at<now()-interval '10 minutes' then 1 else rate_limits.count+1 end,window_at=case when rate_limits.window_at<now()-interval '10 minutes' then now() else rate_limits.window_at end returning count`;
-  if (row.count > max)
+  const allowance =
+    process.env.DAYLIO_SANDBOX === "true" &&
+    process.env.NODE_ENV !== "production"
+      ? max * 100
+      : max;
+  if (row.count > allowance)
     fail(429, "RATE_LIMIT", "Terlalu banyak permintaan. Coba lagi nanti.");
 }
 async function handler(
@@ -41,7 +47,7 @@ async function handler(
     if (path === "health/ready") {
       const sql = database();
       const [schema] =
-        await sql`select max(version)>=10 as ready from schema_migrations`;
+        await sql`select max(version)>=11 as ready from schema_migrations`;
       if (!schema.ready) fail(503, "MIGRATIONS_REQUIRED");
       return NextResponse.json(
         { ready: true },
@@ -361,6 +367,9 @@ async function handler(
     const orgId = z.uuid().parse(request.headers.get("x-organization-id"));
     const result = await scoped(user.id, orgId, async (tx: DB) => {
       const [{ role }] = await tx`select app_role() role`;
+      const [caps] =
+        await tx`select app_capability('finance') finance,app_capability('crm') crm,care_policy() policy`;
+      const authorizationContext = JSON.stringify({ role, ...caps });
       const db = {
         query: async (text: string, values: any[] = []) => ({
           rows: await tx.unsafe(text, values),
@@ -372,10 +381,16 @@ async function handler(
         z.string().min(8).max(160).parse(idempotency);
         await tx`select pg_advisory_xact_lock(hashtext(${orgId + user.id + idempotency}))`;
         const [previous] =
-          await tx`select response,request_hash from idempotency_keys where organization_id=${orgId} and user_id=${user.id} and key=${idempotency}`;
+          await tx`select response,request_hash,authorization_context from idempotency_keys where organization_id=${orgId} and user_id=${user.id} and key=${idempotency}`;
         if (previous) {
           if (previous.request_hash !== requestHash)
             fail(409, "IDEMPOTENCY_CONFLICT");
+          await authorizeReplay(
+            db,
+            previous.authorization_context,
+            authorizationContext,
+            previous.response,
+          );
           return previous.response;
         }
       }
@@ -388,7 +403,7 @@ async function handler(
         url.searchParams,
       );
       if (idempotency && method === "POST")
-        await tx`insert into idempotency_keys(organization_id,user_id,key,request_hash,response) values(${orgId},${user.id},${idempotency},${requestHash},${tx.json(value)})`;
+        await tx`insert into idempotency_keys(organization_id,user_id,key,request_hash,response,authorization_context) values(${orgId},${user.id},${idempotency},${requestHash},${tx.json(value)},${authorizationContext})`;
       return value;
     });
     return NextResponse.json(

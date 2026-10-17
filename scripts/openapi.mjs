@@ -232,6 +232,60 @@ add("payments/provider-webhook", "post", {
   description:
     "Disabled (503) until payment provider is selected and signature, amount, currency, replay and reconciliation checks are verified.",
 });
+// Backend v3 commands retain the same authenticated /api/v1 boundary.
+for (const path of [
+  "workspace/context",
+  "care/today",
+  "care/policy",
+  "manager/exceptions",
+  "manager/closing",
+  "owner/business-pulse",
+  "parent/today",
+  "passports/{childId}",
+  "crm/overview",
+  "development-reports/{id}/pdf",
+])
+  add(path, "get");
+for (const path of [
+  "morning-notes",
+  "daily-stories",
+  "pickup-authorizations",
+  "passport-changes",
+  "observations",
+  "development-reports",
+  "development-rubrics",
+])
+  add(path, "get,post", {
+    description:
+      "Backend v3 scoped workflow. See docs/BACKEND_V3_API.md for strict command payloads, permissions and transitions.",
+  });
+for (const path of ["morning-notes/{id}", "daily-stories/{id}"])
+  add(path, "patch");
+for (const path of [
+  "activities/batches/{batchId}/publish",
+  "morning-notes/{id}/acknowledge",
+  "manager/closing",
+  "daily-stories/{id}/publish",
+  "pickup-authorizations/{id}/approve",
+  "pickup-authorizations/{id}/revoke",
+  "pickups/{id}/verify-handover",
+  "passport-changes/{id}/approve",
+  "passport-changes/{id}/reject",
+  "observations/{id}/submit",
+  "observations/{id}/approve",
+  "observations/{id}/reject",
+  "development-reports/{id}/publish",
+  "crm/leads/{id}/qualify",
+  "crm/leads/{id}/whatsapp-draft",
+  "crm/leads/{id}/confirm-enrollment",
+  "crm/whatsapp-drafts/{id}/copy",
+  "crm/whatsapp-drafts/{id}/open",
+  "leo/caregiver/query",
+])
+  add(path, "post", {
+    description:
+      "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+  });
 const spec = {
   openapi: "3.1.0",
   info: {
