@@ -1,0 +1,31 @@
+✔ F01 v4 hierarchy, eight FAQ topics and unmodified official asset copy (5.3039ms)
+✔ F03 identity verifies token with provider; invalid, expired and unverified denied (21.3654ms)
+✔ F14 signed private media grants are user-bound, expiring and tamper resistant (0.687ms)
+✔ F37 role boundaries and strict per-domain validation (2.5319ms)
+✔ F42 bounded read retries, circuit breaker, cooldown and no blind session retry (16.6138ms)
+✔ F40 embedded PostgreSQL backup can be restored with persisted data (2363.9216ms)
+✔ F04/F07/F08/F09 DB RLS prevents tenant and child URL bypass (1688.1824ms)
+✔ F10/F12/F13/F15/F16/F18/F21 caregiver-to-parent persisted publish loop (65.0336ms)
+✔ F11 pickup requires management approval and staff identity verification (19.2019ms)
+✔ F19 incident escalation, append-only history, resolution, no guardian internal details (29.8864ms)
+✔ F23/F24/F25/F26 tours and atomic retry-safe enrollment (45.3238ms)
+✔ F27/F28/F29/F42 external integration fails closed; no invented stream (3.4508ms)
+✔ F30/F31 LEO scoped facts with source/time and unknown, never evaluates notes (20.1695ms)
+✔ F33/F34 manual payment requires explicit manager confirmation and audit (17.4343ms)
+✔ F38/F39 consent withdrawal, immutable audit and immediate assignment/link revocation (22.0936ms)
+✔ F05/F06 invitation activation, expired/revoked token rejection and limited manager role (26.5544ms)
+✔ F09/F20 shifts and restricted handoff acknowledgment (13.8564ms)
+✔ F17 announcement publication and notification deduplication (31.6514ms)
+✔ F22/F41 exported totals and bounded pagination API contracts (16.1066ms)
+✔ F35/F36 plan caps preserve essential care and support approval stays health-only (15.3594ms)
+✔ F38/F39 data export needs approval; published facts only and guardian scope preserved (16.9535ms)
+✔ F32 caregiver summaries remain drafts until explicitly reviewed (21.5729ms)
+✔ F18/F26/F39/F40 worker deduplicates deliveries and followups; bounded retention preserves audit (23.495ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2543.7385

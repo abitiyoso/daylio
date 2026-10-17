@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-17T09:05:55.355Z",
+  "environment": "localhost synthetic sandbox; PGlite PostgreSQL; isolated identity fixture, not Supabase delivery",
+  "passed": [
+    "Marketing 390px: no overflow; FAQ keyboard-native details; screenshot captured",
+    "Marketing 768px: no overflow; FAQ keyboard-native details; screenshot captured",
+    "Marketing 1440px: no overflow; FAQ keyboard-native details; screenshot captured",
+    "Public demo persisted and deduplicated; daycare inquiry issues private prospect token; survey request stays requested until staff confirmation",
+    "Caregiver group logging submitted through the browser form and rendered from persisted API records",
+    "Browser login with isolated identity fixture for owner, caregiver, parent and unrelated guardian",
+    "Real API + persistent PostgreSQL engine: draft hidden, private photo upload/resize, publish, linked parent timeline on reload, signed media access, cross-user URL denied, owner counts, LEO citation, unavailable CCTV, CSRF rejection",
+    "Revoked guardian cannot use a previously issued media grant; synthetic link restored after test"
+  ]
+}

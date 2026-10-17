@@ -1,0 +1,442 @@
+import { NextResponse } from "next/server";
+import { createHash, randomBytes } from "node:crypto";
+import { z } from "zod";
+import { cookies } from "next/headers";
+import { database, scoped, type DB } from "../../../../lib/db";
+import { identity, sameOrigin } from "../../../../lib/auth";
+import { service, fail } from "../../../../lib/service.mjs";
+import { acceptInvitation } from "../../../../lib/invitations.mjs";
+export const runtime = "nodejs";
+const digest = (s: string) => createHash("sha256").update(s).digest("hex");
+async function limited(key: string, max: number) {
+  const sql = database();
+  const [row] =
+    await sql`insert into rate_limits(key,count) values(${key},1) on conflict(key) do update set count=case when rate_limits.window_at<now()-interval '10 minutes' then 1 else rate_limits.count+1 end,window_at=case when rate_limits.window_at<now()-interval '10 minutes' then now() else rate_limits.window_at end returning count`;
+  if (row.count > max)
+    fail(429, "RATE_LIMIT", "Terlalu banyak permintaan. Coba lagi nanti.");
+}
+async function handler(
+  request: Request,
+  { params }: { params: Promise<{ path: string[] }> },
+) {
+  const requestId = crypto.randomUUID();
+  try {
+    sameOrigin(request);
+    const segments = (await params).path,
+      path = segments.join("/"),
+      method = request.method;
+    const url = new URL(request.url);
+    if (Number(request.headers.get("content-length")) > 65536)
+      fail(413, "PAYLOAD_TOO_LARGE");
+    const raw = ["GET", "DELETE"].includes(method) ? "" : await request.text();
+    if (raw.length > 65536) fail(413, "PAYLOAD_TOO_LARGE");
+    let body: any = {};
+    try {
+      body = raw ? JSON.parse(raw) : {};
+    } catch {
+      fail(422, "INVALID_JSON");
+    }
+    if (body === null || Array.isArray(body) || typeof body !== "object")
+      fail(422, "INVALID_JSON_OBJECT");
+    if (path === "health/ready") {
+      const sql = database();
+      const [schema] =
+        await sql`select max(version)>=10 as ready from schema_migrations`;
+      if (!schema.ready) fail(503, "MIGRATIONS_REQUIRED");
+      return NextResponse.json(
+        { ready: true },
+        { headers: { "Cache-Control": "no-store" } },
+      );
+    }
+    if (path === "payments/provider-webhook")
+      fail(
+        503,
+        "PAYMENT_PROVIDER_UNCONFIGURED",
+        "Provider pembayaran belum dikonfigurasi.",
+      );
+    if (path.startsWith("auth/")) {
+      if (method !== "POST") fail(405, "METHOD_NOT_ALLOWED");
+      await limited(
+        "auth:" + digest(request.headers.get("x-real-ip") || "local"),
+        100,
+      );
+      if (body.email)
+        await limited(
+          "auth-account:" + digest(String(body.email).toLowerCase()),
+          20,
+        );
+      const base = process.env.SUPABASE_URL,
+        key = process.env.SUPABASE_ANON_KEY;
+      if (!base || !key)
+        fail(503, "AUTH_UNAVAILABLE", "Identitas belum dikonfigurasi");
+      const action = segments[1];
+      const jar = await cookies();
+      if (action === "password") {
+        await identity(request);
+        const password = z.string().min(12).max(128).parse(body.password);
+        const token = jar.get("daylio_access")?.value;
+        const response = await fetch(`${base}/auth/v1/user`, {
+          method: "PUT",
+          headers: {
+            apikey: key!,
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ password }),
+          signal: AbortSignal.timeout(8000),
+        });
+        if (!response.ok) fail(400, "PASSWORD_UPDATE_FAILED");
+        return NextResponse.json({ ok: true });
+      }
+      if (action === "logout") {
+        const token = jar.get("daylio_access")?.value;
+        if (token)
+          await fetch(`${base}/auth/v1/logout`, {
+            method: "POST",
+            headers: { apikey: key!, Authorization: `Bearer ${token}` },
+            signal: AbortSignal.timeout(5000),
+          });
+        jar.delete("daylio_access");
+        jar.delete("daylio_refresh");
+        return NextResponse.json({ loggedOut: true });
+      }
+      let endpoint = "",
+        payload: any;
+      if (action === "refresh") {
+        endpoint = "token?grant_type=refresh_token";
+        payload = { refresh_token: jar.get("daylio_refresh")?.value };
+      } else if (action === "recover") {
+        endpoint = "recover";
+        payload = { email: z.email().parse(body.email) };
+      } else if (action === "signup" || action === "login") {
+        endpoint = action === "signup" ? "signup" : "token?grant_type=password";
+        payload = {
+          email: z.email().parse(body.email),
+          password: z.string().min(12).max(128).parse(body.password),
+        };
+      } else fail(404, "ROUTE_NOT_FOUND");
+      const result = await fetch(`${base}/auth/v1/${endpoint}`, {
+        method: "POST",
+        headers: { apikey: key!, "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(8000),
+        cache: "no-store",
+      });
+      const data = await result.json();
+      if (!result.ok)
+        fail(
+          result.status === 429 ? 429 : 400,
+          "AUTH_FAILED",
+          "Permintaan identitas gagal. Periksa email dan kredensial.",
+        );
+      if (data.access_token) {
+        const options = {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "lax" as const,
+          path: "/",
+        };
+        jar.set("daylio_access", data.access_token, {
+          ...options,
+          maxAge: data.expires_in || 3600,
+        });
+        jar.set("daylio_refresh", data.refresh_token, {
+          ...options,
+          maxAge: 604800,
+        });
+      }
+      return NextResponse.json(
+        { ok: true, verificationRequired: !data.access_token },
+        { headers: { "Cache-Control": "no-store" } },
+      );
+    }
+    if (path === "public/demo-requests" && method === "POST") {
+      await limited(
+        "demo:" + digest(request.headers.get("x-real-ip") || "local"),
+        10,
+      );
+      const lead = z
+        .object({
+          name: z.string().trim().min(1).max(160),
+          daycare: z.string().trim().min(1).max(160),
+          contact: z.string().min(5).max(160),
+          children: z.string().max(100),
+          cctv: z.string().max(40),
+          consent: z.literal(true),
+          website: z.literal("").optional(),
+        })
+        .strict()
+        .parse(body);
+      const fingerprint = digest(JSON.stringify(lead));
+      const sql = database();
+      const [row] =
+        await sql`insert into demo_leads(name,daycare,contact,data,fingerprint) values(${lead.name},${lead.daycare},${lead.contact},${sql.json(lead)},${fingerprint}) on conflict(fingerprint) do update set fingerprint=excluded.fingerprint returning id`;
+      await sql`insert into platform_events(kind,resource_id) values('demo.received',${row.id}) on conflict do nothing`;
+      return NextResponse.json(
+        { id: row.id, status: "recorded", whatsappSent: false },
+        { status: 201 },
+      );
+    }
+    if (
+      segments[0] === "public" &&
+      ["inquiries", "tours"].includes(segments[1])
+    ) {
+      const tenant = z.uuid().parse(segments[2]);
+      const sql = database();
+      const [organization] =
+        await sql`select id from organizations where id=${tenant} and not suspended`;
+      if (!organization) fail(404, "NOT_FOUND");
+      await limited(
+        "prospect:" +
+          tenant +
+          ":" +
+          digest(request.headers.get("x-real-ip") || "local"),
+        20,
+      );
+      if (segments[1] === "inquiries" && method === "POST") {
+        const prospect = z
+          .object({
+            name: z.string().trim().min(1).max(160),
+            contact: z.string().min(5).max(160),
+            consent: z.literal(true),
+            website: z.literal("").optional(),
+          })
+          .strict()
+          .parse(body);
+        const token = randomBytes(32).toString("hex"),
+          fingerprint = digest(tenant + prospect.contact.toLowerCase());
+        const result = await sql.begin(async (tx) => {
+          await tx`select pg_advisory_xact_lock(hashtext(${fingerprint}))`;
+          const [existing] =
+            await tx`select id from records where organization_id=${tenant} and kind='lead' and data->>'fingerprint'=${fingerprint}`;
+          // Repeated contacts do not expose a previous prospect's token or data.
+          if (existing) return { recorded: true, duplicate: true };
+          const actor = "00000000-0000-4000-8000-000000000001";
+          const [lead] =
+            await tx`insert into records(organization_id,kind,data,state,created_by) values(${tenant},'lead',${tx.json({ ...prospect, source: "website", fingerprint, prospectTokenHash: digest(token) })},'new',${actor}) returning id`;
+          await tx`insert into records(organization_id,kind,data,state,created_by) values(${tenant},'lead-event',${tx.json({ leadId: lead.id, status: "new" })},'recorded',${actor})`;
+          await tx`insert into audit_logs(organization_id,actor_id,action,resource_id) values(${tenant},${actor},'public.inquiry',${lead.id})`;
+          await tx`insert into notifications(organization_id,user_id,event_key,kind) select organization_id,user_id,${lead.id}||':inquiry','inquiry' from memberships where organization_id=${tenant} and role in ('owner','manager') and active on conflict do nothing`;
+          return { id: lead.id, prospectToken: token, recorded: true };
+        });
+        return NextResponse.json({ data: result }, { status: 201 });
+      }
+      if (segments[1] === "tours" && method === "POST") {
+        const booking = z
+          .object({
+            leadId: z.uuid(),
+            prospectToken: z.string().regex(/^[a-f0-9]{64}$/),
+            startsAt: z.iso.datetime({ offset: true }),
+            endsAt: z.iso.datetime({ offset: true }),
+          })
+          .strict()
+          .parse(body);
+        if (
+          Date.parse(booking.startsAt) <= Date.now() ||
+          Date.parse(booking.endsAt) <= Date.parse(booking.startsAt) ||
+          Date.parse(booking.endsAt) - Date.parse(booking.startsAt) >
+            2 * 3600000
+        )
+          fail(422, "INVALID_INTERVAL");
+        const [lead] =
+          await sql`select id from records where id=${booking.leadId} and organization_id=${tenant} and kind='lead' and data->>'prospectTokenHash'=${digest(booking.prospectToken)} and created_at>now()-interval '7 days'`;
+        if (!lead) fail(403, "PROSPECT_TOKEN_INVALID");
+        const [tour] =
+          await sql`insert into records(organization_id,kind,data,state,created_by) values(${tenant},'tour',${sql.json({ leadId: lead.id, startsAt: booking.startsAt, endsAt: booking.endsAt, timezone: "Asia/Jakarta" })},'requested','00000000-0000-4000-8000-000000000001') returning id,state`;
+        return NextResponse.json({ data: tour }, { status: 201 });
+      }
+      fail(405, "METHOD_NOT_ALLOWED");
+    }
+    const user = await identity(request);
+    await limited("user:" + user.id, 200);
+    const sql = database();
+    if (path === "me/memberships" && method === "GET") {
+      const rows =
+        await sql`select m.organization_id,m.role,o.name from memberships m join organizations o on o.id=m.organization_id where m.user_id=${user.id} and m.active and not o.suspended`;
+      return NextResponse.json(
+        { data: rows },
+        { headers: { "Cache-Control": "no-store" } },
+      );
+    }
+    if (path === "organizations" && method === "POST") {
+      const name = z.string().trim().min(1).max(160).parse(body.name);
+      const result = await sql.begin(async (tx) => {
+        await tx`select pg_advisory_xact_lock(hashtext(${user.id}))`;
+        const existing =
+          await tx`select o.* from organizations o join memberships m on m.organization_id=o.id where m.user_id=${user.id} and m.role='owner' limit 1`;
+        if (existing[0]) return existing[0];
+        const [org] =
+          await tx`insert into organizations(name) values(${name}) returning *`;
+        await tx`insert into memberships(organization_id,user_id,role,display_name) values(${org.id},${user.id},'owner',${user.email.split("@")[0].slice(0, 160)})`;
+        await tx`insert into branches(organization_id,name) values(${org.id},'Utama')`;
+        await tx`insert into audit_logs(organization_id,actor_id,action) values(${org.id},${user.id},'organization.create')`;
+        return org;
+      });
+      return NextResponse.json({ data: result }, { status: 201 });
+    }
+    if (
+      segments[0] === "invitations" &&
+      segments[2] === "accept" &&
+      method === "POST"
+    ) {
+      const token = z
+        .string()
+        .regex(/^[a-f0-9]{64}$/)
+        .parse(segments[1]);
+      const result = await sql.begin(async (tx) =>
+        acceptInvitation(
+          {
+            query: async (s: string, p: any[]) => ({
+              rows: await tx.unsafe(s, p),
+            }),
+          },
+          user,
+          token,
+        ),
+      );
+      return NextResponse.json({ data: result });
+    }
+    if (path.startsWith("platform/")) {
+      const [admin] =
+        await sql`select user_id from platform_admins where user_id=${user.id}`;
+      if (!admin) fail(403, "FORBIDDEN");
+      if (path === "platform/tenants" && method === "GET")
+        return NextResponse.json({
+          data: await sql`select id,name,suspended,created_at from organizations order by created_at desc limit 100`,
+        });
+      if (path === "platform/demo-requests" && method === "GET")
+        return NextResponse.json({
+          data: await sql`select id,name,daycare,contact,created_at from demo_leads order by created_at desc limit 100`,
+        });
+      if (path === "platform/support-access" && method === "POST") {
+        const tenant = z.uuid().parse(body.organizationId),
+          reason = z.string().min(10).max(1000).parse(body.reason);
+        const result = await sql.begin(async (tx) => {
+          const [row] =
+            await tx`insert into records(organization_id,kind,data,state,created_by) values(${tenant},'support-access',${tx.json({ adminId: user.id, reason, scope: "health-only" })},'requested',${user.id}) returning id`;
+          await tx`insert into audit_logs(organization_id,actor_id,action,resource_id) values(${tenant},${user.id},'support.request',${row.id})`;
+          return row;
+        });
+        return NextResponse.json({ data: result });
+      }
+      if (path === "platform/subscriptions" && method === "POST") {
+        const tenant = z.uuid().parse(body.organizationId),
+          plan = z.enum(["trial", "active", "suspended"]).parse(body.plan),
+          limit = z.number().int().min(1).max(100000).parse(body.limit);
+        const row = await sql.begin(async (tx) => {
+          const [record] =
+            await tx`insert into records(organization_id,kind,data,state,created_by) values(${tenant},'subscription',${tx.json({ plan, limit })},'configured',${user.id}) returning id`;
+          await tx`insert into audit_logs(organization_id,actor_id,action,resource_id) values(${tenant},${user.id},'subscription.configure',${record.id})`;
+          return record;
+        });
+        return NextResponse.json({ data: row });
+      }
+      if (segments[1] === "tenants" && segments[2]) {
+        const tenant = z.uuid().parse(segments[2]);
+        if (segments[3] === "suspend" && method === "POST") {
+          const reason = z.string().min(10).max(1000).parse(body.reason);
+          const suspended = z.boolean().parse(body.suspended);
+          await sql.begin(async (tx) => {
+            await tx`update organizations set suspended=${suspended} where id=${tenant}`;
+            await tx`insert into audit_logs(organization_id,actor_id,action) values(${tenant},${user.id},${suspended ? "tenant.suspend" : "tenant.restore"})`;
+          });
+          return NextResponse.json({ data: { suspended } });
+        }
+        if (segments[3] === "health" && method === "GET") {
+          const [grant] =
+            await sql`select id from records where organization_id=${tenant} and kind='support-access' and state='approved' and data->>'adminId'=${user.id} and (data->>'expiresAt')::timestamptz>now()`;
+          if (!grant) fail(403, "OWNER_APPROVAL_REQUIRED");
+          await sql`insert into audit_logs(organization_id,actor_id,action,resource_id) values(${tenant},${user.id},'support.health.read',${grant.id})`;
+          const [health] =
+            await sql`select id,suspended,created_at from organizations where id=${tenant}`;
+          return NextResponse.json({ data: health });
+        }
+      }
+      fail(
+        503,
+        "SUPPORT_ACCESS_DISABLED",
+        "Dukungan memerlukan persetujuan pemilik dan audit.",
+      );
+    }
+    const orgId = z.uuid().parse(request.headers.get("x-organization-id"));
+    const result = await scoped(user.id, orgId, async (tx: DB) => {
+      const [{ role }] = await tx`select app_role() role`;
+      const db = {
+        query: async (text: string, values: any[] = []) => ({
+          rows: await tx.unsafe(text, values),
+        }),
+      };
+      const idempotency = request.headers.get("idempotency-key");
+      const requestHash = digest(`${method}:${path}:${raw}`);
+      if (idempotency && method === "POST") {
+        z.string().min(8).max(160).parse(idempotency);
+        await tx`select pg_advisory_xact_lock(hashtext(${orgId + user.id + idempotency}))`;
+        const [previous] =
+          await tx`select response,request_hash from idempotency_keys where organization_id=${orgId} and user_id=${user.id} and key=${idempotency}`;
+        if (previous) {
+          if (previous.request_hash !== requestHash)
+            fail(409, "IDEMPOTENCY_CONFLICT");
+          return previous.response;
+        }
+      }
+      const value = await service(
+        db,
+        { userId: user.id, orgId, role },
+        method,
+        path,
+        body,
+        url.searchParams,
+      );
+      if (idempotency && method === "POST")
+        await tx`insert into idempotency_keys(organization_id,user_id,key,request_hash,response) values(${orgId},${user.id},${idempotency},${requestHash},${tx.json(value)})`;
+      return value;
+    });
+    return NextResponse.json(
+      { data: result, requestId },
+      {
+        status: method === "POST" ? 201 : 200,
+        headers: { "Cache-Control": "no-store" },
+      },
+    );
+  } catch (error: any) {
+    const validation = error instanceof z.ZodError;
+    const conflict = error.code === "23505",
+      denied = error.code === "42501",
+      relation = error.code === "23503";
+    const status = validation
+      ? 422
+      : conflict
+        ? 409
+        : denied
+          ? 403
+          : relation
+            ? 422
+            : error.status || 503;
+    return NextResponse.json(
+      {
+        error: {
+          code: validation
+            ? "VALIDATION_ERROR"
+            : conflict
+              ? "CONFLICT"
+              : denied
+                ? "FORBIDDEN"
+                : relation
+                  ? "INVALID_REFERENCE"
+                  : error.code || "SERVICE_UNAVAILABLE",
+          message:
+            status === 503
+              ? "Layanan belum tersedia. Silakan coba lagi."
+              : validation
+                ? "Periksa isian formulir."
+                : error.status
+                  ? error.message
+                  : "Permintaan ditolak.",
+          requestId,
+        },
+      },
+      { status, headers: { "Cache-Control": "no-store" } },
+    );
+  }
+}
+export { handler as GET, handler as POST, handler as PATCH, handler as DELETE };

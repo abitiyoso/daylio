@@ -1,0 +1,20 @@
+# Deployment, jobs and recovery
+
+1. Provision PostgreSQL and Supabase Auth for a nonproduction environment first. Apply `node --env-file=.env.local scripts/migrate.mjs`. Migrations are ordered and recorded in `schema_migrations`; backup before deploying new migrations. They are designed for PostgreSQL 16+ and tested against the PostgreSQL engine embedded by PGlite.
+2. Configure Supabase Site URL to the HTTPS app origin. Configure signup and recovery email templates to link to `/auth/confirm?token_hash={{ .TokenHash }}&type=signup` or `type=recovery`, respectively. Allowlist the exact app origin. Real delivery and password reset must pass in that environment before inviting actual families.
+3. Configure `DATABASE_URL`, `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `APP_ORIGIN`, a random `MEDIA_SIGNING_KEY` of at least 32 characters, and a private persistent `MEDIA_DIRECTORY`. No Elenio secret is needed while disabled. The supplied service-role key placeholder is reserved for later verified delivery integrations and is not currently consumed.
+4. Install locked dependencies, run tests/typecheck/lint/build, and start the app behind HTTPS. The web process needs a database login that can switch to `daylio_app`. Keep migration/bootstrap credentials server-only. Use a single persistent media volume; do not deploy the filesystem-media implementation to stateless edge hosting.
+5. Schedule `node --env-file=.env.local scripts/worker.mjs` every minute using your deployment scheduler. It uses an advisory lock, records in-app delivery attempts, sends due followup notifications once, and processes explicitly requested bounded metadata retention. There is no claim of external email/push delivery. Failed work rolls back for the next run. Alert on nonzero exit, repeated `status=failed`, failed readiness checks, storage exhaustion and database connection errors. No scheduled job was installed on this computer.
+6. `GET /api/v1/health/ready` returns only readiness. Application errors carry request IDs and typed codes without request bodies or tokens. Disable/redact proxy query-string logs for `/api/v1/media/*/content` and `/auth/confirm`; Next development logging excludes those paths. Do not send child notes to telemetry. Configure encrypted disks, private DB networking and secret rotation at the host.
+
+## Backup and restore procedure
+
+Production operator: run `pg_dump --format=custom` to encrypted restricted backup storage, snapshot the private media volume at the same recovery point, and retain according to the daycare's approved policy. Monitor backup age daily. Do not put backups into this Git repository.
+
+Restore into a separate database with `pg_restore`, restore the matching media volume, configure a staging process with separate secrets, and verify schema versions, two-tenant isolation, a known published activity, a private photo and an audit entry. Record backup timestamp, restored row counts and operator. Rotate media signing secrets to invalidate old URLs. Promote only after the recovery checks pass. The automated embedded-PostgreSQL snapshot/restore test is a local integrity check; a hosted PostgreSQL + volume recovery drill remains a deployment gate.
+
+## Privacy requests
+
+Parents can request export/deletion for linked children. Owners approve exports, which include the child, published activities, attendance and requester consent records. Download requires authorization again. Deletion is a human review workflow: custody, safeguarding/audit retention and co-guardian rights must be resolved before destructive erasure. The software never claims a child was erased merely because a request was recorded. Metadata retention deletes only selected AI/integration metadata older than the approved cutoff (at least 30 days); immutable audit and historical care facts remain.
+
+Before real data: approve daycare incident escalation SOP, shared-room camera permissions, consent text/version, retention durations and photo licenses. Verify real signup, recovery, logout/refresh, invitation sharing, private-storage permissions, worker failure alerting and disaster recovery. See the supplied acceptance plan.

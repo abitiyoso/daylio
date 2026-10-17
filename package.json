@@ -1,0 +1,36 @@
+{
+  "name": "daylio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --webpack --hostname 127.0.0.1",
+    "build": "next build --webpack",
+    "start": "next start --hostname 127.0.0.1",
+    "test": "node --test tests/*.test.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "node scripts/check.mjs",
+    "sandbox": "node scripts/dev-sandbox.mjs",
+    "test:browser": "node scripts/browser-test.mjs",
+    "db:migrate": "node scripts/migrate.mjs",
+    "worker": "node scripts/worker.mjs",
+    "api:generate": "node scripts/openapi.mjs"
+  },
+  "dependencies": {
+    "next": "^16.0.0",
+    "postgres": "^3.4.7",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sharp": "^0.35.5",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.10",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "playwright": "^1.64.1",
+    "prettier": "^3.9.10",
+    "typescript": "^5.9.0"
+  }
+}

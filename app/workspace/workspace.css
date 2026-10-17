@@ -1,0 +1,198 @@
+.workspace {
+  font:
+    16px/1.6 system-ui,
+    sans-serif;
+  color: #153358;
+  background: #fffaf7;
+  min-height: 100vh;
+}
+.workspace * {
+  box-sizing: border-box;
+}
+.workspace header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 20px 4vw;
+  border-bottom: 1px solid #eeded8;
+  background: white;
+  flex-wrap: wrap;
+}
+.wordmark {
+  font-size: 30px;
+  font-weight: 850;
+  color: #153358;
+  text-decoration: none;
+}
+.wordmark small {
+  display: block;
+  font-size: 11px;
+}
+.workspace-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  max-width: 1400px;
+  margin: auto;
+}
+.workspace nav {
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.workspace nav button {
+  text-align: left;
+  background: transparent;
+  color: #153358;
+}
+.workspace nav button[aria-current] {
+  background: #ffe4e4;
+}
+.workspace main {
+  padding: 30px;
+  min-width: 0;
+}
+.workspace h1 {
+  font-size: 32px;
+  line-height: 1.2;
+}
+.workspace h2 {
+  font-size: 21px;
+}
+.workspace label {
+  display: block;
+  font-size: 14px;
+  font-weight: 650;
+  margin: 12px 0;
+}
+.workspace input,
+.workspace select {
+  display: block;
+  padding: 12px;
+  border: 1px solid #d5dce0;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 460px;
+  background: white;
+  color: #153358;
+  font: inherit;
+}
+.workspace button {
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 18px;
+  background: #f57f91;
+  color: #153358;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+}
+.workspace button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+.workspace .secondary {
+  background: #e7f4f0;
+}
+.workspace :focus-visible {
+  outline: 3px solid #247675;
+  outline-offset: 3px;
+}
+.workspace section,
+.workspace article {
+  background: white;
+  border: 1px solid #ecdfd9;
+  border-radius: 18px;
+  padding: 22px;
+  margin: 18px 0;
+  overflow-wrap: anywhere;
+}
+.workspace article {
+  background: #fffcfa;
+}
+.workspace .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+.workspace .cards strong {
+  display: block;
+  font-size: 28px;
+}
+.workspace .actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.workspace .page-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.workspace footer {
+  padding: 30px;
+  text-align: center;
+}
+.workspace footer img {
+  width: 100px;
+  vertical-align: middle;
+}
+.workspace .identifier {
+  display: block;
+  user-select: all;
+  color: #526171;
+}
+.workspace pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: inherit;
+}
+.workspace.auth {
+  max-width: 520px;
+  margin: 40px auto;
+  padding: 30px;
+  min-height: auto;
+  border-radius: 24px;
+}
+.workspace [role="status"] {
+  color: #924353;
+  min-height: 24px;
+}
+@media (max-width: 768px) {
+  .workspace-layout {
+    display: block;
+  }
+  .workspace nav {
+    flex-direction: row;
+    overflow: auto;
+    padding: 12px;
+    position: sticky;
+    top: 0;
+    background: #fffaf7;
+    z-index: 2;
+  }
+  .workspace nav button {
+    white-space: nowrap;
+    padding: 10px 6px;
+    font-size: 13px;
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+  }
+  .workspace main {
+    padding: 20px;
+  }
+  .workspace h1 {
+    font-size: 26px;
+  }
+  .workspace .page-title {
+    align-items: flex-start;
+  }
+  .workspace header {
+    gap: 12px;
+  }
+  .workspace header select {
+    max-width: 180px;
+  }
+}
