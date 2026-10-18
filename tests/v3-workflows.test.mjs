@@ -751,3 +751,73 @@ test("V3 owner metrics use configured capacity and real branch/date scope; missi
     "qualified",
   );
 });
+
+test("Parent Home bounds today's highlights, picks the latest handover, and preserves scoped history", async () => {
+  const date = jakartaDay(),
+    target = randomUUID();
+  await db.query(
+    "insert into children(id,organization_id,classroom_id,name) values($1,$2,$3,'Nara Putri')",
+    [target, org, room],
+  );
+  await db.query(
+    "insert into guardian_child_links(organization_id,child_id,user_id) values($1,$2,$3)",
+    [org, target, parent],
+  );
+  // Fixture writes stay inside this test's in-memory PostgreSQL database.
+  for (let index = 0; index < 8; index++)
+    await db.query(
+      "insert into records(organization_id,child_id,kind,data,state,created_by,created_at,updated_at) values($1,$2,'activity',$3,'published',$4,$5,$5)",
+      [
+        org,
+        target,
+        JSON.stringify({
+          type: "play",
+          note: `Bermain balok sesi ${index + 1}.`,
+          occurredAt: `${date}T09:${String(index + 10).padStart(2, "0")}:00+07:00`,
+        }),
+        caregiver,
+        `${date}T09:${String(index + 10).padStart(2, "0")}:00+07:00`,
+      ],
+    );
+  for (let index = 0; index < 3; index++)
+    await db.query(
+      "insert into records(organization_id,child_id,kind,data,state,created_by,created_at,updated_at) values($1,$2,'morning-note',$3,'submitted',$4,$5,$5)",
+      [
+        org,
+        target,
+        JSON.stringify({ date, note: `Kabar dari rumah ${index + 1}.` }),
+        parent,
+        `${date}T07:${String(index + 10).padStart(2, "0")}:00+07:00`,
+      ],
+    );
+  const today = await call(
+    parent,
+    "GET",
+    "parent/today",
+    {},
+    new URLSearchParams({ childId: target }),
+  );
+  assert.equal(today.activities.length, 4);
+  assert.ok(today.activityCount >= 8);
+  assert.equal(today.morning.length, 1);
+  assert.ok(today.morningHistory.length >= 2);
+  assert.ok(today.activities.every((r) => r.child_id === target));
+  const history = await call(
+    parent,
+    "GET",
+    "activities",
+    {},
+    new URLSearchParams({ childId: target }),
+  );
+  assert.ok(history.filter((r) => r.kind === "activity").length >= 8);
+  await assert.rejects(
+    call(
+      stranger,
+      "GET",
+      "parent/today",
+      {},
+      new URLSearchParams({ childId: target }),
+    ),
+    denied(404),
+  );
+});

@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-17T14:11:41.931Z",
+  "previewFingerprintBefore": "79c9df2d20b758a3c6f2f03ef705dd09",
+  "previewFingerprintAfter": "79c9df2d20b758a3c6f2f03ef705dd09",
+  "previewUnchanged": true,
+  "teardown": "Temporary database, media and build directory removed, including on failure.",
+  "results": [
+    {
+      "suite": "access",
+      "iteration": 1,
+      "passed": true,
+      "elapsedMs": 37388,
+      "output": "Access UI loaded\nForm filled\nAdmin UI creates persistent parent invitation; provider receives verification request; membership not activated before verification.\nUnverified identity denied; email link → verified session → invitation acceptance → private password → linked-child-only parent dashboard on mobile.\nProvider rejection returns explicit 503 without claiming delivery; successful request and invitation acceptance leave persistent audit evidence.\nChosen password login works; used email proof rejected; wrong-account acceptance, revoked email send, parent privilege escalation and manager-to-manager invite denied.\nThree labeled static role showcases; separate login entry; desktop/mobile login screenshots.\n"
+    }
+  ]
+}

@@ -1,16 +1,18 @@
+import { requireIsolatedBrowserTarget } from "./browser-test-guard.mjs";
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import { randomUUID } from "node:crypto";
 import { sandbox as s } from "../db/sandbox-fixture.mjs";
 const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3100";
+await requireIsolatedBrowserTarget(base);
 if (!["localhost", "127.0.0.1"].includes(new URL(base).hostname))
   throw Error("Synthetic localhost only");
 const browser = await chromium.launch({ channel: "chrome", headless: true }),
   actors = [],
   faults = [],
   passed = [],
-  tag = "P1 " + Date.now(),
+  tag = "Hari ini",
   today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Jakarta" }).format(
     new Date(),
   );

@@ -1,9 +1,11 @@
+import { requireIsolatedBrowserTarget } from "./browser-test-guard.mjs";
 import { chromium } from "playwright";
 import { mkdir, writeFile } from "node:fs/promises";
 import assert from "node:assert/strict";
 import sharp from "sharp";
 import { sandbox as s } from "../db/sandbox-fixture.mjs";
 const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3100";
+await requireIsolatedBrowserTarget(base);
 if (!["127.0.0.1", "localhost"].includes(new URL(base).hostname))
   throw Error("Browser test may only use local synthetic sandbox");
 await mkdir("evidence/screenshots", { recursive: true });
@@ -161,7 +163,7 @@ try {
     childId: s.child,
     data: {
       type: "meal",
-      note: "Browser test: nasi, sayur dan air putih",
+      note: "Makan nasi, sayur dan air putih",
       occurredAt: new Date().toISOString(),
     },
   });
@@ -199,8 +201,7 @@ try {
     404,
   );
   assert.equal(
-    (await api(owner, `activities/${meal.body.id}/publish`, "POST", {}))
-      .status,
+    (await api(owner, `activities/${meal.body.id}/publish`, "POST", {})).status,
     201,
   );
   const live = await api(parent, `children/${s.child}/timeline`);
@@ -242,7 +243,7 @@ try {
     .getByRole("button", { name: "Keluar", exact: true })
     .waitFor();
   await parent.page
-    .getByText("Browser test: nasi, sayur dan air putih", { exact: true })
+    .getByText("Makan nasi, sayur dan air putih", { exact: true })
     .first()
     .waitFor();
   await parent.page.setViewportSize({ width: 390, height: 844 });

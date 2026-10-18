@@ -7,6 +7,7 @@ import { verifyIdentity } from "../../../../lib/identity.mjs";
 import { identity, sameOrigin } from "../../../../lib/auth";
 import { service, fail } from "../../../../lib/service.mjs";
 import { acceptInvitation } from "../../../../lib/invitations.mjs";
+import { sandboxPaths } from "../../../../lib/sandbox-paths.mjs";
 import { authorizeReplay } from "../../../../lib/replay-authorization.mjs";
 export const runtime = "nodejs";
 const digest = (s: string) => createHash("sha256").update(s).digest("hex");
@@ -51,7 +52,22 @@ async function handler(
         await sql`select max(version)>=11 as ready from schema_migrations`;
       if (!schema.ready) fail(503, "MIGRATIONS_REQUIRED");
       return NextResponse.json(
-        { ready: true },
+        {
+          ready: true,
+          ...(process.env.DAYLIO_SANDBOX === "true" &&
+          process.env.NODE_ENV !== "production"
+            ? {
+                sandbox: {
+                  ...(({ purpose, runId }) => ({ purpose, runId }))(
+                    sandboxPaths(),
+                  ),
+                  fingerprint: (
+                    await sql`select md5(coalesce(string_agg(id::text||updated_at::text, ',' order by id),'')) fingerprint from records`
+                  )[0].fingerprint,
+                },
+              }
+            : {}),
+        },
         { headers: { "Cache-Control": "no-store" } },
       );
     }

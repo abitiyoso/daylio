@@ -1,9 +1,11 @@
+import { requireIsolatedBrowserTarget } from "./browser-test-guard.mjs";
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import { sandbox } from "../db/sandbox-fixture.mjs";
 
 const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3100";
+await requireIsolatedBrowserTarget(base);
 if (!["127.0.0.1", "localhost"].includes(new URL(base).hostname))
   throw Error("Use only the isolated local sandbox.");
 const browser = await chromium.launch({ channel: "chrome", headless: true });

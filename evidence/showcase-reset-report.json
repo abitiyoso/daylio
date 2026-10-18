@@ -1,0 +1,15 @@
+{
+  "backup": "C:\\Users\\Abi Tiyoso\\Documents\\ChatGPT\\daylio\\data\\sandbox-backups\\2026-10-18T03-28-32-434Z",
+  "moved": [
+    "sandbox",
+    "sandbox-media"
+  ],
+  "seed": {
+    "date": "2026-10-18",
+    "children": 7,
+    "present": 6,
+    "photographicExamples": 1,
+    "fictional": true
+  },
+  "legacyMedia": "data/media left untouched; new showcase uses data/sandbox-media"
+}

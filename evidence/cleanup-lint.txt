@@ -1,0 +1,2 @@
+$ node scripts/check.mjs
+JavaScript syntax and embedded credential checks passed.

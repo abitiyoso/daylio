@@ -1,36 +1,41 @@
-# Daylio Backend v3 visual QA
+# Daylio Backend v3 corrective visual QA
+
+Date: 18 October 2026 (Asia/Bangkok). Scope: existing authenticated application, local fictional showcase. This is a design/functional acceptance of the requested cleanup, not a pixel-identical clone or a production release certificate.
+
+## Source, capture and matching
+
+Approved source: `design-reference/Daylio_Backend_v3/desktop_owner.png`, `desktop_manager.png`, `desktop_caregiver.png`, `desktop_parent.png`, `mobile_owner.png`, `mobile_parent.png`, plus supplied HTML/CSS. `mobile_caregiver.png` is a Today overview, so it is not falsely compared as Quick Care: `scripts/capture-reference.mjs` renders the approved HTML read-only and selects the actual Quick Care state at 390/820. The same process captures Manager mobile/tablet, for which no supplied PNG exists. Those reference captures are under `evidence/design-qa/cleanup/reference-states/`.
+
+Implementation: `evidence/screenshots/cleanup/{owner,manager,caregiver,parent}-{1440,820,390}.png`, the matching `-viewport.png` images and Parent Story card/history captures. CSS viewports are 1440×1000, 820×1000 and 390×844, deviceScaleFactor 1. Desktop sources are 1440px wide with differing full-page heights; matched top crops use the smaller source/actual height, never stretch either screenshot. Mobile uses a matched 390×844 top viewport. Full images are also inspected for content below the fold. The comparison manifest records exact pixel sizes, paths and crops.
+
+Combined source-left / implementation-right comparisons are in `evidence/design-qa/cleanup/*comparison.png`. Owner, Manager, Caregiver and Parent desktop, mobile Owner/Parent, matched mobile Quick Care/Manager, and 820px source states were inspected. `parent-story-focused.png` places the approved Daily Story card beside its actual card at the same 660px width, retaining aspect ratio and noting the longer reviewed narrative. This focused pass examines photography, type, copy, crop, source date and CTA; full-screen comparison alone would not resolve those details.
+
+## Iteration history
+
+1. **[P0] Persisted QA contamination.** Before: `evidence/screenshots/cleanup-before/parent.png` shows repeated V3/P1 notes, stale handovers and pink QA uploads. Fix: fresh per-suite database/media/build lifecycle, run-bound mutation guards, explicit backup/reseed of the local preview only. After: clean named fictional family; one labeled photographic example; no visible QA identifiers. Repeated-run fingerprints prove tests do not rewrite the showcase.
+2. **[P1] Tiny typography and noisy Parent feed.** Before: 13px body, numerous 9–11px labels, entire activity/morning lists on Home. Fix: 16px body/fields, 13–14px support, 44px controls, child identity, one reviewed digest, latest handover, collapsed initial activity list and actual paginated history. After: readable narrative and supporting hierarchy in Parent desktop/mobile and focused-card evidence. No source UUIDs are rendered in these normal screens.
+3. **[P2] Excessive Parent hero height and cramped Manager mobile rows.** First correction still pushed Story down and placed action buttons beside narrow paragraphs. Fix: move morning action to the title toolbar, combine the environment badge with the heading, place mobile exception actions below full-width text, group batch exceptions. After: Parent story is the primary content card and Manager rows have readable line length without colliding controls.
+4. **[P2] Metric whitespace / Owner toolbar.** Initial corrected metrics stacked icons above labels and retained a second filter row below the banner. Fix: align metric icon beside its label, shorten repeated explanations, move Owner date/branch and Control Tower action into the title toolbar. After: final matched Owner comparison restores the reference's banner → metrics → two-column work hierarchy; Manager mobile has compact two-column metrics. All three viewport widths were recaptured.
+5. **[P2] Small-text/action contrast and photo keyboard behavior.** Fix: retain coral surfaces with navy action text, darken muted/status text and selected navigation text; use a native modal photo dialog with refreshed private grant, focus containment, Escape and return focus. After: final photo/history browser checks pass; imagery has a visible example caption, no swatch, no covering overlays and no missing image state.
+
+6. **[P0] Morning action available before child context loaded.** The complete regression caught an early-click race after moving the CTA into the toolbar: a modal could capture an empty child ID while the page was still loading. Evidence: `evidence/cleanup-morning-loading-race.txt` and the matching before screenshot. Fix: disable the action until current child context and scoped Today data are ready; retain the API validation and permission checks. The care suite explicitly submits through this control after reload.
+
+## Required fidelity surfaces
+
+| Surface | Actual review and accepted result |
+|---|---|
+| Fonts / type | DM Sans body and Plus Jakarta Sans headings retained. Corrective brief intentionally increases the reference's smaller text to 16px body/fields and 13–14px support. Headings, line height and readable wrapping inspected; the larger text naturally makes some cards longer than the original mock. |
+| Spacing / layout | Fixed 244px desktop sidebar, cream/white surfaces, restrained rounded cards, banner and metric rhythm, two-column content and stacked mobile cards retained. Final toolbar and metric refinements resolve major density drift. At 820 the sidebar becomes an actual menu. No horizontal overflow at 1440/820/390. |
+| Color / tokens | Navy, warm neutrals, coral primary actions and teal positive actions. Darker foregrounds deliberately satisfy the cleanup's readability requirement; no rainbow dashboard or additional decorative theme. |
+| Imagery / assets | Original Elenio PNG retained byte-identically. Approved kit photographic example is served privately with consent checks and a visible example caption. A child without a saved portrait uses actual initials; no invented profile photo. No generated/simulated CCTV frames. |
+| Copy / content | Natural Indonesian care notes/story, real stored event/publication times, human-review attribution, current pickup and latest handover. No V3/P1 identifiers, raw internal IDs, fixture names or repeated stale feed items. One sandbox badge and an explicit example-photo caption remain intentional. |
+| Icons / actions | Existing Phosphor library retained, coherent stroke/style. Role navigation, batch logging, grouped review, acknowledgment, pickup, report, CRM and LEO actions remain connected to authenticated APIs. |
+| Responsive / keyboard | Full screenshots inspected for all four roles. Mobile Manager actions now sit below text; caregiver selection and overrides remain usable. Dialog focus/Escape and photo/history navigation checked. Full assistive-technology certification is a production UAT gate. |
+
+## Intentional differences and follow-up
+
+The implementation displays actual scoped counts and capabilities, not the mock's fabricated metrics or role dropdown. Date/branch filtering and access administration remain functional. Caregiver opens Quick Care by default, as required. Parent has actual initials in the identity hero and a separate consent-gated gallery rather than pretending an activity image is a profile portrait. The approved kit image is explicitly an example; replacing it with licensed customer photography requires production consent/licensing. Story text is a genuine human-written sample digest tied to stored sources rather than the short prototype-generated sentence. These are expected product/privacy/readability differences, not unresolved P0/P1/P2 defects.
+
+P3 follow-up: licensed production imagery and richer profile-photo management, exact copy polish, broader assistive-technology UAT. Hosted provider verification is outside local visual acceptance. No deployment is implied.
 
 final result: passed
-
-Scope: local responsive implementation of the approved v3 UX in the existing authenticated workspace. This is not a pixel-identical recreation of the synthetic prototype or a production-readiness certificate. Functional/permission evidence and remaining milestones are in `IMPLEMENTATION_STATUS.md`.
-
-## Reference and state
-
-Reviewed the ten supplied desktop/mobile PNGs and prototype CSS, plus `MASTER_PROMPT.md`, `DECISION_LOG.md`, handoff and UX review. The operational screens use the approved navy/coral/teal hierarchy, fixed sidebar/topbar, bordered rounded cards, class-first actions and parent/manager information hierarchy. Runtime state comes from verified sessions and persisted records.
-
-Side-by-side images are under `evidence/design-qa/`, generated by `scripts/design-comparison.mjs`: source left, implementation right. Desktop comparisons use the same 1440px width and top 1000px region. Parent mobile uses 390px and top 844px. The supplied caregiver mobile PNG shows its **Today overview**, whereas the implementation deliberately opens **Quick Care**, prioritizing the user's requested classroom-first entry; that pair is a responsive design-language comparison, not a matched interaction-state claim. The desktop caregiver pair compares the actual Quick Care state. No source screenshot was distorted to manufacture a match.
-
-## Checks
-
-| Area | Result / evidence |
-|---|---|
-| Structure | 244px desktop sidebar, 68px topbar, 34px desktop content padding; two-column operational cards; stacked mobile cards. Role menus use the actual session and server capabilities. |
-| Typography | DM Sans body and Plus Jakarta Sans headings from the approved reference; 26px desktop/22px mobile main heading. Clear hierarchy and readable form controls. Font loading is awaited by browser capture; system fallback remains available. |
-| Palette and surfaces | Reference navy `#233555`, coral `#ff6b76`, teal `#159d96`, background `#f8f9fc`, borders `#e9edf1`; 14–18px card rounding and restrained shadows. |
-| Spacing | Primary care/parent controls remain visible and scrollable at 390px. Bounded cards use min-width zero and flexible actions. No horizontal overflow at 390/820/1440 in any of four roles. |
-| Imagery / brand | Original Elenio PNG reused byte-identically. Marketing v4 layout, stylesheet, imagery and assets are retained. A later entry-path recheck adds a mobile **Masuk** link in `app/page.tsx` SSR. The subsequent user correction changes the navigation label to Showcase and restores a labeled, static three-role phone illustration instead of its login placeholder. Fictional prototype child photos and camera thumbnails are omitted; real child initials are the fallback. Existing consent-protected uploads can be displayed through authenticated expiring grants. Standard Phosphor icons replace hand-drawn/icon-glyph approximations. |
-| Copy / factual state | Actual organization/role, child name, latest documented meal/sleep and actor/time. Missing sleep displays “Belum tercatat.” No fabricated counts, AI inference, live camera status, safety score or WhatsApp delivery claim. Sandbox is labeled. Owner filters intentionally take additional vertical room. |
-| Interaction | Six present children preselected, individual exceptions, grouped review/publication, parent note/acknowledgment, sibling replacement, routine and substitute verification, unresolved closing all exercised through UI. Navigation refresh prevents stale cross-role records. Extra response scope prevents stale sibling content while fetching. |
-| Loading / errors | Operational skeleton while context is loading; extra views wait for their own authenticated response instead of showing false empty/zero data. Failed requests retain form state and expose an error. Retry preserves batch occurrence time and idempotency key for the unchanged payload. |
-| Responsive / accessibility | 12 captures, hamburger navigation, native labels, explicit select names, focus outline, native checkboxes/details and reduced-motion support. Dialog initial focus, Escape, Tab loop and return focus implemented. Full screen-reader/manual keyboard UAT remains. |
-| PDF | Synthetic report rendered via Poppler and visually inspected in `evidence/v3-report-1.png`: no overlap or clipping. Current exporter is a basic Latin-text MVP; branded report typography, human-readable signatory presentation and Unicode font embedding remain documented polish work. |
-
-## Executed acceptance
-
-- `evidence/v3-browser-results.json`: P0 workflows and 12 responsive role captures, no unhandled browser exceptions.
-- `evidence/v3-business-browser-results.json`: passport → approval → staff, observation → review → signed report → parent PDF, CRM qualification/unsent draft/confirmed enrollment, and role-scoped LEO UI; no unhandled browser exceptions.
-- `evidence/browser-results.json`: retained v4 marketing/FAQ/public intake and earlier private-media/authorization regression.
-
-Intentional differences from the demo include real data/unknown states, actual role identity instead of a role switcher, synthetic-test disclosure, explicit authorization confirmations, branch/date controls, initials instead of fictional child photos, and deferring all camera/analytics evidence. Record volume in screenshots reflects accumulated persisted acceptance runs; it is not seeded production data. More advanced dashboards, historical analytics, portfolio polish and production/provider checks are not marked complete by this visual result.
-
-Latest showcase/login/access screenshots are in `evidence/screenshots/access/`. Desktop showcase and admin view plus 390px login and invited-parent dashboard reviewed. Email-provider fixture is local only; actual SMTP delivery is a separate acceptance gate.

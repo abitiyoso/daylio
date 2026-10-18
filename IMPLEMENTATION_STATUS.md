@@ -1,6 +1,6 @@
 # Implementation status — Daylio F01–F42
 
-Updated 17 October 2026 (Asia/Bangkok). This is an evidence ledger, not a production release certificate. Every function remains listed. **The full 42-function definition of done is not yet satisfied.** Rows marked local verified identify the tested subset; the final column identifies remaining acceptance work. No row is represented as deployed.
+Updated 18 October 2026 (Asia/Bangkok). This is an evidence ledger, not a production release certificate. Every function remains listed. **The full 42-function definition of done is not yet satisfied.** Rows marked local verified identify the tested subset; the final column identifies remaining acceptance work. No row is represented as deployed.
 
 ## Backend v3 implementation — 17 October 2026
 
@@ -97,3 +97,26 @@ Evidence: `tests/contracts.test.mjs`, `tests/workflows.test.mjs`, `tests/reliabi
 
 - Final correction checks: 36 automated tests passed; JavaScript/credential check passed; TypeScript passed; production webpack build passed including `/auth/complete`; four-role entry browser test and email-access browser test passed. Desktop showcase/login/admin and mobile login/invited-parent screenshots reviewed with no overflow. Evidence in the JSON files above.
 - The browser-provided development hydration report showed Grammarly injecting `data-new-gr-c-s-check-loaded` and `data-gr-ext-installed` on `<body>`. Fresh automated browser sessions report no page errors; the extension can still trigger the development badge in an extension-enabled browser. No global hydration warning suppression was added.
+
+
+## UI cleanup and clean data lifecycle — 18 October 2026
+
+**LOCAL VERIFIED correction; no production/provider verification claimed.** The corrective brief is preserved at `design-reference/Daylio_Codex_UI_Cleanup_Production_UX.md`. This pass extends the existing `codex/backend-v3-workflows` branch and keeps the original authenticated backend, schema/migrations, tenant/role policies, signed media/consent, audit and business workflows. The v4 landing and Elenio logo were not edited. No camera, gateway or analytics engine was built.
+
+| Functions affected | Correction | Actual evidence |
+|---|---|---|
+| F03–F09, F37–F40 | QA gets a new local database/media/build directory for each suite; guards reject preview, hosted/production or foreign run. Preview reset is explicit with a backup, never startup cleanup. | `tests/sandbox-isolation.test.mjs`; `evidence/isolated-browser*-results.json`; `evidence/showcase-reset-report.json` |
+| F10, F12–F16, F18, F21 | Readable common typography and form targets; six-present-child workflow retained; Manager groups a batch in its queue; Parent has a child identity, one story, latest handover, scoped photos and bounded/paginated history. | 39 automated tests in `evidence/cleanup-tests.txt`; care browser suite; twelve clean role/device captures in `evidence/cleanup-visual-results.json` |
+| F11, F19–F20 | Routine/substitute pickup, actual human handover, expiry denial and truthful closing retained. | Existing negative PostgreSQL cases and isolated care suite; no generated CCTV evidence |
+| F22–F26, F30–F32 | Owner capacity/date/branch scope and drilldowns retained; passport/report/CRM/manual WhatsApp/LEO flows remain real and permission-scoped. | Isolated business suite; owner screenshots and prior RLS/capability/observation tests |
+| F01, F27–F29, F42 | Marketing/brand preserved; video integrations remain deferred. | Existing F01 hash/contract test and disabled-adapter regression |
+
+Modified implementation files: `app/workspace/operations.tsx`, `operations.css`, `lib/care-workflows.mjs`, `lib/sandbox.ts`, new `lib/sandbox-paths.mjs`, `app/api/v1/[...path]/route.ts` (sandbox health identity/fingerprint only), `next.config.ts` (isolated QA build path), new curated fixture/reset/runner/guard/capture/comparison scripts, guarded existing browser scripts, test additions, package commands and documentation. No old SQL migration was changed and no production schema migration was needed.
+
+The contaminated preview was archived, not silently edited. The final fresh-day seed on 18 October moved only `data/sandbox` and `data/sandbox-media` into `data/sandbox-backups/2026-10-18T03-28-32-434Z/`; the original contaminated snapshot is retained in the earlier 17 October backup. Legacy `data/media` is untouched and not served by the new preview. Seven fictional children, six present, coherent guardian/staff/CRM/report/pickup states and one labeled private photographic example are seeded. Completed sample activities are not dated in the future. No seeded production customer facts or external messages.
+
+Final visual evidence: `evidence/screenshots/cleanup/` contains full/viewport captures for all four roles at 1440/820/390, Parent Story and desktop/mobile overviews. `evidence/design-qa/cleanup/` contains source/actual combined comparisons and matching HTML reference states, with exact viewport/density/crop metadata. `design-qa.md` records the observed P0/P1/P2 issues, iterations, acceptable privacy/readability differences and **final result: passed** for local cleanup acceptance. This does not claim pixel-identical rendering or production certification.
+
+See `docs/UI_CLEANUP_VERIFICATION.md` for commands, lifecycle, history limits and remaining provider/production gates. Existing P2 milestones and incomplete advanced F01–F42 details above remain unchanged.
+
+Final correction checks on 18 October: `pnpm lint`, `pnpm typecheck`, and `pnpm build` passed; `pnpm test` passed **39/39**; `pnpm test:browser` passed **all five suites**. The browser run preserved the showcase fingerprint `4fe24deb1368796d7bd48e75c3a4dd04` before/after and removed every owned QA directory. Regression testing exposed a morning-handover button race before child context finished loading; the action is now disabled until context is ready, and the complete five-suite run passed after that fix. Actual outputs are `evidence/cleanup-{lint,typecheck,build,tests,browser-run}.txt` and `evidence/isolated-browser-results.json`.

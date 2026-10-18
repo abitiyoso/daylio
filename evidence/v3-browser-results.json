@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-17T13:10:12.409Z",
+  "at": "2026-10-18T03:39:11.836Z",
   "environment": "Persistent local PGlite database and synthetic isolated auth. No hosted Supabase, external delivery, video, or model inference claimed.",
   "passed": [
     "Caregiver UI: six present children preselected, absent child excluded, individual exception, 6 persisted drafts; HTTP idempotency replay returns identical record. Parent cannot read drafts.",

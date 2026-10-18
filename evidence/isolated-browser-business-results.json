@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-17T14:04:24.791Z",
+  "previewFingerprintBefore": "ab33f2c97938838b917bf032d7254fd6",
+  "previewFingerprintAfter": "ab33f2c97938838b917bf032d7254fd6",
+  "previewUnchanged": true,
+  "teardown": "Temporary database, media and build directory removed, including on failure.",
+  "results": [
+    {
+      "suite": "business",
+      "iteration": 1,
+      "passed": true,
+      "elapsedMs": 37558,
+      "output": "Care Passport UI: parent proposal → manager confirmed version → assigned caregiver read, with actual persisted emergency/allergy information.\nDevelopment UI: configured age/curriculum rubric → educator observation → submit → manager source review → human report draft → sign-off/publication → linked parent read and private PDF generated.\nCRM UI: manual inquiry → age/schedule/class/package qualification → saved unsent WhatsApp draft → confirmed class slot/price/emergency contact → atomic child/enrollment and guardian invitation. Optional tour/trial skipped explicitly; capacity enforced by shared existing enrollment service. No external messages sent.\nLEO UI works for actual parent, assigned caregiver and owner sessions in explicit verified-records mode.\n"
+    }
+  ]
+}

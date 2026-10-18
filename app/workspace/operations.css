@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
 .daylio-ops {
   --navy: #233555;
-  --muted: #718198;
+  --muted: #526981;
   --line: #e9edf1;
   --bg: #f8f9fc;
   --coral: #ff6b76;
   --teal: #159d96;
   font:
-    13px/1.55 "DM Sans",
+    16px/1.6 "DM Sans",
     Arial,
     sans-serif;
   color: var(--navy);
@@ -35,14 +35,14 @@
   font-size: 16px;
 }
 .daylio-ops h3 {
-  font-size: 13px;
+  font-size: 15px;
 }
 .daylio-ops p {
   margin: 5px 0 12px;
   line-height: 1.7;
 }
 .daylio-ops small {
-  font-size: 10.5px;
+  font-size: 14px;
   color: var(--muted);
 }
 .daylio-ops button,
@@ -102,10 +102,10 @@
 }
 .op-muted {
   color: var(--muted);
-  font-size: 11.5px;
+  font-size: 14px;
 }
 .op-kicker {
-  font-size: 9px;
+  font-size: 13px;
   font-weight: 800;
   letter-spacing: 1.7px;
   color: #df5969;
@@ -146,7 +146,7 @@
 }
 .op-brand small {
   display: block;
-  font-size: 9px;
+  font-size: 13px;
   color: #8392a5;
 }
 .op-org {
@@ -160,13 +160,13 @@
   padding: 12px;
 }
 .op-org strong {
-  font-size: 11px;
+  font-size: 14px;
   display: block;
   overflow-wrap: anywhere;
 }
 .op-org small {
   display: block;
-  font-size: 9px;
+  font-size: 13px;
 }
 .op-org-letter {
   display: grid;
@@ -187,7 +187,7 @@
 .op-nav-label {
   display: block;
   color: #8795a8;
-  font-size: 9px;
+  font-size: 13px;
   letter-spacing: 1.5px;
   font-weight: 800;
   padding: 13px 12px 8px;
@@ -202,7 +202,7 @@
   padding: 11px;
   color: #647691;
   font-weight: 700;
-  font-size: 11.5px;
+  font-size: 14px;
   border-radius: 10px;
   text-align: left;
   position: relative;
@@ -230,7 +230,7 @@
   background: #fff3e7;
   padding: 2px 6px;
   border-radius: 6px;
-  font-size: 9px;
+  font-size: 13px;
 }
 .op-sidebar footer {
   border-top: 1px solid var(--line);
@@ -256,12 +256,12 @@
 }
 .op-aside-leo strong {
   display: block;
-  font-size: 10px;
+  font-size: 13px;
   color: #356d6a;
 }
 .op-aside-leo small {
   display: block;
-  font-size: 9px;
+  font-size: 13px;
 }
 .op-main {
   margin-left: 244px;
@@ -285,7 +285,7 @@
   align-items: center;
   gap: 11px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 14px;
 }
 .op-crumb strong {
   color: var(--navy);
@@ -294,7 +294,7 @@
   padding: 7px 12px;
   border: 1px solid var(--line);
   border-radius: 9px;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
 }
 .op-icon {
@@ -319,13 +319,13 @@
   background: #fbe4e0;
   color: #b75d61;
   border-radius: 50%;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 800;
 }
 .op-avatar.small {
   width: 32px;
   height: 32px;
-  font-size: 10px;
+  font-size: 13px;
 }
 .op-content {
   max-width: 1520px;
@@ -352,7 +352,7 @@
   border: 1px solid #e5eaf0;
   background: #fff;
   color: #334767;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 800;
   border-radius: 9px;
   white-space: normal;
@@ -382,7 +382,7 @@
   border: 0;
   background: none;
   color: #18857e;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
   padding: 3px;
 }
@@ -409,13 +409,13 @@
 }
 .op-section-head p {
   margin: 4px 0 0;
-  font-size: 11px;
+  font-size: 14px;
 }
 .op-section-head h2 {
   margin: 0;
 }
 .op-empty {
-  font-size: 12px;
+  font-size: 14px;
   color: #718198;
   line-height: 1.7;
   padding: 17px 0;
@@ -437,7 +437,7 @@
   letter-spacing: -0.7px;
 }
 .op-banner p {
-  font-size: 11.5px;
+  font-size: 14px;
   color: #718198;
   max-width: 560px;
 }
@@ -467,7 +467,7 @@
   gap: 4px;
 }
 .op-metric > span:not(.op-symbol) {
-  font-size: 11px;
+  font-size: 14px;
   color: #718198;
 }
 .op-metric strong {
@@ -481,7 +481,7 @@
   letter-spacing: -0.5px;
 }
 .op-metric small {
-  font-size: 10px;
+  font-size: 13px;
   line-height: 1.5;
 }
 .op-symbol {
@@ -510,7 +510,7 @@
   background: #fff4e6;
   color: #9d691f;
   padding: 4px 7px;
-  font-size: 9px;
+  font-size: 13px;
   font-weight: 800;
   white-space: nowrap;
 }
@@ -533,7 +533,7 @@
 }
 .op-list-item p {
   color: #697d94;
-  font-size: 12px;
+  font-size: 14px;
   margin: 6px 0;
 }
 .op-list-item > .op-btn {
@@ -554,19 +554,19 @@
   padding-bottom: 0;
 }
 .op-exception strong {
-  font-size: 11.5px;
+  font-size: 14px;
 }
 .op-exception p {
-  font-size: 11px;
+  font-size: 14px;
   color: var(--muted);
   margin: 4px 0;
   overflow-wrap: anywhere;
 }
 .op-exception small {
-  font-size: 9px;
+  font-size: 13px;
 }
 .op-exception .op-btn {
-  font-size: 10px;
+  font-size: 13px;
   padding: 7px 9px;
   max-width: 115px;
 }
@@ -574,10 +574,10 @@
   padding: 12px 0;
 }
 .op-capacity strong {
-  font-size: 11px;
+  font-size: 14px;
 }
 .op-capacity span {
-  font-size: 10px;
+  font-size: 13px;
   color: var(--muted);
 }
 .op-capacity progress {
@@ -610,7 +610,7 @@
   color: #26565b;
 }
 .op-leo-card p {
-  font-size: 12px;
+  font-size: 14px;
 }
 .op-tabs {
   display: flex;
@@ -625,7 +625,7 @@
   border-radius: 10px;
   color: #718198;
   font-weight: 700;
-  font-size: 11px;
+  font-size: 14px;
   display: flex;
   gap: 10px;
 }
@@ -655,7 +655,7 @@
   gap: 8px;
   padding: 13px 4px;
   font-weight: 700;
-  font-size: 10px;
+  font-size: 13px;
   color: #718198;
 }
 .op-activity-types button.active {
@@ -687,12 +687,12 @@
   background: #f2fbf7;
 }
 .op-child strong {
-  font-size: 11px;
+  font-size: 14px;
   overflow-wrap: anywhere;
   max-width: 100%;
 }
 .op-child small {
-  font-size: 9px;
+  font-size: 13px;
 }
 .op-check {
   position: absolute;
@@ -728,7 +728,7 @@
   flex-direction: column;
   gap: 7px;
   color: #526981;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
 }
 .daylio-ops input,
@@ -741,20 +741,20 @@
   padding: 10px 11px;
   max-width: 100%;
   min-width: 0;
-  font-size: 12px;
+  font-size: 14px;
 }
 .daylio-ops textarea {
   resize: vertical;
   min-height: 76px;
 }
 .op-inline-label {
-  font-size: 9px;
+  font-size: 13px;
 }
 .op-inline-label select {
   max-width: 220px;
   min-height: 36px;
   padding: 7px 10px;
-  font-size: 11px;
+  font-size: 14px;
 }
 .op-form .op-checkbox {
   display: flex;
@@ -772,14 +772,14 @@
   accent-color: var(--teal);
 }
 .op-form details {
-  font-size: 11px;
+  font-size: 14px;
   color: #526981;
 }
 .op-form summary,
 .daylio-ops details summary {
   padding: 8px 0;
   color: #526981;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
 }
 .op-exception-form {
@@ -801,11 +801,11 @@
   color: #4b7973;
 }
 .op-hint p {
-  font-size: 11px;
+  font-size: 14px;
   margin: 0;
 }
 .op-hint-text {
-  font-size: 11px;
+  font-size: 14px;
   color: #718198;
 }
 .op-attendance {
@@ -830,7 +830,7 @@
 }
 .op-parent-hero p {
   max-width: 550px;
-  font-size: 12px;
+  font-size: 14px;
   color: #718198;
 }
 .op-child-monogram {
@@ -897,18 +897,18 @@
   width: 36px;
   flex-shrink: 0;
   font-weight: 700;
-  font-size: 10px;
+  font-size: 13px;
 }
 .op-timeline strong {
-  font-size: 11px;
+  font-size: 14px;
 }
 .op-timeline p {
-  font-size: 11px;
+  font-size: 14px;
   color: #718198;
   margin: 4px 0;
 }
 .op-timeline small {
-  font-size: 9px;
+  font-size: 13px;
 }
 .op-timeline .op-row {
   flex-wrap: wrap;
@@ -920,13 +920,13 @@
   gap: 16px;
 }
 .op-facts dt {
-  font-size: 10px;
+  font-size: 13px;
   color: #718198;
   margin-bottom: 5px;
 }
 .op-facts dd {
   margin: 0;
-  font-size: 13px;
+  font-size: 15px;
   overflow-wrap: anywhere;
 }
 .op-filters {
@@ -948,7 +948,7 @@
   display: flex;
   gap: 9px;
   align-items: center;
-  font-size: 12px;
+  font-size: 14px;
   overflow-wrap: anywhere;
 }
 .op-alert .op-link {
@@ -960,7 +960,7 @@
   color: #287355;
 }
 .op-sandbox {
-  font-size: 9px;
+  font-size: 13px;
   background: #f2f5f9;
   border-color: #e4eaf1;
   color: #718198;
@@ -978,7 +978,7 @@
   display: flex;
   gap: 8px;
   align-items: center;
-  font-size: 10px;
+  font-size: 13px;
   color: #4c7f78;
   padding: 8px;
   border: 1px solid #e0eeeb;
@@ -988,7 +988,7 @@
 .op-footer {
   text-align: center;
   color: #8f9eaf;
-  font-size: 9px;
+  font-size: 13px;
   padding-top: 28px;
 }
 .op-modal-backdrop {
@@ -1073,10 +1073,10 @@
   }
   .op-crumb {
     gap: 6px;
-    font-size: 10px;
+    font-size: 13px;
   }
   .op-role {
-    font-size: 10px;
+    font-size: 13px;
     padding: 6px 9px;
   }
   .op-topbar .op-row {
@@ -1145,14 +1145,14 @@
     display: none;
   }
   .op-banner p {
-    font-size: 11px;
+    font-size: 14px;
   }
   .op-activity-types {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .op-activity-types button {
     min-height: 78px;
-    font-size: 11px;
+    font-size: 14px;
   }
   .op-parent-hero {
     padding: 18px;
@@ -1166,7 +1166,7 @@
     font-size: 26px;
   }
   .op-parent-hero p {
-    font-size: 11px;
+    font-size: 14px;
   }
   .op-children-grid {
     gap: 7px;
@@ -1175,10 +1175,10 @@
     padding: 12px 5px;
   }
   .op-child strong {
-    font-size: 10px;
+    font-size: 13px;
   }
   .op-child small {
-    font-size: 8px;
+    font-size: 13px;
   }
   .op-exception {
     flex-wrap: wrap;
@@ -1192,7 +1192,7 @@
     min-width: 190px;
   }
   .op-exception strong {
-    font-size: 12px;
+    font-size: 14px;
   }
   .op-modal-backdrop {
     padding: 12px;
@@ -1214,7 +1214,7 @@
     gap: 7px;
   }
   .op-timeline strong {
-    font-size: 11px;
+    font-size: 14px;
   }
   .op-form input,
   .op-form select,
@@ -1222,7 +1222,7 @@
     font-size: 16px;
   }
   .op-form label {
-    font-size: 12px;
+    font-size: 14px;
   }
   .op-tabs button {
     min-height: 42px;
@@ -1253,5 +1253,567 @@
   .op-card {
     break-inside: avoid;
     box-shadow: none;
+  }
+}
+
+/* Production UX hierarchy: shared tokens above apply to every role. */
+.daylio-ops h1 {
+  font-size: 28px;
+  line-height: 1.3;
+}
+.daylio-ops h2 {
+  font-size: 19px;
+  line-height: 1.4;
+}
+.daylio-ops h3 {
+  font-size: 16px;
+}
+.daylio-ops small {
+  font-size: 13px;
+  line-height: 1.6;
+}
+.daylio-ops input,
+.daylio-ops select,
+.daylio-ops textarea {
+  font-size: 16px;
+  min-height: 44px;
+}
+.op-btn,
+.op-icon,
+.op-link,
+.op-tabs button,
+.op-sidebar nav button {
+  min-height: 44px;
+}
+.op-btn {
+  font-size: 14px;
+  padding: 11px 15px;
+  white-space: normal;
+}
+.op-content {
+  max-width: 1520px;
+  padding: 30px 34px 60px;
+}
+.op-card {
+  padding: 24px;
+  border-radius: 18px;
+}
+.op-section-head {
+  gap: 16px;
+  align-items: flex-start;
+}
+.op-section-head .op-muted {
+  margin-bottom: 0;
+}
+.op-muted {
+  font-size: 14px;
+}
+.op-kicker {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+}
+.op-columns {
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: 20px;
+}
+.op-metric {
+  min-height: 148px;
+  gap: 8px;
+}
+.op-metric > span:not(.op-symbol) {
+  font-size: 14px;
+}
+.op-metric small {
+  font-size: 13px;
+}
+.op-metrics.three .op-metric strong {
+  font-size: 19px;
+}
+.op-metric strong {
+  line-height: 1.35;
+}
+.op-badge {
+  font-size: 12px;
+  line-height: 1.5;
+}
+.op-sandbox {
+  width: max-content;
+  max-width: 100%;
+  padding: 5px 10px;
+  border: 0;
+  background: #eef3f6;
+  font-size: 12px;
+  margin: 0 0 20px;
+  border-radius: 20px;
+}
+.op-parent-identity {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 0 0 18px;
+}
+.op-parent-identity .op-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+}
+.op-parent-identity strong {
+  font-size: 17px;
+  display: block;
+}
+.op-parent-identity small {
+  display: block;
+}
+.op-parent-hero {
+  padding: 28px;
+  margin-bottom: 20px;
+}
+.op-parent-hero h2 {
+  font-size: 25px;
+  max-width: 610px;
+}
+.op-parent-hero p {
+  font-size: 15px;
+  max-width: 650px;
+}
+.op-child-monogram {
+  width: 90px;
+  height: 90px;
+}
+.op-parent-highlights {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+.op-parent-highlights span {
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #e4f5ef;
+  color: #176958;
+  font-weight: 700;
+}
+.op-parent-highlights span + span {
+  background: #edf0fb;
+  color: #45599b;
+}
+.op-story-text {
+  font-size: 16px;
+  line-height: 1.85 !important;
+  padding: 12px 0;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+.op-story-text.preview {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.op-story-byline {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #60728a;
+  font-size: 13px;
+  margin: 14px 0;
+}
+.op-private-photos {
+  grid-template-columns: 1fr;
+  margin: 4px 0 18px;
+  gap: 14px;
+}
+.op-private-photos figure {
+  margin: 0;
+  min-width: 0;
+}
+.op-private-photos button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+.op-private-photos img {
+  display: block;
+  width: 100%;
+  height: 280px;
+  max-height: none;
+  object-fit: cover;
+  object-position: center 35%;
+  background: #f4f7f9;
+}
+.op-private-photos figcaption {
+  font-size: 12px;
+  margin-top: 7px;
+  color: #60728a;
+}
+.op-private-photos.gallery {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.op-private-photos.gallery figure:first-child {
+  grid-column: 1/-1;
+}
+.op-private-photos.gallery figure:not(:first-child) img {
+  height: 160px;
+}
+.op-photo-expanded {
+  width: 100%;
+  max-height: 72vh;
+  object-fit: contain;
+  display: block;
+  border-radius: 12px;
+}
+.op-photo-close {
+  margin-bottom: 12px;
+}
+.op-parent-note p,
+.op-pickup-person p {
+  margin: 8px 0;
+  font-size: 15px;
+}
+.op-parent-note {
+  padding: 16px;
+  border-radius: 12px;
+  background: #f5faf8;
+}
+.op-parent-note details {
+  margin-top: 14px;
+}
+.op-parent-note details p {
+  color: #60728a;
+}
+.op-timeline strong {
+  font-size: 15px;
+}
+.op-timeline p {
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+.op-timeline time {
+  font-size: 13px;
+  min-width: 42px;
+}
+.op-story-day {
+  margin-bottom: 22px;
+}
+.op-story-day > .op-row {
+  align-items: flex-start;
+}
+.op-history-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+}
+.op-child {
+  min-height: 130px;
+  padding: 16px 8px;
+}
+.op-child strong {
+  font-size: 14px;
+}
+.op-child small {
+  font-size: 13px;
+}
+.op-exception {
+  gap: 14px;
+  padding: 16px 0;
+}
+.op-exception strong {
+  font-size: 15px;
+}
+.op-exception p {
+  font-size: 14px;
+}
+.op-banner p {
+  font-size: 15px;
+}
+.op-sidebar nav button {
+  padding: 11px;
+  font-size: 14px;
+}
+.op-sidebar .op-nav-label {
+  font-size: 12px;
+}
+@media (max-width: 1070px) {
+  .op-columns {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 720px) {
+  .op-content {
+    padding: 22px 16px 44px;
+  }
+  .daylio-ops h1 {
+    font-size: 25px;
+  }
+  .daylio-ops h2 {
+    font-size: 19px;
+  }
+  .op-card {
+    padding: 20px;
+  }
+  .op-parent-hero {
+    padding: 22px;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .op-parent-hero h2 {
+    font-size: 22px;
+  }
+  .op-parent-hero p {
+    font-size: 15px;
+  }
+  .op-parent-hero .op-child-monogram {
+    display: none;
+  }
+  .op-titlebar .op-btn {
+    min-height: 44px;
+  }
+  .op-parent-highlights span {
+    font-size: 12px;
+  }
+  .op-metrics.three .op-metric {
+    min-height: 128px;
+    padding: 20px 20px 20px 68px;
+  }
+  .op-metrics.three .op-metric strong {
+    font-size: 18px;
+  }
+  .op-private-photos img {
+    height: 230px;
+    object-fit: cover;
+  }
+  .op-children-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .op-child {
+    padding: 16px 10px;
+    min-height: 132px;
+  }
+  .op-exception .op-grow {
+    min-width: 0;
+  }
+  .op-exception > .op-btn {
+    margin-left: 0;
+  }
+  .op-topbar {
+    padding: 0 16px;
+  }
+  .op-crumb {
+    font-size: 13px;
+  }
+  .op-role {
+    font-size: 13px;
+    padding: 6px 8px;
+  }
+}
+
+.op-heading-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.op-environment {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 4px 9px;
+  background: #edf2f5;
+  color: #526981;
+  border-radius: 20px;
+}
+.op-parent-hero {
+  min-height: 180px;
+}
+.op-parent-hero .op-parent-highlights {
+  margin-top: 14px;
+}
+.op-story-text.preview {
+  margin-top: 0;
+}
+.op-parent-identity {
+  margin-top: 4px;
+}
+.op-section-head .op-link {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+@media (max-width: 720px) {
+  .op-heading-row {
+    gap: 8px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .op-environment {
+    font-size: 12px;
+  }
+  .op-titlebar > .op-row {
+    gap: 12px;
+  }
+  .op-titlebar > .op-row > .op-btn.primary {
+    width: 100%;
+  }
+}
+
+@media (max-width: 720px) {
+  .op-exception {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr);
+    align-items: start;
+    column-gap: 12px;
+    row-gap: 10px;
+  }
+  .op-exception > .op-symbol {
+    margin-top: 3px;
+  }
+  .op-exception > .op-btn {
+    grid-column: 2;
+    justify-self: start;
+  }
+  .op-exception .op-grow {
+    min-width: 0;
+  }
+  .op-exception strong {
+    font-size: 15px;
+  }
+  .op-exception p {
+    font-size: 14px;
+  }
+}
+
+.op-icon {
+  min-width: 44px;
+  min-height: 44px;
+}
+.daylio-ops input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  min-height: 20px;
+}
+.op-checkbox {
+  min-height: 44px;
+}
+.op-photo-dialog {
+  border: 0;
+  padding: 20px;
+  border-radius: 18px;
+  width: min(90vw, 850px);
+  max-height: 90dvh;
+  color: var(--navy);
+}
+.op-photo-dialog::backdrop {
+  background: #15283b99;
+}
+
+/* Readable text contrast keeps the approved coral/teal surfaces. */
+.op-btn.primary {
+  color: #182d4d;
+}
+.op-badge.good {
+  color: #176958;
+}
+.op-badge:not(.good) {
+  color: #845315;
+}
+.op-kicker {
+  color: #b53b51;
+}
+.op-sidebar nav button[aria-current="page"],
+.op-activity-types button.active {
+  color: #b3344e;
+}
+.daylio-ops small,
+.op-muted,
+.op-parent-hero p,
+.op-list-item p,
+.op-timeline time,
+.op-story-byline,
+.op-private-photos figcaption,
+.op-footer {
+  color: #526981;
+}
+
+.op-metric {
+  position: relative;
+  min-height: 142px;
+  padding: 20px;
+  gap: 6px;
+  justify-content: flex-start;
+}
+.op-metrics:not(.three) .op-metric > .op-symbol {
+  position: absolute;
+  top: 18px;
+  right: 16px;
+  width: 28px;
+  height: 28px;
+}
+.op-metrics:not(.three) .op-metric > span:not(.op-symbol) {
+  padding-right: 34px;
+  min-height: 36px;
+  line-height: 1.4;
+}
+.op-metrics:not(.three) .op-metric strong {
+  margin-top: 0;
+}
+.op-titlebar .op-filters {
+  margin: 0;
+  align-items: flex-end;
+  gap: 10px;
+}
+.op-titlebar .op-filters label {
+  gap: 4px;
+  font-size: 13px;
+}
+.op-titlebar .op-filters input {
+  width: 145px;
+}
+.op-titlebar .op-filters select {
+  max-width: 170px;
+}
+.op-banner {
+  padding: 22px 26px;
+}
+.op-banner p {
+  line-height: 1.55;
+  margin-bottom: 0;
+}
+@media (max-width: 720px) {
+  .op-metrics:not(.three) .op-metric {
+    min-height: 140px;
+    padding: 18px;
+  }
+  .op-metrics:not(.three) .op-metric > .op-symbol {
+    top: 16px;
+    right: 12px;
+    width: 25px;
+    height: 25px;
+  }
+  .op-metrics:not(.three) .op-metric > span:not(.op-symbol) {
+    padding-right: 28px;
+    min-height: 38px;
+  }
+  .op-metrics:not(.three) .op-metric small {
+    font-size: 13px;
+  }
+  .op-titlebar .op-filters {
+    width: 100%;
+  }
+  .op-titlebar .op-filters label {
+    flex: 1;
+  }
+  .op-titlebar .op-filters input,
+  .op-titlebar .op-filters select {
+    width: 100%;
+    max-width: 100%;
+  }
+  .op-banner {
+    padding: 20px;
   }
 }

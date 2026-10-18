@@ -871,8 +871,20 @@ export default function OperationsWorkspace({
     );
   }
   function queue(items: Item[] = []) {
-    return items.length ? (
-      items.map((item) => (
+    const groups = new Map<string, Item[]>();
+    for (const item of items) {
+      const key =
+        item.kind === "activity" && item.data.batchId
+          ? "batch:" + item.data.batchId
+          : item.id + ":" + item.kind;
+      groups.set(key, [...(groups.get(key) || []), item]);
+    }
+    const grouped: Item[] = [...groups.values()].map((rows) => ({
+      ...rows[0],
+      groupCount: rows.length,
+    }));
+    return grouped.length ? (
+      grouped.map((item) => (
         <article className="op-exception" key={`${item.kind}-${item.id}`}>
           <span
             className={`op-symbol ${item.kind === "incident" ? "coral" : "teal"}`}
@@ -880,9 +892,15 @@ export default function OperationsWorkspace({
             {item.kind === "incident" ? <WarningCircle /> : <ClipboardText />}
           </span>
           <div className="op-grow">
-            <strong>{kinds[item.kind] || item.kind}</strong>
+            <strong>
+              {kinds[item.kind] || item.kind}
+              {item.groupCount > 1 ? ` · ${item.groupCount} anak` : ""}
+            </strong>
             <p>
-              {nameFor(item.childId)} ·{" "}
+              {item.groupCount > 1
+                ? "Satu catatan kelompok"
+                : nameFor(item.childId)}{" "}
+              ·{" "}
               {item.data.note ||
                 item.data.name ||
                 item.data.result ||
@@ -1224,14 +1242,97 @@ export default function OperationsWorkspace({
       </>
     );
   }
+  const [storyPage, setStoryPage] = useState(0);
+  useEffect(() => setStoryPage(0), [childId]);
+  function morningAction() {
+    return (
+      <button
+        className="op-btn primary"
+        disabled={!childId || !extraReady || loading || busy}
+        onClick={() =>
+          setModal({
+            title: "Pesan pagi dari rumah",
+            body: (
+              <SmartForm
+                busy={busy}
+                fields={[
+                  {
+                    name: "note",
+                    label: "Hal yang perlu diketahui pengasuh",
+                    type: "textarea",
+                  },
+                ]}
+                button="Kirim pesan pagi"
+                onSubmit={(v) =>
+                  mutate(
+                    () =>
+                      req("morning-notes", "POST", {
+                        childId,
+                        note: v.note,
+                      }),
+                    "Pesan pagi dikirim ke daycare.",
+                  )
+                }
+              />
+            ),
+          })
+        }
+      >
+        <Sun size={16} />
+        Pesan pagi
+      </button>
+    );
+  }
   function today() {
     const c = extra.child || current;
+    const age = c?.birth_date
+      ? Math.max(
+          0,
+          Math.floor(
+            (Date.now() - Date.parse(c.birth_date)) /
+              ((365.25 / 12) * 86400000),
+          ),
+        )
+      : null;
+    const routine = extra.pickups?.find(
+      (r: Item) =>
+        r.kind === "pickup-authorization" &&
+        r.state === "approved" &&
+        Date.parse(r.data.expiresAt) > Date.now(),
+    );
     return (
       <>
+        <div className="op-parent-identity">
+          <span className="op-avatar">
+            {c?.name
+              ?.split(" ")
+              .map((v: string) => v[0])
+              .slice(0, 2)
+              .join("") || <Baby />}
+          </span>
+          <div>
+            <strong>{c?.name || "Anak Anda"}</strong>
+            <small>
+              {data?.classrooms.find(
+                (room: Item) => room.id === c?.classroom_id,
+              )?.name || "Daycare"}
+              {age !== null
+                ? ` · ${Math.floor(age / 12)} th ${age % 12} bl`
+                : ""}
+            </small>
+          </div>
+        </div>
         <div className="op-parent-hero">
           <div>
             <span className="op-kicker">CERITA HARI INI</span>
-            <h2>Hari {c?.name || "si kecil"} bersama Daylio</h2>
+            <h2>
+              {c?.name || "Si kecil"}{" "}
+              {extra.attendance?.data.type === "in"
+                ? "sudah di daycare"
+                : extra.attendance?.data.type === "out"
+                  ? "sudah kembali bersama keluarga"
+                  : "bersama Daylio hari ini"}
+            </h2>
             <p>
               {extra.attendance?.data.type === "in"
                 ? "Sudah tiba di daycare. Pembaruan berikut berasal dari catatan pengasuh."
@@ -1239,40 +1340,16 @@ export default function OperationsWorkspace({
                   ? "Sudah pulang. Lihat cerita dan catatan hari ini."
                   : "Kedatangan hari ini belum tercatat."}
             </p>
-            <button
-              className="op-btn primary"
-              onClick={() =>
-                setModal({
-                  title: "Pesan pagi dari rumah",
-                  body: (
-                    <SmartForm
-                      busy={busy}
-                      fields={[
-                        {
-                          name: "note",
-                          label: "Hal yang perlu diketahui pengasuh",
-                          type: "textarea",
-                        },
-                      ]}
-                      button="Kirim pesan pagi"
-                      onSubmit={(v) =>
-                        mutate(
-                          () =>
-                            req("morning-notes", "POST", {
-                              childId,
-                              note: v.note,
-                            }),
-                          "Pesan pagi dikirim ke daycare.",
-                        )
-                      }
-                    />
-                  ),
-                })
-              }
-            >
-              <Sun size={16} />
-              Pesan pagi
-            </button>
+            <div className="op-parent-highlights">
+              <span>
+                {extra.attendance?.data.type === "in"
+                  ? "Sudah hadir"
+                  : extra.attendance?.data.type === "out"
+                    ? "Sudah pulang"
+                    : "Menunggu kedatangan"}
+              </span>
+              <span>{extra.activityCount || 0} aktivitas dibagikan</span>
+            </div>
           </div>
           <span className="op-child-monogram">
             {c?.name?.substring(0, 2).toUpperCase() || <Baby />}
@@ -1319,59 +1396,126 @@ export default function OperationsWorkspace({
         <div className="op-columns">
           <Card
             title="Daily Story"
-            sub="Cerita yang sudah ditinjau oleh daycare."
+            sub="Cerita kecil yang sudah ditinjau daycare."
+            action={
+              <button className="op-link" onClick={() => go("story")}>
+                Lihat semua <CaretRight size={16} />
+              </button>
+            }
           >
-            {extra.story ? (
-              <>
-                <Badge state={extra.story.state} />
-                <p className="op-story-text">{extra.story.data.note}</p>
-                <small>
-                  {extra.story.data.sourceIds.length} sumber catatan ·{" "}
-                  {time(extra.story.data.publishedAt)} WIB
-                </small>
-              </>
-            ) : (
-              <Empty>
-                Daily Story hari ini belum diterbitkan. Catatan yang tersedia
-                tetap bisa dilihat di bawah.
-              </Empty>
-            )}
             <PrivatePhotos
               key={childId}
               rows={extra.photos || []}
               request={req}
             />
-            {recordList(
-              extra.activities || [],
-              "Belum ada aktivitas yang diterbitkan hari ini.",
+            {extra.story ? (
+              <>
+                <div className="op-story-byline">
+                  <CheckCircle size={16} />
+                  Ditinjau daycare ·{" "}
+                  {new Date(
+                    extra.story.data.publishedAt || extra.story.created_at,
+                  ).toLocaleDateString("id-ID", {
+                    day: "numeric",
+                    month: "long",
+                  })}{" "}
+                  ·{" "}
+                  {time(extra.story.data.publishedAt || extra.story.created_at)}{" "}
+                  WIB
+                </div>
+                <p className="op-story-text preview">{extra.story.data.note}</p>
+              </>
+            ) : (
+              <Empty>
+                Cerita hari ini sedang disiapkan. Kabar yang sudah dibagikan
+                tetap tersedia di catatan aktivitas.
+              </Empty>
             )}
+            <button className="op-btn teal" onClick={() => go("leo")}>
+              <Sparkle size={17} />
+              Tanya LEO tentang hari ini
+            </button>
+            <details className="op-space">
+              <summary>
+                Catatan aktivitas hari ini ({extra.activityCount || 0})
+              </summary>
+              {recordList(
+                extra.activities || [],
+                "Belum ada aktivitas yang dibagikan hari ini.",
+              )}
+              <button className="op-link" onClick={() => go("story")}>
+                Lihat semua catatan
+              </button>
+            </details>
           </Card>
           <div className="op-stack">
-            <Card title="Pesan pagi Anda">
+            <Card
+              title="Pesan pagi Anda"
+              sub="Kabar dari rumah, diterima dengan perhatian."
+            >
               {extra.morning?.length ? (
-                extra.morning.map((r: Item) => (
-                  <article className="op-list-item" key={r.id}>
-                    <p>{r.data.note}</p>
-                    <Badge state={r.state} />
-                    {r.data.acknowledgedAt && (
-                      <small>
-                        {" "}
-                        · Diterima {time(r.data.acknowledgedAt)} WIB
-                      </small>
-                    )}
-                  </article>
-                ))
+                <div className="op-parent-note">
+                  <div className="op-row">
+                    <Sun size={18} />
+                    <Badge state={extra.morning[0].state} />
+                  </div>
+                  <p>{extra.morning[0].data.note}</p>
+                  <small>
+                    {extra.morning[0].data.acknowledgedAt
+                      ? `Diterima pengasuh pukul ${time(extra.morning[0].data.acknowledgedAt)} WIB`
+                      : "Menunggu pengasuh membaca pesan Anda."}
+                  </small>
+                  {extra.morningHistory?.length > 0 && (
+                    <details>
+                      <summary>
+                        Pesan sebelumnya hari ini ({extra.morningCount - 1})
+                      </summary>
+                      {extra.morningHistory.map((r: Item) => (
+                        <article key={r.id}>
+                          <p>{r.data.note}</p>
+                          <small>
+                            {time(r.created_at)} WIB · <Badge state={r.state} />
+                          </small>
+                        </article>
+                      ))}
+                    </details>
+                  )}
+                </div>
               ) : (
                 <Empty>
-                  Bagikan kondisi tidur, makan, atau kebutuhan anak dari rumah.
+                  Bagikan kabar tidur, sarapan, atau kebutuhan si kecil melalui
+                  tombol Pesan pagi.
                 </Empty>
               )}
             </Card>
             <Card title="Penjemputan hari ini">
-              <p>
-                Kelola penjemput rutin atau berikan izin pengganti yang memiliki
-                batas waktu.
-              </p>
+              {routine ? (
+                <div className="op-pickup-person">
+                  <div className="op-row">
+                    <span className="op-symbol teal">
+                      <ShieldCheck />
+                    </span>
+                    <div>
+                      <strong>{routine.data.name}</strong>
+                      <small style={{ display: "block" }}>
+                        {routine.data.relationship} ·{" "}
+                        {routine.data.kind === "routine"
+                          ? "Penjemput rutin"
+                          : "Penjemput pengganti"}
+                      </small>
+                    </div>
+                  </div>
+                  <p>
+                    Otorisasi aktif. Petugas tetap memeriksa identitas saat
+                    penjemputan.
+                  </p>
+                </div>
+              ) : (
+                <p>
+                  Belum ada izin penjemputan aktif. Atur penjemput rutin atau
+                  berikan izin pengganti.
+                </p>
+              )}
               <button className="op-btn" onClick={() => go("pickup")}>
                 Kelola penjemput
                 <ArrowRight size={14} />
@@ -1394,7 +1538,10 @@ export default function OperationsWorkspace({
     );
   }
   function stories() {
-    const rows = selectedRecords.filter((r) => r.kind === "daily-story");
+    const allStories = selectedRecords
+      .filter((r) => r.kind === "daily-story")
+      .sort((a, b) => String(b.data.date).localeCompare(String(a.data.date)));
+    const rows = allStories.slice(storyPage * 5, storyPage * 5 + 5);
     const sources = selectedRecords.filter(
       (r) =>
         r.kind === "activity" &&
@@ -1421,11 +1568,36 @@ export default function OperationsWorkspace({
               rows.map((r) => (
                 <article className="op-list-item" key={r.id}>
                   <div className="op-row between">
-                    <strong>{r.data.date}</strong>
+                    <strong>
+                      {new Date(
+                        r.data.date + "T12:00:00+07:00",
+                      ).toLocaleDateString("id-ID", {
+                        weekday: "long",
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </strong>
                     <Badge state={r.state} />
                   </div>
-                  <p>{r.data.note}</p>
-                  <small>{r.data.sourceIds.length} catatan sumber</small>
+                  <PrivatePhotos
+                    rows={selectedRecords
+                      .filter(
+                        (photo) =>
+                          photo.kind === "media" &&
+                          photo.state === "published" &&
+                          photo.data.uploaded &&
+                          (photo.data.date ||
+                            localDateFrom(photo.created_at)) === r.data.date,
+                      )
+                      .slice(0, 3)}
+                    request={req}
+                  />
+                  <p className="op-story-text">{r.data.note}</p>
+                  <small>
+                    Ditinjau daycare ·{" "}
+                    {time(r.data.publishedAt || r.created_at)} WIB
+                  </small>
                   {r.state === "draft" &&
                     !isParent &&
                     (management ||
@@ -1451,6 +1623,28 @@ export default function OperationsWorkspace({
               ))
             ) : (
               <Empty>Belum ada Daily Story untuk anak ini.</Empty>
+            )}
+            {allStories.length > 5 && (
+              <div className="op-history-controls">
+                <button
+                  className="op-btn"
+                  disabled={storyPage === 0}
+                  onClick={() => setStoryPage((p) => p - 1)}
+                >
+                  Lebih baru
+                </button>
+                <small>
+                  Halaman {storyPage + 1} dari{" "}
+                  {Math.ceil(allStories.length / 5)}
+                </small>
+                <button
+                  className="op-btn"
+                  disabled={(storyPage + 1) * 5 >= allStories.length}
+                  onClick={() => setStoryPage((p) => p + 1)}
+                >
+                  Lebih lama
+                </button>
+              </div>
             )}
           </Card>
         </div>
@@ -1487,11 +1681,12 @@ export default function OperationsWorkspace({
           ) : !isParent ? (
             <Empty>Terbitkan catatan aktivitas terlebih dahulu.</Empty>
           ) : null}
-          {recordList(
-            selectedRecords.filter(
+          <ActivityHistory
+            rows={selectedRecords.filter(
               (r) => r.kind === "activity" && r.state === "published",
-            ),
-          )}
+            )}
+            render={recordList}
+          />
         </Card>
       </div>
     );
@@ -2235,7 +2430,48 @@ export default function OperationsWorkspace({
       </div>
     );
   }
+  function businessFilters() {
+    return (
+      <div className="op-row wrap op-filters">
+        <label>
+          Tanggal
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+        </label>
+        <label>
+          Cabang
+          <select value={branch} onChange={(e) => setBranch(e.target.value)}>
+            <option value="">Semua cabang</option>
+            {Array.from(new Set(classes.map((c) => c.branch_id))).map((id) => (
+              <option key={id} value={id}>
+                {classes.find((c) => c.branch_id === id)?.branch_name ||
+                  "Cabang " +
+                    (Array.from(
+                      new Set(classes.map((c) => c.branch_id)),
+                    ).indexOf(id) +
+                      1)}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+    );
+  }
   function business() {
+    const capacityClasses = (extra.classes || []).filter(
+      (room: Item) => room.capacity,
+    );
+    const capacity = capacityClasses.reduce(
+      (sum: number, room: Item) => sum + room.capacity,
+      0,
+    );
+    const enrolled = capacityClasses.reduce(
+      (sum: number, room: Item) => sum + room.enrolled,
+      0,
+    );
     return (
       <>
         <div className="op-banner">
@@ -2247,45 +2483,27 @@ export default function OperationsWorkspace({
                 ? `${extra.exceptions.length} hal memerlukan perhatian tim. Mulai dari antrean operasional.`
                 : "Pantau kapasitas, pembaruan keluarga, dan tindak lanjut dari catatan tim."}
             </p>
-            <button className="op-btn primary" onClick={() => go("control")}>
-              Lihat prioritas hari ini
-              <ArrowRight size={16} />
-            </button>
           </div>
           <ChartBar size={64} weight="duotone" />
         </div>
-        <div className="op-row wrap op-filters">
-          <label>
-            Tanggal
-            <input
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-            />
-          </label>
-          <label>
-            Cabang
-            <select value={branch} onChange={(e) => setBranch(e.target.value)}>
-              <option value="">Semua cabang</option>
-              {Array.from(new Set(classes.map((c) => c.branch_id))).map(
-                (id) => (
-                  <option key={id} value={id}>
-                    {classes.find((c) => c.branch_id === id)?.branch_name ||
-                      "Cabang " +
-                        (Array.from(
-                          new Set(classes.map((c) => c.branch_id)),
-                        ).indexOf(id) +
-                          1)}
-                  </option>
-                ),
-              )}
-            </select>
-          </label>
-        </div>
         <div className="op-metrics">
           {[
-            ["Anak aktif", extra.children, UsersThree, "Terdaftar di kelas"],
-            ["Hadir sekarang", extra.present, House, "Berdasarkan kehadiran"],
+            [
+              "Keterisian kelas",
+              capacity
+                ? `${Math.round((enrolled / capacity) * 100)}%`
+                : "Belum diatur",
+              UsersThree,
+              capacity
+                ? `${enrolled} dari ${capacity} slot kelas`
+                : "Lengkapi kapasitas kelas",
+            ],
+            [
+              "Hadir hari ini",
+              extra.present,
+              House,
+              `${extra.children || 0} anak terdaftar`,
+            ],
             [
               "Prospek aktif",
               extra.leads,
@@ -2382,25 +2600,38 @@ export default function OperationsWorkspace({
       <>
         <div className="op-metrics">
           {[
-            ["Perlu perhatian", extra.items?.length || 0, WarningCircle],
-            ["Anak hadir", children.filter((c) => c.present).length, House],
-            ["Draf perawatan", drafts.length, ClipboardText],
+            [
+              "Perlu perhatian",
+              extra.items?.length || 0,
+              WarningCircle,
+              "Perlu ditinjau",
+            ],
+            [
+              "Anak hadir",
+              children.filter((c) => c.present).length,
+              House,
+              "Sesuai absensi",
+            ],
+            ["Draf perawatan", drafts.length, ClipboardText, "Review kelompok"],
             [
               "Izin menunggu",
               records.filter(
                 (r) =>
-                  r.kind === "pickup-authorization" && r.state === "requested",
+                  r.kind === "pickup-authorization" &&
+                  r.state === "requested" &&
+                  Date.parse(r.data.expiresAt) > Date.now(),
               ).length,
               ShieldCheck,
+              "Otorisasi aktif",
             ],
-          ].map(([label, value, Icon]: any) => (
+          ].map(([label, value, Icon, detail]: any) => (
             <div className="op-metric" key={label}>
               <span className="op-symbol teal">
                 <Icon />
               </span>
               <span>{label}</span>
               <strong>{value}</strong>
-              <small>Catatan yang tersedia saat ini</small>
+              <small>{detail}</small>
             </div>
           ))}
         </div>
@@ -3276,10 +3507,29 @@ export default function OperationsWorkspace({
                   year: "numeric",
                 })}
               </span>
-              <h1>{heading[0]}</h1>
+              <div className="op-heading-row">
+                <h1>{heading[0]}</h1>
+                {process.env.NEXT_PUBLIC_SANDBOX === "true" && (
+                  <span className="op-environment">
+                    SANDBOX · Data sintetis · Contoh fiktif
+                  </span>
+                )}
+              </div>
               <p className="op-muted">{heading[1]}</p>
             </div>
             <div className="op-row wrap">
+              {role === "owner" && view === "home" && (
+                <>
+                  <button
+                    className="op-btn primary"
+                    onClick={() => go("control")}
+                  >
+                    Buka Control Tower <ArrowRight size={16} />
+                  </button>
+                  {businessFilters()}
+                </>
+              )}
+              {isParent && view === "today" && morningAction()}
               {[
                 "today",
                 "story",
@@ -3301,12 +3551,6 @@ export default function OperationsWorkspace({
               </button>
             </div>
           </div>
-          {data?.organization.name.startsWith("SANDBOX") && (
-            <div className="op-sandbox">
-              SANDBOX · Data sintetis untuk pengujian. Tidak terhubung ke
-              layanan produksi.
-            </div>
-          )}
           {error && (
             <div className="op-alert" role="alert">
               <WarningCircle size={18} />
@@ -3416,19 +3660,77 @@ export default function OperationsWorkspace({
     </div>
   );
 }
+function localDateFrom(value: string) {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Jakarta" }).format(
+    new Date(value),
+  );
+}
+function ActivityHistory({
+  rows,
+  render,
+}: {
+  rows: Item[];
+  render: (rows: Item[], empty?: string) => ReactNode;
+}) {
+  const [page, setPage] = useState(0);
+  const signature = rows.map((r) => r.id).join(",");
+  useEffect(() => setPage(0), [signature]);
+  const ordered = [...rows].sort(
+    (a, b) =>
+      Date.parse(b.data.occurredAt || b.created_at) -
+      Date.parse(a.data.occurredAt || a.created_at),
+  );
+  return (
+    <>
+      {render(ordered.slice(page * 10, page * 10 + 10))}
+      {ordered.length > 10 && (
+        <div className="op-history-controls">
+          <button
+            className="op-btn"
+            disabled={page === 0}
+            onClick={() => setPage((p) => p - 1)}
+          >
+            Sebelumnya
+          </button>
+          <small>
+            {page * 10 + 1}–{Math.min((page + 1) * 10, ordered.length)} dari{" "}
+            {ordered.length}
+          </small>
+          <button
+            className="op-btn"
+            disabled={(page + 1) * 10 >= ordered.length}
+            onClick={() => setPage((p) => p + 1)}
+          >
+            Berikutnya
+          </button>
+        </div>
+      )}
+    </>
+  );
+}
 function PrivatePhotos({ rows, request }: { rows: Item[]; request: Request }) {
-  const [photos, setPhotos] = useState<{ id: string; url: string }[]>([]),
-    [unavailable, setUnavailable] = useState(false);
+  const [photos, setPhotos] = useState<
+      { id: string; url: string; example: boolean; caption: string }[]
+    >([]),
+    [unavailable, setUnavailable] = useState(false),
+    [expanded, setExpanded] = useState<string | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const ids = rows.map((r) => r.id).join(",");
   useEffect(() => {
     let active = true;
     setPhotos([]);
+    setExpanded(null);
     setUnavailable(false);
     void Promise.all(
       rows.map(async (r) => {
         try {
           const grant = await request(`media/${r.id}/access`);
-          return { id: r.id, url: grant.url };
+          return {
+            id: r.id,
+            url: grant.url,
+            example: r.data.exampleMedia === true,
+            caption: r.data.caption || "Foto aktivitas yang dibagikan daycare",
+          };
         } catch {
           return null;
         }
@@ -3436,7 +3738,7 @@ function PrivatePhotos({ rows, request }: { rows: Item[]; request: Request }) {
     ).then((results) => {
       if (active) {
         setPhotos(
-          results.filter((r): r is { id: string; url: string } => r !== null),
+          results.filter((r): r is NonNullable<typeof r> => r !== null),
         );
         setUnavailable(results.some((r) => r === null));
       }
@@ -3445,28 +3747,92 @@ function PrivatePhotos({ rows, request }: { rows: Item[]; request: Request }) {
       active = false;
     };
   }, [ids]);
+  useEffect(() => {
+    if (!expanded) return;
+    const dialog = dialogRef.current,
+      previous = document.activeElement as HTMLElement | null;
+    dialog?.showModal();
+    return () => {
+      dialog?.close();
+      previous?.focus();
+    };
+  }, [expanded]);
   if (!rows.length) return null;
   return (
-    <div className="op-private-photos">
-      {photos.map((photo) => (
-        <img
-          key={photo.id}
-          src={photo.url}
-          alt="Foto aktivitas yang dibagikan daycare"
-          loading="lazy"
-          onError={() => {
-            setPhotos((old) => old.filter((p) => p.id !== photo.id));
-            setUnavailable(true);
+    <>
+      <div
+        className={"op-private-photos" + (photos.length > 1 ? " gallery" : "")}
+      >
+        {photos.map((photo) => (
+          <figure key={photo.id}>
+            <button
+              aria-label="Perbesar foto aktivitas"
+              onClick={() =>
+                void request(`media/${photo.id}/access`)
+                  .then((grant) => setExpanded(grant.url))
+                  .catch(() => setUnavailable(true))
+              }
+            >
+              <img
+                src={photo.url}
+                alt={
+                  photo.example
+                    ? "Contoh fotografi kegiatan anak dari kit desain"
+                    : "Foto aktivitas yang dibagikan daycare"
+                }
+                loading="lazy"
+                onError={() => {
+                  setPhotos((old) => old.filter((p) => p.id !== photo.id));
+                  setUnavailable(true);
+                }}
+              />
+            </button>
+            {photo.example && (
+              <figcaption>
+                Contoh fotografi · bukan foto anak pelanggan
+              </figcaption>
+            )}
+          </figure>
+        ))}
+        {unavailable && (
+          <small>
+            Foto belum dapat ditampilkan. Periksa persetujuan foto atau perbarui
+            halaman.
+          </small>
+        )}
+      </div>
+      {expanded && (
+        <dialog
+          ref={dialogRef}
+          className="op-photo-dialog"
+          aria-label="Foto aktivitas"
+          onCancel={(event) => {
+            event.preventDefault();
+            setExpanded(null);
           }}
-        />
-      ))}
-      {unavailable && (
-        <small>
-          Foto belum dapat ditampilkan. Periksa persetujuan foto atau perbarui
-          halaman.
-        </small>
+          onClick={(event) => {
+            if (event.target === event.currentTarget) setExpanded(null);
+          }}
+        >
+          <button
+            autoFocus
+            className="op-btn op-photo-close"
+            onClick={() => setExpanded(null)}
+          >
+            Tutup foto <X size={18} />
+          </button>
+          <img
+            className="op-photo-expanded"
+            src={expanded}
+            alt="Foto aktivitas diperbesar"
+            onError={() => {
+              setExpanded(null);
+              setUnavailable(true);
+            }}
+          />
+        </dialog>
       )}
-    </div>
+    </>
   );
 }
 function Notifications({ request }: { request: Request }) {

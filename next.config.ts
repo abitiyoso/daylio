@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 const config: NextConfig = {
   poweredByHeader: false,
+  distDir: process.env.DAYLIO_BUILD_DIRECTORY || ".next",
   devIndicators: false,
   logging: {
     incomingRequests: {

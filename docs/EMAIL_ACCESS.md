@@ -14,4 +14,4 @@ Before production acceptance, test a real invitation in a fresh browser and on a
 
 ## Local evidence
 
-`node scripts/dev-sandbox.mjs`, then `node scripts/browser-access-test.mjs`. The identity fixture listens only on localhost and captures test emails only for @daylio.test; its mailbox is not part of the application API or deployed code. Application data, invitation acceptance, membership checks and audit use the persistent sandbox database. Never deploy the sandbox launcher or its auth fixture. Evidence is in evidence/access-browser-results.json and evidence/screenshots/access/.
+`node scripts/run-browser-regressions.mjs --suite=access`. The runner starts its own ephemeral sandbox on ports 3101/4012. The identity fixture listens only on localhost and captures test emails only for @daylio.test; its mailbox is not part of the application API or deployed code. Application data, invitation acceptance, membership checks and audit use the persistent sandbox database. Never deploy the sandbox launcher or its auth fixture. Evidence is in evidence/access-browser-results.json and evidence/screenshots/access/.

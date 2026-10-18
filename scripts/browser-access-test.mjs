@@ -1,8 +1,10 @@
+import { requireIsolatedBrowserTarget } from "./browser-test-guard.mjs";
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import { sandbox } from "../db/sandbox-fixture.mjs";
-const base = "http://127.0.0.1:3100";
+const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3101";
+await requireIsolatedBrowserTarget(base);
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const contexts = [],
   evidence = [],
@@ -63,7 +65,7 @@ try {
     path: "evidence/screenshots/access/admin-desktop.png",
   });
   const mail = await (
-    await owner.context.request.get("http://127.0.0.1:4011/__test/mail")
+    await owner.context.request.get("http://127.0.0.1:4012/__test/mail")
   ).json();
   const letter = mail.findLast((x) => x.email === email);
   assert.ok(letter);
