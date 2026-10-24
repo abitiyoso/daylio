@@ -11,3 +11,8 @@ These are dependency-based milestones, not invented calendar commitments. P0 and
 | M5 | Production privacy, storage and recovery | Daycare operator + platform ops | Reviewed retention/deletion policies, shared storage, staging environment | Child deletion/export SOP, verified restore of PostgreSQL plus photos, provider delivery tests, failure alerts and launch approval. |
 
 F20 is implemented as P1 per the matrix even though one supplied acceptance-plan paragraph groups handovers with P2. The function matrix is the completion inventory.
+
+
+## 24 October v10 progress
+
+M1 now includes a persisted source-hashed work-item lifecycle for two allowlisted internal outputs, with human approval and permission revalidation; external inference remains unconnected. M2 now has approved recurring rules, worker generation, unique monthly invoices and verified manual receipt PDFs; invoice adjustments/refunds and branded layouts remain. M4 now has real catalog prices, 14-day trial/expiry, server/RLS entitlements, child quotas and separate SaaS invoices verified by platform administration. Proration, active-term switching/scheduled downgrade and provider payment lifecycle remain. M3 and M5 still require their external/operational acceptance gates. See `BACKEND_V10_API.md` and the latest evidence in `IMPLEMENTATION_STATUS.md`.

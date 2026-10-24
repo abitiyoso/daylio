@@ -1,4 +1,7 @@
-import { requireIsolatedBrowserTarget } from "./browser-test-guard.mjs";
+import {
+  requireIsolatedBrowserTarget,
+  saveBrowserScreenshot,
+} from "./browser-test-guard.mjs";
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
@@ -21,6 +24,7 @@ try {
         reducedMotion: "reduce",
       }),
       page = await context.newPage();
+    page.setDefaultNavigationTimeout(60000);
     page.on("pageerror", (e) => faults.push(`${role}: ${e.message}`));
     await page.goto(base + "/workspace");
     await page.getByLabel("Email", { exact: true }).fill(role + "@daylio.test");
@@ -28,7 +32,7 @@ try {
       .getByLabel("Kata sandi", { exact: true })
       .fill("Sandbox-only-2026!");
     await page.getByRole("button", { name: "Masuk", exact: true }).click();
-    await page.locator(".op-content .op-card").first().waitFor();
+    await page.locator('.op-content > div[aria-busy="false"]').waitFor();
     await page.getByText("SANDBOX · Data sintetis", { exact: false }).waitFor();
     return { page, context };
   }
@@ -37,6 +41,9 @@ try {
     caregiver = await login("caregiver"),
     parent = await login("parent");
   actors.push(owner, manager, caregiver, parent);
+  await caregiver.page
+    .getByRole("button", { name: "Catat Aktivitas", exact: true })
+    .click();
   async function api(
     actor,
     path,
@@ -84,6 +91,9 @@ try {
         data: { type: "in" },
       });
   await caregiver.page.reload();
+  await caregiver.page
+    .getByRole("button", { name: "Catat Aktivitas", exact: true })
+    .click();
   await caregiver.page
     .getByRole("button", { name: "Simpan draf untuk 6 anak", exact: true })
     .waitFor();
@@ -181,6 +191,9 @@ try {
     .click();
   await parent.page.getByRole("status").waitFor();
   await caregiver.page.reload();
+  await caregiver.page
+    .getByRole("button", { name: "Catat Aktivitas", exact: true })
+    .click();
   const morning = caregiver.page
     .locator(".op-list-item")
     .filter({ hasText: tag + " tidur lebih larut" });
@@ -196,6 +209,7 @@ try {
   await parent.page
     .getByLabel("Anak aktif", { exact: true })
     .selectOption(kids[1].id);
+  await parent.page.getByText(/^Catatan aktivitas hari ini \(/).click();
   await parent.page
     .getByText(tag + " makan separuh porsi.", { exact: true })
     .first()
@@ -239,7 +253,7 @@ try {
     })
     .waitFor();
   await parent.page
-    .getByRole("button", { name: "Penjemputan", exact: true })
+    .getByRole("button", { name: "Izin Penjemputan", exact: true })
     .click();
   async function createPickup(kind, name) {
     await parent.page
@@ -327,7 +341,7 @@ try {
     409,
   );
   await manager.page
-    .getByRole("button", { name: "Penjemputan", exact: true })
+    .getByRole("button", { name: "Penjemputan & Insiden", exact: true })
     .click();
   await manager.page
     .getByLabel("Anak aktif", { exact: true })
@@ -354,6 +368,7 @@ try {
     childId: kids[2].id,
     data: { severity: "medium", note: tag + " perlu tindak lanjut manusia" },
   });
+  await manager.page.locator(".v10-additional-nav summary").click();
   await manager.page
     .getByRole("button", { name: "Daily Closing", exact: true })
     .click();
@@ -382,16 +397,16 @@ try {
       data: { type: "in" },
     });
   for (const [name, actor, title] of [
-    ["owner", owner, "Business Pulse"],
+    ["owner", owner, "Ringkasan Daycare"],
     ["manager", manager, "Control Tower"],
-    ["caregiver", caregiver, "Catat Aktivitas"],
-    ["parent", parent, "My Child Today"],
+    ["caregiver", caregiver, /Selamat/],
+    ["parent", parent, /^Halo,/],
   ]) {
     await actor.page.reload();
     await actor.page
       .getByRole("heading", { name: title, exact: true })
       .waitFor();
-    await actor.page.locator(".op-content .op-card").first().waitFor();
+    await actor.page.locator('.op-content > div[aria-busy="false"]').waitFor();
     for (const width of [1440, 820, 390]) {
       await actor.page.setViewportSize({
         width,
@@ -416,7 +431,7 @@ try {
         true,
         `${name} ${width} overflow`,
       );
-      await actor.page.screenshot({
+      await saveBrowserScreenshot(actor.page, {
         path: `evidence/screenshots/v3/${name}-${width}.png`,
         fullPage: false,
       });

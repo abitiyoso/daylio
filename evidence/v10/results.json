@@ -1,0 +1,148 @@
+{
+  "at": "2026-10-24T08:16:18.661Z",
+  "results": [
+    {
+      "role": "owner",
+      "width": 320,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-owner-320.png"
+    },
+    {
+      "role": "owner",
+      "width": 390,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-owner-390.png"
+    },
+    {
+      "role": "owner",
+      "width": 768,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-owner-768.png"
+    },
+    {
+      "role": "owner",
+      "width": 1024,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-owner-1024.png"
+    },
+    {
+      "role": "owner",
+      "width": 1440,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-owner-1440.png"
+    },
+    {
+      "role": "manager",
+      "width": 320,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-manager-320.png"
+    },
+    {
+      "role": "manager",
+      "width": 390,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-manager-390.png"
+    },
+    {
+      "role": "manager",
+      "width": 768,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-manager-768.png"
+    },
+    {
+      "role": "manager",
+      "width": 1024,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-manager-1024.png"
+    },
+    {
+      "role": "manager",
+      "width": 1440,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-manager-1440.png"
+    },
+    {
+      "role": "caregiver",
+      "width": 320,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-caregiver-320.png"
+    },
+    {
+      "role": "caregiver",
+      "width": 390,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-caregiver-390.png"
+    },
+    {
+      "role": "caregiver",
+      "width": 768,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-caregiver-768.png"
+    },
+    {
+      "role": "caregiver",
+      "width": 1024,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-caregiver-1024.png"
+    },
+    {
+      "role": "caregiver",
+      "width": 1440,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-caregiver-1440.png"
+    },
+    {
+      "role": "parent",
+      "width": 320,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-parent-320.png"
+    },
+    {
+      "role": "parent",
+      "width": 390,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-parent-390.png"
+    },
+    {
+      "role": "parent",
+      "width": 768,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-parent-768.png"
+    },
+    {
+      "role": "parent",
+      "width": 1024,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-parent-1024.png"
+    },
+    {
+      "role": "parent",
+      "width": 1440,
+      "overflow": false,
+      "imagesLoaded": true,
+      "comparison": "compare-parent-1440.png"
+    }
+  ],
+  "errors": [],
+  "showcaseUnchanged": true,
+  "fingerprint": "12a9552d42254df0c6e6fd76a6c357f2"
+}

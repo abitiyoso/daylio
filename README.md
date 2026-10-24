@@ -1,6 +1,8 @@
 # Daylio by Elenio
 
-Next.js/TypeScript, PostgreSQL RLS, Supabase Auth, private photo storage, role-scoped daycare operations and a disabled Elenio adapter. The supplied v4 layout, CSS, photography assets and official Elenio mark are retained. See `IMPLEMENTATION_STATUS.md` for exact F01–F42 coverage and unresolved release gates.
+Next.js/TypeScript, PostgreSQL RLS, Supabase Auth, private photo storage and role-scoped daycare operations. The newly approved **V20 public landing** and **v10 private workflow/navigation** extend the existing backend. Original source archives/assets and the unchanged official Elenio mark are retained. See `IMPLEMENTATION_STATUS.md` for exact F01–F42 coverage and unresolved release gates.
+
+The 24 October implementation adds a persistent capacity/shift planner, verified owner onboarding, prospect PIC/waitlist/contact warning, recurring family billing, separate Daylio SaaS billing and server-enforced entitlements, and human-approved LEO work items. See [the v10 API and operational notes](docs/BACKEND_V10_API.md) and [audit](docs/V10_GAP_ANALYSIS.md). Live CCTV/Video Analytics remains unavailable; metadata registry/bridge scaffolding does not activate streaming or replace existing Elenio services.
 
 ## Run an isolated local sandbox
 
@@ -52,13 +54,19 @@ pnpm test:browser
 node scripts/run-browser-regressions.mjs --suite=entry --repeat=2
 # Read-only business data capture of all four preview roles at 1440/820/390:
 pnpm screenshots:showcase
+# Current v10 role screenshots/reference comparisons (read-only preview business data):
+node scripts/approved-reference.mjs --serve
+# In another terminal, with the showcase running:
+node scripts/capture-v10.mjs
+node scripts/browser-v20-test.mjs
+node scripts/browser-v20-zoom-test.mjs
 ```
 
 Database tests apply every SQL migration to an actual embedded PostgreSQL engine and use restricted roles. Browser tests use synthetic identities, real HTTP routes, persistent database records and real image processing. They are not evidence of deployed Supabase/Elenio integration. Screenshots and machine-readable evidence are under `evidence/`.
 
 API inventory: `docs/openapi.json`. Security/storage decisions: `docs/ARCHITECTURE.md`. Deployment, workers and restore procedure: `docs/OPERATIONS.md`. External integration gaps: `ELENIO_API_DISCOVERY.md`. P2: `docs/P2_MILESTONES.md`.
 
-All included photographs are retained source assets. Their production license/provenance has not been verified; the original kit explicitly identifies concept fallback crops. No public-stock hotlinks are loaded at runtime. Replacing them with licensed production photos is a launch gate, separate from preserving the supplied v4 design.
+All included photographs are retained source assets, with new source hashes in `design-reference/approved-2026-10-24/asset-manifest.json`. Production licensing/consent must still be verified. No public-stock hotlinks are loaded at runtime. V4 source remains archived; the later supplied V20 reference controls the active public page.
 
 Email access configuration and local evidence: [docs/EMAIL_ACCESS.md](docs/EMAIL_ACCESS.md). Run `node scripts/run-browser-regressions.mjs --suite=access` to verify the invitation workflow.
 

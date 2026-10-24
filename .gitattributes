@@ -1,1 +1,5 @@
 *.pdf binary
+# Preserve approved source bytes even on Windows checkouts with autocrlf.
+public/approved-assets/** -text
+public/fonts/*.woff2 -text
+design-reference/approved-2026-10-24/*.html -text

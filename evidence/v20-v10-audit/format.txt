@@ -1,0 +1,16 @@
+app/workspace/operations.tsx 647ms
+app/workspace/operations.css 488ms
+db/showcase-fixture.mjs 131ms
+lib/worker.mjs 6ms (unchanged)
+lib/billing-workflows.mjs 10ms
+tests/v10-commercial.test.mjs 25ms
+scripts/browser-test-guard.mjs 2ms
+scripts/browser-test.mjs 23ms
+scripts/browser-v3-test.mjs 21ms
+scripts/browser-v3-business-test.mjs 20ms
+scripts/browser-entry-test.mjs 6ms
+scripts/browser-access-test.mjs 11ms
+scripts/browser-v10-journey.mjs 17ms
+scripts/run-browser-regressions.mjs 17ms
+scripts/capture-v10.mjs 13ms
+scripts/openapi.mjs 17ms

@@ -16,7 +16,7 @@
     "worker": "node scripts/worker.mjs",
     "api:generate": "node scripts/openapi.mjs",
     "sandbox:reset": "node scripts/reset-showcase.mjs --confirm-local-showcase",
-    "screenshots:showcase": "node scripts/capture-cleanup.mjs"
+    "screenshots:showcase": "node scripts/capture-v10.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",

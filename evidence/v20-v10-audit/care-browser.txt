@@ -1,0 +1,28 @@
+Running care, iteration 1, isolated database/media
+Browser exceptions: []
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.goto: Timeout 30000ms exceeded.
+Call log:
+[2m  - navigating to "http://127.0.0.1:3101/workspace", waiting until "load"[22m
+
+    at login (C:\Users\Abi Tiyoso\Documents\ChatGPT\daylio\scripts\browser-v3-test.mjs:25:16)
+    at async file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/browser-v3-test.mjs:35:17 {
+  log: [
+    '  - navigating to "http://127.0.0.1:3101/workspace", waiting until "load"'
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.22.1
+file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/run-browser-regressions.mjs:162
+      if (code !== 0) throw Error(`${name} failed`);
+                            ^
+
+Error: care failed
+    at file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/run-browser-regressions.mjs:162:29
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+Node.js v24.22.1

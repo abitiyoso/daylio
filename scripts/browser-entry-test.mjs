@@ -1,4 +1,7 @@
-import { requireIsolatedBrowserTarget } from "./browser-test-guard.mjs";
+import {
+  requireIsolatedBrowserTarget,
+  saveBrowserScreenshot,
+} from "./browser-test-guard.mjs";
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
@@ -13,19 +16,21 @@ const passed = [];
 await mkdir("evidence/screenshots/entry", { recursive: true });
 try {
   for (const [role, title] of [
-    ["owner", "Business Pulse"],
+    ["owner", "Ringkasan Daycare"],
     ["manager", "Control Tower"],
-    ["caregiver", "Catat Aktivitas"],
-    ["parent", "My Child Today"],
+    ["caregiver", /Selamat/],
+    ["parent", /^Halo,/],
   ]) {
     const context = await browser.newContext({
       viewport: { width: 1440, height: 900 },
       reducedMotion: "reduce",
     });
     const page = await context.newPage();
+    page.setDefaultNavigationTimeout(60000);
     const errors = [];
     page.on("pageerror", (error) => errors.push(error.message));
     await page.goto(base);
+    await page.locator("#leoQuestions button").first().waitFor();
     const desktopEntry = page.locator(".nav-actions").getByRole("link", {
       name: "Masuk",
       exact: true,
@@ -38,11 +43,11 @@ try {
       await page.setViewportSize({ width: 390, height: 844 });
       await page.locator("#menuToggle").click();
       const mobileEntry = page
-        .getByRole("navigation", { name: "Navigasi mobile" })
+        .getByRole("navigation", { name: "Menu mobile" })
         .getByRole("link", { name: "Masuk", exact: true });
       assert.equal(await mobileEntry.isVisible(), true);
       if (role === "manager")
-        await page.screenshot({
+        await saveBrowserScreenshot(page, {
           path: "evidence/screenshots/entry/mobile-menu.png",
         });
       await mobileEntry.click();
@@ -83,22 +88,19 @@ try {
       ),
       true,
     );
-    await page.screenshot({
+    await saveBrowserScreenshot(page, {
       path: `evidence/screenshots/entry/${role}-dashboard.png`,
     });
     passed.push(
       `${role}: authenticated dashboard, scoped persisted API, responsive entry`,
     );
-    // The phone is a labeled showcase.
+    // Public LEO is explicitly a simulation, without authenticated child records.
     await page.goto(base);
     await page
-      .locator("#phoneContent")
-      .getByText(/SHOWCASE/)
+      .locator(".leo20-demo-caption")
+      .getByText(/simulasi/i)
       .waitFor();
-    assert.equal(
-      await page.locator("#phoneContent a[href='/workspace']").count(),
-      0,
-    );
+    assert.equal(await page.locator("#leoChatForm").count(), 1);
     await context.close();
   }
   await writeFile(

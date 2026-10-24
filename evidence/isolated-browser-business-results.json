@@ -1,16 +1,14 @@
 {
-  "at": "2026-10-17T14:04:24.791Z",
-  "previewFingerprintBefore": "ab33f2c97938838b917bf032d7254fd6",
-  "previewFingerprintAfter": "ab33f2c97938838b917bf032d7254fd6",
+  "at": "2026-10-24T04:27:01.120Z",
   "previewUnchanged": true,
   "teardown": "Temporary database, media and build directory removed, including on failure.",
   "results": [
     {
       "suite": "business",
       "iteration": 1,
-      "passed": true,
-      "elapsedMs": 37558,
-      "output": "Care Passport UI: parent proposal → manager confirmed version → assigned caregiver read, with actual persisted emergency/allergy information.\nDevelopment UI: configured age/curriculum rubric → educator observation → submit → manager source review → human report draft → sign-off/publication → linked parent read and private PDF generated.\nCRM UI: manual inquiry → age/schedule/class/package qualification → saved unsent WhatsApp draft → confirmed class slot/price/emergency contact → atomic child/enrollment and guardian invitation. Optional tour/trial skipped explicitly; capacity enforced by shared existing enrollment service. No external messages sent.\nLEO UI works for actual parent, assigned caregiver and owner sessions in explicit verified-records mode.\n"
+      "passed": false,
+      "elapsedMs": 62982,
+      "output": "[]\nnode:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nlocator.click: Timeout 30000ms exceeded.\r\nCall log:\r\n\u001b[2m  - waiting for locator('.v10-additional-nav summary')\u001b[22m\r\n\r\n    at nav (C:\\Users\\Abi Tiyoso\\Documents\\ChatGPT\\daylio\\scripts\\browser-v3-business-test.mjs:65:63)\r\n    at async file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/browser-v3-business-test.mjs:201:3 {\r\n  log: [ \"  - waiting for locator('.v10-additional-nav summary')\" ],\r\n  name: 'TimeoutError'\r\n}\r\n\r\nNode.js v24.22.1\r\n"
     }
   ]
 }

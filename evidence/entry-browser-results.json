@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-18T03:40:25.203Z",
+  "at": "2026-10-24T08:08:18.685Z",
   "environment": "Local synthetic sandbox; actual HTTP API and persisted database. No hosted deployment claimed.",
   "passed": [
     "owner: authenticated dashboard, scoped persisted API, responsive entry",

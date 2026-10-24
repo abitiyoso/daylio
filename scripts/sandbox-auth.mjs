@@ -52,6 +52,14 @@ export function startSandboxAuth(port = 4011) {
     };
     const url = new URL(req.url, `http://127.0.0.1:${port}`);
     if (url.pathname === "/__test/mail") return send(200, mail);
+    if(url.pathname === "/auth/v1/signup"){
+      const email=String(body.email||"").toLowerCase();
+      if(!email.endsWith("@daylio.test")||String(body.password||"").length<12)return send(422,{});
+      if(users.has(email))return send(200,{});
+      const user={id:randomUUID(),email};users.set(email,user);passwords.set(email,body.password);
+      const proof=randomBytes(32).toString("hex");proofs.set(proof,{user,redirect:url.searchParams.get("redirect_to")});
+      mail.push({email,link:`http://127.0.0.1:${port}/auth/v1/verify?token=${proof}`});return send(200,{user});
+    }
     if (url.pathname === "/auth/v1/otp") {
       const email = body.email.toLowerCase();
       if (!email.endsWith("@daylio.test")) return send(403, {});

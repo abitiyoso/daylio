@@ -291,6 +291,49 @@ for (const path of [
     description:
       "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
   });
+for (const [path, methods] of [
+  ["owner/summary", "get"],
+  ["workspace/search", "get"],
+  ["care/handoff-options", "get"],
+  ["planner/overview", "get"],
+  ["planner/history/{id}", "get"],
+  ["planner/bookings", "post"],
+  ["planner/bookings/{id}", "patch"],
+  ["planner/bookings/{id}/cancel", "post"],
+  ["planner/shifts", "post"],
+  ["planner/shifts/{id}", "patch"],
+  ["planner/shifts/{id}/cancel", "post"],
+  ["commercial/context", "get"],
+  ["commercial/invoices", "post"],
+  ["commercial/addons", "post"],
+  ["billing/overview", "get"],
+  ["billing/recurring", "get,post"],
+  ["billing/recurring/{id}/generate", "post"],
+  ["billing/recurring/{id}/stop", "post"],
+  ["family/billing", "get"],
+  ["family/receipts/{id}", "get"],
+  ["platform/saas-invoices", "get"],
+  ["platform/saas-invoices/{id}/verify", "post"],
+  ["integrations/overview", "get"],
+  ["integrations/registry", "post"],
+  ["integrations/registry/{id}/disable", "post"],
+  ["integrations/events/{id}/review", "post"],
+  ["integrations/events/{id}/link-incident", "post"],
+  ["leo/work-items", "get,post"],
+  ...["draft", "approve", "execute", "cancel"].map((action) => [
+    "leo/work-items/{id}/" + action,
+    "post",
+  ]),
+])
+  add(path, methods, {
+    description:
+      "Authenticated v10 workflow. Role, plan, RLS and state checks apply; strict request DTO and provider limitations: docs/BACKEND_V10_API.md.",
+  });
+add("integrations/elenio/events", "post", {
+  publicRoute: true,
+  description:
+    "Disabled by default Daylio metadata bridge proposal; requires configured HMAC signature and timestamp, registered camera and deduplicated provider event ID. Not an official verified Elenio contract. See docs/BACKEND_V10_API.md.",
+});
 const spec = {
   openapi: "3.1.0",
   info: {

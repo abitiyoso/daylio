@@ -40,6 +40,13 @@ import {
   DownloadSimple,
 } from "@phosphor-icons/react";
 import "./operations.css";
+import Planner from "./planner";
+import Commercial from "./commercial";
+import OwnerSummary from "./owner-summary";
+import Finance from "./finance";
+import VideoIntegration from "./video-integration";
+import LeoTasks from "./leo-tasks";
+import WorkspaceSearch from "./workspace-search";
 type Item = Record<string, any>;
 type Request = (
   path: string,
@@ -100,6 +107,11 @@ const status: Record<string, string> = {
   qualified: "Terkualifikasi",
   new: "Baru",
   contacted: "Dihubungi",
+  offered: "Penawaran",
+  waitlisted: "Daftar tunggu",
+  lost: "Tidak berlanjut",
+  "tour-booked": "Survei terjadwal",
+  trial: "Trial",
   resolved: "Selesai",
 };
 const activities = [
@@ -111,6 +123,34 @@ const activities = [
   ["note", "Catatan", NotePencil],
 ] as const;
 const titles: Record<string, [string, string]> = {
+  staffToday: [
+    "Hari Ini",
+    "Mulai dari anak, kelas, dan catatan yang membutuhkan perhatian.",
+  ],
+  handoff: [
+    "Serah Terima Shift",
+    "Catatan untuk rekan yang menerima tugas berikutnya.",
+  ],
+  finance: [
+    "Tagihan Orang Tua",
+    "Verifikasi transaksi sebelum memperbarui status pembayaran.",
+  ],
+  businessReports: [
+    "Laporan Bisnis",
+    "Ringkasan dari catatan operasional yang tersimpan.",
+  ],
+  integrations: [
+    "CCTV & Video AI",
+    "Integrasi layanan Elenio dan review sesuai kewenangan.",
+  ],
+  subscription: [
+    "Langganan Daylio",
+    "Paket, kuota, dan tagihan SaaS. Terpisah dari tagihan keluarga.",
+  ],
+  planner: [
+    "Jadwal & Kapasitas",
+    "Kelas, booking, dan cakupan pengasuh dalam satu kalender.",
+  ],
   home: [
     "Business Pulse",
     "Keputusan hari ini, berangkat dari catatan yang nyata.",
@@ -120,7 +160,7 @@ const titles: Record<string, [string, string]> = {
     "Catat Aktivitas",
     "Lebih sedikit administrasi, lebih banyak waktu bersama anak.",
   ],
-  today: ["My Child Today", "Cerita kecil hari ini, terhubung dengan Anda."],
+  today: ["Anakku Hari Ini", "Cerita kecil hari ini, terhubung dengan Anda."],
   pickup: [
     "Penjemputan Aman",
     "Izin wali, verifikasi petugas, dan serah terima tercatat.",
@@ -195,6 +235,28 @@ function Card({
 }
 function Empty({ children }: { children: ReactNode }) {
   return <p className="op-empty">{children}</p>;
+}
+function Metric({
+  label,
+  value,
+  detail,
+  icon: Icon,
+}: {
+  label: string;
+  value: number;
+  detail: string;
+  icon: any;
+}) {
+  return (
+    <div className="op-metric">
+      <div className="op-row between">
+        <span>{label}</span>
+        <Icon size={20} />
+      </div>
+      <strong>{value}</strong>
+      <small>{detail}</small>
+    </div>
+  );
 }
 function SmartForm({
   fields,
@@ -292,7 +354,7 @@ export default function OperationsWorkspace({
         : role === "manager"
           ? "control"
           : role === "caregiver"
-            ? "care"
+            ? "staffToday"
             : "today",
     ),
     [data, setData] = useState<Item | null>(null),
@@ -524,51 +586,161 @@ export default function OperationsWorkspace({
     });
   }
   const childOptions = children.map((c) => ({ value: c.id, label: c.name }));
-  const nav: [string, string, any][] = isParent
-    ? [
-        ["today", "My Child Today", House],
-        ["story", "Daily Story", BookOpen],
-        ["pickup", "Penjemputan", ShieldCheck],
-        ["reports", "Rapor Anak", ChartBar],
-        ["children", "Care Passport", Baby],
-        ["messages", "Pesan Daycare", ChatCircleText],
-        ["leo", "Tanya LEO", Sparkle],
-      ]
-    : role === "caregiver"
+  const navGroups: { title: string; items: [string, string, any][] }[] =
+    isParent
       ? [
-          ["care", "Catat Aktivitas", NotePencil],
-          ["story", "Review Catatan", ClipboardText],
-          ["children", "Anak & Care Passport", Baby],
-          ["pickup", "Penjemputan", ShieldCheck],
-          ["reports", "Observasi & Rapor", BookOpen],
-          ["messages", "Pesan & Pengumuman", ChatCircleText],
-          ["leo", "LEO Assistant", Sparkle],
+          {
+            title: "Keluarga",
+            items: [
+              ["today", "Anakku Hari Ini", House],
+              ["story", "Cerita Harian", BookOpen],
+              ["reports", "Tumbuh Kembang", ChartBar],
+              ["children", "Care Passport", Baby],
+            ],
+          },
+          {
+            title: "Layanan",
+            items: [
+              ["planner", "Paket & Jadwal", CalendarBlank],
+              ["pickup", "Izin Penjemputan", ShieldCheck],
+              ["messages", "Pesan Daycare", ChatCircleText],
+              ["integrations", "CCTV Area Anak", SquaresFour],
+              ["leo", "Tanya LEO", Sparkle],
+            ],
+          },
         ]
-      : [
-          ...(role === "owner"
-            ? [["home", "Business Pulse", SquaresFour] as [string, string, any]]
-            : []),
-          ["control", "Control Tower", SquaresFour],
-          ["care", "Operasional Harian", NotePencil],
-          ["pickup", "Penjemputan", ShieldCheck],
-          ["children", "Anak & Keluarga", UsersThree],
-          ["reports", "Rapor & Perkembangan", BookOpen],
-          ...(user.capabilities?.crm
-            ? [
-                ["crm", "CRM & WhatsApp", ChatCircleText] as [
-                  string,
-                  string,
-                  any,
+      : role === "caregiver"
+        ? [
+            {
+              title: "Tugas harian",
+              items: [
+                ["staffToday", "Hari Ini", House],
+                ["care", "Catat Aktivitas", NotePencil],
+                ["children", "Anak Asuhan", Baby],
+                ["planner", "Jadwal Saya", CalendarBlank],
+              ],
+            },
+            {
+              title: "Tindak lanjut",
+              items: [
+                ["pickup", "Penjemputan", ShieldCheck],
+                ["handoff", "Serah Terima Shift", ClipboardText],
+                ["story", "Review Catatan", BookOpen],
+                ["reports", "Observasi & Rapor", BookOpen],
+                ["messages", "Pesan", ChatCircleText],
+                ["leo", "Tanya LEO", Sparkle],
+              ],
+            },
+          ]
+        : role === "manager"
+          ? [
+              {
+                title: "Hari ini",
+                items: [
+                  ["control", "Control Tower", SquaresFour],
+                  ["planner", "Jadwal & Kapasitas", CalendarBlank],
                 ],
-              ]
-            : []),
-          ["messages", "Komunikasi Keluarga", ChatCircleText],
-          ["closing", "Daily Closing", CheckCircle],
-          ["leo", "LEO Copilot", Sparkle],
-          ...(role === "owner"
-            ? [["settings", "Pengaturan", GearSix] as [string, string, any]]
-            : []),
-        ];
+              },
+              {
+                title: "Pengasuhan",
+                items: [
+                  ["children", "Data Anak", UsersThree],
+                  ["story", "Aktivitas & Review", ClipboardText],
+                  ["care", "Catat Aktivitas", NotePencil],
+                  ["pickup", "Penjemputan & Insiden", ShieldCheck],
+                  ["reports", "Perkembangan Anak", BookOpen],
+                  ["closing", "Daily Closing", CheckCircle],
+                ],
+              },
+              {
+                title: "Komunikasi & teknologi",
+                items: [
+                  ["messages", "Pesan Keluarga", ChatCircleText],
+                  ["integrations", "CCTV & Video AI", SquaresFour],
+                  ["leo", "LEO AI Workspace", Sparkle],
+                  ...(user.capabilities?.crm
+                    ? [
+                        ["crm", "Prospek & Pendaftaran", ChatCircleText] as [
+                          string,
+                          string,
+                          any,
+                        ],
+                      ]
+                    : []),
+                  ...(user.capabilities?.finance
+                    ? [
+                        ["finance", "Tagihan Orang Tua", NotePencil] as [
+                          string,
+                          string,
+                          any,
+                        ],
+                      ]
+                    : []),
+                ],
+              },
+            ]
+          : [
+              { title: "Hari ini", items: [["home", "Ringkasan", House]] },
+              {
+                title: "Pengasuhan",
+                items: [
+                  ["children", "Anak & Keluarga", UsersThree],
+                  ["planner", "Jadwal & Booking", CalendarBlank],
+                  ["control", "Care & Safety", ShieldCheck],
+                  ["care", "Catat Aktivitas", NotePencil],
+                  ["pickup", "Penjemputan", ShieldCheck],
+                  ["reports", "Perkembangan Anak", BookOpen],
+                  ["integrations", "CCTV & Video AI", SquaresFour],
+                ],
+              },
+              {
+                title: "Bisnis daycare",
+                items: [
+                  ...(user.capabilities?.crm
+                    ? [
+                        ["crm", "Prospek & Pendaftaran", ChatCircleText] as [
+                          string,
+                          string,
+                          any,
+                        ],
+                      ]
+                    : []),
+                  ...(user.capabilities?.finance
+                    ? [
+                        ["finance", "Tagihan Orang Tua", NotePencil] as [
+                          string,
+                          string,
+                          any,
+                        ],
+                      ]
+                    : []),
+                  ["businessReports", "Laporan", ChartBar],
+                  ["messages", "Pesan Keluarga", ChatCircleText],
+                  ["closing", "Daily Closing", CheckCircle],
+                ],
+              },
+              {
+                title: "Intelligence",
+                items: [["leo", "LEO AI Workspace", Sparkle]],
+              },
+              {
+                title: "Pengaturan",
+                items: [
+                  ["subscription", "Langganan Daylio", CalendarBlank],
+                  ["settings", "Pengaturan", GearSix],
+                ],
+              },
+            ];
+  const nav = navGroups.flatMap((g) => g.items);
+  const additionalNav = new Set(
+    role === "owner"
+      ? ["care", "pickup", "reports", "messages", "closing"]
+      : role === "caregiver"
+        ? ["story", "reports"]
+        : role === "manager"
+          ? ["care", "closing"]
+          : [],
+  );
   const selectedRecords = records.filter(
     (r) => !childId || r.child_id === childId,
   );
@@ -1302,94 +1474,123 @@ export default function OperationsWorkspace({
     );
     return (
       <>
-        <div className="op-parent-identity">
-          <span className="op-avatar">
-            {c?.name
-              ?.split(" ")
-              .map((v: string) => v[0])
-              .slice(0, 2)
-              .join("") || <Baby />}
-          </span>
-          <div>
+        <div className="v6-parent-head">
+          <div className="v6-parent-greeting">
+            <span className="v6-overline">
+              MY CHILD TODAY · {data?.organization.name}
+            </span>
+            <h1>
+              Halo, {user.displayName?.split(" ")[0] || "Keluarga"}{" "}
+              <Sun size={24} />
+            </h1>
+            <p>
+              Cerita kecil {c?.name?.split(" ")[0] || "si kecil"} yang membuat
+              hari ini berarti.
+            </p>
+            <div className="v6-child-status">
+              <span>
+                <Check size={14} />
+                {extra.attendance?.data.type === "in"
+                  ? "Hadir hari ini"
+                  : extra.attendance?.data.type === "out"
+                    ? "Sudah pulang"
+                    : "Kedatangan belum tercatat"}
+              </span>
+              <span>
+                <ShieldCheck size={14} />
+                {
+                  (extra.pickups || []).filter(
+                    (p: Item) =>
+                      p.state === "approved" &&
+                      Date.parse(p.data.expiresAt) > Date.now(),
+                  ).length
+                }{" "}
+                penjemput terdaftar
+              </span>
+            </div>
+            <div className="v6-parent-cta">
+              <button
+                className="op-btn primary"
+                onClick={() =>
+                  setModal({
+                    title: "Pesan pengasuh",
+                    body: (
+                      <SmartForm
+                        busy={busy}
+                        button="Kirim pesan"
+                        fields={[
+                          {
+                            name: "note",
+                            label: "Pesan untuk daycare",
+                            type: "textarea",
+                          },
+                        ]}
+                        onSubmit={(v) =>
+                          mutate(() =>
+                            req("messages", "POST", {
+                              childId,
+                              data: { note: v.note },
+                            }),
+                          )
+                        }
+                      />
+                    ),
+                  })
+                }
+              >
+                <ChatCircleText size={16} /> Pesan pengasuh
+              </button>
+              <button className="op-btn" onClick={() => go("pickup")}>
+                Atur izin jemput
+              </button>
+            </div>
+            {process.env.NEXT_PUBLIC_SANDBOX === "true" && (
+              <span className="op-environment">
+                SANDBOX · Data sintetis · Contoh fiktif
+              </span>
+            )}
+          </div>
+          <div className="v10-parent-identity">
+            <span className="op-avatar">
+              {c?.name
+                ?.split(" ")
+                .map((v: string) => v[0])
+                .slice(0, 2)
+                .join("") || <Baby />}
+            </span>
             <strong>{c?.name || "Anak Anda"}</strong>
             <small>
-              {data?.classrooms.find(
-                (room: Item) => room.id === c?.classroom_id,
-              )?.name || "Daycare"}
-              {age !== null
+              {classes.find((room) => room.id === c?.classroom_id)?.name ||
+                "Daycare"}
+              {age != null
                 ? ` · ${Math.floor(age / 12)} th ${age % 12} bl`
                 : ""}
             </small>
           </div>
         </div>
-        <div className="op-parent-hero">
-          <div>
-            <span className="op-kicker">CERITA HARI INI</span>
-            <h2>
-              {c?.name || "Si kecil"}{" "}
-              {extra.attendance?.data.type === "in"
-                ? "sudah di daycare"
-                : extra.attendance?.data.type === "out"
-                  ? "sudah kembali bersama keluarga"
-                  : "bersama Daylio hari ini"}
-            </h2>
-            <p>
-              {extra.attendance?.data.type === "in"
-                ? "Sudah tiba di daycare. Pembaruan berikut berasal dari catatan pengasuh."
-                : extra.attendance?.data.type === "out"
-                  ? "Sudah pulang. Lihat cerita dan catatan hari ini."
-                  : "Kedatangan hari ini belum tercatat."}
-            </p>
-            <div className="op-parent-highlights">
-              <span>
-                {extra.attendance?.data.type === "in"
-                  ? "Sudah hadir"
-                  : extra.attendance?.data.type === "out"
-                    ? "Sudah pulang"
-                    : "Menunggu kedatangan"}
-              </span>
-              <span>{extra.activityCount || 0} aktivitas dibagikan</span>
-            </div>
-          </div>
-          <span className="op-child-monogram">
-            {c?.name?.substring(0, 2).toUpperCase() || <Baby />}
-          </span>
-        </div>
-        <div className="op-metrics three">
+        <div className="v6-parent-day-strip">
           {[
             [
-              House,
-              "Kehadiran",
+              Check,
               extra.attendance
-                ? extra.attendance.data.type === "in"
-                  ? "Di daycare"
-                  : "Sudah pulang"
+                ? time(extra.attendance.created_at)
                 : "Belum tercatat",
-              extra.attendance
-                ? time(extra.attendance.created_at) + " WIB"
-                : "Menunggu catatan daycare",
+              extra.attendance?.data.type === "out" ? "Check-out" : "Check-in",
             ],
             [
               ForkKnife,
-              "Makan terakhir",
-              extra.meal?.data.result || "Belum tercatat",
-              extra.meal?.data.note ||
-                "Informasi makan akan muncul setelah diterbitkan.",
+              extra.meal?.data.result || "Belum dicatat",
+              "Makan siang",
             ],
-            [
-              Moon,
-              "Tidur terakhir",
-              extra.sleep?.data.result || "Belum tercatat",
-              extra.sleep?.data.note || "Informasi tidur belum tersedia.",
-            ],
-          ].map(([Icon, label, value, detail]: any) => (
-            <div className="op-metric" key={label}>
-              <span className="op-symbol teal">
-                <Icon />
-              </span>
-              <span>{label}</span>
+            [Moon, extra.sleep?.data.result || "Belum dicatat", "Istirahat"],
+            [Sun, (extra.activityCount || 0) + " update", "Aktivitas terbit"],
+          ].map(([Icon, value, title]: any) => (
+            <div key={title}>
+              <i>
+                <Icon size={18} />
+              </i>
               <strong>{value}</strong>
-              <small>{detail}</small>
+              <span>{title}</span>
             </div>
           ))}
         </div>
@@ -1449,9 +1650,51 @@ export default function OperationsWorkspace({
             </details>
           </Card>
           <div className="op-stack">
+            <Card title="Informasi untuk keluarga" sub="YANG PENTING">
+              <div className="v6-family-links">
+                {[
+                  [
+                    "pickup",
+                    ShieldCheck,
+                    "Penjemputan hari ini",
+                    routine ? routine.data.name : "Periksa izin penjemput",
+                  ],
+                  [
+                    "reports",
+                    BookOpen,
+                    "Perkembangan " + (c?.name?.split(" ")[0] || "anak"),
+                    "Observasi pendidik dan rapor",
+                  ],
+                  [
+                    "planner",
+                    CalendarBlank,
+                    "Paket & jadwal",
+                    selectedRecords.find((r) => r.kind === "enrollment")?.data
+                      .packageName || "Informasi layanan keluarga",
+                  ],
+                  [
+                    "integrations",
+                    SquaresFour,
+                    "CCTV area anak",
+                    "Menunggu integrasi dan pengaturan akses",
+                  ],
+                ].map(([key, Icon, title, note]: any) => (
+                  <button key={key} onClick={() => go(key)}>
+                    <Icon size={19} />
+                    <span>
+                      <b>{title}</b>
+                      <small>{note}</small>
+                    </span>
+                    <ArrowRight size={15} />
+                  </button>
+                ))}
+              </div>
+            </Card>
+
             <Card
               title="Pesan pagi Anda"
               sub="Kabar dari rumah, diterima dengan perhatian."
+              action={morningAction()}
             >
               {extra.morning?.length ? (
                 <div className="op-parent-note">
@@ -2749,6 +2992,20 @@ export default function OperationsWorkspace({
                 {lead.data.contact} · {lead.data.source}
               </p>
               <p>{lead.data.notes}</p>
+              {lead.data.duplicateIds?.length > 0 && (
+                <p className="op-hint-text">
+                  Kontak ini juga tercatat pada prospek lain. Periksa apakah
+                  keluarga yang sama sebelum mendaftarkan anak.
+                </p>
+              )}
+              {lead.data.ownerId && (
+                <p className="op-hint-text">
+                  PIC:{" "}
+                  {extra.staff?.find(
+                    (s: Item) => s.user_id === lead.data.ownerId,
+                  )?.display_name || "Petugas daycare"}
+                </p>
+              )}
               {lead.data.desiredSchedule && (
                 <p className="op-hint-text">
                   Usia {lead.data.childAgeMonths} bulan ·{" "}
@@ -2760,6 +3017,111 @@ export default function OperationsWorkspace({
                 </p>
               )}
               <div className="op-row wrap">
+                <button
+                  className="op-btn"
+                  onClick={() =>
+                    setModal({
+                      title: "Edit prospek",
+                      body: (
+                        <SmartForm
+                          busy={busy}
+                          fields={[
+                            {
+                              name: "name",
+                              label: "Nama wali",
+                              value: lead.data.name,
+                            },
+                            {
+                              name: "contact",
+                              label: "Kontak wali",
+                              value: lead.data.contact,
+                            },
+                            {
+                              name: "source",
+                              label: "Sumber pertanyaan",
+                              value: lead.data.source,
+                            },
+                            {
+                              name: "notes",
+                              label: "Catatan",
+                              type: "textarea",
+                              value: lead.data.notes,
+                              required: false,
+                            },
+                          ]}
+                          onSubmit={(v) =>
+                            mutate(() => req(`leads/${lead.id}`, "PATCH", v))
+                          }
+                        />
+                      ),
+                    })
+                  }
+                >
+                  Edit prospek
+                </button>
+                {lead.state !== "enrolled" && (
+                  <button
+                    className="op-btn"
+                    onClick={() =>
+                      setModal({
+                        title: "Tahap & penanggung jawab",
+                        body: (
+                          <SmartForm
+                            busy={busy}
+                            fields={[
+                              {
+                                name: "status",
+                                label: "Tahap prospek",
+                                value: lead.state,
+                                options: [
+                                  "new",
+                                  "contacted",
+                                  "tour-booked",
+                                  "trial",
+                                  "qualified",
+                                  "offered",
+                                  "waitlisted",
+                                  "lost",
+                                ].map((value) => ({
+                                  value,
+                                  label: status[value],
+                                })),
+                              },
+                              {
+                                name: "ownerId",
+                                label: "Penanggung jawab",
+                                value: lead.data.ownerId || "",
+                                required: false,
+                                options: [
+                                  { value: "", label: "Belum ditetapkan" },
+                                  ...(extra.staff || []).map((s: Item) => ({
+                                    value: s.user_id,
+                                    label: s.display_name || roles[s.role],
+                                  })),
+                                ],
+                              },
+                              {
+                                name: "note",
+                                label: "Alasan / langkah berikutnya",
+                                type: "textarea",
+                              },
+                            ]}
+                            onSubmit={(v) =>
+                              mutate(() =>
+                                req(`leads/${lead.id}/status`, "POST", {
+                                  ...v,
+                                  ownerId: v.ownerId || null,
+                                }),
+                              )
+                            }
+                          />
+                        ),
+                      })
+                    }
+                  >
+                    Tahap & PIC
+                  </button>
+                )}
                 {!["enrolled", "lost"].includes(lead.state) && (
                   <button
                     className="op-btn"
@@ -3170,17 +3532,26 @@ export default function OperationsWorkspace({
             </div>
           )}
         </Card>
-        <div className="op-leo-card">
-          <Sparkle size={36} />
-          <h2>Fakta yang bisa ditelusuri.</h2>
-          <p>
-            LEO tidak mengisi catatan yang kosong atau menyimpulkan kondisi
-            medis anak. Hasil tanpa sumber akan ditampilkan sebagai belum
-            tercatat.
-          </p>
-          <p>
-            Publikasi cerita dan rapor tetap memerlukan pemeriksaan manusia.
-          </p>
+        <div className="op-stack">
+          <div className="op-leo-card">
+            <Sparkle size={36} />
+            <h2>Fakta yang bisa ditelusuri.</h2>
+            <p>
+              LEO tidak mengisi catatan yang kosong atau menyimpulkan kondisi
+              medis anak. Hasil tanpa sumber akan ditampilkan sebagai belum
+              tercatat.
+            </p>
+            <p>
+              Publikasi cerita dan rapor tetap memerlukan pemeriksaan manusia.
+            </p>
+          </div>
+          <LeoTasks
+            request={req}
+            role={role}
+            children={children}
+            records={records}
+            canCrm={!!user.capabilities?.crm}
+          />
         </div>
       </div>
     );
@@ -3358,31 +3729,358 @@ export default function OperationsWorkspace({
     );
   }
   const heading = titles[view] || titles.home;
+  function staffToday() {
+    const assigned = children.filter(
+        (c) => !classId || c.classroom_id === classId,
+      ),
+      ids = new Set(assigned.map((c) => c.id));
+    const careNotes = records.filter(
+      (r) => r.kind === "passport" && ids.has(r.child_id),
+    );
+    const notes = careNotes
+      .filter((r) => r.data.allergies || r.data.careInstructions)
+      .slice(0, 3);
+    const hour = Number(
+      new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Asia/Jakarta",
+        hour: "2-digit",
+        hourCycle: "h23",
+      }).format(new Date()),
+    );
+    const greeting =
+      hour < 11 ? "pagi" : hour < 15 ? "siang" : hour < 18 ? "sore" : "malam";
+    return (
+      <>
+        <div className="v6-intro v6-care-intro">
+          <div>
+            <span className="v6-overline">
+              {classes.find((c) => c.id === classId)?.name || "Kelas"} · TODAY'S
+              CARE
+            </span>
+            <h1>
+              Selamat {greeting}, Kak{" "}
+              {user.displayName?.split(" ")[0] || "Pengasuh"}
+            </h1>
+            <p>
+              {assigned.filter((c) => c.present).length} anak hadir. Mulai catat
+              kegiatan tanpa membuka profil satu-satu.
+            </p>
+            {process.env.NEXT_PUBLIC_SANDBOX === "true" && (
+              <span className="op-environment">
+                SANDBOX · Data sintetis · Contoh fiktif
+              </span>
+            )}
+          </div>
+          <div className="v6-intro-actions">
+            {assigned.length > 0 && !assigned.some((c) => c.present) && (
+              <button
+                className="op-btn"
+                onClick={() => {
+                  const el = document.getElementById(
+                    "v10-attendance",
+                  ) as HTMLDetailsElement;
+                  if (el) {
+                    el.open = true;
+                    el.scrollIntoView({ block: "center" });
+                  }
+                }}
+              >
+                Buka kehadiran kelas
+              </button>
+            )}
+            <button className="op-btn primary" onClick={() => go("care")}>
+              <Plus size={16} /> Catat aktivitas kelas
+            </button>
+          </div>
+        </div>
+        <div className="v6-care-strip">
+          {[
+            [assigned.filter((c) => c.present).length, "Anak hadir"],
+            [
+              records.filter(
+                (r) =>
+                  r.kind === "activity" &&
+                  ids.has(r.child_id) &&
+                  localDateFrom(r.data.occurredAt || r.created_at) ===
+                    localDate(),
+              ).length,
+              "Aktivitas tercatat",
+            ],
+            [drafts.length, "Menunggu review"],
+            [careNotes.length, "Profil terkonfirmasi"],
+          ].map(([value, title]) => (
+            <div key={title}>
+              <strong>{value}</strong>
+              <span>{title}</span>
+            </div>
+          ))}
+        </div>
+        <div className="v6-dash-charts v6-care-grid">
+          <section className="v6-surface">
+            <div className="v6-surface-head">
+              <div>
+                <span className="v6-surface-kicker">
+                  SATU KELAS, SATU INPUT
+                </span>
+                <h2>Catat aktivitas cepat</h2>
+                <p>
+                  Pilih aktivitas lalu konfirmasi anak; ubah hanya pengecualian.
+                </p>
+              </div>
+            </div>
+            <div className="v6-quick-grid">
+              {activities.map(([type, label, Icon]) => (
+                <button
+                  key={type}
+                  onClick={() => {
+                    setActivity(type);
+                    setResult(type === "meal" ? "Habis" : "Tercatat");
+                    go("care");
+                  }}
+                >
+                  <span>
+                    <Icon size={24} />
+                  </span>
+                  <strong>{type === "hygiene" ? "Toilet" : label}</strong>
+                </button>
+              ))}
+            </div>
+          </section>
+          <section className="v6-surface">
+            <div className="v6-surface-head">
+              <div>
+                <span className="v6-surface-kicker">CARE PASSPORT</span>
+                <h2>Brief perawatan anak</h2>
+                <p>Periksa sebelum makan, tidur atau serah-terima.</p>
+              </div>
+              <button className="v6-text-action" onClick={() => go("children")}>
+                Semua anak <ArrowRight size={15} />
+              </button>
+            </div>
+            <div className="v10-passport-brief">
+              {notes.map((r) => (
+                <button
+                  key={r.id}
+                  onClick={() => {
+                    setChild(r.child_id);
+                    go("children");
+                  }}
+                >
+                  <span className="op-avatar">
+                    {String(nameFor(r.child_id))
+                      .split(" ")
+                      .map((n) => n[0])
+                      .slice(0, 2)
+                      .join("")}
+                  </span>
+                  <span>
+                    <strong>{nameFor(r.child_id)}</strong>
+                    <small>
+                      {r.data.allergies} · {r.data.careInstructions}
+                    </small>
+                  </span>
+                  <ArrowRight size={15} />
+                </button>
+              ))}
+              {!notes.length && (
+                <p>
+                  Belum ada instruksi yang dikonfirmasi. Periksa Care Passport
+                  setiap anak.
+                </p>
+              )}
+            </div>
+          </section>
+        </div>
+        <div className="v6-next-actions">
+          <span>SELANJUTNYA</span>
+          {[
+            ["handoff", "Handover"],
+            ["pickup", "Penjemputan"],
+            ["messages", "Pesan keluarga"],
+          ].map(([key, title]) => (
+            <button key={key} onClick={() => go(key)}>
+              {title}
+              <ArrowRight size={14} />
+            </button>
+          ))}
+        </div>
+        <details className="v10-block" id="v10-attendance">
+          <summary>Kehadiran kelas</summary>
+          {assigned.map((c) => (
+            <div className="op-list-item" key={c.id}>
+              <strong>{c.name}</strong>
+              <p>{c.present ? "Sudah hadir" : "Belum hadir"}</p>
+              {!c.present && (
+                <button
+                  className="op-btn"
+                  disabled={busy}
+                  onClick={() =>
+                    void mutate(() =>
+                      req("attendance", "POST", {
+                        childId: c.id,
+                        data: { type: "in" },
+                      }),
+                    ).catch(() => {})
+                  }
+                >
+                  Catat kedatangan
+                </button>
+              )}
+            </div>
+          ))}
+        </details>
+      </>
+    );
+  }
+  function handoff() {
+    const rows = records.filter((r) => r.kind === "handoff");
+    return (
+      <Card
+        title="Serah Terima Shift"
+        sub="Pengirim dan penerima yang terhubung dapat melihat catatan."
+      >
+        <button
+          className="op-btn primary"
+          onClick={() =>
+            void req("care/handoff-options")
+              .then((recipients) =>
+                setModal({
+                  title: "Buat serah terima",
+                  body: (
+                    <SmartForm
+                      busy={busy}
+                      fields={[
+                        {
+                          name: "recipientId",
+                          label: "Penerima",
+                          options: recipients.map((r: Item) => ({
+                            value: r.user_id,
+                            label: r.display_name || "Petugas daycare",
+                          })),
+                        },
+                        {
+                          name: "note",
+                          label: "Catatan serah terima",
+                          type: "textarea",
+                        },
+                      ]}
+                      onSubmit={(v) => mutate(() => req("handoffs", "POST", v))}
+                    />
+                  ),
+                }),
+              )
+              .catch((e) => setError(e.message))
+          }
+        >
+          Buat serah terima
+        </button>
+        {rows.map((r) => (
+          <article className="op-list-item" key={r.id}>
+            <Badge state={r.state} />
+            <p>{r.data.note}</p>
+            <small>{new Date(r.created_at).toLocaleString("id-ID")}</small>
+            {r.state !== "acknowledged" &&
+              r.data.recipientId === user.userId && (
+                <button
+                  className="op-btn"
+                  disabled={busy}
+                  onClick={() =>
+                    void mutate(() =>
+                      req(`handoffs/${r.id}/acknowledge`, "POST", {}),
+                    ).catch(() => {})
+                  }
+                >
+                  Terima serah tugas
+                </button>
+              )}
+          </article>
+        ))}
+        {!rows.length && <Empty>Belum ada catatan serah terima.</Empty>}
+      </Card>
+    );
+  }
+  function integrations() {
+    return (
+      <Card
+        title={isParent ? "CCTV Area Anak" : "CCTV & Video AI"}
+        sub="Layanan streaming dan analitik Elenio belum terhubung."
+      >
+        <div className="op-banner">
+          <ShieldCheck size={24} />
+          <div>
+            <h2>Belum ada sesi kamera aktif</h2>
+            <p>
+              Akses hanya dapat diterbitkan setelah izin tenant, relasi anak,
+              area, waktu, dan consent diperiksa oleh server. Event AI adalah
+              sinyal untuk review manusia.
+            </p>
+          </div>
+        </div>
+        <button
+          className="op-btn"
+          onClick={() =>
+            void req("cameras" + (isParent ? "?childId=" + childId : ""))
+              .then(() => setNotice("Tidak ada kamera terhubung."))
+              .catch((e) => setError(e.message))
+          }
+        >
+          Periksa koneksi & izin
+        </button>
+        <p>
+          Tidak ada rekaman atau deteksi yang disimulasikan dalam workspace ini.
+          CCTV dan AI Video Analytics adalah add-on Elenio terpisah.
+        </p>
+      </Card>
+    );
+  }
+  function businessReports() {
+    return (
+      <div className="op-stack">
+        <OwnerSummary request={req} go={go} date={date} branch={branch} />
+        <Card
+          title="Ekspor laporan operasional"
+          sub="Data mengikuti izin organisasi dan periode yang dipilih."
+        >
+          <button
+            className="op-btn"
+            onClick={() =>
+              void req("reports/operations?format=csv")
+                .then((file) => {
+                  const a = document.createElement("a");
+                  const url = URL.createObjectURL(
+                    new Blob([file.content || JSON.stringify(file)], {
+                      type: "text/csv",
+                    }),
+                  );
+                  a.href = url;
+                  a.download = "daylio-operations.csv";
+                  a.click();
+                  setTimeout(() => URL.revokeObjectURL(url), 1000);
+                })
+                .catch((e) => setError(e.message))
+            }
+          >
+            Unduh laporan
+          </button>
+        </Card>
+      </div>
+    );
+  }
   return (
-    <div className="daylio-ops">
+    <div className="daylio-ops" data-view={view}>
+      <link rel="stylesheet" href="/workspace-v10.css" />
+      <link rel="stylesheet" href="/fonts/daylio.css" />
       <div
         className={`op-overlay ${menu ? "open" : ""}`}
         onClick={() => setMenu(false)}
       />
       <aside className={`op-sidebar ${menu ? "open" : ""}`}>
-        <a className="op-brand" href="/">
-          <span>
-            <Heart size={25} weight="duotone" />
-          </span>
-          <div>
-            <strong>Daylio</strong>
-            <small>Care. Connect. Grow.</small>
-          </div>
+        <a className="op-brand v10-brandwrap" href="/">
+          <img
+            src="/approved-assets/489b7ae542496ea355c1.png"
+            alt="Daylio by Elenio — logo Sun of Care"
+          />
         </a>
-        <div className="op-org">
-          <span className="op-org-letter">
-            {data?.organization.name?.[0] || "D"}
-          </span>
-          <div>
-            <strong>{data?.organization.name || "Daycare"}</strong>
-            <small>Workspace daycare</small>
-          </div>
-        </div>
         {memberships.length > 1 && (
           <select
             aria-label="Daycare aktif"
@@ -3397,22 +4095,48 @@ export default function OperationsWorkspace({
           </select>
         )}
         <nav aria-label="Navigasi utama">
-          <span className="op-nav-label">
-            WORKSPACE {roles[role]?.toUpperCase()}
-          </span>
-          {nav.map(([key, label, Icon]) => (
-            <button
-              key={key}
-              aria-current={view === key ? "page" : undefined}
-              onClick={() => go(key)}
-            >
-              <Icon size={18} />
-              {label}
-              {key === "control" && extra.items?.length > 0 && (
-                <span className="op-nav-count">{extra.items.length}</span>
-              )}
-            </button>
+          {navGroups.map((group) => (
+            <div className="v10-group" key={group.title}>
+              <div className="v10-label">{group.title}</div>
+              <div className="v10-nav">
+                {group.items
+                  .filter(([key]) => !additionalNav.has(key))
+                  .map(([key, label, Icon]) => (
+                    <button
+                      key={key}
+                      className={view === key ? "active" : ""}
+                      aria-current={view === key ? "page" : undefined}
+                      onClick={() => go(key)}
+                    >
+                      <Icon size={17} />
+                      <span>{label}</span>
+                      {key === "integrations" && (
+                        <span className="v10-next">ADD-ON</span>
+                      )}
+                    </button>
+                  ))}
+              </div>
+            </div>
           ))}
+          {additionalNav.size > 0 && (
+            <details className="v10-additional-nav">
+              <summary>Alat pengasuhan lainnya</summary>
+              <div className="v10-nav">
+                {nav
+                  .filter(([key]) => additionalNav.has(key))
+                  .map(([key, label, Icon]) => (
+                    <button
+                      key={key}
+                      onClick={() => go(key)}
+                      aria-current={view === key ? "page" : undefined}
+                    >
+                      <Icon size={17} />
+                      {label}
+                    </button>
+                  ))}
+              </div>
+            </details>
+          )}
           {management && (
             <button onClick={onAccess}>
               <UsersThree size={18} />
@@ -3471,13 +4195,26 @@ export default function OperationsWorkspace({
             >
               {menu ? <X /> : <List />}
             </button>
-            <span className="op-crumb">
-              <span>Workspace</span>
-              <CaretRight size={12} />
-              <strong>{nav.find((n) => n[0] === view)?.[1]}</strong>
-            </span>
+            {isParent && view === "today" && childOptions.length > 1 ? (
+              selector()
+            ) : (
+              <span className="op-crumb">
+                <span>{data?.organization.name || "Daycare"}</span>
+                <CaretRight size={12} />
+                <strong>{nav.find((n) => n[0] === view)?.[1]}</strong>
+              </span>
+            )}
           </div>
           <div className="op-row">
+            <WorkspaceSearch
+              request={req}
+              onChoose={(row) => {
+                if (row.type === "child") {
+                  setChild(row.id);
+                  go("children");
+                } else go("crm");
+              }}
+            />
             <span className="op-role">{roles[role]}</span>
             <button
               className="op-icon"
@@ -3491,13 +4228,26 @@ export default function OperationsWorkspace({
             >
               <Bell size={18} />
             </button>
+            {["today", "staffToday", "home"].includes(view) && (
+              <button
+                className="op-btn"
+                aria-label="Perbarui"
+                disabled={loading || busy}
+                onClick={() => void reload()}
+              >
+                <Clock size={16} />
+              </button>
+            )}
             <span className="op-avatar small">
               {roles[role]?.substring(0, 2).toUpperCase()}
             </span>
           </div>
         </header>
         <main className="op-content">
-          <div className="op-titlebar">
+          <div
+            className="op-titlebar"
+            hidden={["today", "staffToday", "home"].includes(view)}
+          >
             <div>
               <span className="op-kicker">
                 {new Date().toLocaleDateString("id-ID", {
@@ -3509,11 +4259,12 @@ export default function OperationsWorkspace({
               </span>
               <div className="op-heading-row">
                 <h1>{heading[0]}</h1>
-                {process.env.NEXT_PUBLIC_SANDBOX === "true" && (
-                  <span className="op-environment">
-                    SANDBOX · Data sintetis · Contoh fiktif
-                  </span>
-                )}
+                {!["home", "staffToday", "today"].includes(view) &&
+                  process.env.NEXT_PUBLIC_SANDBOX === "true" && (
+                    <span className="op-environment">
+                      SANDBOX · Data sintetis · Contoh fiktif
+                    </span>
+                  )}
               </div>
               <p className="op-muted">{heading[1]}</p>
             </div>
@@ -3529,7 +4280,6 @@ export default function OperationsWorkspace({
                   {businessFilters()}
                 </>
               )}
-              {isParent && view === "today" && morningAction()}
               {[
                 "today",
                 "story",
@@ -3539,6 +4289,7 @@ export default function OperationsWorkspace({
                 "messages",
                 "leo",
               ].includes(view) &&
+                view !== "today" &&
                 (!management || view !== "leo") &&
                 selector()}
               <button
@@ -3592,12 +4343,78 @@ export default function OperationsWorkspace({
                       : "Mengambil informasi terbaru sesuai izin akun Anda."}
                   </p>
                 </Card>
+              ) : view === "staffToday" ? (
+                staffToday()
+              ) : view === "handoff" ? (
+                handoff()
+              ) : view === "integrations" ? (
+                <VideoIntegration
+                  request={req}
+                  parent={isParent}
+                  childId={childId}
+                  classes={classes}
+                />
+              ) : view === "businessReports" ? (
+                businessReports()
+              ) : view === "finance" ? (
+                <Finance request={req} children={children} />
+              ) : view === "subscription" ? (
+                <Commercial request={req} />
+              ) : view === "planner" ? (
+                <div className="op-stack">
+                  {isParent && <Finance request={req} family />}
+                  <Planner request={req} role={role} />
+                </div>
               ) : view === "care" ? (
                 care()
               ) : view === "today" ? (
                 today()
               ) : view === "home" ? (
-                business()
+                <OwnerSummary
+                  request={req}
+                  go={go}
+                  date={date}
+                  branch={branch}
+                  filters={businessFilters()}
+                  onAddChild={() =>
+                    setModal({
+                      title: "Daftarkan anak",
+                      body: (
+                        <SmartForm
+                          busy={busy}
+                          fields={[
+                            { name: "name", label: "Nama anak" },
+                            {
+                              name: "classroomId",
+                              label: "Kelas",
+                              options: classes.map((c) => ({
+                                value: c.id,
+                                label: c.name,
+                              })),
+                            },
+                            {
+                              name: "birthDate",
+                              label: "Tanggal lahir",
+                              type: "date",
+                              required: false,
+                            },
+                          ]}
+                          onSubmit={(v) =>
+                            mutate(() =>
+                              req("children", "POST", {
+                                name: v.name,
+                                classroomId: v.classroomId,
+                                ...(v.birthDate
+                                  ? { birthDate: v.birthDate }
+                                  : {}),
+                              }),
+                            )
+                          }
+                        />
+                      ),
+                    })
+                  }
+                />
               ) : view === "control" || view === "closing" ? (
                 control()
               ) : view === "pickup" ? (
@@ -3657,6 +4474,34 @@ export default function OperationsWorkspace({
           </section>
         </div>
       )}
+      <nav className="v10-mobile-bottom" aria-label="Akses cepat">
+        {(isParent
+          ? ["today", "story", "pickup", "messages"]
+          : role === "caregiver"
+            ? ["staffToday", "care", "children", "pickup"]
+            : role === "manager"
+              ? ["control", "planner", "children", "story"]
+              : ["home", "children", "planner", "control"]
+        ).map((key) => {
+          const item = nav.find((n) => n[0] === key);
+          if (!item) return null;
+          const Icon = item[2];
+          return (
+            <button
+              key={key}
+              aria-current={view === key ? "page" : undefined}
+              onClick={() => go(key)}
+            >
+              <Icon size={18} />
+              <span>{item[1]}</span>
+            </button>
+          );
+        })}
+        <button onClick={() => setMenu(!menu)}>
+          <List size={18} />
+          <span>Menu</span>
+        </button>
+      </nav>
     </div>
   );
 }

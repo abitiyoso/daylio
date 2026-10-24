@@ -9,6 +9,11 @@ import { service, fail } from "../../../../lib/service.mjs";
 import { acceptInvitation } from "../../../../lib/invitations.mjs";
 import { sandboxPaths } from "../../../../lib/sandbox-paths.mjs";
 import { authorizeReplay } from "../../../../lib/replay-authorization.mjs";
+import { verifySaasPayment } from "../../../../lib/commercial-workflows.mjs";
+import {
+  verifyVideoWebhook,
+  ingestVideoEvent,
+} from "../../../../lib/video-metadata.mjs";
 export const runtime = "nodejs";
 const digest = (s: string) => createHash("sha256").update(s).digest("hex");
 async function limited(key: string, max: number) {
@@ -29,10 +34,11 @@ async function handler(
 ) {
   const requestId = crypto.randomUUID();
   try {
-    sameOrigin(request);
     const segments = (await params).path,
       path = segments.join("/"),
       method = request.method;
+    if (path !== "integrations/elenio/events" || method !== "POST")
+      sameOrigin(request);
     const url = new URL(request.url);
     if (Number(request.headers.get("content-length")) > 65536)
       fail(413, "PAYLOAD_TOO_LARGE");
@@ -46,10 +52,31 @@ async function handler(
     }
     if (body === null || Array.isArray(body) || typeof body !== "object")
       fail(422, "INVALID_JSON_OBJECT");
+    if (path === "integrations/elenio/events" && method === "POST") {
+      const event = verifyVideoWebhook(raw, request.headers, {
+        secret: process.env.ELENIO_METADATA_WEBHOOK_SECRET,
+        enabled: process.env.ELENIO_METADATA_ENABLED === "true",
+      });
+      await limited("elenio-event:" + event.organizationId, 1200);
+      const result = await database().begin(async (tx: DB) =>
+        ingestVideoEvent(
+          {
+            query: async (text: string, values: any[] = []) => ({
+              rows: await tx.unsafe(text, values),
+            }),
+          },
+          event,
+        ),
+      );
+      return NextResponse.json(
+        { data: result },
+        { headers: { "Cache-Control": "no-store" } },
+      );
+    }
     if (path === "health/ready") {
       const sql = database();
       const [schema] =
-        await sql`select max(version)>=11 as ready from schema_migrations`;
+        await sql`select exists(select 1 from schema_migrations where version=20) as ready`;
       if (!schema.ready) fail(503, "MIGRATIONS_REQUIRED");
       return NextResponse.json(
         {
@@ -62,7 +89,22 @@ async function handler(
                     sandboxPaths(),
                   ),
                   fingerprint: (
-                    await sql`select md5(coalesce(string_agg(id::text||updated_at::text, ',' order by id),'')) fingerprint from records`
+                    await sql`select md5(coalesce(string_agg(key||content,',' order by key),'')) fingerprint from (
+                      select 'records:'||id::text key,to_jsonb(r)::text content from records r union all
+                      select 'children:'||id::text,to_jsonb(r)::text from children r union all
+                      select 'classes:'||id::text,to_jsonb(r)::text from classrooms r union all
+                      select 'members:'||id::text,to_jsonb(r)::text from memberships r union all
+                      select 'guardians:'||id::text,to_jsonb(r)::text from guardian_child_links r union all
+                      select 'assignments:'||id::text,to_jsonb(r)::text from staff_assignments r union all
+                      select 'bookings:'||id::text,to_jsonb(r)::text from schedule_bookings r union all
+                      select 'shifts:'||id::text,to_jsonb(r)::text from schedule_shifts r union all
+                      select 'subscription:'||organization_id::text,to_jsonb(r)::text from tenant_subscriptions r union all
+                      select 'saas:'||id::text,to_jsonb(r)::text from saas_invoices r union all
+                      select 'recurring:'||id::text,to_jsonb(r)::text from recurring_billing_rules r union all
+                      select 'leo:'||id::text,to_jsonb(r)::text from leo_work_items r union all
+                      select 'camera:'||id::text,to_jsonb(r)::text from camera_registry r union all
+                      select 'video:'||id::text,to_jsonb(r)::text from video_events r
+                    ) entries`
                   )[0].fingerprint,
                 },
               }
@@ -174,7 +216,10 @@ async function handler(
         endpoint = `recover?redirect_to=${encodeURIComponent(new URL("/auth/complete", process.env.APP_ORIGIN || request.url).href)}`;
         payload = { email: z.email().parse(body.email) };
       } else if (action === "signup" || action === "login") {
-        endpoint = action === "signup" ? "signup" : "token?grant_type=password";
+        endpoint =
+          action === "signup"
+            ? `signup?redirect_to=${encodeURIComponent(new URL("/auth/complete", process.env.APP_ORIGIN || request.url).href)}`
+            : "token?grant_type=password";
         payload = {
           email: z.email().parse(body.email),
           password: z.string().min(12).max(128).parse(body.password),
@@ -195,6 +240,7 @@ async function handler(
           "Permintaan identitas gagal. Periksa email dan kredensial.",
         );
       if (data.access_token) {
+        await verifyIdentity(data.access_token, { url: base, key });
         const options = {
           httpOnly: true,
           secure: process.env.NODE_ENV === "production",
@@ -384,6 +430,31 @@ async function handler(
         });
         return NextResponse.json({ data: result });
       }
+      if (path === "platform/saas-invoices" && method === "GET") {
+        const rows =
+          await sql`select i.*,o.name organization_name from saas_invoices i join organizations o on o.id=i.organization_id order by i.created_at desc limit 100`;
+        return NextResponse.json({ data: rows });
+      }
+      if (
+        segments[1] === "saas-invoices" &&
+        segments[2] &&
+        segments[3] === "verify" &&
+        method === "POST"
+      ) {
+        const row = await sql.begin(async (tx) =>
+          verifySaasPayment(
+            {
+              query: async (text: string, values: any[] = []) => ({
+                rows: await tx.unsafe(text, values),
+              }),
+            },
+            user.id,
+            segments[2],
+            body,
+          ),
+        );
+        return NextResponse.json({ data: row });
+      }
       if (path === "platform/subscriptions" && method === "POST") {
         const tenant = z.uuid().parse(body.organizationId),
           plan = z.enum(["trial", "active", "suspended"]).parse(body.plan),
@@ -475,7 +546,7 @@ async function handler(
     const result = await scoped(user.id, orgId, async (tx: DB) => {
       const [{ role }] = await tx`select app_role() role`;
       const [caps] =
-        await tx`select app_capability('finance') finance,app_capability('crm') crm,care_policy() policy`;
+        await tx`select app_capability('finance') finance,app_capability('crm') crm,care_policy() policy,app_plan() commercial_plan`;
       const authorizationContext = JSON.stringify({ role, ...caps });
       const db = {
         query: async (text: string, values: any[] = []) => ({
@@ -523,11 +594,12 @@ async function handler(
   } catch (error: any) {
     const validation = error instanceof z.ZodError;
     const conflict = error.code === "23505",
+      constrained = error.code === "23514",
       denied = error.code === "42501",
       relation = error.code === "23503";
     const status = validation
       ? 422
-      : conflict
+      : conflict || constrained
         ? 409
         : denied
           ? 403
@@ -539,21 +611,25 @@ async function handler(
         error: {
           code: validation
             ? "VALIDATION_ERROR"
-            : conflict
-              ? "CONFLICT"
-              : denied
-                ? "FORBIDDEN"
-                : relation
-                  ? "INVALID_REFERENCE"
-                  : error.code || "SERVICE_UNAVAILABLE",
+            : constrained
+              ? "CAPACITY_OR_SCHEDULE_CONFLICT"
+              : conflict
+                ? "CONFLICT"
+                : denied
+                  ? "FORBIDDEN"
+                  : relation
+                    ? "INVALID_REFERENCE"
+                    : error.code || "SERVICE_UNAVAILABLE",
           message:
             status === 503
               ? "Layanan belum tersedia. Silakan coba lagi."
-              : validation
-                ? "Periksa isian formulir."
-                : error.status
-                  ? error.message
-                  : "Permintaan ditolak.",
+              : constrained
+                ? "Perubahan ditolak karena kapasitas, kuota, atau jadwal yang sudah dipesan. Perbarui data dan periksa alokasi terlebih dahulu."
+                : validation
+                  ? "Periksa isian formulir."
+                  : error.status
+                    ? error.message
+                    : "Permintaan ditolak.",
           requestId,
         },
       },

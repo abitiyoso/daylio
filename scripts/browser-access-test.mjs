@@ -1,4 +1,7 @@
-import { requireIsolatedBrowserTarget } from "./browser-test-guard.mjs";
+import {
+  requireIsolatedBrowserTarget,
+  saveBrowserScreenshot,
+} from "./browser-test-guard.mjs";
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
@@ -16,6 +19,7 @@ async function actor(role) {
   });
   contexts.push(context);
   const page = await context.newPage();
+  page.setDefaultNavigationTimeout(60000);
   page.setDefaultTimeout(15000);
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(base + "/workspace");
@@ -24,7 +28,7 @@ async function actor(role) {
     .getByLabel("Kata sandi", { exact: true })
     .fill("Sandbox-only-2026!");
   await page.getByRole("button", { name: "Masuk", exact: true }).click();
-  await page.locator(".op-content .op-card").first().waitFor();
+  await page.locator('.op-content > div[aria-busy="false"]').waitFor();
   return { context, page };
 }
 async function api(actor, path, method = "GET", body) {
@@ -61,7 +65,7 @@ try {
     .getByRole("status")
     .filter({ hasText: "Permintaan email verifikasi diterima" })
     .waitFor();
-  await owner.page.screenshot({
+  await saveBrowserScreenshot(owner.page, {
     path: "evidence/screenshots/access/admin-desktop.png",
   });
   const mail = await (
@@ -80,6 +84,7 @@ try {
   });
   contexts.push(inviteeContext);
   const page = await inviteeContext.newPage();
+  page.setDefaultNavigationTimeout(60000);
   page.setDefaultTimeout(15000);
   page.on("pageerror", (e) => errors.push(e.message));
   const notVerified = await inviteeContext.request.post(
@@ -89,11 +94,11 @@ try {
       data: { email, password: "Sandbox-only-2026!" },
     },
   );
-  assert.equal(notVerified.status(), 200);
+  assert.equal(notVerified.status(), 403);
   const denied = await inviteeContext.request.get(
     base + "/api/v1/me/memberships",
   );
-  assert.equal(denied.status(), 403);
+  assert.equal(denied.status(), 401);
   await page.goto(letter.link);
   await page
     .getByRole("heading", { name: "Atur kata sandi baru", exact: true })
@@ -106,9 +111,7 @@ try {
     .fill("Invited-test-2026!");
   await page.getByLabel("Ulangi kata sandi").fill("Invited-test-2026!");
   await page.getByRole("button", { name: "Simpan kata sandi" }).click();
-  await page
-    .getByRole("heading", { name: "My Child Today", exact: true })
-    .waitFor();
+  await page.getByRole("heading", { name: /^Halo,/, exact: true }).waitFor();
   const today = await inviteeContext.request.get(
     base + "/api/v1/workspace/context",
     { headers: { "x-organization-id": sandbox.org } },
@@ -117,7 +120,7 @@ try {
   assert.equal(data.role, "parent");
   assert.equal(data.children.length, 1);
   assert.equal(data.children[0].id, sandbox.child);
-  await page.screenshot({
+  await saveBrowserScreenshot(page, {
     path: "evidence/screenshots/access/invited-parent-mobile.png",
   });
   assert.equal(
@@ -217,37 +220,34 @@ try {
   });
   contexts.push(landing);
   const lp = await landing.newPage();
+  lp.setDefaultNavigationTimeout(60000);
   lp.setDefaultTimeout(15000);
-  await lp.goto(base + "/#aplikasi");
-  await lp
-    .locator("#phoneContent")
-    .getByText(/SHOWCASE/)
-    .waitFor();
+  await lp.goto(base + "/#leo");
+  await lp.locator("#leoQuestions button").first().waitFor();
   for (const role of ["parent", "caregiver", "owner"]) {
-    await lp.locator(`.role-tab[data-role="${role}"]`).click();
-    assert.equal(
-      await lp
-        .locator("#phoneContent")
-        .getByText(/SHOWCASE/)
-        .count(),
-      1,
+    await lp.locator(`[data-leo="${role}"]`).click();
+    assert.match(
+      await lp.locator(".leo20-demo-caption").textContent(),
+      /simulasi/i,
     );
-    assert.equal(await lp.locator("#phoneContent a").count(), 0);
+    assert.equal(await lp.locator("#leoThread a").count(), 0);
   }
   await lp
-    .locator("#aplikasi")
+    .locator("#leo")
     .screenshot({ path: "evidence/screenshots/access/showcase-desktop.png" });
   await lp.goto(base + "/workspace");
   await lp
     .getByRole("heading", { name: "Selamat datang", exact: true })
     .waitFor();
-  await lp.screenshot({
+  await saveBrowserScreenshot(lp, {
     path: "evidence/screenshots/access/login-desktop.png",
   });
   await lp.setViewportSize({ width: 390, height: 844 });
-  await lp.screenshot({ path: "evidence/screenshots/access/login-mobile.png" });
+  await saveBrowserScreenshot(lp, {
+    path: "evidence/screenshots/access/login-mobile.png",
+  });
   evidence.push(
-    "Three labeled static role showcases; separate login entry; desktop/mobile login screenshots.",
+    "Three labeled V20 LEO simulation roles; separate login entry; desktop/mobile login screenshots.",
   );
   assert.deepEqual(errors, []);
   await writeFile(

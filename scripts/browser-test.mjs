@@ -1,4 +1,7 @@
-import { requireIsolatedBrowserTarget } from "./browser-test-guard.mjs";
+import {
+  requireIsolatedBrowserTarget,
+  saveBrowserScreenshot,
+} from "./browser-test-guard.mjs";
 import { chromium } from "playwright";
 import { mkdir, writeFile } from "node:fs/promises";
 import assert from "node:assert/strict";
@@ -21,6 +24,7 @@ const browser = await chromium.launch({ channel: "chrome", headless: true });
 const evidence = [];
 try {
   const page = await browser.newPage();
+  page.setDefaultNavigationTimeout(60000);
   for (const width of [390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto(base, { waitUntil: "networkidle" });
@@ -36,21 +40,26 @@ try {
       true,
       `Horizontal overflow ${width}`,
     );
-    assert.equal(await page.locator("details").count(), 8);
-    await page.locator("details").nth(1).locator("summary").click();
-    assert.equal(await page.locator("details").nth(1).getAttribute("open"), "");
+    assert.equal(await page.locator("main>section").count(), 8);
+    await page.locator("#leoQuestions button").first().waitFor();
+    await page.locator('[data-solution="care"]').click();
+    assert.equal(
+      await page.locator("#dashboardTitle").textContent(),
+      "Care & Family",
+    );
     await page.evaluate(() => scrollTo(0, 0));
-    await page.screenshot({
+    await saveBrowserScreenshot(page, {
       path: `evidence/screenshots/marketing-${width}.png`,
       fullPage: false,
     });
     evidence.push(
-      `Marketing ${width}px: no overflow; FAQ keyboard-native details; screenshot captured`,
+      `Marketing ${width}px: no overflow; V20 platform interaction; screenshot captured`,
     );
   }
   async function login(role) {
     const context = await browser.newContext();
     const p = await context.newPage();
+    p.setDefaultNavigationTimeout(60000);
     const faults = [];
     p.on("response", async (r) => {
       if (r.url().includes("/api/") && r.status() >= 400)
@@ -66,7 +75,7 @@ try {
     try {
       await p.getByRole("button", { name: "Keluar", exact: true }).waitFor();
     } catch {
-      await p.screenshot({
+      await saveBrowserScreenshot(p, {
         path: `evidence/screenshots/login-${role}-failure.png`,
       });
       throw Error(
@@ -247,14 +256,18 @@ try {
     .first()
     .waitFor();
   await parent.page.setViewportSize({ width: 390, height: 844 });
-  await parent.page.screenshot({ path: "evidence/screenshots/parent-390.png" });
+  await saveBrowserScreenshot(parent.page, {
+    path: "evidence/screenshots/parent-390.png",
+  });
   await owner.page.setViewportSize({ width: 1440, height: 900 });
   await owner.page.reload();
   await owner.page
     .getByRole("button", { name: "Keluar", exact: true })
     .waitFor();
   await owner.page.locator(".cards article strong").first().waitFor();
-  await owner.page.screenshot({ path: "evidence/screenshots/owner-1440.png" });
+  await saveBrowserScreenshot(owner.page, {
+    path: "evidence/screenshots/owner-1440.png",
+  });
   evidence.push(
     "Browser login with isolated identity fixture for owner, caregiver, parent and unrelated guardian",
   );

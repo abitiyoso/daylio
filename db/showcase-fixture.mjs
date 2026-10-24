@@ -394,6 +394,49 @@ export async function seedShowcase(pg, mediaDirectory) {
         "10:00",
       );
   }
+  // Fictional v10 planner and family billing, only in the opt-in showcase seed.
+  const tomorrow = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Jakarta",
+  }).format(new Date(Date.now() + 86400000));
+  for (const user of [s.caregiver, s.manager])
+    await q(
+      "insert into schedule_shifts(organization_id,classroom_id,user_id,starts_at,ends_at,created_by) values($1,$2,$3,$4,$5,$6)",
+      [
+        s.org,
+        s.room,
+        user,
+        `${tomorrow}T07:00:00+07:00`,
+        `${tomorrow}T17:00:00+07:00`,
+        s.owner,
+      ],
+    );
+  const [prospect] = await q(
+    "select id from records where organization_id=$1 and kind='lead' and state not in ('lost','enrolled') order by created_at limit 1",
+    [s.org],
+  );
+  if (prospect)
+    await q(
+      "insert into schedule_bookings(organization_id,classroom_id,lead_id,child_name,type,starts_at,ends_at,created_by) values($1,$2,$3,'Hana','trial',$4,$5,$6)",
+      [
+        s.org,
+        s.room,
+        prospect.id,
+        `${tomorrow}T09:00:00+07:00`,
+        `${tomorrow}T11:00:00+07:00`,
+        s.owner,
+      ],
+    );
+  await add(
+    "invoice",
+    {
+      dueAt: `${day}T23:59:59+07:00`,
+      lines: [{ description: "Paket daycare bulan berjalan", amount: 2800000 }],
+    },
+    s.child,
+    "draft",
+    s.owner,
+    "09:00",
+  );
   const photo = await add(
     "media",
     {
@@ -411,7 +454,7 @@ export async function seedShowcase(pg, mediaDirectory) {
   const folder = resolve(mediaDirectory, s.org);
   await mkdir(folder, { recursive: true });
   await cp(
-    "design-reference/Daylio_Backend_v3/assets/child-art.webp",
+    "public/approved-assets/1344caa5fc71441eb6ed.webp",
     resolve(folder, photo.id + ".webp"),
   );
   await q(

@@ -13,6 +13,7 @@ import { startSandboxAuth } from "./sandbox-auth.mjs";
 if (process.env.NODE_ENV === "production" || process.env.DATABASE_URL)
   throw Error("Local QA only; remove production connection variables");
 const suites = {
+  v10: "browser-v10-journey.mjs",
   legacy: "browser-test.mjs",
   care: "browser-v3-test.mjs",
   business: "browser-v3-business-test.mjs",
@@ -133,6 +134,16 @@ for (let iteration = 1; iteration <= repeat; iteration++)
         await new Promise((resolve) => setTimeout(resolve, 500));
       }
       if (!ready) throw Error("QA server not ready: " + output.slice(-2000));
+      // Dev compilation is setup, not an application action timeout. Warm the
+      // real entry routes before the browser starts its interaction checks.
+      for (const path of ["/workspace", "/register", "/"]) {
+        const response = await fetch(env.TEST_BASE_URL + path, {
+          signal: AbortSignal.timeout(60000),
+        });
+        if (!response.ok)
+          throw Error(`QA entry route failed: ${path} ${response.status}`);
+        await response.text();
+      }
       console.log(
         `Running ${name}, iteration ${iteration}, isolated database/media`,
       );

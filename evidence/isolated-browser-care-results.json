@@ -1,16 +1,16 @@
 {
-  "at": "2026-10-17T14:13:23.738Z",
-  "previewFingerprintBefore": "79c9df2d20b758a3c6f2f03ef705dd09",
-  "previewFingerprintAfter": "79c9df2d20b758a3c6f2f03ef705dd09",
+  "at": "2026-10-24T04:49:35.364Z",
+  "previewFingerprintBefore": "12a9552d42254df0c6e6fd76a6c357f2",
+  "previewFingerprintAfter": "12a9552d42254df0c6e6fd76a6c357f2",
   "previewUnchanged": true,
   "teardown": "Temporary database, media and build directory removed, including on failure.",
   "results": [
     {
       "suite": "care",
       "iteration": 1,
-      "passed": true,
-      "elapsedMs": 42634,
-      "output": "Caregiver UI: six present children preselected, absent child excluded, individual exception, 6 persisted drafts; HTTP idempotency replay returns identical record. Parent cannot read drafts.\nManager UI publishes reviewed group; linked parent receives only 2 own-child records. Parent morning note acknowledged from caregiver UI; switching siblings replaces meal and notes without mixing children.\nRoutine pickup UI: linked guardian approval without repeated manager review, physical identity check, explicit real handover confirmation, persisted evidence plus atomic attendance out. Substitute UI: request → manager approval → physical verification → single-use handover; preapproval bypass denied.\nDaily Closing UI persists unresolved snapshot and keeps incident open.\nFour authenticated role dashboards at 1440/820/390px: no horizontal overflow; mobile navigation opens and returns to workspace; 12 screenshots captured.\n"
+      "passed": false,
+      "elapsedMs": 99966,
+      "output": "Browser exceptions: []\nnode:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\npage.goto: Timeout 30000ms exceeded.\r\nCall log:\r\n\u001b[2m  - navigating to \"http://127.0.0.1:3101/workspace\", waiting until \"load\"\u001b[22m\r\n\r\n    at login (C:\\Users\\Abi Tiyoso\\Documents\\ChatGPT\\daylio\\scripts\\browser-v3-test.mjs:25:16)\r\n    at async file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/browser-v3-test.mjs:35:17 {\r\n  log: [\r\n    '  - navigating to \"http://127.0.0.1:3101/workspace\", waiting until \"load\"'\r\n  ],\r\n  name: 'TimeoutError'\r\n}\r\n\r\nNode.js v24.22.1\r\n"
     }
   ]
 }

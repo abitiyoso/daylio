@@ -1,4 +1,7 @@
-import { requireIsolatedBrowserTarget } from "./browser-test-guard.mjs";
+import {
+  requireIsolatedBrowserTarget,
+  saveBrowserScreenshot,
+} from "./browser-test-guard.mjs";
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
@@ -24,6 +27,7 @@ try {
         reducedMotion: "reduce",
       }),
       page = await context.newPage();
+    page.setDefaultNavigationTimeout(60000);
     page.on("pageerror", (e) => faults.push(role + ": " + e.message));
     await page.goto(base + "/workspace");
     await page.getByLabel("Email", { exact: true }).fill(role + "@daylio.test");
@@ -58,6 +62,11 @@ try {
     return json.data ?? json;
   }
   async function nav(actor, label) {
+    const target = actor.page
+      .getByRole("navigation", { name: "Navigasi utama" })
+      .getByRole("button", { name: label, exact: true });
+    if (!(await target.isVisible()))
+      await actor.page.locator(".v10-additional-nav summary").click();
     await actor.page
       .getByRole("navigation", { name: "Navigasi utama" })
       .getByRole("button", { name: label, exact: true })
@@ -89,7 +98,7 @@ try {
     .getByRole("button", { name: "Ajukan untuk dikonfirmasi", exact: true })
     .click();
   await saved(parent);
-  await nav(manager, "Anak & Keluarga");
+  await nav(manager, "Data Anak");
   const proposal = manager.page
     .locator(".op-list-item")
     .filter({ hasText: "Tidak ada yang dilaporkan — " + tag });
@@ -100,17 +109,17 @@ try {
     .getByRole("button", { name: "Catat keputusan", exact: true })
     .click();
   await saved(manager);
-  await nav(caregiver, "Anak & Care Passport");
+  await nav(caregiver, "Anak Asuhan");
   await caregiver.page
     .getByText("Tidak ada yang dilaporkan — " + tag, { exact: true })
     .waitFor();
-  await caregiver.page.screenshot({
+  await saveBrowserScreenshot(caregiver.page, {
     path: "evidence/screenshots/v3/passport-1440.png",
   });
   passed.push(
     "Care Passport UI: parent proposal → manager confirmed version → assigned caregiver read, with actual persisted emergency/allergy information.",
   );
-  await nav(manager, "Rapor & Perkembangan");
+  await nav(manager, "Perkembangan Anak");
   const rubricCard = manager.page.locator(".op-card").filter({
     has: manager.page.getByRole("heading", {
       name: "Rubrik usia & kurikulum",
@@ -156,7 +165,7 @@ try {
     .getByRole("button", { name: "Ajukan review", exact: true })
     .click();
   await saved(caregiver);
-  await nav(manager, "Rapor & Perkembangan");
+  await nav(manager, "Perkembangan Anak");
   const review = manager.page
     .locator(".op-list-item")
     .filter({ hasText: tag + " menyusun tiga balok" });
@@ -193,7 +202,7 @@ try {
     .getByRole("button", { name: "Konfirmasi", exact: true })
     .click();
   await saved(manager);
-  await nav(parent, "Rapor Anak");
+  await nav(parent, "Tumbuh Kembang");
   const parentReport = parent.page.locator(".op-list-item").filter({
     has: parent.page.getByRole("heading", {
       name: tag + " Rapor Pengamatan",
@@ -210,7 +219,7 @@ try {
     "evidence/v3-report-synthetic.pdf",
     Buffer.from(pdf.content, "base64"),
   );
-  await parent.page.screenshot({
+  await saveBrowserScreenshot(parent.page, {
     path: "evidence/screenshots/v3/report-parent-1440.png",
   });
   passed.push(
@@ -224,7 +233,7 @@ try {
     name: room.name,
     capacity: 1,
   });
-  await nav(owner, "CRM & WhatsApp");
+  await nav(owner, "Prospek & Pendaftaran");
   for (const [label, value] of [
     ["Nama wali", tag + " Wali Prospek"],
     ["Nomor WhatsApp, format 62…", "6281234567890"],
@@ -312,14 +321,16 @@ try {
       (c) => c.classroom_id === room.id && c.name === tag + " Anak Baru",
     ),
   );
-  await owner.page.screenshot({ path: "evidence/screenshots/v3/crm-1440.png" });
+  await saveBrowserScreenshot(owner.page, {
+    path: "evidence/screenshots/v3/crm-1440.png",
+  });
   passed.push(
     "CRM UI: manual inquiry → age/schedule/class/package qualification → saved unsent WhatsApp draft → confirmed class slot/price/emergency contact → atomic child/enrollment and guardian invitation. Optional tour/trial skipped explicitly; capacity enforced by shared existing enrollment service. No external messages sent.",
   );
   for (const [actor, label] of [
     [parent, "Tanya LEO"],
-    [caregiver, "LEO Assistant"],
-    [owner, "LEO Copilot"],
+    [caregiver, "Tanya LEO"],
+    [owner, "LEO AI Workspace"],
   ]) {
     await nav(actor, label);
     await actor.page
