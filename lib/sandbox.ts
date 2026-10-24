@@ -1,4 +1,5 @@
 import { readFile, readdir, mkdir } from "node:fs/promises";
+import { sandboxPaths } from "./sandbox-paths.mjs";
 import { seedSandbox } from "../db/sandbox-fixture.mjs";
 const shared = globalThis as unknown as { daylioSandbox?: Promise<any> };
 export function sandboxDatabase() {
@@ -9,7 +10,8 @@ export function sandboxDatabase() {
 async function initialize() {
   const { PGlite } = await import("@electric-sql/pglite");
   await mkdir("data", { recursive: true });
-  const pg = new PGlite("data/sandbox");
+  const config = sandboxPaths();
+  const pg = new PGlite(config.directory);
   await pg.waitReady;
   await pg.exec(
     "create table if not exists schema_migrations(version integer primary key,applied_at timestamptz not null default now())",
@@ -28,7 +30,13 @@ async function initialize() {
     const source = await readFile(`db/migrations/${name}`, "utf8");
     await pg.transaction((tx) => tx.exec(source));
   }
-  await seedSandbox(pg);
+  if (config.purpose === "test") await seedSandbox(pg);
+  else if (
+    !(await pg.query("select id from organizations limit 1")).rows.length
+  )
+    throw Error(
+      "Initialize showcase explicitly: node scripts/reset-showcase.mjs --confirm-local-showcase",
+    );
   return pg;
 }
 function adapter(get: () => Promise<any>): any {

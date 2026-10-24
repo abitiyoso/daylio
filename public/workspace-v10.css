@@ -1,0 +1,476 @@
+
+.daylio-ops{--ink:#233444;--navy:#1e3140;--deep:#20313c;--deep2:#172833;--orange:#d97852;--coral:#db765c;--sun:#f1bd58;--ivory:#fbfaf7;--paper:#ffffff;--page:#f5f5f2;--line:#e7e9e6;--muted:#7c8a92;--sage:#286e60;--sagebg:#e9f3ed;--red:#b65a55;--redbg:#fbebe9;--blue:#3d7391;--bluebg:#e9f2f7;--amber:#9d6d24;--amberbg:#faf1db;--lilac:#726499;--lilacbg:#f1eef7;--radius:15px;--shadow:0 8px 30px rgba(21,39,49,.045);font-synthesis:none}
+@media(max-width:1250px){}
+@media(max-width:940px){}
+@media(max-width:620px){}
+@media(prefers-reduced-motion:reduce){}
+/* Final UX refinements */
+@media(max-width:940px){}
+@media(max-width:620px){}
+
+/* DAYLIO — SUN OF CARE DESIGN SYSTEM | v4 corrected
+   Source of truth: approved brand board, identical original logo asset.
+   Brand: Sunrise Coral #FF704D, Golden Sun #FDBA3C,
+          Peach Clay #F7A890, Warm Cream #FFF4EA, Charcoal Navy #0F2A44.
+   Contrast: deeper interactive coral #AF4331 on white text; golden never used for body copy.
+   Functional accents mint / lilac / blue are semantic, not brand colors. */
+.daylio-ops {
+  --daylio-coral: #FF704D;
+  --daylio-yellow: #FDBA3C;
+  --daylio-peach: #F7A890;
+  --daylio-cream: #FFF4EA;
+  --daylio-navy: #0F2A44;
+  --daylio-action: #AD4332;
+  --daylio-action-hover: #983825;
+  --daylio-mist: #FFF0E8;
+  --daylio-linen: #FAF8F4;
+  --daylio-teal: #27715B;
+  --daylio-purple: #6D5A9A;
+  --daylio-blue: #37698B;
+  --ink: #162D42;
+  --navy: var(--daylio-navy);
+  --deep: var(--daylio-navy);
+  --deep2: #11283D;
+  --orange: var(--daylio-action);
+  --coral: var(--daylio-coral);
+  --sun: var(--daylio-yellow);
+  --ivory: #FFFCF8;
+  --paper: #FFFFFF;
+  --page: #FAF8F5;
+  --line: #EDE9E3;
+  --muted: #657786;
+  --sage: var(--daylio-teal);
+  --sagebg: #E7F3ED;
+  --red: #AA4843;
+  --redbg: #FCEDEA;
+  --blue: var(--daylio-blue);
+  --bluebg: #EAF3FC;
+  --amber: #89611F;
+  --amberbg: #FFF2D9;
+  --lilac: var(--daylio-purple);
+  --lilacbg: #F0ECFA;
+  --radius: 16px;
+  --shadow: 0 7px 24px rgba(35,48,59,.035);
+}
+/* Navigation: warm-light, brand-first, independently distinct from Kamelo's dark green shell. */
+/* Header and typography */
+/* Surfaces */
+/* Daylio's sun/smile is implicit in the open-space, golden vignette. Logo files untouched. */
+/* Buttons: accessible dark coral primary; sunshine reserved for accents */
+/* Product patterns */
+/* Parent warmth without drowning the platform in pink/orange */
+/* Tablet/mobile rhythm */
+@media(max-width:1250px){}
+@media(max-width:940px){}
+@media(max-width:620px){
+}
+/* Mobile hero must grow with its content; avoid clipped CTAs and descriptions. */
+@media(max-width:620px){
+}
+
+/* Daylio UX V5 — Sun of Care. Same logo bytes, compact brand lockup. */
+.daylio-ops{--daylio-coral:#FF704D;--daylio-yellow:#FDBA3C;--daylio-navy:#0F2A44;--daylio-action:#AD4332;--daylio-cream:#FFF4EA;--line:#EDE9E3}
+@media(max-width:1250px){}
+@media(max-width:940px){}
+@media(max-width:620px){}
+/* Final compact endorsement and parent development */
+@media(max-width:620px){}
+
+/* Daylio V6: calm productivity / editorial data visualization */
+.daylio-ops {--v6-ink:#1D3042; --v6-soft:#73818F; --v6-line:#E9E8E3; --v6-cream:#FAF8F4; --v6-coral:#CA634F; --v6-coral-d:#AA4E3F; --v6-sun:#EAB85D; --v6-navy:#17324A; --v6-shadow:0 4px 18px rgba(27,40,48,.032); --page:#F7F7F4; --line:#E9E8E3; --daylio-action:#AD4E3E; --orange:#AD4E3E; --ink:#213449; --muted:#687989; }
+.daylio-ops .v6-stat-num {font-family:Manrope,"Inter Display",Inter,system-ui,sans-serif;}
+/* v6 business overview */
+.daylio-ops .v6-intro {display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:26px}
+.daylio-ops .v6-overline {display:flex;align-items:center;gap:9px;font:800 10px/1.2 "DM Sans",Inter,sans-serif;letter-spacing:.12em;color:#9C7C6D}
+.daylio-ops .v6-overline i {display:block;width:4px;height:4px;border-radius:50%;background:#CE8B6C}
+.daylio-ops .v6-intro h1,.daylio-ops .v6-parent-greeting h1 {font-size:clamp(26px,2.6vw,35px);letter-spacing:-.055em;line-height:1.2;margin-top:9px;font-weight:800;color:#1B3042}
+.daylio-ops .v6-intro h1 span {font-size:24px;color:#E8B25B;display:inline-block;transform:translateY(-2px)}
+.daylio-ops .v6-intro p {font-size:13.9px;color:#6F7F88;line-height:1.55;margin-top:9px}
+.daylio-ops .v6-intro-actions {display:flex;align-items:center;gap:11px;flex:0 0 auto}
+.daylio-ops .v6-today {display:flex;align-items:center;gap:8px;font-size:12.5px;color:#6A7985;font-weight:600;border:1px solid #EDEAE5;background:#fff;padding:11px 13px;border-radius:10px}
+.daylio-ops .v6-stat-grid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:0 0 16px}
+.daylio-ops .v6-stat {min-width:0;min-height:165px;border:1px solid #E9E9E5;background:white;border-radius:14px;position:relative;padding:19px 19px 16px;box-shadow:var(--v6-shadow)}
+.daylio-ops .v6-stat.coral {border-top:3px solid #D47B62}
+.daylio-ops .v6-stat.navy {border-top:3px solid #334F66}
+.daylio-ops .v6-stat.gold {border-top:3px solid #E4B256}
+.daylio-ops .v6-stat.neutral {border-top:3px solid #B4B8B8}
+.daylio-ops .v6-stat-label {display:flex;align-items:center;justify-content:space-between;font-size:12.6px;font-weight:700;color:#6A7985;gap:6px}
+.daylio-ops .v6-stat-icon {display:grid;place-items:center;color:#B0A39D}
+.daylio-ops .v6-stat.coral .v6-stat-icon{color:#BD6F59}.daylio-ops .v6-stat.navy .v6-stat-icon{color:#526F85}.daylio-ops .v6-stat.gold .v6-stat-icon{color:#BA8A3B}
+.daylio-ops .v6-stat-num {font-size:clamp(22px,2.1vw,29px);font-weight:800;letter-spacing:-.056em;margin:13px 0 4px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.daylio-ops .v6-stat-detail {font-size:11.9px;line-height:1.5;color:#89939A}
+.daylio-ops .v6-stat-link {margin-top:11px;border:0;background:transparent;color:#A15341;display:flex;gap:5px;align-items:center;padding:0;font-size:11.6px;font-weight:800}
+.daylio-ops .v6-dash-charts {display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:16px;margin-bottom:16px}
+.daylio-ops .v6-surface {min-width:0;background:white;border:1px solid #E8E9E6;border-radius:16px;box-shadow:var(--v6-shadow);overflow:hidden}
+.daylio-ops .v6-surface-head {display:flex;align-items:center;justify-content:space-between;gap:15px;padding:23px 23px 14px}
+.daylio-ops .v6-surface-head h2 {font-size:17px;font-weight:800;letter-spacing:-.035em;line-height:1.35;color:#23394B;margin:6px 0 0}
+.daylio-ops .v6-surface-head p {font-size:12.3px;color:#84919B;line-height:1.6;margin-top:4px}
+.daylio-ops .v6-surface-kicker {font-size:10px;font-weight:800;letter-spacing:.13em;color:#B58F76}
+.daylio-ops .v6-text-action {flex:0 0 auto;border:none;background:transparent;display:flex;align-items:center;gap:6px;color:#B45C48;font-size:12px;font-weight:750;padding:7px 0;white-space:nowrap}
+.daylio-ops .v6-cap-chart {padding:9px 23px 13px;display:flex;flex-direction:column;gap:24px}
+.daylio-ops .v6-cap-row {display:grid;grid-template-columns:110px minmax(0,1fr) 60px;gap:17px;align-items:center}
+.daylio-ops .v6-cap-label {display:flex;flex-direction:column;gap:3px}
+.daylio-ops .v6-cap-label strong {font-size:12.4px;color:#314556}
+.daylio-ops .v6-cap-label span {font-size:11.2px;color:#9BA2A6}
+.daylio-ops .v6-cap-meters {display:flex;flex-direction:column;gap:7px}
+.daylio-ops .v6-cap-meters>span {font-size:11.4px;color:#7E8B91}
+.daylio-ops .v6-cap-bar {height:10px;border-radius:20px;background:#F1EEE8;overflow:hidden}
+.daylio-ops .v6-cap-bar>div {height:100%;border-radius:20px;background:linear-gradient(90deg,#EAA77A 0%,#D2755E 100%);transition:width .2s ease}
+.daylio-ops .v6-cap-free {font-size:11.4px;color:#B06A4F;justify-self:end;white-space:nowrap;font-weight:750}
+.daylio-ops .v6-under-chart {display:flex;align-items:center;gap:8px;margin:8px 23px 20px;border-top:1px solid #F0EFEB;padding-top:14px;font-size:11.8px;flex-wrap:wrap}
+.daylio-ops .v6-under-chart strong {color:#3C5261;font-weight:800}
+.daylio-ops .v6-under-chart>span:last-child {color:#82929C}
+.daylio-ops .v6-dot {width:9px;height:9px;border-radius:50%;display:inline-block}.daylio-ops .v6-dot.coral{background:#D57E68}
+.daylio-ops .v6-revenue-plot {padding:1px 23px 21px}
+.daylio-ops .v6-rev-total {display:flex;align-items:end;justify-content:space-between;gap:12px;margin:8px 0 18px}
+.daylio-ops .v6-rev-total>div:first-child {display:flex;flex-direction:column;gap:6px}
+.daylio-ops .v6-rev-total span {font-size:12px;color:#84909A}
+.daylio-ops .v6-rev-total strong {font:800 26px/1.2 Manrope,"Inter Display",Inter,sans-serif;color:#1B3244;letter-spacing:-.055em}
+.daylio-ops .v6-rev-note {font-size:11.2px;color:#A0A6AA;text-align:right}
+.daylio-ops .v6-rev-stacked {height:16px;border-radius:100px;background:#F2EFEC;display:flex;overflow:hidden;gap:2px;margin-bottom:20px}
+.daylio-ops .v6-rev-stacked .paid{background:#658F7D}.daylio-ops .v6-rev-stacked .due{background:#D57960}.daylio-ops .v6-rev-stacked .pending{background:#E5BD68}
+.daylio-ops .v6-rev-legend {display:grid;grid-template-columns:8px minmax(0,1fr) auto;align-items:center;gap:9px;font-size:12.3px;color:#647686;padding:8px 0}
+.daylio-ops .v6-rev-legend i {width:8px;height:8px;border-radius:50%}.daylio-ops .v6-rev-legend i.paid{background:#658F7D}.daylio-ops .v6-rev-legend i.due{background:#D57960}.daylio-ops .v6-rev-legend i.pending{background:#E5BD68}
+.daylio-ops .v6-rev-legend b {font-size:12.1px;color:#2E4657;font-weight:750}
+.daylio-ops .v6-dash-lower {display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.6fr);gap:16px;margin-bottom:15px}
+.daylio-ops .v6-insight-list {padding:0 23px 17px}
+.daylio-ops .v6-insight-list article {display:flex;align-items:center;gap:14px;padding:14px 0;border-top:1px solid #F1F0ED;min-height:78px}
+.daylio-ops .v6-insight-number {font:800 11px/1 Manrope,Inter,sans-serif;color:#BF9483;background:#FAF4EE;flex:0 0 34px;height:34px;border-radius:11px;display:grid;place-items:center}
+.daylio-ops .v6-insight-list article>div:nth-child(2) {flex:1;min-width:0}
+.daylio-ops .v6-insight-list b {font-size:12.9px;color:#314555;font-weight:750}
+.daylio-ops .v6-insight-list p {font-size:11.7px;color:#89949C;margin-top:5px;line-height:1.55}
+.daylio-ops .v6-insight-list button {flex:0 0 auto;border:0;background:transparent;display:flex;gap:5px;align-items:center;color:#A95D47;font-weight:750;font-size:11.5px;padding:6px 0}
+.daylio-ops .v6-funnel {display:grid;gap:12px;padding:6px 23px 14px}
+.daylio-ops .v6-funnel-item {display:grid;grid-template-columns:77px 1fr 18px;align-items:center;gap:10px;font-size:11.9px;color:#778590}
+.daylio-ops .v6-funnel-track {background:#F0EDE9;height:7px;border-radius:12px;overflow:hidden}
+.daylio-ops .v6-funnel-track i {height:100%;display:block;background:#D7A88E;border-radius:10px}
+.daylio-ops .v6-funnel-item b {font-size:12px;color:#354A59;font-weight:800;text-align:right}
+.daylio-ops .v6-funnel-foot {border-top:1px solid #F1F0EB;margin:8px 23px 17px;padding-top:12px;font-size:11.8px;color:#86939A;display:flex;justify-content:space-between;align-items:center;gap:5px}
+.daylio-ops .v6-funnel-foot button{border:0;background:transparent;font-size:11.6px;color:#A95D47;display:flex;gap:4px;align-items:center;font-weight:750}
+.daylio-ops .v6-shortcuts {display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:10px 0}
+.daylio-ops .v6-shortcuts>span {font-size:10px;letter-spacing:.11em;font-weight:800;color:#A9A09A;margin-right:9px}
+.daylio-ops .v6-shortcuts button {display:flex;align-items:center;gap:8px;border:1px solid #E9E8E3;background:#fff;padding:10px 12px;border-radius:10px;color:#556878;font-weight:700;font-size:11.7px;box-shadow:var(--v6-shadow)}
+.daylio-ops .v6-shortcuts button>svg:first-child {color:#B66C57}
+.daylio-ops .v6-operator-intro {margin-bottom:25px}
+.daylio-ops .v6-manager-actions {padding:0 23px 14px}
+.daylio-ops .v6-action-line {display:flex;gap:12px;align-items:center;padding:16px 0;border-top:1px solid #F0EFEB}
+.daylio-ops .v6-action-icon {flex:0 0 40px;height:40px;border-radius:11px;background:#FBF0E2;display:grid;place-items:center;color:#B17C51}
+.daylio-ops .v6-action-icon.red {background:#FBEAE7;color:#C15B50}
+.daylio-ops .v6-action-info {min-width:0;flex:1;display:flex;flex-direction:column;gap:5px}
+.daylio-ops .v6-action-info strong {font-size:12.9px;color:#263D4F}
+.daylio-ops .v6-action-info span {font-size:11.8px;color:#83909A;line-height:1.5}
+.daylio-ops .v6-coverage-note {margin:7px 23px 22px;padding:12px;border-radius:11px;background:#F7F7F4;display:flex;gap:9px;align-items:center;color:#71818B;font-size:11.8px}
+.daylio-ops .v6-empty {color:#84939A;padding:17px 0;font-size:12.4px}
+/* caregiver */
+.daylio-ops .v6-care-strip {display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #E9E8E4;background:white;border-radius:15px;margin:0 0 15px;padding:20px 8px}
+.daylio-ops .v6-care-strip>div{display:flex;flex-direction:column;align-items:center;gap:5px;border-right:1px solid #F0EEEA}
+.daylio-ops .v6-care-strip>div:last-child {border-right:none}
+.daylio-ops .v6-care-strip strong {font:800 29px/1.25 Manrope,Inter,sans-serif;color:#263B4C;letter-spacing:-.05em}
+.daylio-ops .v6-care-strip span {font-size:11.6px;color:#86929A}
+.daylio-ops .v6-quick-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:7px 23px 23px}
+.daylio-ops .v6-quick-grid button {border:1px solid #EFE9E2;border-radius:14px;min-height:116px;background:#FEFDFC;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#3C5060;font-size:13px}
+.daylio-ops .v6-quick-grid button:hover {border-color:#E3B49E;background:#FFF7F0}
+.daylio-ops .v6-quick-grid button span {width:43px;height:43px;background:#FFF1E8;display:grid;place-items:center;color:#D17A59;border-radius:13px}
+.daylio-ops .v6-quick-grid button strong {font-size:12.6px;font-weight:750}
+.daylio-ops .v6-care-needs {padding:0 23px 19px}
+.daylio-ops .v6-care-needs>div {display:flex;align-items:center;gap:12px;border-top:1px solid #F1EEE9;padding:14px 0}
+.daylio-ops .v6-care-needs img {width:43px;height:43px;border-radius:11px;object-fit:cover}
+.daylio-ops .v6-care-needs span {display:flex;flex-direction:column;flex:1;min-width:0;gap:5px}
+.daylio-ops .v6-care-needs b {font-size:12.7px}.daylio-ops .v6-care-needs small{font-size:11.3px;color:#89949D;line-height:1.45}
+.daylio-ops .v6-care-needs button {border:0;background:transparent;color:#A9604C}
+/* parent */
+.daylio-ops .v6-parent-head {background:#FFF9F2;border:1px solid #F1E8E0;border-radius:18px;display:flex;align-items:center;justify-content:space-between;gap:22px;min-height:242px;padding:25px 30px;margin-bottom:16px;overflow:hidden}
+.daylio-ops .v6-parent-greeting {flex:1}
+.daylio-ops .v6-parent-greeting h1 span {color:#E7B55E}
+.daylio-ops .v6-parent-greeting p {font-size:13.5px;color:#7F8A92;margin-top:9px}
+.daylio-ops .v6-parent-head>img {height:204px;width:240px;max-width:36%;object-fit:cover;object-position:left center;border-radius:14px}
+.daylio-ops .v6-child-status {display:flex;gap:10px;margin:16px 0;flex-wrap:wrap}
+.daylio-ops .v6-child-status span {background:#fff;border:1px solid #EDE7DB;padding:7px 11px;font-size:11.7px;color:#526F60;border-radius:9px;display:flex;align-items:center;gap:7px;font-weight:700}
+.daylio-ops .v6-parent-cta {display:flex;gap:9px;flex-wrap:wrap}
+.daylio-ops .v6-parent-day-strip {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.daylio-ops .v6-parent-day-strip>div {border:1px solid #ECE9E4;border-radius:14px;background:white;padding:15px 14px;min-width:0;display:grid;gap:6px}
+.daylio-ops .v6-parent-day-strip i {font-style:normal;color:#C16F55}
+.daylio-ops .v6-parent-day-strip strong {font-size:17px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.daylio-ops .v6-parent-day-strip span {font-size:11.2px;color:#88939A}
+.daylio-ops .v6-story-highlight {margin:0 22px 14px;display:grid;grid-template-columns:170px 1fr;gap:19px}
+.daylio-ops .v6-story-highlight img {height:180px;width:100%;object-fit:cover;border-radius:12px}
+.daylio-ops .v6-story-highlight>div {display:flex;align-items:flex-start;flex-direction:column;justify-content:center}
+.daylio-ops .v6-story-category {font-size:10px;color:#B8795E;letter-spacing:.1em;font-weight:800}
+.daylio-ops .v6-story-highlight h3 {font-size:18px;line-height:1.3;color:#293E50;letter-spacing:-.035em;margin:9px 0}
+.daylio-ops .v6-story-highlight p {font-size:12.2px;color:#84909A;line-height:1.8}
+.daylio-ops .v6-story-highlight button {margin-top:11px;background:none;border:0;padding:4px 0;color:#B3614D;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800}
+.daylio-ops .v6-story-images {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:0 22px 21px}
+.daylio-ops .v6-story-images img {width:100%;height:97px;object-fit:cover;border-radius:10px}
+.daylio-ops .v6-family-links {padding:1px 22px 17px}
+.daylio-ops .v6-family-links>button {display:flex;align-items:center;gap:13px;border:0;border-top:1px solid #F0EEE9;background:#fff;width:100%;text-align:left;padding:17px 0;color:#AD785E}
+.daylio-ops .v6-family-links>button>span {min-width:0;flex:1;display:flex;flex-direction:column;gap:4px}
+.daylio-ops .v6-family-links b {font-size:12.9px;color:#304859}
+.daylio-ops .v6-family-links small {font-size:11.4px;color:#93A0A7}
+/* general inherited v5 type density refinements */
+/* responsive */
+@media(max-width:1210px){.daylio-ops .v6-stat{padding:16px}.daylio-ops .v6-stat-num{font-size:22px}.daylio-ops .v6-surface-head{padding:20px 18px 13px}.daylio-ops .v6-cap-chart,.daylio-ops .v6-revenue-plot,.daylio-ops .v6-funnel,.daylio-ops .v6-insight-list{padding-left:18px;padding-right:18px}.daylio-ops .v6-rev-total strong {font-size:22px}.daylio-ops .v6-insight-list article {gap:9px}.daylio-ops .v6-insight-list article button{font-size:10.5px}}
+@media(max-width:980px){.daylio-ops .v6-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.daylio-ops .v6-dash-charts,.daylio-ops .v6-dash-lower{grid-template-columns:1fr}.daylio-ops .v6-quick-grid{grid-template-columns:repeat(3,1fr)}.daylio-ops .v6-stat{min-height:151px}.daylio-ops .v6-revenue-plot{max-width:620px}}
+@media(max-width:660px){.daylio-ops .v6-intro{align-items:flex-start;flex-direction:column;gap:15px;margin-bottom:17px}.daylio-ops .v6-intro h1,.daylio-ops .v6-parent-greeting h1{font-size:25px;margin-top:8px}.daylio-ops .v6-intro p{font-size:13px;margin-top:7px}.daylio-ops .v6-today{display:none}.daylio-ops .v6-stat-grid{gap:9px;margin-bottom:11px}.daylio-ops .v6-stat{padding:14px 12px;min-height:135px}.daylio-ops .v6-stat-label{font-size:11px}.daylio-ops .v6-stat-num{font-size:20px;margin:11px 0 4px}.daylio-ops .v6-stat-detail,.daylio-ops .v6-stat-link{font-size:10.5px}.daylio-ops .v6-stat-icon svg{width:16px;height:16px}.daylio-ops .v6-dash-charts,.daylio-ops .v6-dash-lower{gap:11px;margin-bottom:11px}.daylio-ops .v6-surface-head{padding:18px 16px 10px}.daylio-ops .v6-surface-head h2{font-size:15.5px}.daylio-ops .v6-surface-head p{font-size:11.5px}.daylio-ops .v6-text-action{font-size:10.5px}.daylio-ops .v6-cap-chart{padding:8px 14px 12px;gap:21px}.daylio-ops .v6-cap-row{grid-template-columns:74px 1fr 45px;gap:10px}.daylio-ops .v6-cap-label strong,.daylio-ops .v6-cap-free{font-size:10.8px}.daylio-ops .v6-cap-label span,.daylio-ops .v6-cap-meters>span{font-size:10px}.daylio-ops .v6-under-chart{margin:8px 15px 18px}.daylio-ops .v6-revenue-plot{padding:0 15px 17px}.daylio-ops .v6-rev-total strong{font-size:21px}.daylio-ops .v6-insight-list{padding:0 14px 12px}.daylio-ops .v6-insight-list article{gap:9px;padding:12px 0;flex-wrap:wrap}.daylio-ops .v6-insight-list article>div:nth-child(2){flex:1 1 calc(100% - 45px)}.daylio-ops .v6-insight-list article button{margin-left:43px}.daylio-ops .v6-funnel{padding:8px 16px 12px}.daylio-ops .v6-funnel-foot{margin:5px 16px 16px}.daylio-ops .v6-shortcuts{margin-top:2px;gap:7px}.daylio-ops .v6-shortcuts>span{width:100%;font-size:9px}.daylio-ops .v6-shortcuts button{font-size:10.8px;padding:9px}.daylio-ops .v6-care-strip{padding:14px 4px}.daylio-ops .v6-care-strip strong{font-size:23px}.daylio-ops .v6-care-strip span{font-size:9px;text-align:center}.daylio-ops .v6-quick-grid{padding:5px 14px 16px;gap:8px}.daylio-ops .v6-quick-grid button{min-height:89px;gap:7px}.daylio-ops .v6-quick-grid button span{width:36px;height:36px}.daylio-ops .v6-quick-grid button strong{font-size:10.5px}.daylio-ops .v6-parent-head{padding:19px 17px;min-height:210px}.daylio-ops .v6-parent-head>img{width:105px;height:160px;max-width:35%}.daylio-ops .v6-parent-greeting p{font-size:11.5px}.daylio-ops .v6-child-status{gap:6px;margin:12px 0}.daylio-ops .v6-child-status span{font-size:10px;padding:6px 7px}.daylio-ops .v6-parent-cta .btn{font-size:10.5px;padding:8px 10px}.daylio-ops .v6-parent-day-strip{gap:8px}.daylio-ops .v6-parent-day-strip>div{padding:12px 8px}.daylio-ops .v6-parent-day-strip strong{font-size:12px}.daylio-ops .v6-parent-day-strip span{font-size:9px}.daylio-ops .v6-parent-day-strip i svg{height:16px}.daylio-ops .v6-story-highlight{grid-template-columns:1fr;margin:0 16px 15px;gap:11px}.daylio-ops .v6-story-highlight>img{height:175px}.daylio-ops .v6-story-highlight h3{font-size:16px;margin:6px 0}.daylio-ops .v6-story-images{margin:0 16px 17px}.daylio-ops .v6-story-images img{height:75px}.daylio-ops .v6-family-links{padding:0 17px 13px}.daylio-ops .v6-family-links>button{padding:14px 0}.daylio-ops .v6-manager-actions{padding:0 15px 12px}}
+@media(prefers-reduced-motion:reduce){.daylio-ops .v6-cap-bar>div{transition:none}}
+/* mobile child-first clarity */
+@media(max-width:660px){
+ .daylio-ops .v6-parent-head>img{object-position:38% center}
+ .daylio-ops .v6-parent-day-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .daylio-ops .v6-parent-day-strip>div{min-height:91px;padding:12px 14px}
+ .daylio-ops .v6-parent-day-strip strong{font-size:15px;white-space:normal;overflow:visible;text-overflow:clip;line-height:1.35}
+ .daylio-ops .v6-parent-day-strip span{font-size:10.5px}
+}
+
+/* V7: AI Operations design — crisp, low noise, accessible type sizes, neutral-first */
+@media(max-width:1150px){}
+@media(max-width:720px){}
+@media(max-width:720px){}
+@media(max-width:660px){
+}
+@media(max-width:720px){}
+
+
+/* Daylio v9 — commercial design system. UI-only, original Sun of Care assets preserved. */
+.daylio-ops{--v9-ink:#263743;--v9-muted:#6d7d87;--v9-coral:#b95748;--v9-coral-dark:#994339;--v9-peach:#fcf0e9;--v9-sun:#e7b95f;--v9-cream:#faf8f5;--v9-border:#e9e9e5;--v9-teal:#427d6e;--v9-teal-tint:#e8f3ef;--v9-navy:#213647;--daylio-action:var(--v9-coral);--orange:var(--v9-coral);--v6-coral:var(--v9-coral)}
+.daylio-ops .v6-stat-num{font-family:"Plus Jakarta Sans",Inter,system-ui,sans-serif;letter-spacing:-.035em}
+.daylio-ops .nav-btn.v9-nav-locked{color:#89949b!important}.daylio-ops .nav-btn.v9-nav-locked svg{opacity:.55}
+.daylio-ops .v9-nav-lock{margin-left:auto;font-size:9px;letter-spacing:.01em;color:#9b8074;border:1px solid #e9dcd2;padding:2px 5px;border-radius:5px;background:#fffaf7;font-weight:750;white-space:nowrap}
+.daylio-ops .v6-figure,.daylio-ops .v6-stat,.daylio-ops .sc-main,.daylio-ops .sc-sidebox{border:1px solid #e8e9e4!important;box-shadow:0 4px 18px rgba(31,47,55,.027)!important;border-radius:14px!important;background:#fff!important}
+.daylio-ops .v6-headline,.daylio-ops .v6-title,.daylio-ops .v6-section-title,.daylio-ops .v6-stat-num,.daylio-ops .v6-fig-value{color:var(--v9-ink)}
+.daylio-ops .sc-button.primary{background:#b75949!important;border-color:#b75949!important;color:white!important}
+.daylio-ops .sc-button.primary:hover{background:#974639!important}
+.daylio-ops .v9-planswitch{display:flex;gap:5px;align-items:center;border:1px solid #e8e6e2;background:#faf9f7;padding:4px;border-radius:10px;white-space:nowrap;flex:0 0 auto}
+.daylio-ops .v9-planswitch label{font-size:10.5px;color:#86939b;font-weight:750;padding:0 5px}
+.daylio-ops .v9-planswitch select{background:white;border:1px solid #e7e7e3;padding:6px 21px 6px 8px;font-size:11.5px;color:#2a3b46;border-radius:7px;font-weight:800;cursor:pointer;max-width:138px}
+.daylio-ops .v9-demo-tiny{font-size:10px;letter-spacing:.04em;font-weight:800;color:#96755e;background:#fff4eb;border:1px solid #f1e0d3;padding:6px 8px;border-radius:7px}
+.daylio-ops .v9-card{border:1px solid var(--v9-border);background:white;border-radius:15px;box-shadow:0 4px 18px #20313b05;min-width:0}
+.daylio-ops .v9-elevated{background:#fff;border:1px solid #ecebe6;border-radius:14px;padding:21px;min-width:0}
+.daylio-ops .v9-overline{font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:.13em;color:#af7968}
+.daylio-ops .v9-headline{font-size:27px;line-height:1.18;font-weight:820;letter-spacing:-.05em;margin:7px 0 6px}
+.daylio-ops .v9-text{color:#71818b;font-size:12.5px;line-height:1.65}
+.daylio-ops .v9-row{display:flex;align-items:center;gap:12px;min-width:0}.daylio-ops .v9-between{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.daylio-ops .v9-button{border:1px solid #dedfda;background:white;border-radius:9px;padding:9px 13px;min-height:37px;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:12px;font-weight:750;color:#243b48;text-align:center;white-space:nowrap}
+.daylio-ops .v9-button:hover{background:#f7f7f3;border-color:#cfcfc8}.daylio-ops .v9-button.primary{background:#b95748;border-color:#b95748;color:white}.daylio-ops .v9-button.primary:hover{background:#954637}.daylio-ops .v9-button.soft{background:#fbefea;border-color:#f1d8cd;color:#ac5142}.daylio-ops .v9-button:disabled{opacity:.48}
+.daylio-ops .v9-pill{font-size:10.5px;font-weight:780;padding:5px 9px;border-radius:99px;background:#f1f2ef;color:#536875;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.daylio-ops .v9-pill.success{background:#e9f4ee;color:#287457}.daylio-ops .v9-pill.alert{background:#fcf0df;color:#976322}.daylio-ops .v9-pill.coral{background:#fcf0eb;color:#a55243}.daylio-ops .v9-pill.muted{background:#f1f2f0;color:#6a7982}
+.daylio-ops .v9-plan-hero{background:linear-gradient(115deg,#ffffff 0%,#ffffff 65%,#fff8ee 100%);padding:25px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:19px;position:relative;overflow:hidden}
+.daylio-ops .v9-plan-hero::after{content:"";position:absolute;width:230px;height:230px;border-radius:50%;right:-124px;top:-140px;background:radial-gradient(circle,#ffe8c5,#fff8ef 62%,transparent 67%);pointer-events:none}
+.daylio-ops .v9-plan-hero>*{position:relative;z-index:1}.daylio-ops .v9-plan-hero p{font-size:12.5px;color:#7a8992;max-width:630px;line-height:1.7}.daylio-ops .v9-plan-hero h1{font-size:29px;line-height:1.18;letter-spacing:-.045em;margin:7px 0 8px}
+.daylio-ops .v9-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:14px 0 18px}.daylio-ops .v9-metric{padding:17px 18px;min-width:0}.daylio-ops .v9-metric small{font-size:11px;color:#788790;font-weight:670}.daylio-ops .v9-metric strong{font-size:24px;font-weight:850;display:block;line-height:1.4;letter-spacing:-.048em;margin-top:5px;white-space:nowrap}.daylio-ops .v9-metric p{font-size:10.5px;color:#7b8b92;line-height:1.55;margin-top:3px}
+.daylio-ops .v9-content-grid{display:grid;align-items:start;grid-template-columns:minmax(0,1.35fr) minmax(280px,.82fr);gap:16px}.daylio-ops .v9-sectionhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:17px}.daylio-ops .v9-sectionhead h2{font-size:15px;letter-spacing:-.03em}.daylio-ops .v9-sectionhead small{color:#87949a;font-size:11px}
+.daylio-ops .v9-chartline{display:grid;grid-template-columns:95px 1fr 46px;align-items:center;gap:13px;margin:14px 0}.daylio-ops .v9-chartline label{font-size:11.6px;font-weight:750}.daylio-ops .v9-chartline span{font-size:11px;font-weight:720;text-align:right;color:#596873}.daylio-ops .v9-bar{height:10px;border-radius:10px;background:#edece7;overflow:hidden}.daylio-ops .v9-bar i{height:100%;display:block;background:linear-gradient(90deg,#eead87,#cf715d);border-radius:10px}.daylio-ops .v9-bar.sage i{background:#5b9784}
+.daylio-ops .v9-smallrow{padding:9px 0;border-bottom:1px solid #f0f0ec;display:flex;gap:11px;align-items:flex-start}.daylio-ops .v9-smallrow:last-child{border-bottom:0}.daylio-ops .v9-smallrow b{font-size:12px}.daylio-ops .v9-smallrow p{color:#75848c;font-size:11.2px;line-height:1.55;margin-top:4px}
+.daylio-ops .v9-number{font-size:11px;background:#f6ede8;width:29px;height:29px;border-radius:10px;color:#b35e47;display:grid;place-items:center;font-weight:850;flex-shrink:0}
+.daylio-ops .v9-layoutgap{display:grid;gap:16px}.daylio-ops .v9-split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.daylio-ops .v9-banner{padding:16px 18px;background:#fffbf6;border:1px solid #f1e5d8;border-radius:13px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.daylio-ops .v9-banner h3{font-size:12.8px;margin-bottom:3px}.daylio-ops .v9-banner p{font-size:11.2px;color:#7c868c;line-height:1.55}
+.daylio-ops .v9-subheader{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-bottom:20px}.daylio-ops .v9-subheader h1{font-size:26px}.daylio-ops .v9-subheader p{color:#75848c;font-size:12.5px;margin-top:6px}.daylio-ops .v9-cycle{display:flex;gap:2px;border:1px solid #e8e8e3;background:#f7f7f4;padding:3px;border-radius:10px}.daylio-ops .v9-cycle button{border:0;padding:8px 13px;border-radius:7px;background:transparent;color:#657581;font-size:11.5px;font-weight:750}.daylio-ops .v9-cycle button.active{background:white;box-shadow:0 2px 8px #0000000d;color:#a34c3c}
+.daylio-ops .v9-pricing{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:16px 0 17px}.daylio-ops .v9-price-card{padding:21px;display:flex;flex-direction:column;gap:8px;position:relative}.daylio-ops .v9-price-card.current{border-color:#da9d88!important;box-shadow:0 0 0 1px #efd6cb!important}.daylio-ops .v9-price-card h3{font-size:16px}.daylio-ops .v9-price-card .v9-price{font-size:24px;font-weight:870;letter-spacing:-.055em;margin-top:5px}.daylio-ops .v9-price-card .v9-price small{font-size:12px;font-weight:650;color:#7b8990}.daylio-ops .v9-price-card .v9-feature{font-size:11.4px;color:#546771;display:flex;gap:7px;align-items:flex-start;line-height:1.45;padding:4px 0}.daylio-ops .v9-price-card .v9-feature::before{content:'✓';color:#427c68;font-weight:850}.daylio-ops .v9-price-card .v9-feature.disabled{color:#acb1b2}.daylio-ops .v9-price-card .v9-feature.disabled::before{content:'—';color:#b5b7b4}.daylio-ops .v9-price-card footer{margin-top:auto;padding-top:12px}.daylio-ops .v9-price-card footer button{width:100%}
+.daylio-ops .v9-pricing-intro{font-size:11.5px;line-height:1.55;color:#71828d}
+.daylio-ops .v9-usage{padding:20px 23px;margin-top:18px}.daylio-ops .v9-usagegrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.daylio-ops .v9-usagegrid b{font-size:18px;display:block}.daylio-ops .v9-usagegrid small{font-size:11px;color:#819099}.daylio-ops .v9-meter{height:6px;background:#eeeeea;border-radius:20px;overflow:hidden;margin-top:10px}.daylio-ops .v9-meter span{display:block;height:100%;background:#d17762;min-width:3px}
+.daylio-ops .v9-addonrow{display:flex;gap:14px;align-items:center;justify-content:space-between;border-bottom:1px solid #f0efea;padding:14px 0}.daylio-ops .v9-addonrow:last-child{border-bottom:0}.daylio-ops .v9-addonrow h4{font-size:12.6px}.daylio-ops .v9-addonrow p{font-size:11px;color:#83919a;margin-top:3px;line-height:1.55}.daylio-ops .v9-addonrow .v9-addonval{display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.daylio-ops .v9-billrow{display:grid;grid-template-columns:1fr 135px 90px 90px;gap:12px;padding:12px 0;align-items:center;border-bottom:1px solid #eeeee9;font-size:11.8px}.daylio-ops .v9-billrow.header{font-size:10px;font-weight:850;color:#87939a;text-transform:uppercase;letter-spacing:.05em}.daylio-ops .v9-billrow:last-child{border-bottom:none}
+.daylio-ops .v9-lockscreen{max-width:990px;margin:18px auto}.daylio-ops .v9-lockhero{padding:32px 32px 25px}.daylio-ops .v9-lockicon{width:46px;height:46px;border-radius:14px;background:#fff0e9;color:#b95748;display:grid;place-items:center;margin-bottom:16px;font-size:22px}.daylio-ops .v9-lockhero h1{font-size:27px;margin:0 0 11px}.daylio-ops .v9-lockhero p{font-size:13px;line-height:1.7;color:#778790;max-width:680px}.daylio-ops .v9-compare{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin-top:20px}.daylio-ops .v9-compare div{padding:13px;border:1px solid #ecece7;border-radius:10px;background:#fff}.daylio-ops .v9-compare b{font-size:11.5px}.daylio-ops .v9-compare p{font-size:11px;margin-top:5px;line-height:1.55}.daylio-ops .v9-lockfooter{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.daylio-ops .v9-provider-band{background:#eef4f0;border:1px solid #dfece4;border-radius:12px;padding:14px 16px;color:#365e52;font-size:11.7px;line-height:1.65;margin-bottom:15px}
+.daylio-ops .v9-provider-band strong{font-weight:850}
+.daylio-ops .v9-modal-overlay{position:fixed;inset:0;background:#0c202d99;z-index:100;display:grid;place-items:center;padding:15px}.daylio-ops .v9-modal{background:white;border-radius:18px;border:1px solid #efebe7;width:min(510px,100%);max-height:90vh;overflow-y:auto;box-shadow:0 25px 90px #0e203a3d;padding:25px}.daylio-ops .v9-modal h2{font-size:22px}.daylio-ops .v9-modal .v9-modalcopy{font-size:12px;color:#6c7d87;line-height:1.65;margin:11px 0 17px}.daylio-ops .v9-modal label{display:block;font-size:11px;font-weight:800;margin:12px 0 6px}.daylio-ops .v9-modal select,.daylio-ops .v9-modal input{border:1px solid #dde2df;border-radius:9px;padding:10px 12px;width:100%;font:inherit;font-size:13px}.daylio-ops .v9-modal .v9-modalfoot{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}.daylio-ops .v9-smallprint{font-size:10.5px;line-height:1.55;color:#8b969d}.daylio-ops .v9-check{display:flex;align-items:flex-start;gap:9px;margin-top:15px}.daylio-ops .v9-check input{width:17px;margin:1px 0}.daylio-ops .v9-check span{font-size:11.5px;color:#51616b;line-height:1.5}
+.daylio-ops .v9-section-divider{padding-top:17px;border-top:1px solid #ededeb;margin-top:18px}
+.daylio-ops .v9-action-inline{border:none;background:none;color:#aa5344;font-size:11.5px;font-weight:800;cursor:pointer;padding:3px 0}
+.daylio-ops .v9-notice-compact{color:#89929a;font-size:10px;line-height:1.5;margin-top:9px}
+.daylio-ops .v9-accessplan{display:inline-flex;align-items:center;gap:6px;min-width:0;font-size:10px;color:#95614e;border:1px solid #eddcd1;background:#fff6ef;border-radius:7px;padding:5px 7px;font-weight:800;margin-left:auto}
+.daylio-ops .v9-safe-note{font-size:12px;line-height:1.65;color:#5a716d;border-radius:10px;border:1px solid #deebe4;background:#eff6f2;padding:13px}
+.daylio-ops .v9-simple-schedule{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}.daylio-ops .v9-sched-room{padding:19px}.daylio-ops .v9-sched-room h3{font-size:13px}.daylio-ops .v9-sched-room p{font-size:11px;color:#85919a;margin:6px 0 14px}.daylio-ops .v9-sched-room strong{font-size:21px}.daylio-ops .v9-sched-room .v9-bar{margin-top:10px}
+.daylio-ops .v9-caption{font-size:10.5px;color:#8b969b;margin-top:9px}.daylio-ops .v9-overlimit{color:#b05b44!important}
+.daylio-ops .v9-cctv-addon{padding:18px 20px;margin-bottom:16px;border-left:3px solid #dcaa60;background:#fffcf7}
+.daylio-ops .v9-cctv-addon h3{font-size:14px;margin-bottom:6px}.daylio-ops .v9-cctv-addon p{font-size:11.5px;color:#76858e;line-height:1.65}
+.daylio-ops .v9-cctv-addon .v9-addonbuttons{margin-top:14px;display:flex;flex-wrap:wrap;gap:9px}
+@media(max-width:1280px){.daylio-ops .v9-planswitch label{display:none}.daylio-ops .v9-pricing{gap:10px}}
+@media(max-width:1050px){.daylio-ops .v9-content-grid{grid-template-columns:1fr}.daylio-ops .v9-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.daylio-ops .v9-pricing{grid-template-columns:1fr}.daylio-ops .v9-price-card{min-height:unset}}
+@media(max-width:980px){.daylio-ops .v9-planswitch{padding:2px}.daylio-ops .v9-demo-tiny{display:none}}
+@media(max-width:650px){.daylio-ops .v9-metrics{gap:9px}.daylio-ops .v9-metric{padding:12px}.daylio-ops .v9-metric strong{font-size:21px}.daylio-ops .v9-plan-hero{padding:20px;flex-direction:column;align-items:flex-start}.daylio-ops .v9-plan-hero h1{font-size:25px}.daylio-ops .v9-subheader h1{font-size:23px}.daylio-ops .v9-split,.daylio-ops .v9-usagegrid,.daylio-ops .v9-simple-schedule{grid-template-columns:1fr}.daylio-ops .v9-pricing{gap:10px}.daylio-ops .v9-billrow{grid-template-columns:1fr 105px}.daylio-ops .v9-billrow>:nth-child(3),.daylio-ops .v9-billrow>:nth-child(4){display:none}.daylio-ops .v9-compare{grid-template-columns:1fr}.daylio-ops .v9-planswitch{max-width:142px}.daylio-ops .v9-planswitch select{max-width:123px;font-size:10.5px}.daylio-ops .v9-lockhero{padding:22px}.daylio-ops .v9-lockhero h1{font-size:22px}}
+
+.daylio-ops .v9-upgrade-nav{display:flex;align-items:center;gap:10px;width:100%;margin-top:14px;padding:10px 11px;background:#fff6f0;border:1px solid #f2e1d8;color:#a35646;border-radius:10px;cursor:pointer;font-size:11.6px;font-weight:780;text-align:left}.daylio-ops .v9-upgrade-nav span{flex:1}.daylio-ops .v9-upgrade-nav:hover{background:#ffede4}.daylio-ops .v9-upgrade-nav svg{flex-shrink:0}
+
+
+
+/* Daylio v10 — journey-first design audit correction */
+.daylio-ops{--v10-bg:#F8F9F8;--v10-paper:#FFFFFF;--v10-sidebar:#FFFFFF;--v10-ink:#1B2E42;--v10-muted:#6B7B88;--v10-line:#E7EBEC;--v10-brand:#CF634E;--v10-brand-soft:#FFF1EB;--v10-sun:#EAAE4A;--v10-ok:#277E70;--v10-ok-bg:#E8F4F0;--v10-amber:#A76C24;--v10-red:#AE504D}
+.daylio-ops .v6-stat-num{font-family:Inter,"Plus Jakarta Sans",system-ui,sans-serif!important;letter-spacing:-.028em!important}
+.daylio-ops .sidebar.v10-side{background:var(--v10-sidebar)!important;border-right:1px solid var(--v10-line)!important;color:var(--v10-ink)!important;padding:25px 14px 16px!important;overflow-y:auto;min-width:0;display:flex;flex-direction:column}
+.daylio-ops .v10-brandwrap{padding:0 10px 20px;border-bottom:1px solid var(--v10-line);margin-bottom:18px;display:flex;align-items:center;justify-content:flex-start}
+.daylio-ops .v10-brandwrap img{width:119px!important;max-width:119px!important;height:auto;max-height:47px;object-fit:contain;display:block}
+.daylio-ops .v10-group{margin-bottom:17px}.daylio-ops .v10-label{font-size:10px;color:#8D9CA4;font-weight:800;letter-spacing:.105em;margin:0 10px 7px;text-transform:uppercase}
+.daylio-ops .v10-nav{display:flex;flex-direction:column;gap:3px}
+.daylio-ops .v10-nav button{position:relative;width:100%;display:flex;align-items:center;gap:11px;text-align:left;color:#566B7A;background:transparent;border:0;border-radius:9px;min-height:41px;padding:10px 11px;font-size:13px;font-weight:640;line-height:1.24;transition:background .15s ease}
+.daylio-ops .v10-nav button svg{flex-shrink:0;opacity:.8}
+.daylio-ops .v10-nav button:hover{background:#F5F7F7;color:var(--v10-ink)}
+.daylio-ops .v10-nav button.active{background:#FFF1EC;color:#A84C3C;font-weight:790}
+.daylio-ops .v10-nav button.active svg{opacity:1;color:#B95A48}
+.daylio-ops .v10-nav button .v10-next{margin-left:auto;color:#A88A68;font-size:9px;font-weight:700}
+.daylio-ops .v10-sidefoot{margin-top:auto;border-top:1px solid var(--v10-line);padding:13px 7px 0;display:grid;gap:9px}
+.daylio-ops .v10-footbtn{display:flex;align-items:center;gap:10px;color:#637482;font-size:12px;font-weight:650;border:0;background:transparent;text-align:left;padding:8px 7px;border-radius:8px;cursor:pointer}
+.daylio-ops .v10-footbtn:hover{background:#F5F7F7}.daylio-ops .v10-flag{font-size:10px;color:#97A4AB;padding:0 7px;line-height:1.5}
+.daylio-ops .v10-topbar{min-height:72px!important;gap:13px;background:rgba(255,255,255,.97)!important;border-bottom:1px solid var(--v10-line)!important;padding:11px 30px!important;z-index:11}
+.daylio-ops .v10-topmain{flex:1;min-width:0;display:flex;align-items:center;gap:13px}
+.daylio-ops .v10-branchbtn{border:1px solid #E5EAEB;color:#344956;background:white;border-radius:10px;display:flex;align-items:center;gap:8px;padding:10px 11px;font-size:12px;white-space:nowrap;font-weight:720;max-width:235px}
+.daylio-ops .v10-branchbtn:hover{background:#F7F9F9}.daylio-ops .v10-branchbtn b{overflow:hidden;text-overflow:ellipsis;max-width:163px;white-space:nowrap}
+.daylio-ops .v10-path{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}.daylio-ops .v10-path span{font-size:10px;font-weight:600;color:#97A5AD}.daylio-ops .v10-path b{font-size:16px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#21374A}
+.daylio-ops .v10-topright{display:flex;align-items:center;gap:9px;min-width:0}.daylio-ops .v10-planpill{background:#FFF3EC;color:#A75A48;border:1px solid #F0DFD4;border-radius:9px;padding:7px 10px;font-size:11px;font-weight:800;white-space:nowrap}.daylio-ops .v10-planpill:hover{background:#FFEADF}
+.daylio-ops .v10-search{display:flex;align-items:center;gap:8px;border:1px solid #E5EAEB;background:#FAFBFB;border-radius:10px;padding:9px 12px;max-width:240px;width:21vw;color:#84949B}
+.daylio-ops .v10-search input{font-size:12px;background:transparent;border:0;outline:0;width:100%;min-width:0;color:var(--v10-ink)}
+.daylio-ops .v10-demo{font-size:9px;letter-spacing:.1em;border:1px solid #E5E9E9;color:#9AA8AD;border-radius:99px;padding:6px 7px;font-weight:750;white-space:nowrap}
+.daylio-ops .v10-avatar{height:32px;width:32px;border-radius:10px;background:#FBE6D8;display:grid;place-items:center;font-size:10px;color:#A45947;font-weight:850}
+.daylio-ops .v10-branchmenu{position:absolute;left:30px;top:63px;z-index:80;background:white;border:1px solid #E6E9E9;box-shadow:0 12px 50px #1635421a;border-radius:13px;padding:15px;width:275px}.daylio-ops .v10-branchmenu b{font-size:13px}.daylio-ops .v10-branchmenu p{font-size:12px;line-height:1.6;color:#80909B;margin-top:4px}.daylio-ops .v10-branchmenu button{border:1px solid #E4E9E9;border-radius:8px;padding:9px 11px;background:white;margin-top:11px;font-size:12px;font-weight:750;cursor:pointer}
+.daylio-ops .v9-subheader h1{font-size:25px!important;font-weight:800!important}.daylio-ops .v9-subheader p{font-size:13px!important;line-height:1.5!important}
+.daylio-ops .v9-card,.daylio-ops .v6-card{box-shadow:0 1px 3px #1A374308!important;border:1px solid #E6EAE9!important;border-radius:14px!important;background:white!important}
+.daylio-ops .v9-sectionhead h2,.daylio-ops .v6-head h3{font-size:15px!important;font-weight:800!important}
+.daylio-ops .v9-sectionhead small{font-size:12px!important;color:#728590!important}
+.daylio-ops .v9-btn.primary{background:#BA5847!important;border-color:#BA5847!important;color:white!important}
+.daylio-ops .v10-pagehead{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:24px;flex-wrap:wrap}
+.daylio-ops .v10-pagehead h1{font-size:27px;letter-spacing:-.045em;font-weight:840;color:#19334A;line-height:1.25}
+.daylio-ops .v10-pagehead p{font-size:13px;color:#7C8B95;margin-top:7px;max-width:630px;line-height:1.5}
+.daylio-ops .v10-headcta{border:0;border-radius:9px;padding:11px 15px;background:#BB5948;color:white;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}.daylio-ops .v10-headcta:hover{background:#9F4538}
+.daylio-ops .v10-statstrip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:17px}.daylio-ops .v10-stat{background:white;border:1px solid #E6EAE9;border-radius:13px;padding:18px 19px}.daylio-ops .v10-stat label{font-size:11px;color:#738390;font-weight:650;display:block;margin-bottom:9px}.daylio-ops .v10-stat strong{font-size:27px;letter-spacing:-.05em;line-height:1.2;color:#213A4E;display:block;font-weight:840}.daylio-ops .v10-stat small{font-size:11px;color:#89979D;display:block;margin-top:7px}
+.daylio-ops .v10-dashboardgrid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(330px,.95fr);gap:16px;align-items:stretch}.daylio-ops .v10-block{background:white;border:1px solid #E6EAE9;border-radius:15px;padding:22px}.daylio-ops .v10-blockhead{display:flex;align-items:flex-start;justify-content:space-between;gap:9px;margin-bottom:21px}.daylio-ops .v10-block h2{font-size:16px;color:#213849;font-weight:820}.daylio-ops .v10-blockhead p{font-size:12px;color:#8A989F;margin-top:5px}.daylio-ops .v10-link{font-size:12px;font-weight:780;color:#AD5344;border:0;background:transparent;cursor:pointer;white-space:nowrap}.daylio-ops .v10-link:hover{text-decoration:underline}
+.daylio-ops .v10-caprow{display:grid;grid-template-columns:118px 1fr 74px;gap:15px;align-items:center;margin:21px 0}.daylio-ops .v10-caprow b{font-size:12px}.daylio-ops .v10-caprow small{display:block;font-size:10px;color:#93A2A8;margin-top:4px}.daylio-ops .v10-track{background:#F0F2F1;height:9px;overflow:hidden;border-radius:99px}.daylio-ops .v10-track span{height:100%;display:block;background:#D47D65;border-radius:99px}.daylio-ops .v10-caprow em{font-size:12px;color:#546B78;text-align:right;font-style:normal;font-weight:700}
+.daylio-ops .v10-insight{border-top:1px solid #E9EEEE;padding-top:17px;margin-top:12px;display:flex;align-items:flex-start;gap:11px}.daylio-ops .v10-insighticon{width:31px;height:31px;border-radius:9px;display:grid;place-items:center;background:#FFF3DC;color:#AC741F;flex-shrink:0}.daylio-ops .v10-insight b{font-size:12px;display:block}.daylio-ops .v10-insight p{font-size:12px;line-height:1.5;color:#82939B;margin:5px 0}.daylio-ops .v10-insight button{border:0;background:transparent;color:#B35945;font-size:12px;font-weight:800;padding:0;margin-top:3px;text-align:left}
+.daylio-ops .v10-workitem{width:100%;display:flex;align-items:center;text-align:left;gap:13px;padding:16px 0;background:transparent;border:0;border-bottom:1px solid #EDF0EF;color:var(--v10-ink)}.daylio-ops .v10-workitem:last-child{border-bottom:0}.daylio-ops .v10-workitem:hover .v10-workcopy b{color:#A95343}.daylio-ops .v10-worknum{width:35px;height:35px;display:grid;place-items:center;background:#F6F6F3;border-radius:10px;font-size:12px;font-weight:850;flex-shrink:0;color:#A36E58}.daylio-ops .v10-workcopy{flex:1;min-width:0}.daylio-ops .v10-workcopy b{font-size:12.5px}.daylio-ops .v10-workcopy small{display:block;font-size:11.5px;color:#83929B;line-height:1.5;margin-top:4px}.daylio-ops .v10-workarrow{color:#B05B49}
+.daylio-ops .v10-secondarygrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}.daylio-ops .v10-minirow{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #EFF1F0;padding:10px 0;font-size:12px}.daylio-ops .v10-minirow:last-child{border:0}.daylio-ops .v10-minirow span{color:#657D88}.daylio-ops .v10-minirow b{font-size:13px}.daylio-ops .v10-funnel{display:flex;align-items:end;gap:10px;margin:20px 0 8px;min-height:85px}.daylio-ops .v10-funnel-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px}.daylio-ops .v10-funnel-col>span{display:block;width:min(100%,70px);border-radius:6px 6px 2px 2px;background:#F0B89B;min-height:7px}.daylio-ops .v10-funnel-col:nth-child(2)>span{background:#E99F83}.daylio-ops .v10-funnel-col:nth-child(3)>span{background:#C9755B}.daylio-ops .v10-funnel-col:nth-child(4)>span{background:#779B8E}.daylio-ops .v10-funnel-col b{font-size:11px;color:#3E5763}.daylio-ops .v10-funnel-col small{font-size:10px;color:#8798A0}
+.daylio-ops .v10-quickstrip{margin-top:16px;display:flex;gap:12px;align-items:center;justify-content:space-between;padding:16px 19px;border:1px solid #E9EBE9;border-radius:13px;background:#FFFEFC;flex-wrap:wrap}.daylio-ops .v10-quickstrip b{font-size:12px}.daylio-ops .v10-quickstrip p{font-size:11.5px;color:#83939C;margin-top:4px}.daylio-ops .v10-quickactions{display:flex;gap:8px;flex-wrap:wrap}.daylio-ops .v10-quickactions button{border:1px solid #E1E7E6;border-radius:9px;padding:9px 11px;font-size:11.5px;font-weight:720;color:#344C58;background:white;cursor:pointer}.daylio-ops .v10-quickactions button:hover{background:#FFF4ED;border-color:#EAC9B9}
+.daylio-ops .v9-plan-hero{padding:20px!important}.daylio-ops .v9-plan-hero:before{display:none!important}.daylio-ops .v9-plan-hero h1{font-size:24px!important}.daylio-ops .v9-plan-hero .v9-overline{font-size:10px!important}.daylio-ops .v9-metric strong{font-size:23px!important}.daylio-ops .v9-metric small{font-size:12px!important}
+/* keep existing care, consent, report and payment flows as before */
+@media(max-width:1050px){.daylio-ops .v10-search{display:none}.daylio-ops .v10-dashboardgrid{grid-template-columns:1fr}.daylio-ops .v10-statstrip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:940px){.daylio-ops .sidebar.v10-side{position:fixed!important;left:0;top:0;bottom:0;width:260px;height:100dvh;transform:translateX(-110%);transition:transform .22s;z-index:1502!important;box-shadow:13px 0 38px #102b3c25}.daylio-ops .sidebar.v10-side.open{transform:translateX(0)}.daylio-ops .v10-topbar{padding:10px 15px!important}.daylio-ops .v10-topmain{gap:8px}.daylio-ops .v10-topmain .mobile-menu{display:flex}.daylio-ops .v10-branchbtn{font-size:11px;padding:8px;max-width:155px}.daylio-ops .v10-branchbtn b{max-width:118px}.daylio-ops .v10-path{min-width:0}.daylio-ops .v10-path b{font-size:13px}.daylio-ops .v10-planpill{font-size:10px;padding:7px}.daylio-ops .v10-demo{display:none}.daylio-ops .v10-branchmenu{left:15px}}
+@media(max-width:650px){.daylio-ops .v10-branchbtn{max-width:176px}.daylio-ops .v10-branchbtn b{max-width:135px;font-size:10.5px}.daylio-ops .v10-path{display:none}.daylio-ops .v10-path span{display:none}.daylio-ops .v10-path b{font-size:12px}.daylio-ops .v10-planpill{display:none}.daylio-ops .v10-topright{gap:6px}.daylio-ops .v10-topright .role-select{font-size:10px;max-width:99px}.daylio-ops .v10-avatar{display:none}.daylio-ops .v10-statstrip{gap:9px}.daylio-ops .v10-stat{padding:14px 13px}.daylio-ops .v10-stat strong{font-size:23px}.daylio-ops .v10-stat small{font-size:10px}.daylio-ops .v10-dashboardgrid,.daylio-ops .v10-secondarygrid{grid-template-columns:1fr}.daylio-ops .v10-block{padding:18px 15px}.daylio-ops .v10-caprow{grid-template-columns:98px minmax(0,1fr) 56px;gap:8px}.daylio-ops .v10-pagehead{margin-bottom:18px}.daylio-ops .v10-pagehead h1{font-size:22px}.daylio-ops .v10-quickstrip{align-items:flex-start}.daylio-ops .v10-quickactions{width:100%}}
+
+/* DAYLIO DESIGN REFINEMENT V8 — editorial neutral shell, restrained signature coral */
+.daylio-ops{--ink:#223342;--navy:#213b49;--deep:#213b49;--deep2:#182e3a;--orange:#ba655a;--coral:#c8645e;--sun:#e5ac54;--ivory:#fbf9f6;--paper:#fff;--page:#f6f7f5;--line:#e5e9e6;--muted:#687b82;--sage:#347b67;--sagebg:#e6f3ec;--red:#b9544e;--redbg:#fff0ed;--blue:#537d96;--bluebg:#eaf1f5;--amber:#9d6d24;--amberbg:#fcf1d9;--lilac:#7c7297;--lilacbg:#f2eff8;--radius:15px;--shadow:0 10px 36px rgba(29,49,55,.035)}
+.daylio-ops .v6-metric-value{font-family:'Plus Jakarta Sans',Inter,sans-serif!important;letter-spacing:-.038em}
+.daylio-ops .v6-metric{box-shadow:0 3px 14px rgba(29,47,54,.025)!important;border-color:#e6e9e7!important}
+/* schedule planner */
+.daylio-ops .sc-app{max-width:1470px;margin:0 auto 50px;position:relative;color:#23333f}
+.daylio-ops .sc-topbar{display:flex;align-items:start;justify-content:space-between;gap:15px;margin-bottom:20px;flex-wrap:wrap}
+.daylio-ops .sc-eyebrow{font-size:10px;letter-spacing:.19em;text-transform:uppercase;font-weight:900;color:#a66053;display:block;margin-bottom:9px}
+.daylio-ops .sc-topbar h1{font-size:clamp(25px,2.25vw,35px)!important;font-weight:800;line-height:1.18;margin:0 0 7px;letter-spacing:-.06em}
+.daylio-ops .sc-topbar p{font-size:13px;color:#66777f;margin:0;max-width:635px;line-height:1.65}
+.daylio-ops .sc-actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.daylio-ops .sc-button{border:1px solid #dfe6e2;background:white;border-radius:10px;color:#273f47;padding:10px 14px;min-height:39px;display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:750;justify-content:center;transition:all .15s;white-space:nowrap}
+.daylio-ops .sc-button:hover{border-color:#b3bfba;background:#f9faf8;transform:translateY(-1px)}
+.daylio-ops .sc-button.primary{background:#263e49;color:white;border-color:#263e49}
+.daylio-ops .sc-button.primary:hover{background:#18323b}
+.daylio-ops .sc-button.coral{background:#b95751;color:white;border-color:#b95751}
+.daylio-ops .sc-button.coral:hover{background:#a84944}
+.daylio-ops .sc-button.icon{padding:8px 10px;min-width:36px}
+.daylio-ops .sc-shellstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-bottom:17px}
+.daylio-ops .sc-stat{background:#fff;border:1px solid #e7ebe8;border-radius:15px;min-height:112px;padding:15px 17px;position:relative;overflow:hidden}
+.daylio-ops .sc-stat .sc-stat-top{display:flex;justify-content:space-between;align-items:center;color:#68787e;font-weight:680;font-size:11px}
+.daylio-ops .sc-stat .sc-stat-icon{color:#b45e53;background:#faece8;width:29px;height:29px;border-radius:9px;display:flex;align-items:center;justify-content:center}
+.daylio-ops .sc-stat strong{display:block;font-size:27px;color:#213542;letter-spacing:-.07em;font-weight:850;margin-top:8px;line-height:1.15}
+.daylio-ops .sc-stat small{display:block;color:#75858a;font-size:11px;margin-top:3px;line-height:1.45}
+.daylio-ops .sc-stat.is-alert .sc-stat-icon{color:#a16d27;background:#fff1d4}
+.daylio-ops .sc-workspace{display:grid;grid-template-columns:minmax(0,1fr) 295px;gap:15px;align-items:start}
+.daylio-ops .sc-main{background:white;border:1px solid #e5e9e6;border-radius:18px;overflow:hidden;min-width:0}
+.daylio-ops .sc-toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:18px 20px 13px;flex-wrap:wrap}
+.daylio-ops .sc-weeknav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.daylio-ops .sc-weeknav b{font-size:15px;color:#263c47;letter-spacing:-.025em;margin:0 4px}
+.daylio-ops .sc-viewtabs{display:flex;align-items:center;background:#f3f5f2;padding:3px;border-radius:11px;gap:2px}
+.daylio-ops .sc-viewtabs button{border:0;background:transparent;color:#77858a;padding:9px 12px;border-radius:8px;font-size:11px;font-weight:800;white-space:nowrap}
+.daylio-ops .sc-viewtabs button.active{color:#293f48;background:#fff;box-shadow:0 1px 5px #dae0db}
+.daylio-ops .sc-filters{display:flex;gap:9px;padding:0 20px 16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.daylio-ops .sc-filter-controls{display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.daylio-ops .sc-filter-controls .sc-filter{font-size:11px;font-weight:750;border-radius:20px;padding:7px 11px;background:white;border:1px solid #e6eae6;color:#6d7e82}
+.daylio-ops .sc-filter-controls .sc-filter.active{border-color:#cf928a;color:#a7524d;background:#fdf0ec}
+.daylio-ops .sc-smalllegend{display:flex;gap:12px;align-items:center;flex-wrap:wrap;color:#74848a;font-size:10px}
+.daylio-ops .sc-smalllegend i{display:inline-block;width:7px;height:7px;border-radius:100%;margin-right:4px}
+.daylio-ops .sc-tablewrap{overflow-x:auto;scrollbar-color:#d7ded9 transparent}
+.daylio-ops .sc-grid{display:grid;grid-template-columns:137px repeat(5,minmax(130px,1fr));min-width:815px;border-top:1px solid #e8ece9}
+.daylio-ops .sc-gridhead{background:#f8faf8;border-right:1px solid #e9edeb;border-bottom:1px solid #e9edeb;padding:13px 12px;min-height:65px}
+.daylio-ops .sc-gridhead .daylabel{font-weight:850;font-size:12px;color:#3d5059}
+.daylio-ops .sc-gridhead small{font-size:10px;display:block;color:#8b979a;margin-top:4px}
+.daylio-ops .sc-roomlead{background:#fafbf9;padding:16px 12px;border-right:1px solid #e9edeb;border-bottom:1px solid #e9edeb;min-height:170px}
+.daylio-ops .sc-roomlead strong{font-size:13px;font-weight:830;display:block;margin-bottom:4px;color:#25404c}
+.daylio-ops .sc-roomlead small{display:block;color:#89959a;font-size:10px;line-height:1.5}
+.daylio-ops .sc-roomlead .sc-roomtag{margin-top:18px;display:block;font-size:10px;color:#ad6553;font-weight:750}
+.daylio-ops .sc-cell{border:0;background:white;border-right:1px solid #e9edeb;border-bottom:1px solid #e9edeb;padding:13px 10px 12px;min-height:170px;text-align:left;position:relative;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:background .17s,border-color .17s}
+.daylio-ops .sc-cell:hover{background:#fbf9f5}
+.daylio-ops .sc-cell.selected{background:#fffaf6;box-shadow:inset 0 0 0 2px #d8aaa0;z-index:1}
+.daylio-ops .sc-cell.drag-over{background:#edf3ed;box-shadow:inset 0 0 0 2px #6fa088}
+.daylio-ops .sc-cell.overbook{background:#fff7f4}
+.daylio-ops .sc-cell .head{display:flex;align-items:center;gap:5px;justify-content:space-between}
+.daylio-ops .sc-cell .head strong{font-size:13px;font-weight:850;color:#29424c}
+.daylio-ops .sc-cell .head .sc-flag{font-size:9px;color:#aa5949;background:#ffebdf;padding:4px 6px;border-radius:99px;white-space:nowrap;font-weight:750}
+.daylio-ops .sc-cell .sc-meter{height:5px;background:#ecf1ed;border-radius:100px;overflow:hidden}
+.daylio-ops .sc-cell .sc-meter span{height:100%;display:block;border-radius:100px;background:#8aa995}
+.daylio-ops .sc-cell.overbook .sc-meter span{background:#d17a68}
+.daylio-ops .sc-cell .sc-staffline{font-size:10px;color:#77878a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.daylio-ops .sc-cell .sc-event{display:flex;align-items:center;gap:6px;background:#f3f4f8;color:#5e647b;border:1px solid #ebebf0;border-radius:7px;padding:6px 7px;font-weight:760;font-size:10px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;min-height:27px}
+.daylio-ops .sc-cell .sc-event.trial{background:#fdf1dc;color:#9c6c24;border-color:#f7e7c6}
+.daylio-ops .sc-cell .sc-event.dropin{background:#eaf4ef;color:#31765e;border-color:#dcece3}
+.daylio-ops .sc-cell .sc-event.regular{background:#f0f2f7;color:#586879}
+.daylio-ops .sc-cell .sc-event i{font-style:normal;opacity:.75}
+.daylio-ops .sc-cell .sc-event[draggable=true]{cursor:grab}
+.daylio-ops .sc-cell .sc-event[draggable=true]:active{cursor:grabbing}
+.daylio-ops .sc-empty-slot{font-size:10px;color:#8b969a;display:flex;align-items:center;gap:5px;margin-top:auto}
+.daylio-ops .sc-side{display:flex;flex-direction:column;gap:13px}
+.daylio-ops .sc-sidepanel{background:white;border:1px solid #e5e9e6;border-radius:16px;overflow:hidden}
+.daylio-ops .sc-sidepanel-header{padding:16px 17px 11px;border-bottom:1px solid #eef0ed}
+.daylio-ops .sc-sidepanel-header small{display:block;color:#ab6e5b;font-size:10px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;margin-bottom:6px}
+.daylio-ops .sc-sidepanel-header h3{font-size:16px;margin:0;font-weight:850;letter-spacing:-.04em;color:#243943}
+.daylio-ops .sc-sidepanel-header p{color:#78878c;font-size:11px;margin:5px 0 0;line-height:1.5}
+.daylio-ops .sc-sidepanel-body{padding:14px 17px 17px}
+.daylio-ops .sc-minirow{display:flex;align-items:center;justify-content:space-between;font-size:11px;padding:10px 0;border-bottom:1px solid #f0f1ed;gap:8px}
+.daylio-ops .sc-minirow:last-child{border-bottom:0}
+.daylio-ops .sc-minirow strong{font-weight:800;color:#334b54}
+.daylio-ops .sc-minirow span{color:#74858b}
+.daylio-ops .sc-issue{border:1px solid #f1dfcf;background:#fff9f0;padding:12px;border-radius:11px;margin-bottom:9px}
+.daylio-ops .sc-issue .sc-issue-title{display:flex;gap:8px;align-items:center;font-size:11px;font-weight:850;color:#855b3c}
+.daylio-ops .sc-issue p{margin:7px 0 10px;font-size:11px;line-height:1.6;color:#806f63}
+.daylio-ops .sc-issue button{border:0;background:none;font-size:11px;font-weight:850;color:#a45a46;padding:0}
+.daylio-ops .sc-insight{background:#f5f7f5;border:1px solid #ebefeb;border-radius:12px;padding:13px;margin-top:11px}
+.daylio-ops .sc-insight strong{display:block;font-size:12px;color:#32454a;margin:3px 0 5px;line-height:1.5}
+.daylio-ops .sc-insight p{font-size:11px;color:#687b80;line-height:1.6;margin:0}
+.daylio-ops .sc-insight .sc-chip{font-size:9px;letter-spacing:.1em;font-weight:850;color:#97634e;text-transform:uppercase}
+.daylio-ops .sc-occupancy-graph{padding:15px 20px 20px;border-top:1px solid #e9edea;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.daylio-ops .sc-occupancy-graph .sc-gitem{display:flex;align-items:end;gap:7px;min-width:0}
+.daylio-ops .sc-gitem .barbox{display:flex;align-items:end;height:36px;background:#f0f2ef;border-radius:5px;width:12px;overflow:hidden;flex:none}
+.daylio-ops .sc-gitem .barbox span{display:block;width:100%;background:#9bb1a2;border-radius:5px}
+.daylio-ops .sc-gitem div:last-child b{display:block;font-size:11px}
+.daylio-ops .sc-gitem div:last-child small{font-size:10px;color:#8a969a}
+.daylio-ops .sc-footnote{font-size:10px;color:#8a9697;padding:11px 20px 16px;line-height:1.55}
+.daylio-ops .sc-dayview{display:grid;gap:10px;padding:5px 17px 19px}
+.daylio-ops .sc-daycard{display:grid;grid-template-columns:140px 1fr auto;align-items:center;gap:15px;background:#fff;border:1px solid #e9ecea;border-radius:12px;padding:15px}
+.daylio-ops .sc-daycard h3{font-size:13px;margin:0 0 6px}.daylio-ops .sc-daycard small{font-size:11px;color:#85938f}
+.daylio-ops .sc-daybar{height:8px;background:#edf0ed;border-radius:100px;margin-top:9px;overflow:hidden}.daylio-ops .sc-daybar span{display:block;height:100%;background:#97b0a0}
+.daylio-ops .sc-rosterwrap{overflow-x:auto}.daylio-ops .sc-roster{display:grid;grid-template-columns:165px repeat(5,minmax(118px,1fr));min-width:800px}
+.daylio-ops .sc-roster .sc-staffname{padding:15px;background:#fafbf9;border-right:1px solid #ecedeb;border-bottom:1px solid #ecedeb;font-size:12px;font-weight:850}
+.daylio-ops .sc-roster .sc-staffname small{display:block;margin-top:5px;color:#859396;font-size:10px;font-weight:500}
+.daylio-ops .sc-roster .sc-roster-cell{border:0;border-right:1px solid #ecedeb;border-bottom:1px solid #ecedeb;background:white;min-height:70px;padding:11px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:5px}
+.daylio-ops .sc-roster-cell:hover{background:#f9faf8}.daylio-ops .sc-shiftbadge{background:#e9f2ed;color:#3a806b;font-size:10px;font-weight:800;padding:7px;border-radius:7px;line-height:1.35}.daylio-ops .sc-shiftbadge.warn{background:#fff2e7;color:#9a6c46}
+.daylio-ops .sc-modalback{position:fixed;inset:0;background:rgba(18,35,44,.48);z-index:20000;display:grid;place-items:center;padding:20px;backdrop-filter:blur(3px)}
+.daylio-ops .sc-modal{background:#fff;border-radius:19px;width:min(530px,100%);box-shadow:0 26px 90px rgba(0,0,0,.2);overflow:hidden;max-height:92vh;overflow-y:auto}
+.daylio-ops .sc-modal-head{display:flex;align-items:start;justify-content:space-between;gap:14px;border-bottom:1px solid #eef0ee;padding:21px 24px 16px}
+.daylio-ops .sc-modal-head h2{font-size:21px;margin:2px 0 3px;letter-spacing:-.05em}.daylio-ops .sc-modal-head p{font-size:11px;color:#84929a;margin:0}
+.daylio-ops .sc-modal-body{padding:21px 24px;display:grid;gap:14px}
+.daylio-ops .sc-formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.daylio-ops .sc-formfield{display:flex;flex-direction:column;gap:6px;min-width:0}
+.daylio-ops .sc-formfield label{font-size:11px;font-weight:850;color:#52646d}
+.daylio-ops .sc-formfield input,.daylio-ops .sc-formfield select{width:100%;border:1px solid #dae2dd;border-radius:9px;padding:11px 11px;color:#2f434a;background:#fff;font-size:12px;min-height:41px;outline:0}
+.daylio-ops .sc-formfield input:focus,.daylio-ops .sc-formfield select:focus{border-color:#b65d54;box-shadow:0 0 0 3px #f8eae6}
+.daylio-ops .sc-modalfoot{padding:15px 24px 21px;display:flex;justify-content:flex-end;gap:8px;border-top:1px solid #eef0ee}
+.daylio-ops .sc-formhelp{font-size:11px;color:#788990;line-height:1.55;padding:9px 12px;background:#f6f8f6;border-radius:9px}
+.daylio-ops .sc-formerror{color:#ab4d42;font-size:11px;font-weight:700;line-height:1.5;min-height:0}
+.daylio-ops .sc-demo-label{font-size:10px;font-weight:850;color:#946453;background:#fbf1e9;border-radius:6px;padding:5px 8px}
+@media(min-width:1300px){.daylio-ops .sc-workspace{grid-template-columns:minmax(0,1fr) 308px}}
+@media(max-width:1180px){.daylio-ops .sc-workspace{grid-template-columns:minmax(0,1fr)}.daylio-ops .sc-side{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.daylio-ops .sc-main{min-width:0}}
+@media(max-width:790px){.daylio-ops .sc-shellstats{grid-template-columns:repeat(2,minmax(0,1fr))}.daylio-ops .sc-side{display:flex}.daylio-ops .sc-toolbar,.daylio-ops .sc-filters{padding-left:14px;padding-right:14px}.daylio-ops .sc-topbar h1{font-size:27px!important}.daylio-ops .sc-actions{width:100%}.daylio-ops .sc-actions .sc-button{flex:1}.daylio-ops .sc-weeknav b{font-size:13px}.daylio-ops .sc-grid{min-width:815px}.daylio-ops .sc-occupancy-graph{padding:12px;gap:6px}.daylio-ops .sc-daycard{grid-template-columns:1fr;gap:9px}.daylio-ops .sc-smalllegend{display:none}}
+@media(max-width:430px){.daylio-ops .sc-shellstats{gap:8px}.daylio-ops .sc-stat{padding:12px;min-height:106px}.daylio-ops .sc-stat strong{font-size:22px}.daylio-ops .sc-filter-controls{width:100%}.daylio-ops .sc-viewtabs{width:100%;justify-content:center}.daylio-ops .sc-viewtabs button{flex:1}.daylio-ops .sc-formgrid{grid-template-columns:1fr}.daylio-ops .sc-modal-head,.daylio-ops .sc-modal-body,.daylio-ops .sc-modalfoot{padding-left:17px;padding-right:17px}}
+
+.daylio-ops .sc-mobilehint{display:none;padding:0 14px 11px;color:#8a8179;font-weight:650;font-size:10px}@media(max-width:790px){.daylio-ops .sc-mobilehint{display:block}}
+.daylio-ops .sc-weeknav .sc-button.icon:first-child svg{transform:rotate(180deg)}
+
+.daylio-ops .sc-owner-alert{display:flex;align-items:center;gap:13px;padding:13px 15px;border:1px solid #f0dfce;background:#fffaf2;border-radius:13px;margin-bottom:14px}.daylio-ops .sc-owner-alert-icon{color:#a5733e;background:#fff0d8;border-radius:10px;padding:10px;display:flex}.daylio-ops .sc-owner-alert b{font-size:12px;color:#805736}.daylio-ops .sc-owner-alert p{font-size:11px;color:#96795e;margin:3px 0 0;line-height:1.5}.daylio-ops .sc-owner-alert button{margin-left:auto;background:#fff;flex:none}@media(max-width:700px){.daylio-ops .sc-owner-alert{align-items:start;flex-wrap:wrap}.daylio-ops .sc-owner-alert button{margin-left:0;width:100%}}
+/* Mobile drawer must sit above its scrim. The previous visual layer intercepted taps. */
+@media(max-width:940px){
+}
+@media(max-width:940px){
+}

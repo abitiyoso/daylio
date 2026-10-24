@@ -1,0 +1,39 @@
+Running v10, iteration 1, isolated database/media
+Owner signup and branch passed
+Verified invitations passed
+Planner and enrollment passed
+Owner registration UI → provider-contract email verification → authenticated tenant + branch; no unverified tenant bootstrap.
+Owner invites manager and caregiver through Access UI; each verifies a one-use email proof and creates its own private password.
+Manager configures classroom/capacity; owner records real future staff shift + trial through planner UI; transactional enrollment replaces reserved prospective seat and verified guardian gets only its child.
+New tenant: caregiver attendance + care draft → manager publication → guardian Daily Story; recurring family invoice → independent staff verification → own-family payment receipt.
+SaaS invoice remains pending until platform-admin manual verification; customer cannot activate itself. Essential entitlement denies paid CRM API while preserving parent care/story/billing history. No real payment or external message.
+Running legacy, iteration 1, isolated database/media
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'Ringkasan Bisnis'
+- 'Care & Family'
+
+    at file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/browser-test.mjs:41:12 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'Ringkasan Bisnis',
+  expected: 'Care & Family',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.1
+file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/run-browser-regressions.mjs:162
+      if (code !== 0) throw Error(`${name} failed`);
+                            ^
+
+Error: legacy failed
+    at file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/run-browser-regressions.mjs:162:29
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+Node.js v24.22.1

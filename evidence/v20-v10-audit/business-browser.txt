@@ -1,0 +1,26 @@
+Running business, iteration 1, isolated database/media
+[]
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('.v10-additional-nav summary')[22m
+
+    at nav (C:\Users\Abi Tiyoso\Documents\ChatGPT\daylio\scripts\browser-v3-business-test.mjs:65:63)
+    at async file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/browser-v3-business-test.mjs:201:3 {
+  log: [ "  - waiting for locator('.v10-additional-nav summary')" ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.22.1
+file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/run-browser-regressions.mjs:161
+      if (code !== 0) throw Error(`${name} failed`);
+                            ^
+
+Error: business failed
+    at file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/run-browser-regressions.mjs:161:29
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+Node.js v24.22.1
