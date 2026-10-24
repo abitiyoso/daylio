@@ -16,3 +16,8 @@ F20 is implemented as P1 per the matrix even though one supplied acceptance-plan
 ## 24 October v10 progress
 
 M1 now includes a persisted source-hashed work-item lifecycle for two allowlisted internal outputs, with human approval and permission revalidation; external inference remains unconnected. M2 now has approved recurring rules, worker generation, unique monthly invoices and verified manual receipt PDFs; invoice adjustments/refunds and branded layouts remain. M4 now has real catalog prices, 14-day trial/expiry, server/RLS entitlements, child quotas and separate SaaS invoices verified by platform administration. Proration, active-term switching/scheduled downgrade and provider payment lifecycle remain. M3 and M5 still require their external/operational acceptance gates. See `BACKEND_V10_API.md` and the latest evidence in `IMPLEMENTATION_STATUS.md`.
+
+
+## Subscription continuation — 24 October 2026
+
+M4 now includes migration 021: paid-period history, next-period renewal/upgrade/downgrade, exact database-time entitlement boundaries and owner-only cancellation of unverified requests. Current paid time and old subscription end dates are preserved. Existing children remain after a future quota reduction; new admissions are blocked when over limit. Recurring generation rechecks the effective paid period independently of worker timing. Remaining: immediate/prorated changes, refunds, real gateway settlement and hosted load/operational validation. Evidence: `tests/subscription-lifecycle.test.mjs`, `evidence/subscription-phase/` and `evidence/subscription-browser-results.json`.

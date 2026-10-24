@@ -2,6 +2,24 @@
 
 Updated 24 October 2026 (Asia/Bangkok). This is an evidence ledger, not a production release certificate. Every function remains listed. **The full 42-function definition of done is not yet satisfied.** Rows marked local verified identify the tested subset; the final column identifies remaining acceptance work. No row is represented as deployed.
 
+## Subscription continuation — 24 October 2026
+
+Migration 021 adds verified paid terms and owner cancellation of pending SaaS invoices. Renewal and plan changes start after all purchased time; database time resolves entitlements at the exact boundary without waiting for a worker. Existing active periods, children, care/history, APIs and original brand assets are preserved. No proration, refund, automatic charge or external payment connection is implied.
+
+| Function | Completed subset / evidence | Remaining boundary |
+|---|---|---|
+| F35/F36 | Owner desktop/mobile subscription history, cancellation reason and confirmation, scheduled plan periods; independent admin verification; real authenticated APIs and migration 021 | Immediate/prorated switching, refunds, payment provider and hosted support UAT |
+| F33/F34 | Recurring family billing worker resolves the current paid term rather than an expired compatibility snapshot | Provider settlement and reconciliation |
+| F39/F41 | Tenant RLS, owner-only cancellation, restricted paid-term writes, verified-invoice and nonoverlap DB guards, stable retry and audit | Hosted multi-connection load/race testing and operational pilot |
+
+Backend evidence: **51/51 tests** in `evidence/subscription-phase/unit-tests.txt`; legacy-period/database-guard assertions also pass in `final-subscription-tests.txt` (3/3). The new `tests/subscription-lifecycle.test.mjs` covers renewal, monthly/yearly changes, exact boundaries, legacy paid-period preservation, over-limit roster retention, worker gates, cancellation, cross-role/tenant denial and audit replay.
+
+Browser evidence: **7/7 suites pass** in `evidence/isolated-browser-results.json` (subscription, v10, legacy, care, business, entry, access); raw log `evidence/subscription-phase/full-browser.txt`. A final subscription repeat also tests mobile navigation open/selection/close before capture, in `isolated-browser-subscription-results.json` / `subscription-phase/mobile-browser.txt`. All test runs preserve preview business fingerprint `12a9552d42254df0c6e6fd76a6c357f2`; disposable data is removed. Actual desktop/mobile subscription screenshots are under `evidence/screenshots/subscription/`; `design-qa.md` records inspection and the corrected intermediate mobile transition capture.
+
+This section supersedes the earlier scheduled-downgrade gap. Every paid change currently takes effect at the next unpurchased period, including upgrades. Live video/analytics remains deferred.
+
+Final local checks also pass: production webpack build, standalone TypeScript and syntax/embedded-credential lint (`evidence/subscription-phase/build.txt`, `typecheck.txt`, `lint.txt`). The stopped local showcase received only the final cancellation-function definition from unreleased migration 021; business records were retained (`local-schema-sync.txt`). Hosted release gates below remain open.
+
 ## V20 landing / v10 workflow extension — 24 October 2026
 
 The exact supplied standalone references and both request texts were inspected and archived under `design-reference/approved-2026-10-24/`; asset hashes identify the original embedded bytes. `docs/V10_GAP_ANALYSIS.md` records the initial audit. Work stays in the existing branch/application/API/database. The new approval supersedes the active V4 marketing presentation with V20; archived V4 and original Elenio logo bytes are preserved. No prototype role switch, localStorage business records or simulated private camera/AI data is promoted into the authenticated application.
@@ -26,7 +44,7 @@ The exact supplied standalone references and both request texts were inspected a
 | F27/F28/F29/F42 | Metadata registry, disabled signed bridge proposal, idempotent actual event ingestion and human review/incident link; commercial test; live adapter still fails closed | **Live video/analytics remains deferred.** Actual existing Elenio contract/authorization required. No camera gateway, streaming or analytics engine built |
 | F30/F31/F32 | Existing authorized sourced queries plus source-hashed allowlisted work items; draft → human approval → internal output; schedule tests | External model integration and broader reviewed tool actions; no fabricated model response |
 | F33/F34 | Family overview, approved recurring rule and worker, unique monthly invoice, verified manual transfer and own receipt PDF; commercial + v10 browser tests | Provider settlement, adjustments/refunds, branded compliant invoice and reconciliation |
-| F35/F36 | Real catalog/trial/expiry/usage/quota, separate pending SaaS invoice and independently audited platform-admin verification; commercial + v10 browser tests | Early-term switching/proration/scheduled downgrade, real payment provider, hosted support UAT |
+| F35/F36 | Real catalog/trial/expiry/usage/quota, separate pending SaaS invoice and independently audited platform-admin verification; commercial + v10 browser tests; scheduled terms added in continuation above | Early-term switching/proration, real payment provider, hosted support UAT |
 | F38/F39/F40/F41 | Existing consent/audit/retention/idempotency/security tests retained; new schedule history, financial/event/work-item audit and plan-aware replay | Hosted restore, privacy/legal review, observability and real delivery/provider pilot |
 
 Production release is **not complete**. Local provider/email/payment fixtures prove application behavior, not actual inbox/bank/Elenio/LLM connectivity. SaaS active paid terms cannot be replaced early; draft add-on requests do not activate services. Prior per-function rows below describe the earlier verified baseline; this dated extension is the newer scope. No deployment, merge or real external message has been performed.

@@ -76,7 +76,7 @@ async function handler(
     if (path === "health/ready") {
       const sql = database();
       const [schema] =
-        await sql`select exists(select 1 from schema_migrations where version=20) as ready`;
+        await sql`select exists(select 1 from schema_migrations where version=21) as ready`;
       if (!schema.ready) fail(503, "MIGRATIONS_REQUIRED");
       return NextResponse.json(
         {
@@ -100,6 +100,7 @@ async function handler(
                       select 'shifts:'||id::text,to_jsonb(r)::text from schedule_shifts r union all
                       select 'subscription:'||organization_id::text,to_jsonb(r)::text from tenant_subscriptions r union all
                       select 'saas:'||id::text,to_jsonb(r)::text from saas_invoices r union all
+                      select 'paid-term:'||id::text,to_jsonb(r)::text from saas_paid_terms r union all
                       select 'recurring:'||id::text,to_jsonb(r)::text from recurring_billing_rules r union all
                       select 'leo:'||id::text,to_jsonb(r)::text from leo_work_items r union all
                       select 'camera:'||id::text,to_jsonb(r)::text from camera_registry r union all
@@ -432,7 +433,7 @@ async function handler(
       }
       if (path === "platform/saas-invoices" && method === "GET") {
         const rows =
-          await sql`select i.*,o.name organization_name from saas_invoices i join organizations o on o.id=i.organization_id order by i.created_at desc limit 100`;
+          await sql`select i.*,o.name organization_name,t.starts_at,t.ends_at,greatest(now(),coalesce((select max(ends_at) from saas_paid_terms where organization_id=i.organization_id),now()),coalesce(case when s.state='active' then s.period_end end,now())) proposed_starts_at from saas_invoices i join organizations o on o.id=i.organization_id left join tenant_subscriptions s on s.organization_id=i.organization_id left join saas_paid_terms t on t.invoice_id=i.id and t.organization_id=i.organization_id order by i.created_at desc limit 100`;
         return NextResponse.json({ data: rows });
       }
       if (

@@ -73,6 +73,8 @@ Email access configuration and local evidence: [docs/EMAIL_ACCESS.md](docs/EMAIL
 
 ## Clean showcase and QA isolation
 
+Subscription continuation (migration 021) supports audited owner cancellation of pending SaaS invoices and independently verified renewal/plan changes. Purchased time is retained; changes queue for the next unpurchased period, with database-time entitlement resolution. Immediate/prorated changes, refunds and payment-provider integration remain future work. Run `node scripts/run-browser-regressions.mjs --suite=subscription` for the isolated end-to-end journey; `tests/subscription-lifecycle.test.mjs` covers permissions, period guards and date-based billing gates.
+
 Browser suites reject the preview server and require a run-bound health identity. The runner creates a new database, media and build folder under `data/qa-runs/run-*/` for each suite on ports 3101/4012. It removes them in `finally`, on test failures, and on handled interruption. Production/hosted connection variables are refused. It fingerprints the preview records before and after each run and reports whether they changed. Do not invoke old browser scripts directly against port 3100. See `docs/UI_CLEANUP_VERIFICATION.md` for evidence, reset/backup details and reference comparisons.
 
 Sample activities are compressed into elapsed time on the explicit seed date; tour appointments and pickup expiry remain future scheduled times. On another day, the preview correctly does not show old activity as today. Reseeding a new fictional example day is an opt-in action, not a startup behavior.

@@ -4,6 +4,14 @@ Date: 24 October 2026, Asia/Bangkok. Scope: approved V20 public landing and the 
 
 ## Source and matching
 
+### Subscription continuation QA — 24 October 2026
+
+The new current/scheduled-period cards, pending-invoice cancellation dialog and admin period evidence use the existing authenticated v10 typography, colors, spacing and controls. Desktop (1440px) and mobile (390px) actual screenshots were inspected at `evidence/screenshots/subscription/owner-desktop.png` and `owner-mobile.png`. Current Growth, subsequent Essential and cancelled yearly request all reflect database records. The mobile invoice table scrolls within its container; the page has no horizontal overflow.
+
+The first mobile capture caught the sidebar's resize transition and obscured content. The final test waits for actual closed geometry, opens navigation, selects the subscription destination, waits for closure and captures again. No CSS or business data is modified for screenshots. Both final images show the correct hierarchy and scheduled-period information. These screenshots use disposable, explicitly fictional payment references; they are not production bank evidence. No landing/logo assets changed.
+
+All seven browser suites pass in `evidence/isolated-browser-results.json`; the final mobile-navigation repeat passes separately in `evidence/isolated-browser-subscription-results.json`. Both retain the same preview business fingerprint and remove temporary data. Backend tests: 51/51. Prior source comparisons and four-role screenshots below remain the reference baseline; the care suite also recaptured four roles at 1440/820/390px in this run.
+
 Exact supplied HTML, request texts and original asset hashes: `design-reference/approved-2026-10-24/`. V20 uses real React sections, original scoped CSS, copy, SVG and imagery. Actual login navigation, a mobile login link and the source's missing thumbnail alias are technical integration changes. Original Elenio brand bytes are unchanged; V4 source remains archived.
 
 `evidence/v20/` contains source/actual full pages and all eight section crops at 1440/1280/1024/768/390/320px. Comparisons put source left / actual right. Header visibility and smooth scrolling are set identically for section crops; untouched full-page captures retain the real header. All **48 section pairs have identical dimensions**. Maximum mean absolute RGBA-channel difference: **0.0595/255**. Maximum channels differing by more than 10: **0.000332%**. See `pixel-comparison.json`. Static initial-state comparisons do not imply that an illustrated public service is connected.

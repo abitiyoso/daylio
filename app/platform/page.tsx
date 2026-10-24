@@ -72,6 +72,21 @@ export default function Platform() {
                 {row.plan_id} · Rp {Number(row.amount).toLocaleString("id-ID")}{" "}
                 · {row.state}
               </p>
+              {row.starts_at && (
+                <p>
+                  Periode terverifikasi:{" "}
+                  {new Date(row.starts_at).toLocaleDateString("id-ID")} —{" "}
+                  {new Date(row.ends_at).toLocaleDateString("id-ID")}
+                </p>
+              )}
+              {row.state === "pending" && (
+                <p>
+                  Perkiraan mulai setelah verifikasi:{" "}
+                  {new Date(row.proposed_starts_at).toLocaleDateString("id-ID")}
+                  . Sisa periode terbayar tetap utuh. Tidak ada prorata atau
+                  pembayaran otomatis.
+                </p>
+              )}
               {row.state === "pending" && (
                 <form
                   onSubmit={(e) => {

@@ -23,6 +23,7 @@ Apply **all** migrations in order with `node --env-file=.env.local scripts/migra
 | 018 | LEO source hashes and work-item lifecycle, role/child/capability RLS |
 | 019 | Human-confirmed event-to-incident link, source identity XOR and future booking ratio guard |
 | 020 | Normalized lead-contact lookup; warns about a shared guardian without preventing sibling inquiries |
+| 021 | Paid subscription periods, server-time entitlement resolution, no-overlap guard and owner-only audited cancellation of pending invoices |
 
 Existing tenants get an explicit **legacy** entitlement preserving working capabilities; it is not represented as a paid subscription. Newly registered tenants receive a 14-day Intelligence trial. Expiry resolves to Essential in server authorization, even before a worker runs. Catalog: Essential Rp299,000/25 children, Growth Rp699,000/60, Intelligence Rp1,490,000/120; yearly requests use ten monthly prices. Essential retains care and parent history; premium CRM, finance, scheduling writes, business exports and LEO require the appropriate feature. Exceeding the active-child limit is blocked at API and DB, with existing child care retained.
 
@@ -45,13 +46,14 @@ All paths below start `/api/v1/`. Route DTOs are validated strictly in the named
 | `billing/recurring` GET/POST; `/{id}/generate`, `/{id}/stop` POST | Explicitly approved rule, validated lines/due day/start month; one invoice per rule/month; worker uses the same permission and uniqueness guards |
 | `commercial/context` | Owner catalog, actual usage, entitlement state, SaaS invoice history, add-on history and disconnected provider state |
 | `commercial/invoices` POST | Owner request only, server catalog amount; explicit confirmation; cannot activate entitlement |
+| `commercial/invoices/{id}/cancel` POST | Owner of the selected tenant only; strict `{confirmed:true, reason}` (6–500 characters), pending invoices only, cancellation metadata and audit; verified payments cannot be cancelled here |
 | `commercial/addons` POST | Owner request only; CCTV Rp30,000 and analytics Rp120,000 are labeled draft estimates, not activated services |
 | `platform/saas-invoices` GET, `/{id}/verify` POST | Verified platform admin only; explicit manually checked reference/amount/confirmation; independent verification audit, duplicate verification stable |
 | `integrations/overview` GET, `integrations/registry` POST; `/{id}/disable` POST | Management registry of external camera ID and classroom; no passwords, RTSP or transport URLs |
 | `integrations/overview` GET; `integrations/events` `/{id}/review`, `/{id}/link-incident` POST | Management actual event metadata, human review and explicit same-class incident linkage |
 | `leo/work-items` GET/POST; `/{id}/draft`, `/approve`, `/execute`, `/cancel` POST | Intelligence + authorized role/sources; management human approval and execution; narrow outputs described below |
 
-Family payments remain independent from Daylio SaaS payments. A staff-confirmed family transfer generates a receipt and an immutable audit; it does not assert a bank callback was received. SaaS requests remain pending until platform administration records a separately verified payment. Active paid terms cannot currently be replaced early: `CURRENT_PAID_TERM_ACTIVE`. Scheduled downgrade, proration, refunds, tax-compliant invoice layout and provider settlement are follow-up work, not simulated success.
+Family payments remain independent from Daylio SaaS payments. A staff-confirmed family transfer generates a receipt and an immutable audit; it does not assert a bank callback was received. SaaS requests remain pending until platform administration records a separately verified payment. Verified renewal, upgrade and downgrade requests now append a paid period after all previously purchased time. Existing active periods are never shortened or replaced. `commercial/context` returns `scheduledTerms`, `nextPaidTermStartsAt`, and invoice period/cancellation metadata. The date resolver `commercial_plan_at` is an invoker-rights function protected by table RLS; `app_plan()` always evaluates database `now()`. Access changes at the period boundary even if a worker is delayed. Recurring billing uses that same resolver. Verification rechecks the target child limit; any later overage preserves existing children and blocks new admissions. Explicit operator expiry remains an override requiring review before a paid period can be revived. Immediate/prorated switching, refunds, tax-compliant invoice layout and provider settlement remain follow-up scope.
 
 ## Elenio boundary
 

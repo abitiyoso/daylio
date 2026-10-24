@@ -305,6 +305,7 @@ for (const [path, methods] of [
   ["planner/shifts/{id}/cancel", "post"],
   ["commercial/context", "get"],
   ["commercial/invoices", "post"],
+  ["commercial/invoices/{id}/cancel", "post"],
   ["commercial/addons", "post"],
   ["billing/overview", "get"],
   ["billing/recurring", "get,post"],

@@ -98,7 +98,35 @@ export default function Commercial({ request }: { request: Request }) {
               mengaktifkan paket; administrator platform memverifikasi transaksi
               yang benar-benar diterima. Tagihan orang tua dikelola terpisah.
             </p>
+            <p>
+              Perpanjangan dan perubahan paket yang sudah berbayar dimulai
+              setelah seluruh periode terbayar selesai. Tidak ada pemotongan
+              sisa waktu, prorata, atau penagihan otomatis.
+            </p>
           </div>
+          {data.scheduledTerms?.length > 0 && (
+            <section
+              className="v9-card v9-elevated"
+              aria-label="Periode paket terjadwal"
+            >
+              <h3>Periode paket terjadwal</h3>
+              <p>
+                Pembayaran sudah diverifikasi; akses berubah pada tanggal mulai,
+                tanpa menghapus catatan anak.
+              </p>
+              {data.scheduledTerms.map((t: Item) => (
+                <article className="op-list-item" key={t.id}>
+                  <strong>
+                    {data.catalog.find((p: Item) => p.id === t.plan_id)?.name}
+                  </strong>
+                  <p>
+                    {new Date(t.starts_at).toLocaleDateString("id-ID")} —{" "}
+                    {new Date(t.ends_at).toLocaleDateString("id-ID")}
+                  </p>
+                </article>
+              ))}
+            </section>
+          )}
           <div className="v9-cycle">
             <button
               className={"op-btn " + (cycle === "monthly" ? "primary" : "")}
@@ -258,6 +286,7 @@ export default function Commercial({ request }: { request: Request }) {
                     <th>Jumlah</th>
                     <th>Status</th>
                     <th>Verifikasi</th>
+                    <th>Periode / tindakan</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -283,6 +312,35 @@ export default function Commercial({ request }: { request: Request }) {
                       </td>
                       <td>
                         {i.reference || "Belum ada transaksi terverifikasi"}
+                      </td>
+                      <td>
+                        {i.starts_at ? (
+                          <>
+                            <span>
+                              {new Date(i.starts_at).toLocaleDateString(
+                                "id-ID",
+                              )}{" "}
+                              —{" "}
+                              {new Date(i.ends_at).toLocaleDateString("id-ID")}
+                            </span>
+                            {new Date(i.starts_at) > new Date() && (
+                              <small> · Terjadwal</small>
+                            )}
+                          </>
+                        ) : i.state === "pending" ? (
+                          <CancelInvoice
+                            invoice={i}
+                            request={request}
+                            onDone={async () => {
+                              setNotice(
+                                "Permintaan tagihan dibatalkan. Paket aktif tetap sama.",
+                              );
+                              await load();
+                            }}
+                          />
+                        ) : (
+                          i.cancel_reason || "—"
+                        )}
                       </td>
                     </tr>
                   ))}
@@ -319,9 +377,22 @@ export default function Commercial({ request }: { request: Request }) {
           </p>
           <p>
             Paket tidak berubah sampai transaksi diverifikasi administrator
-            platform. Downgrade tidak menghapus catatan; perubahan paket
-            berbayar yang lebih rendah menunggu periode aktif selesai.
+            platform. Perpanjangan dan perubahan paket berbayar menunggu periode
+            terbayar selesai; catatan anak tidak dihapus.
           </p>
+          {data?.nextPaidTermStartsAt &&
+            new Date(data.nextPaidTermStartsAt) >
+              new Date(Date.now() + 60000) && (
+              <p>
+                Perkiraan mulai periode baru:{" "}
+                <strong>
+                  {new Date(data.nextPaidTermStartsAt).toLocaleDateString(
+                    "id-ID",
+                  )}
+                </strong>
+                . Tanggal final ditetapkan server saat pembayaran diverifikasi.
+              </p>
+            )}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -357,5 +428,103 @@ export default function Commercial({ request }: { request: Request }) {
         </dialog>
       )}
     </div>
+  );
+}
+
+function CancelInvoice({
+  invoice,
+  request,
+  onDone,
+}: {
+  invoice: Item;
+  request: Request;
+  onDone: () => Promise<void>;
+}) {
+  const [open, setOpen] = useState(false),
+    [busy, setBusy] = useState(false),
+    [error, setError] = useState("");
+  const dialog = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const old = document.activeElement as HTMLElement;
+    dialog.current?.showModal();
+    return () => {
+      dialog.current?.close();
+      old?.focus();
+    };
+  }, [open]);
+  return (
+    <>
+      <button
+        className="op-btn"
+        onClick={() => {
+          setError("");
+          setOpen(true);
+        }}
+      >
+        Batalkan tagihan
+      </button>
+      {open && (
+        <dialog
+          ref={dialog}
+          className="v10-commercial-dialog"
+          aria-label="Batalkan permintaan tagihan"
+          onCancel={(e) => {
+            if (busy) e.preventDefault();
+            else setOpen(false);
+          }}
+        >
+          <h2>Batalkan permintaan tagihan</h2>
+          <p>
+            Hanya tagihan yang belum diverifikasi dapat dibatalkan. Paket aktif
+            dan catatan pengasuhan tetap tersimpan. Pembayaran yang sudah
+            diverifikasi tidak dapat dibatalkan melalui tindakan ini.
+          </p>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (busy) return;
+              const reason = String(
+                new FormData(e.currentTarget).get("reason"),
+              );
+              setBusy(true);
+              void request(`commercial/invoices/${invoice.id}/cancel`, "POST", {
+                reason,
+                confirmed: true,
+              })
+                .then(async () => {
+                  setOpen(false);
+                  await onDone();
+                })
+                .catch((e) => setError(e.message))
+                .finally(() => setBusy(false));
+            }}
+          >
+            <label>
+              Alasan pembatalan
+              <textarea name="reason" required minLength={6} maxLength={500} />
+            </label>
+            <label className="op-checkbox">
+              <input type="checkbox" required />
+              Saya membatalkan permintaan tagihan yang belum diverifikasi.
+            </label>
+            {error && <p role="alert">{error}</p>}
+            <div className="op-row wrap">
+              <button
+                className="op-btn"
+                type="button"
+                disabled={busy}
+                onClick={() => setOpen(false)}
+              >
+                Kembali
+              </button>
+              <button className="op-btn primary" disabled={busy}>
+                Konfirmasi pembatalan
+              </button>
+            </div>
+          </form>
+        </dialog>
+      )}
+    </>
   );
 }

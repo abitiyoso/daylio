@@ -14234,6 +14234,89 @@
         }
       }
     },
+    "/api/v1/commercial/invoices/{id}/cancel": {
+      "post": {
+        "operationId": "post_commercial_invoices__id__cancel",
+        "description": "Authenticated v10 workflow. Role, plan, RLS and state checks apply; strict request DTO and provider limitations: docs/BACKEND_V10_API.md.",
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success; JSON envelope {data, requestId} unless auth/public endpoint"
+          },
+          "201": {
+            "description": "Created or idempotent result"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Hidden or missing resource"
+          },
+          "409": {
+            "description": "State/idempotency conflict"
+          },
+          "422": {
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/commercial/addons": {
       "post": {
         "operationId": "post_commercial_addons",
