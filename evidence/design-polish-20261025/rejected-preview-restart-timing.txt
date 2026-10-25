@@ -1,0 +1,10 @@
+Running design, iteration 1, isolated database/media
+Design polish: 20 role/viewport cases, readable labels, balanced Parent grid, 2-column mobile caregiver metrics and 320px morning form passed.
+file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/run-browser-regressions.mjs:229
+      if (before !== after) throw Error("Showcase changed during isolated QA");
+                                  ^
+
+Error: Showcase changed during isolated QA
+    at file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/run-browser-regressions.mjs:229:35
+
+Node.js v24.22.1

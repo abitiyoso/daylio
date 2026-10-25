@@ -1491,7 +1491,7 @@ export default function OperationsWorkspace({
         <div className="v6-parent-head">
           <div className="v6-parent-greeting">
             <span className="v6-overline">
-              MY CHILD TODAY · {data?.organization.name}
+              ANAKKU HARI INI · {data?.organization.name}
             </span>
             <h1>
               Halo, {user.displayName?.split(" ")[0] || "Keluarga"}{" "}
@@ -1503,7 +1503,11 @@ export default function OperationsWorkspace({
             </p>
             <div className="v6-child-status">
               <span>
-                <Check size={14} />
+                {extra.attendance ? (
+                  <Check size={14} />
+                ) : (
+                  <CalendarBlank size={14} />
+                )}
                 {extra.attendance?.data.type === "in"
                   ? "Hadir hari ini"
                   : extra.attendance?.data.type === "out"
@@ -1585,7 +1589,7 @@ export default function OperationsWorkspace({
         <div className="v6-parent-day-strip">
           {[
             [
-              Check,
+              extra.attendance ? Check : CalendarBlank,
               extra.attendance
                 ? time(extra.attendance.created_at)
                 : "Belum tercatat",
@@ -1608,7 +1612,7 @@ export default function OperationsWorkspace({
             </div>
           ))}
         </div>
-        <div className="op-columns">
+        <div className="op-columns op-parent-grid">
           <Card
             title="Daily Story"
             sub="Cerita kecil yang sudah ditinjau daycare."
@@ -1641,10 +1645,15 @@ export default function OperationsWorkspace({
                 <p className="op-story-text preview">{extra.story.data.note}</p>
               </>
             ) : (
-              <Empty>
-                Cerita hari ini sedang disiapkan. Kabar yang sudah dibagikan
-                tetap tersedia di catatan aktivitas.
-              </Empty>
+              <div className="op-story-empty">
+                <Empty>
+                  Belum ada cerita yang dibagikan untuk hari ini. Lihat cerita
+                  sebelumnya untuk kabar terakhir dari daycare.
+                </Empty>
+                <button className="op-btn" onClick={() => go("story")}>
+                  Lihat cerita sebelumnya <ArrowRight size={16} />
+                </button>
+              </div>
             )}
             <button className="op-btn teal" onClick={() => go("leo")}>
               <Sparkle size={17} />
@@ -1663,7 +1672,7 @@ export default function OperationsWorkspace({
               </button>
             </details>
           </Card>
-          <div className="op-stack">
+          <>
             <Card title="Informasi untuk keluarga" sub="YANG PENTING">
               <div className="v6-family-links">
                 {[
@@ -1789,7 +1798,7 @@ export default function OperationsWorkspace({
                 <CaretRight size={14} />
               </button>
             </Card>
-          </div>
+          </>
         </div>
       </>
     );
@@ -3778,8 +3787,8 @@ export default function OperationsWorkspace({
         <div className="v6-intro v6-care-intro">
           <div>
             <span className="v6-overline">
-              {classes.find((c) => c.id === classId)?.name || "Kelas"} · TODAY'S
-              CARE
+              {classes.find((c) => c.id === classId)?.name || "Kelas"} ·
+              PENGASUHAN HARI INI
             </span>
             <h1>
               Selamat {greeting}, Kak{" "}
@@ -4104,7 +4113,10 @@ export default function OperationsWorkspace({
         className={`op-overlay ${menu ? "open" : ""}`}
         onClick={() => setMenu(false)}
       />
-      <aside className={`op-sidebar ${menu ? "open" : ""}`}>
+      <aside
+        id="workspace-navigation"
+        className={`op-sidebar ${menu ? "open" : ""}`}
+      >
         <a className="op-brand v10-brandwrap" href="/">
           <img
             src="/approved-assets/489b7ae542496ea355c1.png"
@@ -4236,6 +4248,8 @@ export default function OperationsWorkspace({
               className="op-icon op-hamburger"
               onClick={() => setMenu(!menu)}
               aria-label="Buka navigasi"
+              aria-expanded={menu}
+              aria-controls="workspace-navigation"
             >
               {menu ? <X /> : <List />}
             </button>
@@ -4257,6 +4271,7 @@ export default function OperationsWorkspace({
           </div>
           <div className="op-row">
             <WorkspaceSearch
+              key={organizationId}
               request={req}
               onChoose={(row) => {
                 if (row.type === "child") {
@@ -4578,7 +4593,11 @@ export default function OperationsWorkspace({
             </button>
           );
         })}
-        <button onClick={() => setMenu(!menu)}>
+        <button
+          aria-expanded={menu}
+          aria-controls="workspace-navigation"
+          onClick={() => setMenu(!menu)}
+        >
           <List size={18} />
           <span>Menu</span>
         </button>

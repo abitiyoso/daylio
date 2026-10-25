@@ -42,8 +42,15 @@ export default function OwnerSummary({
       active = false;
     };
   }, [date, branch, refreshVersion]);
-  if (error) return <p role="alert">{error}</p>;
-  if (!data) return <p>Memuat ringkasan daycare…</p>;
+  if (error || !data)
+    return (
+      <section className="v10-owner-summary" aria-busy={!error}>
+        <h1>Ringkasan Daycare</h1>
+        <p role={error ? "alert" : "status"}>
+          {error || "Memuat ringkasan daycare…"}
+        </p>
+      </section>
+    );
   const seats = data.classes.reduce(
       (s: number, c: Item) => s + (c.capacity || 0),
       0,
@@ -82,7 +89,7 @@ export default function OwnerSummary({
   const stages = leadStageCounts(data.funnel),
     max = Math.max(1, ...stages.map((stage) => stage.count));
   return (
-    <>
+    <section className="v10-owner-summary" aria-busy="false">
       <link rel="stylesheet" href="/workspace-v10.css" />
       <div className="v10-pagehead">
         <div>
@@ -300,6 +307,6 @@ export default function OwnerSummary({
           <button onClick={() => go("integrations")}>CCTV & AI →</button>
         </div>
       </div>
-    </>
+    </section>
   );
 }

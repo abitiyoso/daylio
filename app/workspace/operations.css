@@ -1037,11 +1037,13 @@
 @media (max-width: 1070px) {
   .op-sidebar {
     transform: translateX(-110%);
+    visibility: hidden;
     transition: transform 0.2s;
     box-shadow: 8px 0 30px #1729450a;
   }
   .op-sidebar.open {
     transform: translateX(0);
+    visibility: visible;
   }
   .op-main {
     margin-left: 0;
@@ -2306,9 +2308,32 @@
   background: transparent;
   min-width: 0;
   width: 100%;
-  font-size: 12px;
+  font-size: 14px;
   color: #233444;
   outline: 0;
+}
+.daylio-ops .v10-live-search form:focus-within {
+  outline: 2px solid #bb5948;
+  outline-offset: 2px;
+}
+.daylio-ops .v10-search-toggle {
+  display: none;
+}
+.daylio-ops .v10-search-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 6px;
+  color: #233444;
+  background: #f3eee9;
+  cursor: pointer;
+}
+.daylio-ops .v10-search-submit:focus-visible {
+  outline: 2px solid #bb5948;
 }
 .daylio-ops .v10-search-results {
   position: absolute;
@@ -2350,7 +2375,36 @@
 }
 @media (max-width: 1024px) {
   .daylio-ops .v10-live-search {
+    width: auto;
+    flex-shrink: 0;
+    position: static;
+  }
+  .daylio-ops .v10-search-toggle {
+    display: inline-flex;
+  }
+  .daylio-ops .v10-live-search form {
     display: none;
+  }
+  .daylio-ops .v10-live-search.expanded form {
+    display: flex;
+    position: absolute;
+    right: 14px;
+    top: calc(100% + 8px);
+    width: min(320px, calc(100vw - 28px));
+    z-index: 31;
+    box-shadow: 0 10px 35px #20313c20;
+  }
+  .daylio-ops .v10-live-search.expanded input {
+    font-size: 16px;
+  }
+  .daylio-ops .v10-live-search .v10-search-results {
+    top: calc(100% + 75px);
+    right: 14px;
+    width: min(320px, calc(100vw - 28px));
+  }
+  .daylio-ops .v10-live-search .v10-search-loading {
+    top: calc(100% + 75px);
+    right: 14px;
   }
 }
 
@@ -2690,4 +2744,146 @@
   max-height: 200px;
   aspect-ratio: auto;
   object-fit: contain;
+}
+
+/* Production readability pass: retain the approved shell, improve live content. */
+@media (min-width: 1181px) and (max-width: 1500px) {
+  .daylio-ops[data-view] .sc-workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .daylio-ops[data-view] .sc-side {
+    min-width: 0;
+  }
+}
+.daylio-ops[data-view] {
+  --muted: #526773;
+}
+.daylio-ops[data-view] .op-muted,
+.daylio-ops[data-view] .op-empty,
+.daylio-ops[data-view] .op-titlebar p,
+.daylio-ops[data-view] .v10-passport-brief small,
+.daylio-ops[data-view] .v6-family-links small,
+.daylio-ops[data-view] .v6-parent-day-strip span,
+.daylio-ops[data-view] .v6-parent-greeting p,
+.daylio-ops[data-view] .v6-surface-head p,
+.daylio-ops[data-view] .v10-blockhead p,
+.daylio-ops[data-view] .v10-stat label,
+.daylio-ops[data-view] .v10-workcopy small,
+.daylio-ops[data-view] .v10-smallprint,
+.daylio-ops[data-view] .v10-pagehead p,
+.daylio-ops[data-view] .v10-insight p,
+.daylio-ops[data-view] .v10-caprow span,
+.daylio-ops[data-view] .v10-quickstrip p,
+.daylio-ops[data-view] .v6-next-actions {
+  color: #526773;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.daylio-ops[data-view] .v10-stat label,
+.daylio-ops[data-view] .v10-workcopy b,
+.daylio-ops[data-view] .v10-caprow b,
+.daylio-ops[data-view] .v10-minirow,
+.daylio-ops[data-view] .v10-insight b,
+.daylio-ops[data-view] .v10-quickstrip b {
+  font-size: 14px;
+}
+.daylio-ops[data-view] .v10-stat small,
+.daylio-ops[data-view] .v10-funnel-col small,
+.daylio-ops[data-view] .v10-caprow small,
+.daylio-ops[data-view] .v10-search-results small,
+.daylio-ops[data-view] .sc-sidepanel p,
+.daylio-ops[data-view] .sc-sidepanel-body small {
+  font-size: 13px !important;
+  line-height: 1.5;
+  color: #526773 !important;
+}
+.daylio-ops[data-view] .v10-stat {
+  min-height: 132px;
+}
+.daylio-ops[data-view] .v10-blockhead {
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.daylio-ops[data-view] .v10-link,
+.daylio-ops[data-view] .v10-text-action,
+.daylio-ops[data-view] .v10-insight button,
+.daylio-ops[data-view] .v10-quickactions button,
+.daylio-ops[data-view] .v10-summary-filters summary,
+.daylio-ops[data-view] .v10-additional-nav summary,
+.daylio-ops[data-view] .v6-text-action,
+.daylio-ops[data-view] .v6-quick-grid button strong,
+.daylio-ops[data-view] .v6-next-actions button {
+  font-size: 13px;
+}
+.daylio-ops[data-view] .v6-overline {
+  font-size: 11px;
+  color: #805d48;
+}
+.daylio-ops[data-view] .v6-child-status span {
+  font-size: 12px;
+  color: #526773;
+}
+.daylio-ops[data-view] .v10-parent-identity small {
+  font-size: 13px;
+}
+.daylio-ops[data-view] .op-parent-grid {
+  align-items: stretch;
+}
+.daylio-ops[data-view] .op-parent-grid > section:last-child {
+  grid-column: 1 / -1;
+}
+.daylio-ops[data-view] .v6-family-links {
+  padding: 0;
+}
+.daylio-ops[data-view] .v6-family-links > button {
+  padding: 14px 0;
+}
+.daylio-ops[data-view] .op-parent-grid .op-section-head {
+  flex-wrap: wrap;
+}
+.daylio-ops[data-view] .op-parent-grid .op-section-head > .op-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.daylio-ops[data-view] .v6-care-strip span {
+  font-size: 13px;
+  line-height: 1.45;
+  color: #526773;
+  text-align: center;
+}
+@media (max-width: 620px) {
+  .daylio-ops[data-view] .v6-care-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  .daylio-ops[data-view] .v6-care-strip > div {
+    padding: 16px 10px;
+    min-height: 90px;
+  }
+  .daylio-ops[data-view] .v6-care-strip > div:nth-child(2) {
+    border-right: 0;
+  }
+  .daylio-ops[data-view] .v6-care-strip > div:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--line);
+  }
+  .daylio-ops[data-view] .v10-funnel {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: end;
+    row-gap: 18px;
+  }
+  .daylio-ops[data-view] .v10-funnel-col {
+    min-width: 0;
+  }
+  .daylio-ops[data-view] .v10-funnel-col small {
+    white-space: normal;
+    text-align: center;
+  }
+  .daylio-ops[data-view] input,
+  .daylio-ops[data-view] select,
+  .daylio-ops[data-view] textarea {
+    font-size: 16px;
+  }
 }

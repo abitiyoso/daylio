@@ -2,6 +2,37 @@
 
 Updated 25 October 2026 (Asia/Bangkok). This is an evidence ledger, not a production release certificate. Every function remains listed. **The full 42-function definition of done is not yet satisfied.** Rows marked local verified identify the tested subset; the final column identifies remaining acceptance work. No row is represented as deployed.
 
+## Visual polish and deploy-readiness review — 25 October 2026
+
+The user's request for a stricter human-centered design review exposed real presentation issues beyond functional test success: 10–12px pale Owner captions, a long empty left column on Parent Today, compressed four-across Caregiver mobile metrics, misleading preparation copy/check icon in an unrecorded state, and a clipped Sunday column on normal desktop planning. Corrections preserve the approved shell, actual records, original logos, authenticated API and all business rules. Evidence and before/after links: `docs/DESIGN_DEPLOY_REVIEW_2026_10_25.md`; `evidence/design-polish-20261025/`.
+
+| Function / role surface | Actual correction and verification |
+|---|---|
+| F02/F06 Owner | Important labels/captions 13–14px, darker supporting text, legible three-column mobile funnel; summary heading/loading status retained until its nested API finishes. Capture waits for actual summary completion |
+| F11/F12/F13 Caregiver | Mobile metrics arranged 2×2 with readable labels; activity shortcuts and care notes enlarged without changing present-child selection, drafts, review or pickup behavior |
+| F14/F15/F16/F17 Parent | Five Today cards share a balanced grid; morning/pickup cards occupy both columns, mobile stays stacked. Explicit previous-story action; unrecorded attendance does not show a completed check. Family permissions/publication rules unchanged |
+| F05/F06/F26 planning | Detail panel moves below the week at 1181–1500px, giving all seven days space at 1440px; small-screen internal calendar scrolling retained |
+| F39/F41/F42 local validation | 55 backend tests and ten distinct browser suites pass together; new design suite checks four roles at five widths, single heading, overflow, selected text sizes, Parent card placement, Caregiver mobile grid and a 320px morning dialog. Separate final design rerun adds computed contrast and the full-week fit check |
+
+This is scoped visual acceptance for staging/UAT, not a production release certificate. Hosted auth/email delivery, database/backup operations, external provider checks and real staff acceptance remain open. No deploy, external message/payment or live CCTV/analytics connection was performed. Rejected loading captures remain labeled as rejected; screenshot inspection is not replaced by geometry assertions.
+
+Production webpack build, standalone TypeScript, syntax/credential lint and formatting pass (`evidence/design-polish-20261025/build.txt`, `typecheck.txt`, `final-lint.txt`, `format.txt`). Expanded final design checks cover actual computed contrast, all seven desktop calendar days and a viewport-only 320px morning dialog. An extra capture overlapping the preview restart was rejected by its missing-baseline fingerprint guard, retained separately, and repeated with a stable preview; it is not counted as a successful full run.
+
+## UX/function recheck — 25 October 2026
+
+Fresh four-role desktop/mobile captures and functional regressions are recorded in `docs/UX_FUNCTION_RECHECK_2026_10_25.md` and `evidence/recheck-20261025/`. The existing backend/authentication/database remain in place. Search now has a visible submit button and mobile entry, invalidates late responses on edit/Escape/outside dismissal, clears errors on edit, validates whitespace and remounts when the tenant changes. Mobile search is anchored inside both viewport edges; closed off-canvas navigation cannot retain keyboard focus and its triggers expose expanded state.
+
+| Function / surface | Current evidence |
+|---|---|
+| F02/F03/F06/F37 workspace and access | Role-specific entry, scoped authenticated search → child profile, responsive administration, invitations and one-use verification/acceptance; cross-tenant search denied, Parent/Caregiver prospect results excluded |
+| F07/F11–F17/F20/F21 care and family | Current role audit and end-to-end browser journeys cover passports, classroom batch drafts, manager publication, own-child-only story, sibling replacement, morning note acknowledgement, routine/substitute pickup verification and persisted handover evidence |
+| F22–F26/F30–F36 business | Current CRM/enrollment/planner, private developmental PDF, verified-record LEO, independent family payment verification and SaaS subscription regression journeys |
+| F39/F41/F42 validation | 55/55 backend tests; nine browser suites pass together, including 40 role/screen/viewport cases; read-only preview fingerprint unchanged. Dedicated expanded search rerun and final build/check evidence are stored alongside the full run |
+
+The first search fixture-name assertion and pre-initialization public-control timeout are retained as rejected harness runs. Screenshot inspection additionally found left-edge clipping missed by the first overflow-only assertion; both viewport edges are now checked. These failures are not concealed as passes. Production provider, deployment and full F01–F42 acceptance boundaries remain open as listed below. CCTV/Video Analytics live integration remains deferred.
+
+Final expanded search rerun passes for four roles at 1440/390/320px, including both viewport edges, menu state, delayed API responses, whitespace validation, error recovery and outside dismissal (`final-search-regressions.txt`, `search/results.json`). **Production webpack build, standalone TypeScript, syntax/credential lint and source formatting pass** (`build.txt`, `final-typecheck.txt`, `final-lint.txt`, `format.txt`). The nine-suite run and separate final search rerun both preserve the showcase fingerprint `12a9552d42254df0c6e6fd76a6c357f2`.
+
 ## Media, legacy administration and role preview correction — 25 October 2026
 
 The next four supplied screenshots identify a separate legacy administration layout, generic challenge imagery, an unhelpful CCTV illustration and a soft closing image. Advanced tools now render inside the same authenticated Daylio shell, open grouped tools rather than a duplicate home dashboard, retain scoped forms/actions and return through normal navigation. The four challenge scenes now depict specific daycare work; a fresh closing photograph replaces the visibly soft source. Six generated illustrative assets and their exact built-in ImageGen prompts are recorded in `evidence/refinement-20261025/image-generation.json`; original brand/source assets remain unchanged.

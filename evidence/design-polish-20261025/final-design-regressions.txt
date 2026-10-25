@@ -1,0 +1,3 @@
+Running design, iteration 1, isolated database/media
+Design polish: 20 role/viewport cases, readable labels, balanced Parent grid, 2-column mobile caregiver metrics and 320px morning form passed.
+All selected browser suites passed; showcase unchanged; temporary data removed.

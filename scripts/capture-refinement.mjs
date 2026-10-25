@@ -4,7 +4,9 @@ import { mkdir, writeFile, readFile } from "node:fs/promises";
 import sharp from "sharp";
 import { saveBrowserScreenshot } from "./browser-test-guard.mjs";
 const base = "http://127.0.0.1:3100",
-  root = "evidence/refinement-20261025/previews";
+  root =
+    process.env.DAYLIO_CAPTURE_DIRECTORY ||
+    "evidence/refinement-20261025/previews";
 await mkdir(root, { recursive: true });
 const fingerprint = async () => {
   const r = await fetch(base + "/api/v1/health/ready");
@@ -40,6 +42,15 @@ try {
       .fill("Sandbox-only-2026!");
     await page.getByRole("button", { name: "Masuk", exact: true }).click();
     await page.locator('.op-content > div[aria-busy="false"]').waitFor();
+    if (role === "owner")
+      await page.locator('.v10-owner-summary[aria-busy="false"]').waitFor();
+    await page.getByRole("heading", { level: 1 }).waitFor();
+    await page.waitForFunction(
+      () =>
+        ![...document.querySelectorAll(".op-topbar button")].some(
+          (b) => b.getAttribute("aria-label") === "Perbarui" && b.disabled,
+        ),
+    );
     await page.evaluate(() => document.fonts.ready);
     for (const width of [1440, 390]) {
       await page.setViewportSize({ width, height: 1000 });

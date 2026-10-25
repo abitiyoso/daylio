@@ -13,6 +13,8 @@ import { startSandboxAuth } from "./sandbox-auth.mjs";
 if (process.env.NODE_ENV === "production" || process.env.DATABASE_URL)
   throw Error("Local QA only; remove production connection variables");
 const suites = {
+  design: "browser-design-polish.mjs",
+  ux: "browser-search-ux.mjs",
   roles: "browser-role-audit.mjs",
   subscription: "browser-subscription-test.mjs",
   v10: "browser-v10-journey.mjs",

@@ -8,7 +8,9 @@ import {
 import { sandbox } from "../db/sandbox-fixture.mjs";
 const base = process.env.TEST_BASE_URL;
 await requireIsolatedBrowserTarget(base);
-const root = "evidence/refinement-20261025",
+const root =
+    process.env.DAYLIO_ROLE_EVIDENCE_DIRECTORY ||
+    "evidence/refinement-20261025",
   results = [],
   errors = [];
 await mkdir(root + "/screenshots", { recursive: true });
@@ -244,6 +246,9 @@ try {
     reducedMotion: "reduce",
   });
   await page.goto(base + "/#cctv");
+  // These controls bind in the marketing initialization effect. Wait for its
+  // rendered content rather than clicking server HTML before hydration.
+  await page.locator("#featureList h3").first().waitFor();
   await page.locator('[data-event="people"]').click();
   await page
     .getByRole("status")

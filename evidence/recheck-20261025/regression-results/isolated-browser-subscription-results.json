@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-24T09:07:46.371Z",
+  "previewFingerprintBefore": "12a9552d42254df0c6e6fd76a6c357f2",
+  "previewFingerprintAfter": "12a9552d42254df0c6e6fd76a6c357f2",
+  "previewUnchanged": true,
+  "teardown": "Temporary database, media and build directory removed, including on failure.",
+  "results": [
+    {
+      "suite": "subscription",
+      "iteration": 1,
+      "passed": true,
+      "elapsedMs": 50192,
+      "output": "Subscription cancellation, independent verification and next-period change passed across roles.\n"
+    }
+  ]
+}
