@@ -11,12 +11,15 @@
     "typecheck": "tsc --noEmit",
     "lint": "node scripts/check.mjs",
     "sandbox": "node scripts/dev-sandbox.mjs",
-    "test:browser": "node scripts/browser-test.mjs",
+    "test:browser": "node scripts/run-browser-regressions.mjs",
     "db:migrate": "node scripts/migrate.mjs",
     "worker": "node scripts/worker.mjs",
-    "api:generate": "node scripts/openapi.mjs"
+    "api:generate": "node scripts/openapi.mjs",
+    "sandbox:reset": "node scripts/reset-showcase.mjs --confirm-local-showcase",
+    "screenshots:showcase": "node scripts/capture-v10.mjs"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.10",
     "next": "^16.0.0",
     "postgres": "^3.4.7",
     "react": "^19.0.0",

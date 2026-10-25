@@ -1,0 +1,89 @@
+{
+  "at": "2026-10-18T03:33:27.441Z",
+  "environment": "Curated fictional local showcase. Read-only business APIs; auth login only. No production/provider claims.",
+  "results": [
+    {
+      "role": "owner",
+      "width": 1440,
+      "overflow": false,
+      "readableBody": true
+    },
+    {
+      "role": "owner",
+      "width": 820,
+      "overflow": false,
+      "readableBody": true
+    },
+    {
+      "role": "owner",
+      "width": 390,
+      "overflow": false,
+      "readableBody": true
+    },
+    {
+      "role": "manager",
+      "width": 1440,
+      "overflow": false,
+      "readableBody": true
+    },
+    {
+      "role": "manager",
+      "width": 820,
+      "overflow": false,
+      "readableBody": true
+    },
+    {
+      "role": "manager",
+      "width": 390,
+      "overflow": false,
+      "readableBody": true
+    },
+    {
+      "role": "caregiver",
+      "width": 1440,
+      "overflow": false,
+      "readableBody": true
+    },
+    {
+      "role": "caregiver",
+      "width": 820,
+      "overflow": false,
+      "readableBody": true
+    },
+    {
+      "role": "caregiver",
+      "width": 390,
+      "overflow": false,
+      "readableBody": true
+    },
+    {
+      "role": "parent",
+      "width": 1440,
+      "overflow": false,
+      "readableBody": true
+    },
+    {
+      "role": "parent",
+      "width": 820,
+      "overflow": false,
+      "readableBody": true
+    },
+    {
+      "role": "parent",
+      "width": 390,
+      "overflow": false,
+      "readableBody": true
+    },
+    {
+      "workflow": "Curated day has one handover, three published activities, one example photo; no future recorded activities/story",
+      "passed": true
+    },
+    {
+      "workflow": "Parent photo enlargement and Daily Story history",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "fingerprintBefore": "4fe24deb1368796d7bd48e75c3a4dd04",
+  "fingerprintAfter": "4fe24deb1368796d7bd48e75c3a4dd04"
+}

@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-17T14:09:57.484Z",
+  "previewFingerprintBefore": "79c9df2d20b758a3c6f2f03ef705dd09",
+  "previewFingerprintAfter": "79c9df2d20b758a3c6f2f03ef705dd09",
+  "previewUnchanged": true,
+  "teardown": "Temporary database, media and build directory removed, including on failure.",
+  "results": [
+    {
+      "suite": "entry",
+      "iteration": 1,
+      "passed": true,
+      "elapsedMs": 38940,
+      "output": "owner: authenticated dashboard, scoped persisted API, responsive entry\nmanager: authenticated dashboard, scoped persisted API, responsive entry\ncaregiver: authenticated dashboard, scoped persisted API, responsive entry\nparent: authenticated dashboard, scoped persisted API, responsive entry\n"
+    },
+    {
+      "suite": "entry",
+      "iteration": 2,
+      "passed": true,
+      "elapsedMs": 38716,
+      "output": "owner: authenticated dashboard, scoped persisted API, responsive entry\nmanager: authenticated dashboard, scoped persisted API, responsive entry\ncaregiver: authenticated dashboard, scoped persisted API, responsive entry\nparent: authenticated dashboard, scoped persisted API, responsive entry\n"
+    }
+  ]
+}

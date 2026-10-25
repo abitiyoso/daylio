@@ -1,0 +1,118 @@
+{
+  "results": [
+    {
+      "role": "owner",
+      "width": 1440,
+      "searchAndOpenProfile": true,
+      "noOverflow": true
+    },
+    {
+      "role": "owner",
+      "width": 390,
+      "searchAndOpenProfile": true,
+      "noOverflow": true
+    },
+    {
+      "role": "owner",
+      "width": 320,
+      "searchAndOpenProfile": true,
+      "noOverflow": true
+    },
+    {
+      "role": "owner",
+      "lateResponseAfterEditDismissed": true,
+      "lateResponseAfterEscapeDismissed": true,
+      "emptyState": true,
+      "networkErrorRecovery": true,
+      "whitespaceValidation": true,
+      "outsideDismissal": true,
+      "crossTenantDenied": true
+    },
+    {
+      "role": "manager",
+      "width": 1440,
+      "searchAndOpenProfile": true,
+      "noOverflow": true
+    },
+    {
+      "role": "manager",
+      "width": 390,
+      "searchAndOpenProfile": true,
+      "noOverflow": true
+    },
+    {
+      "role": "manager",
+      "width": 320,
+      "searchAndOpenProfile": true,
+      "noOverflow": true
+    },
+    {
+      "role": "manager",
+      "lateResponseAfterEditDismissed": true,
+      "lateResponseAfterEscapeDismissed": true,
+      "emptyState": true,
+      "networkErrorRecovery": true,
+      "whitespaceValidation": true,
+      "outsideDismissal": true,
+      "crossTenantDenied": true
+    },
+    {
+      "role": "caregiver",
+      "width": 1440,
+      "searchAndOpenProfile": true,
+      "noOverflow": true
+    },
+    {
+      "role": "caregiver",
+      "width": 390,
+      "searchAndOpenProfile": true,
+      "noOverflow": true
+    },
+    {
+      "role": "caregiver",
+      "width": 320,
+      "searchAndOpenProfile": true,
+      "noOverflow": true
+    },
+    {
+      "role": "caregiver",
+      "lateResponseAfterEditDismissed": true,
+      "lateResponseAfterEscapeDismissed": true,
+      "emptyState": true,
+      "networkErrorRecovery": true,
+      "whitespaceValidation": true,
+      "outsideDismissal": true,
+      "crossTenantDenied": true
+    },
+    {
+      "role": "parent",
+      "width": 1440,
+      "searchAndOpenProfile": true,
+      "noOverflow": true
+    },
+    {
+      "role": "parent",
+      "width": 390,
+      "searchAndOpenProfile": true,
+      "noOverflow": true
+    },
+    {
+      "role": "parent",
+      "width": 320,
+      "searchAndOpenProfile": true,
+      "noOverflow": true
+    },
+    {
+      "role": "parent",
+      "lateResponseAfterEditDismissed": true,
+      "lateResponseAfterEscapeDismissed": true,
+      "emptyState": true,
+      "networkErrorRecovery": true,
+      "whitespaceValidation": true,
+      "outsideDismissal": true,
+      "crossTenantDenied": true
+    }
+  ],
+  "errors": [],
+  "policy": "Disposable local fixture; delayed responses preserve real authenticated API bodies."
+}

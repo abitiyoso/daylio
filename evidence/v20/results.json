@@ -1,0 +1,607 @@
+{
+  "at": "2026-10-24T04:20:27.250Z",
+  "results": [
+    {
+      "kind": "reference",
+      "width": 1440,
+      "metrics": {
+        "width": 1440,
+        "scroll": 1440,
+        "images": [],
+        "font": "\"Plus Jakarta Sans\", Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "sections": [
+          {
+            "id": "beranda",
+            "height": 610
+          },
+          {
+            "id": "masalah",
+            "height": 555.859375
+          },
+          {
+            "id": "solusi",
+            "height": 719.25
+          },
+          {
+            "id": "cctv",
+            "height": 785.265625
+          },
+          {
+            "id": "pengalaman",
+            "height": 706.609375
+          },
+          {
+            "id": "leo",
+            "height": 802.21875
+          },
+          {
+            "id": "harga",
+            "height": 649.15625
+          },
+          {
+            "id": "kontak",
+            "height": 319
+          }
+        ],
+        "phone": {
+          "w": 330,
+          "h": 561
+        }
+      },
+      "errors": [],
+      "broken": []
+    },
+    {
+      "kind": "actual",
+      "width": 1440,
+      "metrics": {
+        "width": 1440,
+        "scroll": 1440,
+        "images": [],
+        "font": "\"Plus Jakarta Sans\", Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "sections": [
+          {
+            "id": "beranda",
+            "height": 610
+          },
+          {
+            "id": "masalah",
+            "height": 555.859375
+          },
+          {
+            "id": "solusi",
+            "height": 719.25
+          },
+          {
+            "id": "cctv",
+            "height": 785.265625
+          },
+          {
+            "id": "pengalaman",
+            "height": 706.609375
+          },
+          {
+            "id": "leo",
+            "height": 802.21875
+          },
+          {
+            "id": "harga",
+            "height": 649.15625
+          },
+          {
+            "id": "kontak",
+            "height": 319
+          }
+        ],
+        "phone": {
+          "w": 330,
+          "h": 561
+        }
+      },
+      "errors": [],
+      "broken": []
+    },
+    {
+      "kind": "reference",
+      "width": 1280,
+      "metrics": {
+        "width": 1280,
+        "scroll": 1280,
+        "images": [],
+        "font": "\"Plus Jakarta Sans\", Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "sections": [
+          {
+            "id": "beranda",
+            "height": 610
+          },
+          {
+            "id": "masalah",
+            "height": 540.8125
+          },
+          {
+            "id": "solusi",
+            "height": 714.65625
+          },
+          {
+            "id": "cctv",
+            "height": 759.328125
+          },
+          {
+            "id": "pengalaman",
+            "height": 690.46875
+          },
+          {
+            "id": "leo",
+            "height": 787.40625
+          },
+          {
+            "id": "harga",
+            "height": 644.5625
+          },
+          {
+            "id": "kontak",
+            "height": 311.78125
+          }
+        ],
+        "phone": {
+          "w": 330,
+          "h": 561
+        }
+      },
+      "errors": [],
+      "broken": []
+    },
+    {
+      "kind": "actual",
+      "width": 1280,
+      "metrics": {
+        "width": 1280,
+        "scroll": 1280,
+        "images": [],
+        "font": "\"Plus Jakarta Sans\", Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "sections": [
+          {
+            "id": "beranda",
+            "height": 610
+          },
+          {
+            "id": "masalah",
+            "height": 540.8125
+          },
+          {
+            "id": "solusi",
+            "height": 714.65625
+          },
+          {
+            "id": "cctv",
+            "height": 759.328125
+          },
+          {
+            "id": "pengalaman",
+            "height": 690.46875
+          },
+          {
+            "id": "leo",
+            "height": 787.40625
+          },
+          {
+            "id": "harga",
+            "height": 644.5625
+          },
+          {
+            "id": "kontak",
+            "height": 311.78125
+          }
+        ],
+        "phone": {
+          "w": 330,
+          "h": 561
+        }
+      },
+      "errors": [],
+      "broken": []
+    },
+    {
+      "kind": "reference",
+      "width": 1024,
+      "metrics": {
+        "width": 1024,
+        "scroll": 1024,
+        "images": [],
+        "font": "\"Plus Jakarta Sans\", Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "sections": [
+          {
+            "id": "beranda",
+            "height": 600
+          },
+          {
+            "id": "masalah",
+            "height": 515.59375
+          },
+          {
+            "id": "solusi",
+            "height": 695.671875
+          },
+          {
+            "id": "cctv",
+            "height": 703.984375
+          },
+          {
+            "id": "pengalaman",
+            "height": 642.265625
+          },
+          {
+            "id": "leo",
+            "height": 744.1875
+          },
+          {
+            "id": "harga",
+            "height": 639.59375
+          },
+          {
+            "id": "kontak",
+            "height": 296.40625
+          }
+        ],
+        "phone": {
+          "w": 330,
+          "h": 561
+        }
+      },
+      "errors": [],
+      "broken": []
+    },
+    {
+      "kind": "actual",
+      "width": 1024,
+      "metrics": {
+        "width": 1024,
+        "scroll": 1024,
+        "images": [],
+        "font": "\"Plus Jakarta Sans\", Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "sections": [
+          {
+            "id": "beranda",
+            "height": 600
+          },
+          {
+            "id": "masalah",
+            "height": 515.59375
+          },
+          {
+            "id": "solusi",
+            "height": 695.671875
+          },
+          {
+            "id": "cctv",
+            "height": 703.984375
+          },
+          {
+            "id": "pengalaman",
+            "height": 642.265625
+          },
+          {
+            "id": "leo",
+            "height": 744.1875
+          },
+          {
+            "id": "harga",
+            "height": 639.59375
+          },
+          {
+            "id": "kontak",
+            "height": 296.40625
+          }
+        ],
+        "phone": {
+          "w": 330,
+          "h": 561
+        }
+      },
+      "errors": [],
+      "broken": []
+    },
+    {
+      "kind": "reference",
+      "width": 768,
+      "metrics": {
+        "width": 768,
+        "scroll": 768,
+        "images": [],
+        "font": "\"Plus Jakarta Sans\", Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "sections": [
+          {
+            "id": "beranda",
+            "height": 600
+          },
+          {
+            "id": "masalah",
+            "height": 905.765625
+          },
+          {
+            "id": "solusi",
+            "height": 911.671875
+          },
+          {
+            "id": "cctv",
+            "height": 1198.65625
+          },
+          {
+            "id": "pengalaman",
+            "height": 616.0625
+          },
+          {
+            "id": "leo",
+            "height": 767.578125
+          },
+          {
+            "id": "harga",
+            "height": 641.765625
+          },
+          {
+            "id": "kontak",
+            "height": 356
+          }
+        ],
+        "phone": {
+          "w": 306,
+          "h": 544
+        }
+      },
+      "errors": [],
+      "broken": []
+    },
+    {
+      "kind": "actual",
+      "width": 768,
+      "metrics": {
+        "width": 768,
+        "scroll": 768,
+        "images": [],
+        "font": "\"Plus Jakarta Sans\", Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "sections": [
+          {
+            "id": "beranda",
+            "height": 600
+          },
+          {
+            "id": "masalah",
+            "height": 905.765625
+          },
+          {
+            "id": "solusi",
+            "height": 911.671875
+          },
+          {
+            "id": "cctv",
+            "height": 1198.65625
+          },
+          {
+            "id": "pengalaman",
+            "height": 616.0625
+          },
+          {
+            "id": "leo",
+            "height": 767.578125
+          },
+          {
+            "id": "harga",
+            "height": 641.765625
+          },
+          {
+            "id": "kontak",
+            "height": 356
+          }
+        ],
+        "phone": {
+          "w": 306,
+          "h": 544
+        }
+      },
+      "errors": [],
+      "broken": []
+    },
+    {
+      "kind": "reference",
+      "width": 390,
+      "metrics": {
+        "width": 390,
+        "scroll": 390,
+        "images": [],
+        "font": "\"Plus Jakarta Sans\", Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "sections": [
+          {
+            "id": "beranda",
+            "height": 711.921875
+          },
+          {
+            "id": "masalah",
+            "height": 709.296875
+          },
+          {
+            "id": "solusi",
+            "height": 1085.75
+          },
+          {
+            "id": "cctv",
+            "height": 1163.453125
+          },
+          {
+            "id": "pengalaman",
+            "height": 944.421875
+          },
+          {
+            "id": "leo",
+            "height": 1227.921875
+          },
+          {
+            "id": "harga",
+            "height": 1405.71875
+          },
+          {
+            "id": "kontak",
+            "height": 513.25
+          }
+        ],
+        "phone": {
+          "w": 306,
+          "h": 561
+        }
+      },
+      "errors": [],
+      "broken": []
+    },
+    {
+      "kind": "actual",
+      "width": 390,
+      "metrics": {
+        "width": 390,
+        "scroll": 390,
+        "images": [],
+        "font": "\"Plus Jakarta Sans\", Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "sections": [
+          {
+            "id": "beranda",
+            "height": 711.921875
+          },
+          {
+            "id": "masalah",
+            "height": 709.296875
+          },
+          {
+            "id": "solusi",
+            "height": 1085.75
+          },
+          {
+            "id": "cctv",
+            "height": 1163.453125
+          },
+          {
+            "id": "pengalaman",
+            "height": 944.421875
+          },
+          {
+            "id": "leo",
+            "height": 1227.921875
+          },
+          {
+            "id": "harga",
+            "height": 1405.71875
+          },
+          {
+            "id": "kontak",
+            "height": 513.25
+          }
+        ],
+        "phone": {
+          "w": 306,
+          "h": 561
+        }
+      },
+      "errors": [],
+      "broken": []
+    },
+    {
+      "kind": "reference",
+      "width": 320,
+      "metrics": {
+        "width": 320,
+        "scroll": 320,
+        "images": [],
+        "font": "\"Plus Jakarta Sans\", Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "sections": [
+          {
+            "id": "beranda",
+            "height": 761.6875
+          },
+          {
+            "id": "masalah",
+            "height": 766.640625
+          },
+          {
+            "id": "solusi",
+            "height": 1131.90625
+          },
+          {
+            "id": "cctv",
+            "height": 1216.328125
+          },
+          {
+            "id": "pengalaman",
+            "height": 1064.265625
+          },
+          {
+            "id": "leo",
+            "height": 1211.875
+          },
+          {
+            "id": "harga",
+            "height": 1405.71875
+          },
+          {
+            "id": "kontak",
+            "height": 576.5
+          }
+        ],
+        "phone": {
+          "w": 284,
+          "h": 556
+        }
+      },
+      "errors": [],
+      "broken": []
+    },
+    {
+      "kind": "actual",
+      "width": 320,
+      "metrics": {
+        "width": 320,
+        "scroll": 320,
+        "images": [],
+        "font": "\"Plus Jakarta Sans\", Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "sections": [
+          {
+            "id": "beranda",
+            "height": 761.6875
+          },
+          {
+            "id": "masalah",
+            "height": 766.640625
+          },
+          {
+            "id": "solusi",
+            "height": 1131.90625
+          },
+          {
+            "id": "cctv",
+            "height": 1216.328125
+          },
+          {
+            "id": "pengalaman",
+            "height": 1064.265625
+          },
+          {
+            "id": "leo",
+            "height": 1211.875
+          },
+          {
+            "id": "harga",
+            "height": 1405.71875
+          },
+          {
+            "id": "kontak",
+            "height": 576.5
+          }
+        ],
+        "phone": {
+          "w": 284,
+          "h": 556
+        }
+      },
+      "errors": [],
+      "broken": []
+    }
+  ],
+  "interactions": "Four platform tabs; three event states; three cameras; three LEO roles and all twelve suggestions; custom input transparency; three pricing dialogs and WhatsApp target; mobile menu; real login entry",
+  "passed": true
+}

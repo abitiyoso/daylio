@@ -1,0 +1,214 @@
+[
+  {
+    "role": "owner",
+    "reference": "design-reference/Daylio_Backend_v3/desktop_owner.png",
+    "actual": "evidence/screenshots/cleanup/owner-1440-viewport.png",
+    "referencePixels": [
+      1440,
+      1225
+    ],
+    "actualPixels": [
+      1440,
+      1000
+    ],
+    "cssViewport": [
+      1440,
+      1000
+    ],
+    "deviceScaleFactor": 1,
+    "comparisonRegion": [
+      1440,
+      1000
+    ],
+    "left": "approved reference",
+    "right": "authenticated implementation"
+  },
+  {
+    "role": "manager",
+    "reference": "design-reference/Daylio_Backend_v3/desktop_manager.png",
+    "actual": "evidence/screenshots/cleanup/manager-1440-viewport.png",
+    "referencePixels": [
+      1440,
+      900
+    ],
+    "actualPixels": [
+      1440,
+      1000
+    ],
+    "cssViewport": [
+      1440,
+      1000
+    ],
+    "deviceScaleFactor": 1,
+    "comparisonRegion": [
+      1440,
+      900
+    ],
+    "left": "approved reference",
+    "right": "authenticated implementation"
+  },
+  {
+    "role": "caregiver",
+    "reference": "design-reference/Daylio_Backend_v3/desktop_caregiver.png",
+    "actual": "evidence/screenshots/cleanup/caregiver-1440-viewport.png",
+    "referencePixels": [
+      1440,
+      1224
+    ],
+    "actualPixels": [
+      1440,
+      1000
+    ],
+    "cssViewport": [
+      1440,
+      1000
+    ],
+    "deviceScaleFactor": 1,
+    "comparisonRegion": [
+      1440,
+      1000
+    ],
+    "left": "approved reference",
+    "right": "authenticated implementation"
+  },
+  {
+    "role": "parent",
+    "reference": "design-reference/Daylio_Backend_v3/desktop_parent.png",
+    "actual": "evidence/screenshots/cleanup/parent-1440-viewport.png",
+    "referencePixels": [
+      1440,
+      1084
+    ],
+    "actualPixels": [
+      1440,
+      1000
+    ],
+    "cssViewport": [
+      1440,
+      1000
+    ],
+    "deviceScaleFactor": 1,
+    "comparisonRegion": [
+      1440,
+      1000
+    ],
+    "left": "approved reference",
+    "right": "authenticated implementation"
+  },
+  {
+    "role": "owner",
+    "reference": "design-reference/Daylio_Backend_v3/mobile_owner.png",
+    "actual": "evidence/screenshots/cleanup/owner-390.png",
+    "referencePixels": [
+      390,
+      844
+    ],
+    "actualPixels": [
+      390,
+      2661
+    ],
+    "cssViewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 1,
+    "comparisonRegion": [
+      390,
+      844
+    ]
+  },
+  {
+    "role": "caregiver",
+    "reference": "evidence/design-qa/cleanup/reference-states/caregiver-390.png",
+    "actual": "evidence/screenshots/cleanup/caregiver-390.png",
+    "referencePixels": [
+      390,
+      1861
+    ],
+    "actualPixels": [
+      390,
+      2622
+    ],
+    "cssViewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 1,
+    "comparisonRegion": [
+      390,
+      844
+    ]
+  },
+  {
+    "role": "parent",
+    "reference": "design-reference/Daylio_Backend_v3/mobile_parent.png",
+    "actual": "evidence/screenshots/cleanup/parent-390.png",
+    "referencePixels": [
+      390,
+      1788
+    ],
+    "actualPixels": [
+      390,
+      2706
+    ],
+    "cssViewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 1,
+    "comparisonRegion": [
+      390,
+      844
+    ]
+  },
+  {
+    "role": "manager",
+    "reference": "evidence/design-qa/cleanup/reference-states/manager-390-viewport.png",
+    "actual": "evidence/screenshots/cleanup/manager-390-viewport.png",
+    "cssViewport": [
+      390,
+      844
+    ],
+    "deviceScaleFactor": 1,
+    "state": "Control Tower",
+    "left": "approved HTML rendered in matching state",
+    "right": "authenticated implementation"
+  },
+  {
+    "role": "manager",
+    "reference": "evidence/design-qa/cleanup/reference-states/manager-820-viewport.png",
+    "actual": "evidence/screenshots/cleanup/manager-820-viewport.png",
+    "cssViewport": [
+      820,
+      1000
+    ],
+    "deviceScaleFactor": 1,
+    "state": "Control Tower",
+    "left": "approved HTML rendered in matching state",
+    "right": "authenticated implementation"
+  },
+  {
+    "role": "caregiver",
+    "reference": "evidence/design-qa/cleanup/reference-states/caregiver-820-viewport.png",
+    "actual": "evidence/screenshots/cleanup/caregiver-820-viewport.png",
+    "cssViewport": [
+      820,
+      1000
+    ],
+    "deviceScaleFactor": 1,
+    "state": "Quick Care",
+    "left": "approved HTML rendered in matching state",
+    "right": "authenticated implementation"
+  },
+  {
+    "region": "Parent Daily Story",
+    "sourceCrop": [
+      278,
+      583,
+      660,
+      402
+    ],
+    "actual": "evidence/screenshots/cleanup/parent-story-card-1440.png",
+    "normalization": "same 660px card width; aspect ratio retained; narrative longer and typography deliberately larger than original reference per corrective brief"
+  }
+]

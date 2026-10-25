@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-25T01:32:13.195Z",
+  "environment": "Persistent local PGlite database and synthetic isolated auth. No hosted Supabase, external delivery, video, or model inference claimed.",
+  "passed": [
+    "Caregiver UI: six present children preselected, absent child excluded, individual exception, 6 persisted drafts; HTTP idempotency replay returns identical record. Parent cannot read drafts.",
+    "Manager UI publishes reviewed group; linked parent receives only 2 own-child records. Parent morning note acknowledged from caregiver UI; switching siblings replaces meal and notes without mixing children.",
+    "Routine pickup UI: linked guardian approval without repeated manager review, physical identity check, explicit real handover confirmation, persisted evidence plus atomic attendance out. Substitute UI: request → manager approval → physical verification → single-use handover; preapproval bypass denied.",
+    "Daily Closing UI persists unresolved snapshot and keeps incident open.",
+    "Four authenticated role dashboards at 1440/820/390px: no horizontal overflow; mobile navigation opens and returns to workspace; 12 screenshots captured."
+  ],
+  "screenshots": "evidence/screenshots/v3/",
+  "browserErrors": []
+}

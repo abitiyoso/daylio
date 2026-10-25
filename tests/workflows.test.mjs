@@ -7,6 +7,7 @@ import { service } from "../lib/service.mjs";
 import { ElenioAdapter } from "../lib/elenio.mjs";
 import { acceptInvitation } from "../lib/invitations.mjs";
 import { runWorker } from "../lib/worker.mjs";
+import { jakartaDay } from "../lib/care-workflows.mjs";
 let db,
   org,
   orgB,
@@ -164,7 +165,9 @@ test("F10/F12/F13/F15/F16/F18/F21 caregiver-to-parent persisted publish loop", a
   );
   const notifications = await call(parent, "parent", "GET", "notifications");
   assert.equal(
-    notifications.filter((n) => n.event_key === draft.id + ":published").length,
+    notifications.filter(
+      (n) => n.event_key === `${kid}:${jakartaDay()}:daily-update`,
+    ).length,
     1,
   );
   const overview = await call(owner, "owner", "GET", "owner/overview");
@@ -217,14 +220,19 @@ test("F11 pickup requires management approval and staff identity verification", 
     call(staff, "caregiver", "POST", `pickups/${auth.id}/verify-handover`, {
       identityVerified: false,
     }),
-    (e) => e.status === 409,
+    (e) => e.name === "ZodError",
   );
   const pickup = await call(
     staff,
     "caregiver",
     "POST",
     `pickups/${auth.id}/verify-handover`,
-    { identityVerified: true },
+    {
+      verificationMethod: "physical-id",
+      verifiedPersonName: "Wali",
+      identityNote: "Identitas diperiksa sesuai izin wali",
+      handoverConfirmed: true,
+    },
   );
   assert.equal(pickup.state, "verified");
 });
@@ -280,19 +288,41 @@ test("F23/F24/F25/F26 tours and atomic retry-safe enrollment", async () => {
     call(owner, "owner", "POST", `tours/${b.id}/confirm`),
     (e) => e.status === 409,
   );
+  await call(owner, "owner", "PATCH", `classrooms/${room}`, {
+    name: "Toddler",
+    capacity: 12,
+  });
   const enrollment = await call(
     owner,
     "owner",
     "POST",
     `leads/${lead.id}/enroll`,
-    { name: "New Child", classroomId: room, email: "guardian@example.test" },
+    {
+      name: "New Child",
+      classroomId: room,
+      email: "guardian@example.test",
+      packageName: "Bulanan",
+      packagePrice: 1500000,
+      emergencyName: "Kontak wali",
+      emergencyPhone: "081234567890",
+      confirmed: true,
+    },
   );
   const repeated = await call(
     owner,
     "owner",
     "POST",
     `leads/${lead.id}/enroll`,
-    { name: "New Child", classroomId: room, email: "guardian@example.test" },
+    {
+      name: "New Child",
+      classroomId: room,
+      email: "guardian@example.test",
+      packageName: "Bulanan",
+      packagePrice: 1500000,
+      emergencyName: "Kontak wali",
+      emergencyPhone: "081234567890",
+      confirmed: true,
+    },
   );
   assert.equal(enrollment.id, repeated.id);
 });

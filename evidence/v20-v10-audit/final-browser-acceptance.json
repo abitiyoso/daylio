@@ -1,0 +1,57 @@
+{
+  "at": "2026-10-24T08:12:06.917Z",
+  "allSixSuitesPassed": true,
+  "note": "Five suites passed in the aggregate run; access was rerun after warming development entry routes. Original failed aggregate log remains unmodified.",
+  "previewBusinessRecordsUnchanged": true,
+  "previewFingerprint": "12a9552d42254df0c6e6fd76a6c357f2",
+  "results": [
+    {
+      "suite": "v10",
+      "iteration": 1,
+      "passed": true,
+      "elapsedMs": 69245,
+      "output": "Owner signup and branch passed\nVerified invitations passed\nPlanner and enrollment passed\nOwner registration UI \u2192 provider-contract email verification \u2192 authenticated tenant + branch; no unverified tenant bootstrap.\nOwner invites manager and caregiver through Access UI; each verifies a one-use email proof and creates its own private password.\nManager configures classroom/capacity; owner records real future staff shift + trial through planner UI; transactional enrollment replaces reserved prospective seat and verified guardian gets only its child.\nNew tenant: caregiver attendance + care draft \u2192 manager publication \u2192 guardian Daily Story; recurring family invoice \u2192 independent staff verification \u2192 own-family payment receipt.\nSaaS invoice remains pending until platform-admin manual verification; customer cannot activate itself. Essential entitlement denies paid CRM API while preserving parent care/story/billing history. No real payment or external message.\n",
+      "evidence": "evidence/isolated-browser-results.json"
+    },
+    {
+      "suite": "legacy",
+      "iteration": 1,
+      "passed": true,
+      "elapsedMs": 53379,
+      "output": "Retrying screenshot file I/O: evidence/screenshots/marketing-390.png\nRetrying screenshot file I/O: evidence/screenshots/owner-1440.png\nMarketing 390px: no overflow; V20 platform interaction; screenshot captured\nMarketing 768px: no overflow; V20 platform interaction; screenshot captured\nMarketing 1440px: no overflow; V20 platform interaction; screenshot captured\nPublic demo persisted and deduplicated; daycare inquiry issues private prospect token; survey request stays requested until staff confirmation\nCaregiver group logging submitted through the browser form and rendered from persisted API records\nBrowser login with isolated identity fixture for owner, caregiver, parent and unrelated guardian\nReal API + persistent PostgreSQL engine: draft hidden, private photo upload/resize, publish, linked parent timeline on reload, signed media access, cross-user URL denied, owner counts, LEO citation, unavailable CCTV, CSRF rejection\nRevoked guardian cannot use a previously issued media grant; synthetic link restored after test\n",
+      "evidence": "evidence/isolated-browser-results.json"
+    },
+    {
+      "suite": "care",
+      "iteration": 1,
+      "passed": true,
+      "elapsedMs": 61579,
+      "output": "Caregiver UI: six present children preselected, absent child excluded, individual exception, 6 persisted drafts; HTTP idempotency replay returns identical record. Parent cannot read drafts.\nManager UI publishes reviewed group; linked parent receives only 2 own-child records. Parent morning note acknowledged from caregiver UI; switching siblings replaces meal and notes without mixing children.\nRoutine pickup UI: linked guardian approval without repeated manager review, physical identity check, explicit real handover confirmation, persisted evidence plus atomic attendance out. Substitute UI: request \u2192 manager approval \u2192 physical verification \u2192 single-use handover; preapproval bypass denied.\nDaily Closing UI persists unresolved snapshot and keeps incident open.\nFour authenticated role dashboards at 1440/820/390px: no horizontal overflow; mobile navigation opens and returns to workspace; 12 screenshots captured.\n",
+      "evidence": "evidence/isolated-browser-results.json"
+    },
+    {
+      "suite": "business",
+      "iteration": 1,
+      "passed": true,
+      "elapsedMs": 53878,
+      "output": "Care Passport UI: parent proposal \u2192 manager confirmed version \u2192 assigned caregiver read, with actual persisted emergency/allergy information.\nDevelopment UI: configured age/curriculum rubric \u2192 educator observation \u2192 submit \u2192 manager source review \u2192 human report draft \u2192 sign-off/publication \u2192 linked parent read and private PDF generated.\nCRM UI: manual inquiry \u2192 age/schedule/class/package qualification \u2192 saved unsent WhatsApp draft \u2192 confirmed class slot/price/emergency contact \u2192 atomic child/enrollment and guardian invitation. Optional tour/trial skipped explicitly; capacity enforced by shared existing enrollment service. No external messages sent.\nLEO UI works for actual parent, assigned caregiver and owner sessions in explicit verified-records mode.\n",
+      "evidence": "evidence/isolated-browser-results.json"
+    },
+    {
+      "suite": "entry",
+      "iteration": 1,
+      "passed": true,
+      "elapsedMs": 47225,
+      "output": "owner: authenticated dashboard, scoped persisted API, responsive entry\nmanager: authenticated dashboard, scoped persisted API, responsive entry\ncaregiver: authenticated dashboard, scoped persisted API, responsive entry\nparent: authenticated dashboard, scoped persisted API, responsive entry\n",
+      "evidence": "evidence/isolated-browser-results.json"
+    },
+    {
+      "suite": "access",
+      "iteration": 1,
+      "passed": true,
+      "elapsedMs": 83004,
+      "output": "Access UI loaded\nForm filled\nAdmin UI creates persistent parent invitation; provider receives verification request; membership not activated before verification.\nUnverified identity denied; email link \u2192 verified session \u2192 invitation acceptance \u2192 private password \u2192 linked-child-only parent dashboard on mobile.\nProvider rejection returns explicit 503 without claiming delivery; successful request and invitation acceptance leave persistent audit evidence.\nChosen password login works; used email proof rejected; wrong-account acceptance, revoked email send, parent privilege escalation and manager-to-manager invite denied.\nThree labeled V20 LEO simulation roles; separate login entry; desktop/mobile login screenshots.\n",
+      "evidence": "evidence/isolated-browser-access-results.json"
+    }
+  ]
+}

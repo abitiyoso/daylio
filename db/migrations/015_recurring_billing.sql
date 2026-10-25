@@ -1,0 +1,13 @@
+CREATE TABLE recurring_billing_rules(id uuid PRIMARY KEY DEFAULT gen_random_uuid(),organization_id uuid NOT NULL REFERENCES organizations(id),child_id uuid NOT NULL,lines jsonb NOT NULL CHECK(jsonb_typeof(lines)='array'),due_day integer NOT NULL CHECK(due_day BETWEEN 1 AND 28),start_month text NOT NULL CHECK(start_month ~ '^[0-9]{4}-(0[1-9]|1[0-2])$'),active boolean NOT NULL DEFAULT true,created_by uuid NOT NULL,created_at timestamptz NOT NULL DEFAULT now(),FOREIGN KEY(organization_id,child_id) REFERENCES children(organization_id,id));
+CREATE INDEX recurring_billing_scope ON recurring_billing_rules(organization_id,active,child_id);
+ALTER TABLE recurring_billing_rules ENABLE ROW LEVEL SECURITY;
+CREATE POLICY recurring_read ON recurring_billing_rules FOR SELECT TO daylio_app USING(organization_id=app_org() AND app_capability('finance') AND app_has_feature('finance'));
+CREATE POLICY recurring_create ON recurring_billing_rules FOR INSERT TO daylio_app WITH CHECK(organization_id=app_org() AND app_capability('finance') AND app_has_feature('finance') AND created_by=app_user());
+CREATE POLICY recurring_update ON recurring_billing_rules FOR UPDATE TO daylio_app USING(organization_id=app_org() AND app_capability('finance') AND app_has_feature('finance')) WITH CHECK(organization_id=app_org() AND app_capability('finance') AND app_has_feature('finance'));
+GRANT SELECT,INSERT ON recurring_billing_rules TO daylio_app;
+GRANT UPDATE(active) ON recurring_billing_rules TO daylio_app;
+CREATE UNIQUE INDEX recurring_invoice_period ON records(organization_id,(data->>'recurringRuleId'),(data->>'period')) WHERE kind='invoice' AND data ? 'recurringRuleId';
+CREATE POLICY guardian_payment_receipt ON records FOR SELECT TO daylio_app USING(organization_id=app_org() AND app_role()='parent' AND kind='payment' AND state='verified-manual' AND child_id IS NOT NULL AND can_child(child_id));
+DROP POLICY commercial_records_read ON records;
+CREATE POLICY commercial_records_read ON records AS RESTRICTIVE FOR SELECT TO daylio_app USING(record_feature(kind) IS NULL OR app_has_feature(record_feature(kind)) OR (app_role()='parent' AND kind IN ('invoice','enrollment','payment') AND child_id IS NOT NULL AND can_child(child_id)));
+INSERT INTO schema_migrations(version) VALUES(15);
