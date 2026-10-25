@@ -195,26 +195,25 @@ export function initializeMarketing() {
     area: {
       label: "Zona terbatas",
       message:
-        "Contoh: pergerakan terdeteksi pada zona terbatas. Perlu diverifikasi staf.",
+        "Ilustrasi alur review zona terbatas. Integrasi live menggunakan layanan Elenio pada tahap berikutnya.",
     },
     people: {
       label: "Estimasi okupansi",
       message:
-        "Contoh: estimasi kepadatan ruang kegiatan. Jumlah orang perlu diperiksa supervisor.",
+        "Ilustrasi alur pemeriksaan okupansi oleh supervisor. Foto contoh ini tidak dianalisis atau dihitung otomatis.",
     },
     offline: {
       label: "Kamera perlu diperiksa",
       message:
-        "Contoh: gangguan aliran video kamera. Tim dapat mengecek koneksi dan sumber daya.",
+        "Ilustrasi alur penanganan kamera offline. Tim memeriksa koneksi dan sumber daya pada layanan Elenio.",
     },
   };
   function setEvent(id) {
-    $$(".monitor-events button").forEach((btn) =>
-      btn.classList.toggle("selected", btn.dataset.event === id),
-    );
-    $("#detectionOverlay").className =
-      "detection-box " + (id === "area" ? "" : id);
-    $("#detectionLabel").textContent = aiStates[id].label;
+    $$(".monitor-events button").forEach((btn) => {
+      const selected = btn.dataset.event === id;
+      btn.classList.toggle("selected", selected);
+      btn.setAttribute("aria-pressed", String(selected));
+    });
     $("#monitorStatus").textContent = aiStates[id].message;
   }
   $$(".monitor-events button").forEach((btn) =>
@@ -425,9 +424,10 @@ export function initializeMarketing() {
   // Select camera label; each is a UI simulation with access constraints.
   document.querySelectorAll("[data-camera]").forEach((btn) =>
     listen(btn, "click", () => {
-      document
-        .querySelectorAll("[data-camera]")
-        .forEach((el) => el.classList.toggle("current", el === btn));
+      document.querySelectorAll("[data-camera]").forEach((el) => {
+        el.classList.toggle("current", el === btn);
+        el.setAttribute("aria-pressed", String(el === btn));
+      });
       const name =
         btn.querySelector(".camera-item-name")?.textContent || "Ruang kegiatan";
       const el = document.querySelector(".monitor-header>span");

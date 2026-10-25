@@ -47,7 +47,13 @@ import Finance from "./finance";
 import VideoIntegration from "./video-integration";
 import LeoTasks from "./leo-tasks";
 import WorkspaceSearch from "./workspace-search";
-import { displayDate } from "../../lib/workspace-presentation.mjs";
+import AccessPanel from "./access-panel";
+import {
+  displayDate,
+  displayValue,
+  emergencyContact,
+  familyContacts,
+} from "../../lib/workspace-presentation.mjs";
 type Item = Record<string, any>;
 type Request = (
   path: string,
@@ -61,7 +67,6 @@ type Props = {
   memberships: Item[];
   request: Request;
   onTools: () => void;
-  onAccess: () => void;
   onLogout: () => Promise<void>;
   onOrganization: (id: string) => Promise<void>;
 };
@@ -125,6 +130,7 @@ const activities = [
   ["note", "Catatan", NotePencil],
 ] as const;
 const titles: Record<string, [string, string]> = {
+  access: ["Akun & hak akses", "Kelola undangan dan akses tim serta keluarga."],
   staffToday: [
     "Hari Ini",
     "Mulai dari anak, kelas, dan catatan yang membutuhkan perhatian.",
@@ -343,7 +349,6 @@ export default function OperationsWorkspace({
   memberships,
   request,
   onTools,
-  onAccess,
   onLogout,
   onOrganization,
 }: Props) {
@@ -1802,7 +1807,7 @@ export default function OperationsWorkspace({
       <div className="op-columns">
         <div className="op-stack">
           {management && (
-            <button onClick={onAccess}>
+            <button className="op-btn" onClick={() => go("access")}>
               <UsersThree size={18} />
               Akun & hak akses
             </button>
@@ -2207,17 +2212,18 @@ export default function OperationsWorkspace({
   }
   function passports() {
     const passport = extra.current,
-      changes = extra.changes || [];
+      changes = extra.changes || [],
+      emergency = emergencyContact(passport?.data || {});
     return (
       <div className="op-columns">
         <Card
           title={`Care Passport · ${current?.name || "Anak"}`}
-          sub="Informasi yang sudah dikonfirmasi pengelola."
+          sub="Versi yang telah ditinjau pengelola. Periksa kelengkapan sebelum digunakan."
         >
           <p className="op-muted">
             Tanggal lahir:{" "}
             {current?.birth_date
-              ? String(current.birth_date).slice(0, 10)
+              ? displayDate(String(current.birth_date).slice(0, 10))
               : "Belum dilengkapi"}
           </p>
           {management && current && (
@@ -2249,27 +2255,28 @@ export default function OperationsWorkspace({
           {passport ? (
             <>
               <Badge state="approved" />
-              <dl className="op-facts">
+              {!emergency.complete && (
+                <p className="op-passport-incomplete">
+                  Kontak darurat belum lengkap.{" "}
+                  {isParent
+                    ? "Lengkapi melalui pengajuan perubahan di halaman ini."
+                    : "Minta wali melengkapi informasi dan tinjau pengajuannya."}
+                </p>
+              )}
+              <dl className="op-facts op-passport-facts">
                 {[
                   ["Alergi", passport.data.allergies],
                   ["Instruksi perawatan", passport.data.careInstructions],
-                  [
-                    "Kontak darurat",
-                    `${passport.data.emergencyName} · ${passport.data.emergencyPhone}`,
-                  ],
+                  ["Kontak darurat", emergency.label],
                   ["Versi", passport.data.version],
                   [
                     "Kontak keluarga",
-                    passport.data.authorizedContacts
-                      ?.map(
-                        (c: Item) => `${c.name} (${c.relationship}) ${c.phone}`,
-                      )
-                      .join("; ") || "Belum dilengkapi",
+                    familyContacts(passport.data.authorizedContacts),
                   ],
                 ].map(([label, value]) => (
                   <div key={label}>
                     <dt>{label}</dt>
-                    <dd>{value}</dd>
+                    <dd>{displayValue(value)}</dd>
                   </div>
                 ))}
               </dl>
@@ -2339,9 +2346,7 @@ export default function OperationsWorkspace({
                       .filter(Boolean)
                       .join(" · ")}
                   </p>
-                  <p>
-                    Darurat: {r.data.emergencyName} · {r.data.emergencyPhone}
-                  </p>
+                  <p>Darurat: {emergencyContact(r.data).label}</p>
                   {r.state === "submitted" && management && (
                     <SmartForm
                       busy={busy}
@@ -2481,7 +2486,7 @@ export default function OperationsWorkspace({
             )}
           </Card>
           {management && (
-            <button onClick={onAccess}>
+            <button className="op-btn" onClick={() => go("access")}>
               <UsersThree size={18} />
               Akun & hak akses
             </button>
@@ -4151,7 +4156,10 @@ export default function OperationsWorkspace({
             </details>
           )}
           {management && (
-            <button onClick={onAccess}>
+            <button
+              onClick={() => go("access")}
+              aria-current={view === "access" ? "page" : undefined}
+            >
               <UsersThree size={18} />
               Akun & hak akses
             </button>
@@ -4214,7 +4222,11 @@ export default function OperationsWorkspace({
               <span className="op-crumb">
                 <span>{data?.organization.name || "Daycare"}</span>
                 <CaretRight size={12} />
-                <strong>{nav.find((n) => n[0] === view)?.[1]}</strong>
+                <strong>
+                  {view === "access"
+                    ? "Akun & hak akses"
+                    : nav.find((n) => n[0] === view)?.[1]}
+                </strong>
               </span>
             )}
           </div>
@@ -4358,6 +4370,13 @@ export default function OperationsWorkspace({
                 </Card>
               ) : view === "staffToday" ? (
                 staffToday()
+              ) : view === "access" && management ? (
+                <AccessPanel
+                  role={role}
+                  request={req}
+                  refreshVersion={version.current}
+                  onBack={() => go(role === "owner" ? "home" : "control")}
+                />
               ) : view === "handoff" ? (
                 handoff()
               ) : view === "integrations" ? (

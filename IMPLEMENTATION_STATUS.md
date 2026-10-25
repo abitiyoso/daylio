@@ -2,6 +2,21 @@
 
 Updated 25 October 2026 (Asia/Bangkok). This is an evidence ledger, not a production release certificate. Every function remains listed. **The full 42-function definition of done is not yet satisfied.** Rows marked local verified identify the tested subset; the final column identifies remaining acceptance work. No row is represented as deployed.
 
+## Role/screen corrective audit — 25 October 2026
+
+The three reported defects are corrected: public CCTV is an explicit photograph illustration without repeated filmstrip frames or fabricated detection evidence; Care Passport renders missing/partial fields honestly and warns about incomplete emergency contacts; account administration remains inside the approved workspace shell with role-conditional invitation fields and compact member rows. Existing authenticated APIs, database records, email verification, permissions and original brand assets are preserved. No migration or live video integration was introduced.
+
+| Function / surface | Actual correction and evidence |
+|---|---|
+| F03/F06/F08/F37 access | Workspace navigation retained, one page heading, Parent-only required child selector, Owner-only Manager invitation/member controls; authenticated caregiver/parent invitation requests denied. Existing verification/invitation suites retained |
+| F07/F08 child/Care Passport extension | Localized birthday, explicit missing/partial emergency and family contacts, completion warning, responsive facts. Same saved legacy record verified manually; empty profile verified in four-role browser fixtures; helper regression tests |
+| F01 public illustration; F27–F29 deferred | Removed fake detection box/staff/timestamp and seven duplicate frames. Labels distinguish the photograph from live footage; event controls describe the future review workflow. Elenio integration remains deferred |
+| F11/F12/F13/F15/F16/F17/F20/F21/F33/F34 and related tools | Added 32 desktop/mobile cases across Owner, Manager, Caregiver and Parent: passports/access/planner/billing, control/review, batch care/pickup/handoff, Today/messages. Missing-value, overflow, title-height and member-width assertions plus actual image inspection |
+
+Evidence and scoped findings: `docs/ROLE_UI_AUDIT_2026_10_25.md`; captures and logs: `evidence/role-audit-20261025/`. Unit suite: **55 passing tests**. **8/8 isolated browser suites pass** (`all-browser.txt`, `evidence/isolated-browser-results.json`), with disposable data removed and the preview fingerprint unchanged at `12a9552d42254df0c6e6fd76a6c357f2`. Initial overflow-only checks missed mobile spacing and narrow member names; those defects were corrected and geometry checks added before the final run. The full F01–F42 production definition of done remains open as stated above.
+
+The final 32-case role audit also passes after styling the review/development access shortcuts (`final-role-browser.txt`, `evidence/isolated-browser-roles-results.json`); final screenshots were recaptured. **Production webpack build, standalone TypeScript, syntax/embedded-credential lint, marketing JavaScript syntax and source formatting checks pass** (`build.txt`, `typecheck.txt`, `lint.txt`, `marketing-syntax.txt`, `format.txt` in the audit evidence directory). No production data or external provider account was used.
+
 ## UI/workflow corrective audit — 24 October 2026
 
 Validation completed on continuation, 25 October: **7/7 isolated browser suites pass** in `evidence/isolated-browser-results.json`, raw log `evidence/ui-audit-20261024/final-browser-regressions.txt`. The updated planner assertions cover date clearing, previous/next selection, a single page heading and arrow orientation. All temporary test data was removed and the preview fingerprint was unchanged. **Production build, standalone TypeScript and syntax/security lint pass** (`build.txt`, `typecheck.txt`, `lint.txt` in the same evidence folder).

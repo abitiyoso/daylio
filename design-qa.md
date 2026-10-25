@@ -61,3 +61,11 @@ Latest local functional/visual evidence: **53/53 tests**, **seven passing isolat
 The single fictional example's prior file is recoverable at `data/sandbox-backups/photo-2026-10-24T08-12-51.987Z`; business records were unchanged. Hosted SMTP/Supabase/payment/WhatsApp/Elenio/model validation, live stream contracts, real-media consent/licensing, privacy/legal/restore and operator/assistive-technology UAT remain release gates. Advanced scope remains in the functional ledger. No deployment or live-provider readiness is implied.
 
 final result: passed — scoped local LEO and eight-step workflow corrective visual audit, four-role responsive comparison and recorded functional regressions; production release and full F01–F42 completion remain gated.
+
+## Role and screenshot corrections — 25 October 2026
+
+The latest user screenshots supersede exact V20 source matching for the public CCTV illustration. Removed repeated same-photo frames, fake detections/staff indicators/timestamp and the Live heading; retained the original photograph, layout and brand assets. Selected area/event controls now describe an illustration and the future Elenio integration. No private evidence or live camera service is implied.
+
+The saved Care Passport shown by the user now displays explicit missing values, a localized birthday, an emergency-contact completion warning and responsive facts. It retains the same database record. Account administration uses the existing Daylio sidebar/header, role guidance, conditional Parent child selection and compact member rows. Existing email verification and server permissions are preserved.
+
+Actual desktop/mobile images were inspected for Owner, Manager, Caregiver and Parent. Inspection caught mobile title spacing and crushed member names that overflow tests alone missed; flex sizing was corrected and geometry assertions added. The final overview/crops and full originals are in `evidence/role-audit-20261025/`; detailed steps, scope and limitations are in `docs/ROLE_UI_AUDIT_2026_10_25.md`. Prior pixel-perfect source comparison results above are historical and do not claim exact matching for the intentionally corrected LEO/CCTV regions. Current regression results: 55 tests and all eight isolated browser suites pass, preserving the preview fingerprint.

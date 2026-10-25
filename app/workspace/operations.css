@@ -2593,3 +2593,83 @@
 .daylio-ops .op-environment {
   white-space: nowrap;
 }
+
+/* Care Passport and account administration use the same workspace layout. */
+.daylio-ops .op-titlebar {
+  flex-wrap: wrap;
+}
+.daylio-ops .op-titlebar > div:first-child {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.daylio-ops .op-titlebar > .op-row {
+  max-width: 100%;
+}
+.daylio-ops .op-passport-incomplete {
+  margin: 14px 0;
+  padding: 12px 14px;
+  background: #fff7e9;
+  border: 1px solid #eddfc7;
+  border-radius: 10px;
+  color: #765824;
+  line-height: 1.6;
+  font-size: 14px;
+}
+.daylio-ops .op-passport-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 24px;
+}
+.daylio-ops .op-passport-facts > div {
+  padding: 12px 0;
+  border-bottom: 1px solid #edf0ed;
+}
+.daylio-ops .op-passport-facts > div:last-child {
+  grid-column: 1 / -1;
+}
+.daylio-ops .op-access .op-card h2 {
+  margin-top: 0;
+}
+.daylio-ops .op-access-help {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #526773;
+  background: #f5f7f4;
+  padding: 12px;
+  border-radius: 9px;
+}
+.daylio-ops .op-access-member {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.daylio-ops .op-access-member .op-grow {
+  min-width: 0;
+}
+.daylio-ops .op-access-member strong {
+  overflow-wrap: anywhere;
+}
+.daylio-ops .op-access-member p {
+  margin: 4px 0 0;
+}
+.daylio-ops .op-access-member > .op-btn {
+  flex-shrink: 0;
+}
+@media (max-width: 620px) {
+  .daylio-ops .op-passport-facts {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .daylio-ops .op-access-member {
+    flex-wrap: wrap;
+  }
+  .daylio-ops .op-access-member > .op-grow {
+    flex: 1 1 calc(100% - 50px);
+  }
+  .daylio-ops .op-access-member > .op-row {
+    width: 100%;
+  }
+  .daylio-ops .op-access-member > .op-btn {
+    margin-left: 46px;
+  }
+}

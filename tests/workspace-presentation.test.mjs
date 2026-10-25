@@ -3,7 +3,43 @@ import assert from "node:assert/strict";
 import {
   leadStageCounts,
   displayDate,
+  displayValue,
+  emergencyContact,
+  familyContacts,
 } from "../lib/workspace-presentation.mjs";
+
+test("Partial legacy passports expose missing emergency fields without fabricating a contact", () => {
+  assert.deepEqual(emergencyContact({}), {
+    complete: false,
+    label: "Belum dilengkapi",
+  });
+  assert.deepEqual(emergencyContact({ emergencyName: "  Ratna  " }), {
+    complete: false,
+    label: "Ratna · Telepon belum dilengkapi",
+  });
+  assert.deepEqual(emergencyContact({ emergencyPhone: "081234" }), {
+    complete: false,
+    label: "Nama belum dilengkapi · 081234",
+  });
+  assert.deepEqual(
+    emergencyContact({ emergencyName: "Ratna", emergencyPhone: "081234" }),
+    { complete: true, label: "Ratna · 081234" },
+  );
+  assert.equal(displayValue("  "), "Belum dilengkapi");
+  assert.equal(displayValue(undefined), "Belum dilengkapi");
+  assert.equal(displayValue(1), "1");
+});
+test("Family contacts render available fields and tolerate absent legacy contact lists", () => {
+  assert.equal(familyContacts(undefined), "Belum dilengkapi");
+  assert.equal(
+    familyContacts([null, {}, { name: "Fajar", relationship: "Ayah" }]),
+    "Fajar · Ayah",
+  );
+  assert.equal(
+    familyContacts([{ name: "Fajar", phone: "081234" }]),
+    "Fajar · 081234",
+  );
+});
 
 test("Owner pipeline includes contacted and legacy tour records without counting lost/enrolled as active", () => {
   const stages = leadStageCounts({

@@ -2,7 +2,6 @@
 import { useEffect, useState, useRef } from "react";
 import "./workspace.css";
 import OperationsWorkspace from "./operations";
-import AccessPanel from "./access-panel";
 type Row = {
   id: string;
   name?: string;
@@ -436,7 +435,6 @@ export default function Workspace({
     [answer, setAnswer] = useState<any>(null),
     [resetMode, setResetMode] = useState(false),
     [authMode, setAuthMode] = useState(initialMode);
-  const [accessOpen, setAccessOpen] = useState(false);
   const config = configs[view];
   const role = user?.role;
   async function api(
@@ -985,14 +983,6 @@ export default function Workspace({
         <p role="status">{message}</p>
       </main>
     );
-  if (accessOpen && managers.includes(role))
-    return (
-      <AccessPanel
-        role={role}
-        request={(path, method, body) => api(path, method, body)}
-        onBack={() => setAccessOpen(false)}
-      />
-    );
   if (!legacyTools)
     return (
       <OperationsWorkspace
@@ -1000,7 +990,6 @@ export default function Workspace({
         organizationId={org}
         memberships={memberships}
         request={(path, method, body, key) => api(path, method, body, org, key)}
-        onAccess={() => setAccessOpen(true)}
         onTools={() => setLegacyTools(true)}
         onLogout={async () => {
           await api("auth/logout", "POST", {});

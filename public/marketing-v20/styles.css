@@ -322,3 +322,18 @@
   .v20-site .nav-actions .btn-orange{padding:8px 8px;font-size:9px}
   .v20-site .menu-toggle{width:35px;min-width:35px}
 }
+
+/* Public illustration: no repeated frames or fabricated analytics overlays. */
+.v20-site .camera-photo-caption { position:absolute; left:12px; right:12px; bottom:12px; padding:10px 12px; border-radius:9px; background:#102d3de8; color:#fff; display:grid; gap:3px; }
+.v20-site .camera-photo-caption strong { font-size:13px; }
+.v20-site .camera-photo-caption span { font-size:11px; color:#e4edf1; }
+.v20-site .camera-item { min-height:58px; }
+.v20-site .camera-item-name { font-size:11px; }
+.v20-site .camera-item small { font-size:10px; }
+.v20-site .monitor-events button { font-size:12px; min-height:44px; }
+.v20-site .monitor-status { font-size:12px; color:#526773; }
+@media(max-width:620px) {
+  .v20-site .monitor-header { flex-wrap:wrap; font-size:12px; }
+  .v20-site .monitor-header small { font-size:11px; }
+  .v20-site .monitor-events { grid-template-columns:1fr; }
+}

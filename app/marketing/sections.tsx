@@ -767,7 +767,7 @@ export function MonitoringShowcase() {
                 className="live-dot"
                 title="Contoh antarmuka simulasi, bukan kamera live"
               ></span>
-              {" Ruang Kegiatan 1 · Live"}
+              {" Ruang kegiatan · Simulasi"}
             </span>
             <small>{"Preview simulasi · bukan CCTV live"}</small>
           </div>
@@ -780,63 +780,69 @@ export function MonitoringShowcase() {
                 src="/approved-assets/361aa5ea4bcebaa12fca.webp"
                 width="1536"
               />
-              <div className="detection-box" id="detectionOverlay">
-                <span id="detectionLabel">{"Zona terpantau"}</span>
+              <div className="camera-photo-caption">
+                <strong>Ilustrasi ruang daycare</strong>
+                <span>Foto contoh · bukan rekaman kamera</span>
               </div>
-              <div className="caregiver-indicator">{"Staf terpantau"}</div>
-              <div className="cam-timestamp">{"10:24:16"}</div>
-              <div className="camera-disclaimer">{"SIMULASI"}</div>
+              <div className="camera-disclaimer">{"ILUSTRASI"}</div>
             </div>
             <aside aria-label="Area kamera daycare" className="camera-list">
               <button
                 className="camera-item current"
                 data-camera="0"
+                aria-pressed="true"
                 type="button"
               >
                 <span className="cam-thumb">{"01"}</span>
                 <span className="camera-item-name">{"Ruang kegiatan"}</span>
                 <small>{"Kamera 01 · Simulasi"}</small>
               </button>
-              <button className="camera-item" data-camera="1" type="button">
+              <button
+                className="camera-item"
+                data-camera="1"
+                type="button"
+                aria-pressed="false"
+              >
                 <span className="cam-thumb">{"02"}</span>
                 <span className="camera-item-name">{"Ruang bermain"}</span>
                 <small>{"Kamera 02 · Simulasi"}</small>
               </button>
-              <button className="camera-item" data-camera="2" type="button">
+              <button
+                className="camera-item"
+                data-camera="2"
+                type="button"
+                aria-pressed="false"
+              >
                 <span className="cam-thumb">{"03"}</span>
                 <span className="camera-item-name">{"Lobby & jemput"}</span>
                 <small>{"Kamera 03 · Simulasi"}</small>
               </button>
-              <button className="camera-item" data-camera="3" type="button">
+              <button
+                className="camera-item"
+                data-camera="3"
+                type="button"
+                aria-pressed="false"
+              >
                 <span className="cam-thumb">{"04"}</span>
                 <span className="camera-item-name">{"Area makan"}</span>
                 <small>{"Kamera 04 · Simulasi"}</small>
               </button>
             </aside>
           </div>
-          <div aria-hidden="true" className="camera-filmstrip">
-            <span className="filmshot"></span>
-            <span className="filmshot"></span>
-            <span className="filmshot"></span>
-            <span className="filmshot"></span>
-            <span className="filmshot"></span>
-            <span className="filmshot"></span>
-            <span className="filmshot"></span>
-          </div>
           <div className="monitor-events">
-            <button className="selected" data-event="area">
+            <button className="selected" data-event="area" aria-pressed="true">
               <svg className="ic">
                 <use href="#i-shield"></use>
               </svg>
               {" Zona terbatas"}
             </button>
-            <button data-event="people">
+            <button data-event="people" aria-pressed="false">
               <svg className="ic">
                 <use href="#i-users"></use>
               </svg>
               {" Okupansi"}
             </button>
-            <button data-event="offline">
+            <button data-event="offline" aria-pressed="false">
               <svg className="ic">
                 <use href="#i-video"></use>
               </svg>
@@ -845,7 +851,7 @@ export function MonitoringShowcase() {
           </div>
           <div className="monitor-status" id="monitorStatus" role="status">
             {
-              "Contoh: pergerakan terdeteksi pada zona terbatas. Perlu diverifikasi staf."
+              "Ilustrasi alur review zona terbatas. Integrasi live menggunakan layanan Elenio pada tahap berikutnya."
             }
           </div>
         </div>
