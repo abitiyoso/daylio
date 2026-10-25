@@ -370,10 +370,10 @@ export function Challenges() {
           <article className="pain-card">
             <div className="pain-image">
               <img
-                alt="Calon orang tua atau pengelola sedang menggunakan laptop"
+                alt="Ilustrasi pengelola daycare menangani berkas pendaftaran dan kunjungan keluarga"
                 decoding="async"
                 height="512"
-                src="/approved-assets/6717ce9d116146f47f24.webp"
+                src="/marketing-refined/inquiry.webp"
                 width="768"
               />
               <span className="pain-icon">
@@ -391,10 +391,10 @@ export function Challenges() {
           <article className="pain-card">
             <div className="pain-image">
               <img
-                alt="Tumpukan laporan aktivitas anak"
+                alt="Ilustrasi pengasuh mengisi catatan kertas saat rutinitas makan"
                 decoding="async"
                 height="512"
-                src="/approved-assets/ad85612ea33d27ae5196.webp"
+                src="/marketing-refined/carelog.webp"
                 width="768"
               />
               <span className="pain-icon">
@@ -412,10 +412,10 @@ export function Challenges() {
           <article className="pain-card">
             <div className="pain-image">
               <img
-                alt="Orang tua melihat pesan di ponsel"
+                alt="Ilustrasi orang tua menunggu kabar saat penjemputan daycare"
                 decoding="async"
                 height="512"
-                src="/approved-assets/56e8deebff40b6d93aa9.webp"
+                src="/marketing-refined/parentupdate.webp"
                 width="768"
               />
               <span className="pain-icon">
@@ -433,10 +433,10 @@ export function Challenges() {
           <article className="pain-card">
             <div className="pain-image">
               <img
-                alt="Pemilik daycare memeriksa operasional dari laptop"
+                alt="Ilustrasi rekonsiliasi absensi, jadwal staf dan bukti pembayaran daycare"
                 decoding="async"
                 height="512"
-                src="/approved-assets/9f2d72280c542f5f99fe.webp"
+                src="/marketing-refined/operations.webp"
                 width="768"
               />
               <span className="pain-icon">
@@ -452,6 +452,9 @@ export function Challenges() {
           </article>
           {"\n"}
         </div>
+        <p className="visual-note">
+          Visual ilustrasi kegiatan daycare, bukan dokumentasi pelanggan.
+        </p>
         {"\n"}
       </div>
       {"\n"}
@@ -760,73 +763,64 @@ export function MonitoringShowcase() {
             </a>
           </div>
         </div>
-        <div className="monitor">
+        <div className="monitor" data-scenario="area">
           <div className="monitor-header">
-            <span>
-              <span
-                className="live-dot"
-                title="Contoh antarmuka simulasi, bukan kamera live"
-              ></span>
-              {" Ruang kegiatan · Simulasi"}
-            </span>
-            <small>{"Preview simulasi · bukan CCTV live"}</small>
+            <span>Ruang bermain · Contoh kamera 01</span>
+            <small>DEMO SKENARIO · BUKAN LIVE</small>
           </div>
           <div className="monitor-photo">
             <div className="camera-video">
               <img
-                alt="Ruang bermain daycare dari perspektif CCTV, foto ilustrasi resolusi tinggi"
+                alt="Ilustrasi sudut kamera keamanan daycare: area bermain dan pintu servis dengan pengawasan staf"
                 decoding="async"
-                height="1024"
-                src="/approved-assets/361aa5ea4bcebaa12fca.webp"
                 width="1536"
+                height="864"
+                src="/marketing-refined/cctv.webp"
               />
-              <div className="camera-photo-caption">
-                <strong>Ilustrasi ruang daycare</strong>
-                <span>Foto contoh · bukan rekaman kamera</span>
+              <div className="scenario-zone">
+                <span>Zona pintu servis</span>
               </div>
-              <div className="camera-disclaimer">{"ILUSTRASI"}</div>
+              <div className="scenario-occupancy">
+                <strong>4 anak · 2 dewasa</strong>
+                <span>Contoh hitungan area</span>
+              </div>
+              <div className="scenario-offline">
+                <strong>Sinyal kamera terputus</strong>
+                <span>Periksa koneksi melalui layanan Elenio</span>
+              </div>
+              <div className="camera-disclaimer">GAMBAR ILUSTRASI AI</div>
+              <div className="scenario-label">
+                Anotasi demonstrasi · bukan hasil analisis live
+              </div>
             </div>
-            <aside aria-label="Area kamera daycare" className="camera-list">
-              <button
-                className="camera-item current"
-                data-camera="0"
-                aria-pressed="true"
-                type="button"
-              >
-                <span className="cam-thumb">{"01"}</span>
-                <span className="camera-item-name">{"Ruang kegiatan"}</span>
-                <small>{"Kamera 01 · Simulasi"}</small>
-              </button>
-              <button
-                className="camera-item"
-                data-camera="1"
-                type="button"
-                aria-pressed="false"
-              >
-                <span className="cam-thumb">{"02"}</span>
-                <span className="camera-item-name">{"Ruang bermain"}</span>
-                <small>{"Kamera 02 · Simulasi"}</small>
-              </button>
-              <button
-                className="camera-item"
-                data-camera="2"
-                type="button"
-                aria-pressed="false"
-              >
-                <span className="cam-thumb">{"03"}</span>
-                <span className="camera-item-name">{"Lobby & jemput"}</span>
-                <small>{"Kamera 03 · Simulasi"}</small>
-              </button>
-              <button
-                className="camera-item"
-                data-camera="3"
-                type="button"
-                aria-pressed="false"
-              >
-                <span className="cam-thumb">{"04"}</span>
-                <span className="camera-item-name">{"Area makan"}</span>
-                <small>{"Kamera 04 · Simulasi"}</small>
-              </button>
+            <aside
+              className="scenario-review"
+              aria-label="Contoh use case AI Video Analytics"
+            >
+              <span className="scenario-kicker" id="scenarioKicker">
+                01 / ZONA AKSES
+              </span>
+              <h3 id="scenarioTitle">Anak mendekati pintu servis</h3>
+              <p id="scenarioDescription">
+                Event zona virtual membantu pengelola memprioritaskan
+                pemeriksaan. Staf memeriksa area dan mengarahkan anak kembali ke
+                tempat bermain.
+              </p>
+              <dl>
+                <div>
+                  <dt>Contoh pemicu</dt>
+                  <dd id="scenarioTrigger">Pergerakan di zona pintu</dd>
+                </div>
+                <div>
+                  <dt>Tindak lanjut manusia</dt>
+                  <dd id="scenarioAction">
+                    Periksa area dan catat hasil review
+                  </dd>
+                </div>
+              </dl>
+              <span className="scenario-review-note">
+                Keputusan tetap pada staf daycare
+              </span>
             </aside>
           </div>
           <div className="monitor-events">
@@ -840,7 +834,7 @@ export function MonitoringShowcase() {
               <svg className="ic">
                 <use href="#i-users"></use>
               </svg>
-              {" Okupansi"}
+              {" Okupansi & cakupan"}
             </button>
             <button data-event="offline" aria-pressed="false">
               <svg className="ic">
@@ -851,7 +845,7 @@ export function MonitoringShowcase() {
           </div>
           <div className="monitor-status" id="monitorStatus" role="status">
             {
-              "Ilustrasi alur review zona terbatas. Integrasi live menggunakan layanan Elenio pada tahap berikutnya."
+              "Contoh skenario daycare, bukan rekaman atau deteksi aktual. Integrasi live akan menggunakan layanan Elenio."
             }
           </div>
         </div>
@@ -1354,7 +1348,9 @@ export function Closing() {
           <img
             alt="Pengasuh menyambut seorang anak di daycare"
             decoding="async"
-            src="/approved-assets/79c53fd40cc5b205a122.webp"
+            width="1536"
+            height="1024"
+            src="/marketing-refined/welcome.webp"
           />
         </div>
         <div className="closing-copy">

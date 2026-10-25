@@ -263,3 +263,171 @@
     margin: 24px auto;
   }
 }
+/* Administration keeps the authenticated workspace shell and typography. */
+.daylio-ops .workspace-admin {
+  background: transparent;
+  min-height: 0;
+  font: inherit;
+  color: inherit;
+}
+.daylio-ops .workspace-admin .admin-utility {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: end;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.daylio-ops .workspace-admin .admin-utility label {
+  margin: 0;
+  font-size: 13px;
+  color: #526773;
+  min-width: 220px;
+}
+.daylio-ops .workspace-admin .workspace-layout {
+  display: block;
+  max-width: none;
+}
+.daylio-ops .workspace-admin nav {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 0 0 20px;
+  position: static;
+  background: transparent;
+  border-bottom: 1px solid #e3e8e4;
+  margin-bottom: 24px;
+}
+.daylio-ops .workspace-admin nav button {
+  border: 1px solid #e3e8e4;
+  background: white;
+  min-height: 44px;
+  text-align: center;
+  flex: 0 1 auto;
+  font-size: 14px;
+  padding: 10px 16px;
+}
+.daylio-ops .workspace-admin nav button[aria-current] {
+  background: #fff0eb;
+  color: #ae503f;
+  border-color: #f3d6cc;
+}
+.daylio-ops .workspace-admin main {
+  padding: 0;
+}
+.daylio-ops .workspace-admin h1 {
+  font-family: var(--font-heading), sans-serif;
+  font-size: 28px;
+  letter-spacing: -0.04em;
+  margin: 8px 0 16px;
+}
+.daylio-ops .workspace-admin button {
+  background: #b85946;
+  color: white;
+  min-height: 44px;
+  font: inherit;
+  font-size: 14px;
+  border: 1px solid transparent;
+  font-weight: 600;
+}
+.daylio-ops .workspace-admin .secondary {
+  background: white;
+  border-color: #e3e8e4;
+  color: #183d50;
+}
+.daylio-ops .workspace-admin section,
+.daylio-ops .workspace-admin article {
+  border-color: #e3e8e4;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px #173f4d04;
+}
+.daylio-ops .workspace-admin input,
+.daylio-ops .workspace-admin select {
+  font: inherit;
+  font-size: 16px;
+  min-height: 44px;
+}
+.daylio-ops .workspace-admin [role="status"]:empty {
+  display: none;
+}
+.daylio-ops .workspace-admin .page-title {
+  align-items: start;
+}
+@media (max-width: 620px) {
+  .daylio-ops .workspace-admin .admin-utility {
+    align-items: stretch;
+  }
+  .daylio-ops .workspace-admin .admin-utility label {
+    width: 100%;
+  }
+  .daylio-ops .workspace-admin nav {
+    gap: 6px;
+  }
+  .daylio-ops .workspace-admin nav button {
+    flex: 1 1 auto;
+  }
+  .daylio-ops .workspace-admin h1 {
+    font-size: 25px;
+  }
+  .daylio-ops .workspace-admin section {
+    padding: 18px;
+  }
+  .daylio-ops .workspace-admin .page-title {
+    flex-wrap: wrap;
+  }
+}
+.daylio-ops .workspace-admin nav button {
+  color: #183d50;
+}
+.daylio-ops .workspace-admin .admin-tool-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  width: 100%;
+  margin: 12px 0 22px;
+}
+.daylio-ops .workspace-admin .admin-tool-group {
+  border: 1px solid #e3e8e4;
+  border-radius: 12px;
+  padding: 18px;
+  background: #fcfcfa;
+  min-width: 0;
+}
+.daylio-ops .workspace-admin .admin-tool-group h3 {
+  font-size: 16px;
+  margin: 0 0 12px;
+  color: #183d50;
+}
+.daylio-ops .workspace-admin .admin-tool-group button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  margin: 6px 0;
+  font-weight: 500;
+}
+.daylio-ops .workspace-admin .admin-tool-group button span {
+  color: #a95135;
+}
+.daylio-ops .workspace-admin .admin-account-heading {
+  flex-basis: 100%;
+  font-size: 16px;
+  margin: 0;
+}
+.daylio-ops .workspace-admin .actions > button {
+  background: white;
+  color: #183d50;
+  border-color: #e3e8e4;
+}
+@media (max-width: 620px) {
+  .daylio-ops .workspace-admin .admin-tool-groups {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .daylio-ops .workspace-admin .admin-tool-group {
+    padding: 16px;
+  }
+}

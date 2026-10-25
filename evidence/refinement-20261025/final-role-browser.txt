@@ -1,0 +1,3 @@
+Running roles, iteration 1, isolated database/media
+40 role/screen/viewport cases passed: unified administration, passports, access shell and conditional fields, planning, finance, review, care, pickup, handoff and family messages. Public CCTV scenarios checked at desktop/mobile with explicit demo annotation and no fabricated live evidence.
+All selected browser suites passed; showcase unchanged; temporary data removed.

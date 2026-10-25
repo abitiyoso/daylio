@@ -2,6 +2,24 @@
 
 Updated 25 October 2026 (Asia/Bangkok). This is an evidence ledger, not a production release certificate. Every function remains listed. **The full 42-function definition of done is not yet satisfied.** Rows marked local verified identify the tested subset; the final column identifies remaining acceptance work. No row is represented as deployed.
 
+## Media, legacy administration and role preview correction — 25 October 2026
+
+The next four supplied screenshots identify a separate legacy administration layout, generic challenge imagery, an unhelpful CCTV illustration and a soft closing image. Advanced tools now render inside the same authenticated Daylio shell, open grouped tools rather than a duplicate home dashboard, retain scoped forms/actions and return through normal navigation. The four challenge scenes now depict specific daycare work; a fresh closing photograph replaces the visibly soft source. Six generated illustrative assets and their exact built-in ImageGen prompts are recorded in `evidence/refinement-20261025/image-generation.json`; original brand/source assets remain unchanged.
+
+The public CCTV section now demonstrates a supervised child near a service gate, occupancy/staff-coverage review and a lost connection. Each selectable case shows an example trigger and staff follow-up. The image and authored annotations are explicitly labeled as an AI-generated scenario, never actual camera or model output. Live Elenio integration remains deferred. No gateway, streaming, analytics engine or backend replacement was introduced.
+
+| Function / surface | Actual correction and evidence |
+|---|---|
+| F01 public marketing | Specific enrollment, paper care logging, pickup update and operational reconciliation images; high-quality closing source; desktop/mobile capture verifies loaded images at approximately 2× rendered density |
+| F06/F07/F08/F09/F37 advanced administration | Existing tools embedded in approved sidebar/header; one page heading, grouped role-filtered tool menu, working Back/main navigation and tenant selector. Existing APIs and role permissions preserved |
+| F14/F15/F16 Parent | Parent Story language describes reading published information; private activity images retain their full aspect ratio in bounded, expandable thumbnails. Existing private media grants/consent unchanged |
+| F27/F28/F29 deferred | Public examples explain access-zone review, occupancy checks and offline follow-up; no live connection or analytics-accuracy claim |
+| Role preview evidence | Fresh populated-showcase Owner/Manager/Caregiver/Parent desktop/mobile screenshots, plus Parent published history and administration, under `evidence/refinement-20261025/previews/`; no business record mutation |
+
+**55 tests and all eight isolated browser suites pass** in this continuation (`unit-tests.txt`, `all-browser.txt`, `evidence/isolated-browser-results.json`). The complete run includes 38 role cases; the subsequent expanded role audit includes 40 cases after adding Parent Story and final presentation fixes (`final-role-browser.txt`, `evidence/isolated-browser-roles-results.json`). All runs preserve fingerprint `12a9552d42254df0c6e6fd76a6c357f2` and remove disposable data. The capture script separately blocks business mutations and records before/after fingerprints. Detailed findings and direct per-role preview links: `docs/VISUAL_REFINEMENT_2026_10_25.md`. This is scoped local acceptance, with the production/provider gates below still open.
+
+Production webpack build, standalone TypeScript, syntax/embedded-credential lint, marketing JavaScript syntax and source formatting checks pass (`build.txt`, `typecheck.txt`, `lint.txt`, `marketing-syntax.txt`, `format.txt` in the refinement evidence directory). Actual populated-showcase screenshots and public before/after comparison were inspected; private Story photos are bounded without rewriting their source bytes.
+
 ## Role/screen corrective audit — 25 October 2026
 
 The three reported defects are corrected: public CCTV is an explicit photograph illustration without repeated filmstrip frames or fabricated detection evidence; Care Passport renders missing/partial fields honestly and warns about incomplete emergency contacts; account administration remains inside the approved workspace shell with role-conditional invitation fields and compact member rows. Existing authenticated APIs, database records, email verification, permissions and original brand assets are preserved. No migration or live video integration was introduced.

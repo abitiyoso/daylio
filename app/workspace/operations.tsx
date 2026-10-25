@@ -67,6 +67,8 @@ type Props = {
   memberships: Item[];
   request: Request;
   onTools: () => void;
+  administration?: ReactNode;
+  onNavigate?: () => void;
   onLogout: () => Promise<void>;
   onOrganization: (id: string) => Promise<void>;
 };
@@ -349,6 +351,8 @@ export default function OperationsWorkspace({
   memberships,
   request,
   onTools,
+  administration,
+  onNavigate,
   onLogout,
   onOrganization,
 }: Props) {
@@ -562,6 +566,7 @@ export default function OperationsWorkspace({
     }
   }
   function go(next: string) {
+    onNavigate?.();
     setView(next);
     setError("");
     setNotice("");
@@ -1902,7 +1907,11 @@ export default function OperationsWorkspace({
         </div>
         <Card
           title={isParent ? "Catatan terbit" : "Susun Daily Story"}
-          sub="Gunakan catatan nyata yang telah diterbitkan."
+          sub={
+            isParent
+              ? "Catatan perawatan yang sudah dibagikan daycare."
+              : "Gunakan catatan nyata yang telah diterbitkan."
+          }
         >
           {!isParent && sources.length ? (
             <SmartForm
@@ -3740,7 +3749,10 @@ export default function OperationsWorkspace({
       </div>
     );
   }
-  const heading = titles[view] || titles.home;
+  const heading =
+    isParent && view === "story"
+      ? ["Daily Story", "Cerita yang sudah ditinjau dan dibagikan daycare."]
+      : titles[view] || titles.home;
   function staffToday() {
     const assigned = children.filter(
         (c) => !classId || c.classroom_id === classId,
@@ -4122,8 +4134,12 @@ export default function OperationsWorkspace({
                   .map(([key, label, Icon]) => (
                     <button
                       key={key}
-                      className={view === key ? "active" : ""}
-                      aria-current={view === key ? "page" : undefined}
+                      className={
+                        !administration && view === key ? "active" : ""
+                      }
+                      aria-current={
+                        !administration && view === key ? "page" : undefined
+                      }
                       onClick={() => go(key)}
                     >
                       <Icon size={17} />
@@ -4146,7 +4162,9 @@ export default function OperationsWorkspace({
                     <button
                       key={key}
                       onClick={() => go(key)}
-                      aria-current={view === key ? "page" : undefined}
+                      aria-current={
+                        !administration && view === key ? "page" : undefined
+                      }
                     >
                       <Icon size={17} />
                       {label}
@@ -4158,7 +4176,9 @@ export default function OperationsWorkspace({
           {management && (
             <button
               onClick={() => go("access")}
-              aria-current={view === "access" ? "page" : undefined}
+              aria-current={
+                !administration && view === "access" ? "page" : undefined
+              }
             >
               <UsersThree size={18} />
               Akun & hak akses
@@ -4167,7 +4187,10 @@ export default function OperationsWorkspace({
           {!isParent && (
             <>
               <span className="op-nav-label">PENGELOLAAN</span>
-              <button onClick={onTools}>
+              <button
+                onClick={onTools}
+                aria-current={administration ? "page" : undefined}
+              >
                 <GearSix size={18} />
                 Administrasi lanjutan
               </button>
@@ -4223,9 +4246,11 @@ export default function OperationsWorkspace({
                 <span>{data?.organization.name || "Daycare"}</span>
                 <CaretRight size={12} />
                 <strong>
-                  {view === "access"
-                    ? "Akun & hak akses"
-                    : nav.find((n) => n[0] === view)?.[1]}
+                  {administration
+                    ? "Administrasi daycare"
+                    : view === "access"
+                      ? "Akun & hak akses"
+                      : nav.find((n) => n[0] === view)?.[1]}
                 </strong>
               </span>
             )}
@@ -4271,7 +4296,10 @@ export default function OperationsWorkspace({
         <main className="op-content">
           <div
             className="op-titlebar"
-            hidden={["today", "staffToday", "home"].includes(view)}
+            hidden={
+              Boolean(administration) ||
+              ["today", "staffToday", "home"].includes(view)
+            }
           >
             <div>
               <span className="op-kicker">
@@ -4358,7 +4386,9 @@ export default function OperationsWorkspace({
             </Card>
           ) : (
             <div aria-busy={busy || (needsExtra && !extraReady && !error)}>
-              {needsExtra && !extraReady ? (
+              {administration ? (
+                administration
+              ) : needsExtra && !extraReady ? (
                 <Card
                   title={error ? "Catatan belum tersedia" : "Memuat catatan…"}
                 >
@@ -4522,7 +4552,9 @@ export default function OperationsWorkspace({
           return (
             <button
               key={key}
-              aria-current={view === key ? "page" : undefined}
+              aria-current={
+                !administration && view === key ? "page" : undefined
+              }
               aria-label={`Buka ${item[1]}`}
               onClick={() => go(key)}
             >

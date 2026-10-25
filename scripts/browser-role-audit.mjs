@@ -8,7 +8,7 @@ import {
 import { sandbox } from "../db/sandbox-fixture.mjs";
 const base = process.env.TEST_BASE_URL;
 await requireIsolatedBrowserTarget(base);
-const root = "evidence/role-audit-20261025",
+const root = "evidence/refinement-20261025",
   results = [],
   errors = [];
 await mkdir(root + "/screenshots", { recursive: true });
@@ -34,7 +34,13 @@ try {
     ],
     [
       "parent",
-      ["Care Passport", "Anakku Hari Ini", "Izin Penjemputan", "Pesan Daycare"],
+      [
+        "Care Passport",
+        "Anakku Hari Ini",
+        "Izin Penjemputan",
+        "Pesan Daycare",
+        "Cerita Harian",
+      ],
     ],
   ]) {
     const context = await browser.newContext({
@@ -173,6 +179,62 @@ try {
           });
         }
       }
+      if (role !== "parent") {
+        await page.setViewportSize({ width: 1440, height: 1000 });
+        await page
+          .getByRole("navigation", { name: "Navigasi utama" })
+          .getByRole("button", { name: "Administrasi lanjutan", exact: true })
+          .click();
+        await page.locator(".workspace-admin").waitFor();
+        await page
+          .getByRole("heading", { name: "Administrasi daycare", exact: true })
+          .waitFor();
+        for (const width of [1440, 390]) {
+          await page.setViewportSize({ width, height: 1000 });
+          assert.equal(await page.locator(".op-sidebar").count(), 1);
+          assert.equal(
+            await page.getByRole("heading", { level: 1 }).count(),
+            1,
+          );
+          assert.equal(
+            await page
+              .getByRole("heading", {
+                name: "Kabar daycare hari ini",
+                exact: true,
+              })
+              .count(),
+            0,
+          );
+          assert.equal(
+            await page.evaluate(
+              () => document.documentElement.scrollWidth <= innerWidth,
+            ),
+            true,
+          );
+          await saveBrowserScreenshot(page, {
+            path:
+              root +
+              "/screenshots/" +
+              role +
+              "-administration-" +
+              width +
+              ".png",
+            fullPage: true,
+          });
+          results.push({
+            role,
+            view: "Administrasi daycare",
+            width,
+            noOverflow: true,
+            noLeakedValues: true,
+          });
+        }
+        await page.setViewportSize({ width: 1440, height: 1000 });
+        await page
+          .getByRole("button", { name: "← Kembali ke dashboard", exact: true })
+          .click();
+        assert.equal(await page.locator(".workspace-admin").count(), 0);
+      }
     } finally {
       await context.close();
     }
@@ -193,6 +255,21 @@ try {
       .count(),
     0,
   );
+  for (const scenario of ["area", "people", "offline"]) {
+    await page.locator('[data-event="' + scenario + '"]').click();
+    assert.equal(
+      await page.locator(".monitor").getAttribute("data-scenario"),
+      scenario,
+    );
+    assert.equal(
+      await page
+        .locator('[data-event="' + scenario + '"]')
+        .getAttribute("aria-pressed"),
+      "true",
+    );
+    assert.ok(await page.locator("#scenarioTitle").innerText());
+  }
+  await page.locator('[data-event="area"]').click();
   for (const width of [1440, 390]) {
     await page.setViewportSize({ width, height: 1000 });
     assert.equal(
@@ -222,7 +299,7 @@ try {
     ),
   );
   console.log(
-    "32 role/screen/viewport cases passed: passports, access shell and conditional fields, planning, finance, review, care, pickup, handoff and family messages. Public CCTV illustration checked at desktop/mobile without repeated frames or fabricated detections.",
+    "40 role/screen/viewport cases passed: unified administration, passports, access shell and conditional fields, planning, finance, review, care, pickup, handoff and family messages. Public CCTV scenarios checked at desktop/mobile with explicit demo annotation and no fabricated live evidence.",
   );
 } finally {
   await browser.close();

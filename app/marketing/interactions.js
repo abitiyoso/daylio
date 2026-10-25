@@ -193,27 +193,47 @@ export function initializeMarketing() {
 
   const aiStates = {
     area: {
-      label: "Zona terbatas",
+      kicker: "01 / ZONA AKSES",
+      title: "Anak mendekati pintu servis",
+      description:
+        "Event zona virtual membantu pengelola memprioritaskan pemeriksaan. Staf memeriksa area dan mengarahkan anak kembali ke tempat bermain.",
+      trigger: "Pergerakan di zona pintu",
+      action: "Periksa area dan catat hasil review",
       message:
-        "Ilustrasi alur review zona terbatas. Integrasi live menggunakan layanan Elenio pada tahap berikutnya.",
+        "Contoh skenario daycare, bukan rekaman atau deteksi aktual. Integrasi live akan menggunakan layanan Elenio.",
     },
     people: {
-      label: "Estimasi okupansi",
+      kicker: "02 / OKUPANSI",
+      title: "Okupansi & cakupan pengasuh",
+      description:
+        "Hitungan orang membantu pemeriksaan cakupan di ruang bermain. Pengelola mencocokkan dengan absensi dan penugasan staf sebelum menindaklanjuti.",
+      trigger: "4 anak · 2 dewasa (contoh)",
+      action: "Cocokkan absensi dan penugasan",
       message:
-        "Ilustrasi alur pemeriksaan okupansi oleh supervisor. Foto contoh ini tidak dianalisis atau dihitung otomatis.",
+        "Angka dan anotasi adalah contoh skenario, tidak dianalisis dari kamera live. AI tidak menentukan kelayakan pengasuhan.",
     },
     offline: {
-      label: "Kamera perlu diperiksa",
+      kicker: "03 / KONEKSI KAMERA",
+      title: "Kamera berhenti mengirim gambar",
+      description:
+        "Gambar yang terputus perlu ditangani sebagai gangguan layanan. Staf memeriksa koneksi dan sumber daya, lalu mencatat hasil pemeriksaan.",
+      trigger: "Aliran video terputus (contoh)",
+      action: "Periksa koneksi melalui layanan Elenio",
       message:
-        "Ilustrasi alur penanganan kamera offline. Tim memeriksa koneksi dan sumber daya pada layanan Elenio.",
+        "Simulasi gangguan koneksi, bukan status kamera nyata. Jangan menafsirkan gambar terakhir sebagai keadaan saat ini.",
     },
   };
   function setEvent(id) {
+    if (!aiStates[id]) return;
     $$(".monitor-events button").forEach((btn) => {
       const selected = btn.dataset.event === id;
       btn.classList.toggle("selected", selected);
       btn.setAttribute("aria-pressed", String(selected));
     });
+    $(".monitor").dataset.scenario = id;
+    for (const key of ["kicker", "title", "description", "trigger", "action"])
+      $("#scenario" + key[0].toUpperCase() + key.slice(1)).textContent =
+        aiStates[id][key];
     $("#monitorStatus").textContent = aiStates[id].message;
   }
   $$(".monitor-events button").forEach((btn) =>

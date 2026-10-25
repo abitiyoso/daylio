@@ -983,84 +983,41 @@ export default function Workspace({
         <p role="status">{message}</p>
       </main>
     );
-  if (!legacyTools)
-    return (
-      <OperationsWorkspace
-        user={user}
-        organizationId={org}
-        memberships={memberships}
-        request={(path, method, body, key) => api(path, method, body, org, key)}
-        onTools={() => setLegacyTools(true)}
-        onLogout={async () => {
-          await api("auth/logout", "POST", {});
-          setUser(null);
-        }}
-        onOrganization={async (tenant) => {
-          setOrg(tenant);
-          await load(tenant);
-        }}
-      />
-    );
   const readOnly =
     (view === "consents" && role !== "parent") ||
     (role === "parent" &&
       !["messages", "pickups", "consents", "requests"].includes(view)) ||
     (role === "caregiver" &&
       ["children", "shifts", "announcements"].includes(view));
-  return (
-    <div className="workspace">
-      <header>
-        <button onClick={() => setLegacyTools(false)}>
-          Kembali ke dashboard
+  const administration = (
+    <div className="workspace workspace-admin">
+      <div className="admin-utility">
+        <button className="secondary" onClick={() => setLegacyTools(false)}>
+          ← Kembali ke dashboard
         </button>
-        <a href="/" className="wordmark">
-          Daylio <small>by Elenio</small>
-        </a>
-        <select
-          aria-label="Daycare aktif"
-          value={org}
-          onChange={(e) => {
-            const id = e.target.value;
-            setOrg(id);
-            setView("home");
-            void run(() => load(id));
-          }}
-        >
-          {memberships.map((m) => (
-            <option key={m.organization_id} value={m.organization_id}>
-              {m.name}
-            </option>
-          ))}
-        </select>
-        <span>{role}</span>
-        <button
-          className="secondary"
-          onClick={() =>
-            void run(async () => {
-              await api("auth/logout", "POST", {});
-              setUser(null);
-            })
-          }
-        >
-          Keluar
-        </button>
-      </header>
-      {process.env.NEXT_PUBLIC_SANDBOX === "true" && (
-        <p
-          style={{
-            margin: 0,
-            padding: 12,
-            background: "#fff0bd",
-            textAlign: "center",
-          }}
-        >
-          SANDBOX · Hanya data sintetis. Kamera dan provider LEO tidak
-          terhubung.
-        </p>
-      )}
+        <label>
+          Daycare aktif
+          <select
+            aria-label="Daycare aktif"
+            value={org}
+            onChange={(e) => {
+              const id = e.target.value;
+              setOrg(id);
+              setView("more");
+              void run(() => load(id));
+            }}
+          >
+            {memberships.map((m) => (
+              <option key={m.organization_id} value={m.organization_id}>
+                {m.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
       <div className="workspace-layout">
         <nav aria-label="Menu aplikasi">
-          <button onClick={() => setView("home")}>
+          <button onClick={() => setLegacyTools(false)}>
             {role === "parent"
               ? "Beranda"
               : role === "caregiver"
@@ -1098,6 +1055,7 @@ export default function Workspace({
                 {config?.title ||
                   {
                     home: "Kabar daycare hari ini",
+                    more: "Administrasi daycare",
                     leo: "Tanya LEO",
                     cctv: "CCTV area bersama",
                   }[view]}
@@ -1114,32 +1072,100 @@ export default function Workspace({
           <p role="status" aria-live="polite">
             {busy ? "Memuat…" : message}
           </p>
-          {children.length > 0 && (
-            <label>
-              Anak aktif
-              <select
-                value={childId}
-                onChange={(e) => setChild(e.target.value)}
-              >
-                {children.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-          )}
+          {children.length > 0 &&
+            (config?.child ||
+              ["activities", "pickups", "consents"].includes(view)) && (
+              <label>
+                Anak aktif
+                <select
+                  value={childId}
+                  onChange={(e) => setChild(e.target.value)}
+                >
+                  {children.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            )}
           {view === "more" && (
             <section>
               <h2>Layanan daycare</h2>
               <div className="actions">
-                {Object.entries(configs)
-                  .filter(([, c]) => c.roles.includes(role))
-                  .map(([key, c]) => (
-                    <button key={key} onClick={() => setView(key)}>
-                      {c.title}
-                    </button>
-                  ))}
+                <div className="admin-tool-groups">
+                  {[
+                    [
+                      "Anak & pengasuhan",
+                      [
+                        "children",
+                        "attendance",
+                        "activities",
+                        "pickups",
+                        "incidents",
+                        "instructions",
+                        "media",
+                        "consents",
+                      ],
+                    ],
+                    [
+                      "Tim & operasional",
+                      [
+                        "classrooms",
+                        "branches",
+                        "assignments",
+                        "shifts",
+                        "handoffs",
+                        "invitations",
+                        "members",
+                        "announcements",
+                        "messages",
+                      ],
+                    ],
+                    [
+                      "Pendaftaran & tagihan",
+                      [
+                        "leads",
+                        "tours",
+                        "trials",
+                        "followups",
+                        "plans",
+                        "invoices",
+                      ],
+                    ],
+                    [
+                      "Privasi & pengaturan",
+                      [
+                        "settings",
+                        "requests",
+                        "support",
+                        "retention",
+                        "notifications",
+                        "audit",
+                      ],
+                    ],
+                  ].map(([title, keys]) => {
+                    const available = (keys as string[]).filter((key) =>
+                      configs[key]?.roles.includes(role),
+                    );
+                    return available.length ? (
+                      <div className="admin-tool-group" key={title as string}>
+                        <h3>{title}</h3>
+                        {available.map((key) => (
+                          <button
+                            className="secondary"
+                            key={key}
+                            onClick={() => setView(key)}
+                          >
+                            {configs[key].title}
+                            <span aria-hidden="true">→</span>
+                          </button>
+                        ))}
+                      </div>
+                    ) : null;
+                  })}
+                </div>
+                <h3 className="admin-account-heading">Layanan & akun</h3>
                 <button onClick={() => setView("cctv")}>CCTV</button>
                 <button onClick={() => setView("leo")}>Tanya LEO</button>
                 <a href="/platform">Administrasi platform</a>
@@ -1599,10 +1625,28 @@ export default function Workspace({
           )}
         </main>
       </div>
-      <footer>
-        Daylio by{" "}
-        <img src="/marketing/assets/elenio-official.png" alt="ELENIO" />
-      </footer>
     </div>
+  );
+  return (
+    <OperationsWorkspace
+      user={user}
+      organizationId={org}
+      memberships={memberships}
+      request={(path, method, body, key) => api(path, method, body, org, key)}
+      administration={legacyTools ? administration : undefined}
+      onNavigate={() => setLegacyTools(false)}
+      onTools={() => {
+        setView("more");
+        setLegacyTools(true);
+      }}
+      onLogout={async () => {
+        await api("auth/logout", "POST", {});
+        setUser(null);
+      }}
+      onOrganization={async (tenant) => {
+        setOrg(tenant);
+        await load(tenant);
+      }}
+    />
   );
 }

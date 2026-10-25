@@ -1,5 +1,7 @@
 # Daylio V20 / v10 visual and functional QA
 
+Latest continuation, 25 October 2026: the user's following four-image correction replaces generic challenge/closing photos, adds explicit daycare CCTV demonstration scenarios and embeds legacy administration inside the existing role shell. Parent Story uses reader language and bounded uncropped private photos. Fresh populated-showcase desktop/mobile previews, actual before/after comparison and image-generation provenance: `docs/VISUAL_REFINEMENT_2026_10_25.md`, `evidence/refinement-20261025/`. Validation: 55 tests, eight complete isolated browser suites, a subsequent 40-case role audit, production build, standalone TypeScript, lint and source formatting pass. Original logos, archived sources, business records and permission rules remain unchanged. Live video/analytics remains deferred. Historical source-matching results below do not apply to these intentionally revised regions.
+
 Date: 24 October 2026, Asia/Bangkok. Scope: approved V20 public landing and the implemented v10 workflow phase in the existing application. Local acceptance is distinct from a hosted production release and full F01–F42 completion. Prior report: `docs/design-qa-2026-10-18.md`.
 
 ## Source and matching
