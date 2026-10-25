@@ -199,11 +199,6 @@ export default function Planner({
     <div className="sc-app">
       <link rel="stylesheet" href="/workspace-v10.css" />
       <div className="sc-topbar">
-        <div>
-          <span className="sc-eyebrow">DAYLIO · OPERATIONS / SCHEDULING</span>
-          <h1>Jadwal yang jelas. Kapasitas terkendali.</h1>
-          <p>Atur kelas, penugasan pengasuh, dan booking tanpa bentrok.</p>
-        </div>
         {management && (
           <div className="sc-actions">
             <ClassroomSetup
@@ -255,7 +250,11 @@ export default function Planner({
                   <button
                     className="sc-button icon"
                     aria-label="Minggu sebelumnya"
-                    onClick={() => setAnchor(dateShift(anchor, -7))}
+                    onClick={() => {
+                      const next = dateShift(anchor, -7);
+                      setAnchor(next);
+                      setDate(next);
+                    }}
                   >
                     <ArrowLeft size={16} />
                   </button>
@@ -271,7 +270,11 @@ export default function Planner({
                   <button
                     className="sc-button icon"
                     aria-label="Minggu berikutnya"
-                    onClick={() => setAnchor(dateShift(anchor, 7))}
+                    onClick={() => {
+                      const next = dateShift(anchor, 7);
+                      setAnchor(next);
+                      setDate(next);
+                    }}
                   >
                     <ArrowRight size={16} />
                   </button>
@@ -317,6 +320,7 @@ export default function Planner({
                     type="date"
                     value={selectedDate}
                     onChange={(e) => {
+                      if (!e.target.value) return;
                       setDate(e.target.value);
                       setAnchor(e.target.value);
                     }}
@@ -440,12 +444,10 @@ export default function Planner({
                 </div>
               )}
               <div className="sc-footnote">
-                Anak terdaftar sudah memesan kursi kelas. Prospek menambah
-                kebutuhan kursi pada interval booking; server memeriksa puncak
-                bersamaan dan cakupan staf sepanjang interval. Angka pada sel
-                adalah batas atas per hari. Rasio berasal dari konfigurasi
-                daycare. Tidak ada pembayaran atau WhatsApp yang dikirim
-                otomatis.
+                Kursi anak terdaftar dan booking dihitung bersama. Angka
+                kalender menunjukkan kebutuhan maksimum per hari. Buka tanggal
+                untuk memeriksa booking dan shift; rasio mengikuti pengaturan
+                daycare.
               </div>
             </section>
             <aside className="sc-side">

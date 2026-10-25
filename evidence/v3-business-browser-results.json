@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-24T09:05:05.619Z",
+  "at": "2026-10-24T12:05:19.028Z",
   "environment": "Synthetic localhost; persisted PGlite and isolated identity fixture. No external messages or provider integration.",
   "passed": [
     "Care Passport UI: parent proposal → manager confirmed version → assigned caregiver read, with actual persisted emergency/allergy information.",

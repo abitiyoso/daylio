@@ -4,6 +4,14 @@ Date: 24 October 2026, Asia/Bangkok. Scope: approved V20 public landing and the 
 
 ## Source and matching
 
+### Current corrective audit — 24 October 2026
+
+The user's new robot/UI feedback explicitly supersedes the poster treatment in the archived V20 reference. Current LEO uses a transparent, inspected derivative of the same robot (`public/brand/leo-cutout-v1.png`); the original poster, exact archived HTML and official brand logos remain unchanged. Prior exact landing pixel metrics below are historical and no longer apply to the intentionally corrected LEO mascot region.
+
+Current-run evidence and eight-step audit: `docs/UI_AUDIT_2026_10_24.md`, `evidence/ui-audit-20261024/`. In-app browser checks covered LEO Parent tab/photo question, Owner refresh/pipeline, CRM qualification dialog, calendar previous/next/today and Parent sibling switching. Existing read-only capture workflow produced all four roles at five matching source/actual widths with no overflow, broken images or business-record change. `evidence/v10/results.json` is the latest role comparison result; comparison PNGs were inspected. Actual counts, available photographs, explicit unavailable services and initials remain intentional differences from prototype data.
+
+Resolved issues: poster edges/text; omitted active pipeline stages; summary refresh/error recovery; duplicate planner title; reversed arrow; out-of-week detail selection and empty-date crash; crowded CRM buttons; raw legacy tour status/date; narrow review controls; stray care-note punctuation; wrapped child-age/badge; truncated mobile navigation. Scoped selectors ensure calendar/funnel readability overrides the later source stylesheet. Source geometry is retained outside these authorized corrections. This audit is not a claim of complete accessibility compliance or production release readiness. Final validation is recorded in `IMPLEMENTATION_STATUS.md`.
+
 ### Subscription continuation QA — 24 October 2026
 
 The new current/scheduled-period cards, pending-invoice cancellation dialog and admin period evidence use the existing authenticated v10 typography, colors, spacing and controls. Desktop (1440px) and mobile (390px) actual screenshots were inspected at `evidence/screenshots/subscription/owner-desktop.png` and `owner-mobile.png`. Current Growth, subsequent Essential and cancelled yearly request all reflect database records. The mobile invoice table scrolls within its container; the page has no horizontal overflow.
@@ -48,8 +56,8 @@ Private v10 integrates real services rather than prototype localStorage. Actual 
 
 The V20 Essential card lists CRM/enrollment while the explicit backend request assigns those capabilities to Growth. Server gates follow the explicit backend rule; exact public copy retains its prototype-price disclaimer. Commercial-copy alignment requires product approval before launch; see `docs/V10_DECISIONS.md`.
 
-Final local evidence: **48/48 backend tests**, **six passing browser suite outcomes across the recorded final runs**, twenty private visual cases, six public viewports, eighteen native zoom cases, TypeScript, lint and a successful webpack production build. `evidence/v20-v10-audit/final-browser-acceptance.json` consolidates actual passing outcomes and cites the unmodified raw runs.
+Latest local functional/visual evidence: **53/53 tests**, **seven passing isolated browser suites**, twenty recaptured private visual cases and the inspected in-app before/after audit. Raw results: `evidence/ui-audit-20261024/` and `evidence/isolated-browser-results.json`. Earlier V20 work separately recorded six public widths and eighteen native zoom cases; its exact-pixel results are historical for the intentionally changed LEO region. Current build/TypeScript/lint outcomes are recorded in the functional ledger.
 
 The single fictional example's prior file is recoverable at `data/sandbox-backups/photo-2026-10-24T08-12-51.987Z`; business records were unchanged. Hosted SMTP/Supabase/payment/WhatsApp/Elenio/model validation, live stream contracts, real-media consent/licensing, privacy/legal/restore and operator/assistive-technology UAT remain release gates. Advanced scope remains in the functional ledger. No deployment or live-provider readiness is implied.
 
-final result: passed — local V20 fidelity and implemented v10 workflow phase; production release remains gated.
+final result: passed — scoped local LEO and eight-step workflow corrective visual audit, four-role responsive comparison and recorded functional regressions; production release and full F01–F42 completion remain gated.

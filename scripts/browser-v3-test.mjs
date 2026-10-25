@@ -33,7 +33,7 @@ try {
       .fill("Sandbox-only-2026!");
     await page.getByRole("button", { name: "Masuk", exact: true }).click();
     await page.locator('.op-content > div[aria-busy="false"]').waitFor();
-    await page.getByText("SANDBOX · Data sintetis", { exact: false }).waitFor();
+    await page.locator(".op-environment").filter({ hasText: /Sandbox/i }).waitFor();
     return { page, context };
   }
   const owner = await login("owner"),

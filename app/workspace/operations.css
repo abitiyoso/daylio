@@ -567,7 +567,8 @@
 .op-exception .op-btn {
   font-size: 13px;
   padding: 7px 9px;
-  max-width: 115px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 .op-capacity {
   padding: 12px 0;
@@ -2231,9 +2232,9 @@
   border-radius: 10px;
   background: white;
   color: #425966;
-  font-size:12px;
-  font-family:inherit;
-  font-weight:600;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 600;
   cursor: pointer;
 }
 .daylio-ops .op-titlebar[hidden] {
@@ -2509,4 +2510,86 @@
 .daylio-ops .v6-primary-btn {
   background: #bb5948;
   border-color: #bb5948;
+}
+
+/* Audited 24 Oct: structured prospect actions, readable counts and calendar controls. */
+.daylio-ops .op-lead-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+.daylio-ops .op-lead-actions .op-btn {
+  min-width: 0;
+  justify-content: center;
+  padding: 10px 8px;
+}
+.daylio-ops .op-lead-card + .op-lead-card {
+  padding-top: 24px;
+}
+.daylio-ops[data-view] .v10-funnel {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  align-items: end;
+}
+.daylio-ops[data-view] .v10-funnel-col b {
+  font-size: 18px;
+}
+.daylio-ops[data-view] .v10-funnel-col small {
+  font-size: 12px;
+  color: #526773;
+  text-align: center;
+  min-height: 34px;
+  line-height: 1.4;
+}
+.daylio-ops[data-view] .sc-topbar {
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+.daylio-ops[data-view] .sc-button,
+.daylio-ops[data-view] .sc-viewtabs button {
+  font-size: 14px;
+  min-height: 44px;
+}
+.daylio-ops[data-view] .sc-stat small,
+.daylio-ops[data-view] .sc-cell small,
+.daylio-ops[data-view] .sc-footnote {
+  font-size: 13px;
+  color: #526773;
+  line-height: 1.55;
+}
+.daylio-ops[data-view] .sc-modal-body input,
+.daylio-ops[data-view] .sc-modal-body select,
+.daylio-ops[data-view] .sc-filters input,
+.daylio-ops[data-view] .sc-filters select {
+  font-size: 16px;
+  min-height: 44px;
+}
+@media (max-width: 620px) {
+  .daylio-ops .op-lead-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .daylio-ops[data-view] .v10-funnel {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 16px;
+  }
+  .daylio-ops .op-exception {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .daylio-ops .op-exception > .op-grow {
+    flex-basis: calc(100% - 52px);
+  }
+  .daylio-ops .op-exception > button {
+    margin-left: 42px;
+    min-height: 44px;
+  }
+}
+.daylio-ops .v10-child-age {
+  display: block;
+  white-space: nowrap;
+  margin-top: 3px;
+}
+.daylio-ops .op-environment {
+  white-space: nowrap;
 }

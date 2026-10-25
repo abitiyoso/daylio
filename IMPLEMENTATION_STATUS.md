@@ -1,6 +1,22 @@
 # Implementation status — Daylio F01–F42
 
-Updated 24 October 2026 (Asia/Bangkok). This is an evidence ledger, not a production release certificate. Every function remains listed. **The full 42-function definition of done is not yet satisfied.** Rows marked local verified identify the tested subset; the final column identifies remaining acceptance work. No row is represented as deployed.
+Updated 25 October 2026 (Asia/Bangkok). This is an evidence ledger, not a production release certificate. Every function remains listed. **The full 42-function definition of done is not yet satisfied.** Rows marked local verified identify the tested subset; the final column identifies remaining acceptance work. No row is represented as deployed.
+
+## UI/workflow corrective audit — 24 October 2026
+
+Validation completed on continuation, 25 October: **7/7 isolated browser suites pass** in `evidence/isolated-browser-results.json`, raw log `evidence/ui-audit-20261024/final-browser-regressions.txt`. The updated planner assertions cover date clearing, previous/next selection, a single page heading and arrow orientation. All temporary test data was removed and the preview fingerprint was unchanged. **Production build, standalone TypeScript and syntax/security lint pass** (`build.txt`, `typecheck.txt`, `lint.txt` in the same evidence folder).
+
+The user's subsequent LEO/UI correction supersedes exact V20 fidelity for the mascot asset. The original poster and all official brand assets are retained; only a transparent derivative is consumed by the existing LEO component. No new application, backend, permission model, migration or business data was introduced for this phase.
+
+| Function / surface | Actual correction and evidence |
+|---|---|
+| F01/F02 navigation | Short mobile destination labels with descriptive accessible names; compact explicit sandbox badge; correct refresh icon. Four roles at five widths in `evidence/v10/results.json` |
+| F22/F23/F24 Owner/CRM | Pipeline includes contacted and legacy survey states, groups qualified/offered correctly, excludes lost/enrolled; summary refresh signal and error recovery; structured prospect actions and localized start dates. `tests/workspace-presentation.test.mjs`, current-run Owner/CRM screenshots |
+| F05/F06/F26 planner | One page heading; previous arrow direction fixed; week/date/detail selection kept together; clearing the date is safe; readable calendar controls/fields. Additional browser journey assertions plus manual previous/next/today checks |
+| F07/F11/F12/F15/F16 care/review/Parent | Existing batch/review/Story/pickup permissions preserved; classroom labels on coverage exceptions, readable mobile action placement, no stray care-note separators, unbroken age label. Parent sibling switch manually confirms scoped meal/story/morning/pickup state |
+| F30/F31/F32 LEO | Transparent existing-character derivative on public simulation; action workspace card renamed Usulan tindakan. Verified-record mode/human approval unchanged; no fabricated external-model answer |
+
+Audit steps, findings, before/after screenshots and limitations: `docs/UI_AUDIT_2026_10_24.md`; raw captures/logs: `evidence/ui-audit-20261024/`. Backend suite: **53 passing tests** (51 retained + two presentation regression tests). Read-only visual comparisons cover all four roles at 1440/1024/768/390/320px; actual/source pairs were inspected. Preview business fingerprint stays `12a9552d42254df0c6e6fd76a6c357f2`. First browser run's obsolete long-badge selector failure is retained alongside the corrected final run. This is scoped local verification; provider and production gates below remain open.
 
 ## Subscription continuation — 24 October 2026
 

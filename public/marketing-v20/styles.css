@@ -308,7 +308,7 @@
 .v20-site .leo20-demo-caption{position:relative;display:flex;align-items:center;justify-content:center;gap:5px;margin-top:14px;font-size:9.5px;color:#818d99;text-align:center}
 .v20-site .leo20-demo-caption .ic{width:13px;height:13px;color:#dd9e79}
 .v20-site .leo20-character{min-width:0;position:relative;align-self:end;margin-bottom:58px}
-.v20-site .leo20-character img{display:block;width:100%;height:auto;max-width:185px;aspect-ratio:auto;object-fit:contain;mix-blend-mode:multiply}
+.v20-site .leo20-character img{display:block;width:100%;height:auto;max-width:185px;aspect-ratio:auto;object-fit:contain}
 .v20-site .leo20-character span{position:absolute;top:-22px;left:0;display:block;color:#ae6a44;font-weight:800;font-size:11px;transform:rotate(-7deg);white-space:nowrap}
 .v20-site .leo20-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 @media(max-width:1180px){.v20-site .leo20-layout{grid-template-columns:minmax(0,1fr) 330px;gap:24px}.v20-site .leo20-character{display:none}.v20-site .leo20-intro h2{font-size:clamp(25px,2.9vw,34px)}.v20-site .leo20-questions button{font-size:10.5px}}

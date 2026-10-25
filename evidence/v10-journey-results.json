@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-24T09:02:28.652Z",
+  "at": "2026-10-24T12:02:38.851Z",
   "environment": "Disposable QA database + isolated localhost identity/email-contract fixture; no real inbox or bank transaction",
   "passed": [
     "Owner registration UI → provider-contract email verification → authenticated tenant + branch; no unverified tenant bootstrap.",

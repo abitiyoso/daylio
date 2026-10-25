@@ -32,7 +32,7 @@ import {
   ArrowRight,
   Sun,
   CheckCircle,
-  Clock,
+  ArrowClockwise,
   WarningCircle,
   House,
   CalendarBlank,
@@ -47,6 +47,7 @@ import Finance from "./finance";
 import VideoIntegration from "./video-integration";
 import LeoTasks from "./leo-tasks";
 import WorkspaceSearch from "./workspace-search";
+import { displayDate } from "../../lib/workspace-presentation.mjs";
 type Item = Record<string, any>;
 type Request = (
   path: string,
@@ -111,6 +112,7 @@ const status: Record<string, string> = {
   waitlisted: "Daftar tunggu",
   lost: "Tidak berlanjut",
   "tour-booked": "Survei terjadwal",
+  tour: "Survei",
   trial: "Trial",
   resolved: "Selesai",
 };
@@ -1071,7 +1073,9 @@ export default function OperationsWorkspace({
             <p>
               {item.groupCount > 1
                 ? "Satu catatan kelompok"
-                : nameFor(item.childId)}{" "}
+                : item.kind === "staff-coverage"
+                  ? classes.find((c) => c.id === item.id)?.name || "Kelas"
+                  : nameFor(item.childId)}{" "}
               ·{" "}
               {item.data.note ||
                 item.data.name ||
@@ -1545,9 +1549,7 @@ export default function OperationsWorkspace({
               </button>
             </div>
             {process.env.NEXT_PUBLIC_SANDBOX === "true" && (
-              <span className="op-environment">
-                SANDBOX · Data sintetis · Contoh fiktif
-              </span>
+              <span className="op-environment">Sandbox · Data contoh</span>
             )}
           </div>
           <div className="v10-parent-identity">
@@ -1562,9 +1564,11 @@ export default function OperationsWorkspace({
             <small>
               {classes.find((room) => room.id === c?.classroom_id)?.name ||
                 "Daycare"}
-              {age != null
-                ? ` · ${Math.floor(age / 12)} th ${age % 12} bl`
-                : ""}
+              {age != null && (
+                <span className="v10-child-age">
+                  {Math.floor(age / 12)} th {age % 12} bl
+                </span>
+              )}
             </small>
           </div>
         </div>
@@ -2331,7 +2335,9 @@ export default function OperationsWorkspace({
                 <article className="op-list-item" key={r.id}>
                   <Badge state={r.state} />
                   <p>
-                    {r.data.allergies} · {r.data.careInstructions}
+                    {[r.data.allergies, r.data.careInstructions]
+                      .filter(Boolean)
+                      .join(" · ")}
                   </p>
                   <p>
                     Darurat: {r.data.emergencyName} · {r.data.emergencyPhone}
@@ -2983,7 +2989,7 @@ export default function OperationsWorkspace({
           sub="Pesan disusun tim dan dikirim manual oleh petugas."
         >
           {leads.map((lead: Item) => (
-            <article className="op-list-item" key={lead.id}>
+            <article className="op-list-item op-lead-card" key={lead.id}>
               <div className="op-row between">
                 <strong>{lead.data.name}</strong>
                 <Badge state={lead.state} />
@@ -2991,7 +2997,7 @@ export default function OperationsWorkspace({
               <p>
                 {lead.data.contact} · {lead.data.source}
               </p>
-              <p>{lead.data.notes}</p>
+              {lead.data.notes && <p>{lead.data.notes}</p>}
               {lead.data.duplicateIds?.length > 0 && (
                 <p className="op-hint-text">
                   Kontak ini juga tercatat pada prospek lain. Periksa apakah
@@ -3009,14 +3015,15 @@ export default function OperationsWorkspace({
               {lead.data.desiredSchedule && (
                 <p className="op-hint-text">
                   Usia {lead.data.childAgeMonths} bulan ·{" "}
-                  {lead.data.desiredSchedule} · Mulai {lead.data.desiredStart}
+                  {lead.data.desiredSchedule} · Mulai{" "}
+                  {displayDate(lead.data.desiredStart)}
                   <br />
                   Kelas:{" "}
                   {classes.find((c) => c.id === lead.data.classroomId)?.name} ·
                   Minat paket: {lead.data.packageInterest}
                 </p>
               )}
-              <div className="op-row wrap">
+              <div className="op-lead-actions">
                 <button
                   className="op-btn"
                   onClick={() =>
@@ -3766,9 +3773,7 @@ export default function OperationsWorkspace({
               kegiatan tanpa membuka profil satu-satu.
             </p>
             {process.env.NEXT_PUBLIC_SANDBOX === "true" && (
-              <span className="op-environment">
-                SANDBOX · Data sintetis · Contoh fiktif
-              </span>
+              <span className="op-environment">Sandbox · Data contoh</span>
             )}
           </div>
           <div className="v6-intro-actions">
@@ -3876,7 +3881,9 @@ export default function OperationsWorkspace({
                   <span>
                     <strong>{nameFor(r.child_id)}</strong>
                     <small>
-                      {r.data.allergies} · {r.data.careInstructions}
+                      {[r.data.allergies, r.data.careInstructions]
+                        .filter(Boolean)
+                        .join(" · ")}
                     </small>
                   </span>
                   <ArrowRight size={15} />
@@ -4036,7 +4043,13 @@ export default function OperationsWorkspace({
   function businessReports() {
     return (
       <div className="op-stack">
-        <OwnerSummary request={req} go={go} date={date} branch={branch} />
+        <OwnerSummary
+          request={req}
+          go={go}
+          date={date}
+          branch={branch}
+          refreshVersion={version.current}
+        />
         <Card
           title="Ekspor laporan operasional"
           sub="Data mengikuti izin organisasi dan periode yang dipilih."
@@ -4235,7 +4248,7 @@ export default function OperationsWorkspace({
                 disabled={loading || busy}
                 onClick={() => void reload()}
               >
-                <Clock size={16} />
+                <ArrowClockwise size={16} />
               </button>
             )}
             <span className="op-avatar small">
@@ -4262,7 +4275,7 @@ export default function OperationsWorkspace({
                 {!["home", "staffToday", "today"].includes(view) &&
                   process.env.NEXT_PUBLIC_SANDBOX === "true" && (
                     <span className="op-environment">
-                      SANDBOX · Data sintetis · Contoh fiktif
+                      Sandbox · Data contoh
                     </span>
                   )}
               </div>
@@ -4297,7 +4310,7 @@ export default function OperationsWorkspace({
                 disabled={loading || busy}
                 onClick={() => void reload()}
               >
-                <Clock size={15} />
+                <ArrowClockwise size={15} />
                 {loading ? "Memuat…" : "Perbarui"}
               </button>
             </div>
@@ -4375,6 +4388,7 @@ export default function OperationsWorkspace({
                   go={go}
                   date={date}
                   branch={branch}
+                  refreshVersion={version.current}
                   filters={businessFilters()}
                   onAddChild={() =>
                     setModal({
@@ -4490,10 +4504,26 @@ export default function OperationsWorkspace({
             <button
               key={key}
               aria-current={view === key ? "page" : undefined}
+              aria-label={`Buka ${item[1]}`}
               onClick={() => go(key)}
             >
               <Icon size={18} />
-              <span>{item[1]}</span>
+              <span>
+                {(
+                  {
+                    today: "Hari ini",
+                    story: isParent ? "Cerita" : "Review",
+                    pickup: "Jemput",
+                    messages: "Pesan",
+                    staffToday: "Hari ini",
+                    care: "Catat",
+                    children: "Anak",
+                    control: "Prioritas",
+                    planner: "Jadwal",
+                    home: "Ringkasan",
+                  } as Record<string, string>
+                )[key] || item[1]}
+              </span>
             </button>
           );
         })}

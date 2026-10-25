@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-24T09:07:45.591Z",
+  "at": "2026-10-24T12:01:44.954Z",
   "environment": "Disposable PostgreSQL and local identity fixture; fictional manual payment references, no bank transaction.",
   "passed": [
     "Owner cancels an unverified yearly request through real UI and can choose a replacement cycle.",

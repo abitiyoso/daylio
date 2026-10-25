@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-24T09:06:45.077Z",
+  "at": "2026-10-24T12:07:13.641Z",
   "environment": "Local synthetic email provider fixture and persistent sandbox DB. No real inbox delivery or hosted provider configuration claimed.",
   "passed": [
     "Admin UI creates persistent parent invitation; provider receives verification request; membership not activated before verification.",

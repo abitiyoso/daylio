@@ -190,6 +190,26 @@ try {
     timeZone: "Asia/Jakarta",
   }).format(new Date(Date.now() + 86400000));
   await nav(owner, "Jadwal & Booking");
+  const dateInput = owner.page.getByLabel("Tanggal planner", { exact: true });
+  const initialDate = await dateInput.inputValue();
+  await owner.page
+    .getByRole("button", { name: "Minggu sebelumnya", exact: true })
+    .click();
+  assert.notEqual(await dateInput.inputValue(), initialDate);
+  await owner.page
+    .getByRole("button", { name: "Minggu berikutnya", exact: true })
+    .click();
+  assert.equal(await dateInput.inputValue(), initialDate);
+  await dateInput.fill("");
+  assert.equal(await dateInput.inputValue(), initialDate);
+  assert.equal(await owner.page.getByRole("heading", { level: 1 }).count(), 1);
+  assert.equal(
+    await owner.page
+      .getByRole("button", { name: "Minggu sebelumnya", exact: true })
+      .locator("svg")
+      .evaluate((svg) => getComputedStyle(svg).transform),
+    "none",
+  );
   await owner.page
     .getByLabel("Tanggal planner", { exact: true })
     .fill(tomorrow);

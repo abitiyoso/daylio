@@ -68,7 +68,7 @@ export default function LeoTasks({
     <section className="op-card">
       <div className="op-section-head">
         <div>
-          <h2>LEO AI Workspace</h2>
+          <h2>Usulan tindakan</h2>
           <p className="op-muted">
             Mode catatan terverifikasi · provider AI belum terhubung.
           </p>

@@ -1217,10 +1217,10 @@ export function LeoChat() {
             <img
               alt="LEO, maskot AI Assistant Daylio"
               decoding="async"
-              height="639"
+              height="1230"
               loading="lazy"
-              src="/approved-assets/242342353a9af19799c3.webp"
-              width="720"
+              src="/brand/leo-cutout-v1.png"
+              width="1278"
             />
             <span>{"“Tanya saja ke LEO!”"}</span>
           </div>

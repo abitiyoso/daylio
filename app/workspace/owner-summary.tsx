@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState, type ReactNode } from "react";
 import { ArrowRight, Sparkle } from "@phosphor-icons/react";
+import { leadStageCounts } from "../../lib/workspace-presentation.mjs";
 type Item = Record<string, any>;
 const money = (value: number) =>
   "Rp " + Number(value || 0).toLocaleString("id-ID");
@@ -11,6 +12,7 @@ export default function OwnerSummary({
   branch,
   onAddChild,
   filters,
+  refreshVersion,
 }: {
   request: (path: string) => Promise<any>;
   go: (view: string) => void;
@@ -18,12 +20,14 @@ export default function OwnerSummary({
   branch: string;
   onAddChild?: () => void;
   filters?: ReactNode;
+  refreshVersion?: number;
 }) {
   const [data, setData] = useState<Item | null>(null),
     [error, setError] = useState("");
   useEffect(() => {
     let active = true;
     setData(null);
+    setError("");
     request(
       "owner/summary?" +
         new URLSearchParams({ date, ...(branch ? { branchId: branch } : {}) }),
@@ -37,7 +41,7 @@ export default function OwnerSummary({
     return () => {
       active = false;
     };
-  }, [date, branch]);
+  }, [date, branch, refreshVersion]);
   if (error) return <p role="alert">{error}</p>;
   if (!data) return <p>Memuat ringkasan daycare…</p>;
   const seats = data.classes.reduce(
@@ -75,13 +79,8 @@ export default function OwnerSummary({
       page: "planner",
     },
   ];
-  const stages = [
-      ["new", "Baru"],
-      ["tour-booked", "Survei"],
-      ["trial", "Trial"],
-      ["qualified", "Penawaran"],
-    ],
-    max = Math.max(1, ...stages.map(([key]) => data.funnel[key] || 0));
+  const stages = leadStageCounts(data.funnel),
+    max = Math.max(1, ...stages.map((stage) => stage.count));
   return (
     <>
       <link rel="stylesheet" href="/workspace-v10.css" />
@@ -89,13 +88,11 @@ export default function OwnerSummary({
         <div>
           <h1>Ringkasan Daycare</h1>
           {process.env.NEXT_PUBLIC_SANDBOX === "true" && (
-            <span className="op-environment">
-              SANDBOX · Data sintetis · Contoh fiktif
-            </span>
+            <span className="op-environment">Sandbox · Data contoh</span>
           )}
           <p>
             {canBusiness
-              ? "Layanan berjalan baik, bisnis bertumbuh."
+              ? "Ringkasan layanan dan bisnis hari ini."
               : "Layanan dan keselamatan hari ini."}{" "}
             Lihat yang perlu diputuskan hari ini, bukan semua data sekaligus.
           </p>
@@ -267,22 +264,22 @@ export default function OwnerSummary({
             <div className="v10-blockhead">
               <div>
                 <h2>Perjalanan calon keluarga</h2>
-                <p>Dari inquiry sampai penawaran</p>
+                <p>Posisi seluruh prospek aktif saat ini</p>
               </div>
               <button className="v10-link" onClick={() => go("crm")}>
                 Buka CRM →
               </button>
             </div>
             <div className="v10-funnel">
-              {stages.map(([key, title]) => (
-                <div className="v10-funnel-col" key={key}>
-                  <b>{data.funnel[key] || 0}</b>
+              {stages.map(({ label, count }) => (
+                <div className="v10-funnel-col" key={label}>
+                  <b>{count}</b>
                   <span
                     style={{
-                      height: 15 + ((data.funnel[key] || 0) / max) * 52,
+                      height: 7 + (count / max) * 52,
                     }}
                   />
-                  <small>{title}</small>
+                  <small>{label}</small>
                 </div>
               ))}
             </div>
