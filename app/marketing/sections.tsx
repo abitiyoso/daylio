@@ -130,10 +130,10 @@ export function Header() {
         </nav>
         {"\n"}
         <div className="nav-actions">
-          <a className="btn btn-ghost" href="/workspace">
+          <a className="btn btn-ghost nav-login" href="/workspace">
             {"Masuk"}
           </a>
-          <a className="btn btn-orange" href="#kontak">
+          <a className="btn btn-orange nav-demo" href="#kontak">
             {"Coba Demo "}
             <svg className="ic">
               <use href="#i-arrow"></use>
@@ -168,6 +168,7 @@ export function Header() {
         <a href="#harga">{"Harga"}</a>
         <a href="#kontak">{"Tentang Kami"}</a>
         <a href="/workspace">Masuk</a>
+        <a href="#kontak">Jadwalkan Demo</a>
       </nav>
       {"\n"}
     </header>
@@ -284,12 +285,12 @@ export function Hero() {
           <div className="float-cam">
             {"\n"}
             <div className="cam-title">
-              {"Ruang Kegiatan 1 · Live "}
+              {"Ruang Kegiatan 1 "}
               <span
                 className="live-dot"
                 title="Contoh antarmuka simulasi, bukan kamera live"
               >
-                {"Live"}
+                {"Simulasi"}
               </span>
             </div>
             {"\n"}
@@ -540,7 +541,10 @@ export function PlatformShowcase() {
             className="solution-list"
             id="featureList"
           ></div>
-          <div className="dashboard-frame">
+          <div
+            className="dashboard-frame"
+            aria-label="Contoh tampilan dashboard"
+          >
             <div className="dashboard-sidebar">
               <img
                 alt="Ilustrasi pengalaman penggunaan Daylio"
@@ -591,6 +595,9 @@ export function PlatformShowcase() {
               </span>
             </div>
             <div className="dashboard-main">
+              <span className="dashboard-demo-label">
+                Pratinjau · Data simulasi
+              </span>
               <div className="dashboard-toolbar">
                 <span className="search-bar">
                   {"⌕   Cari anak, orang tua, atau tagihan..."}
@@ -1438,7 +1445,12 @@ export function Footer() {
 }
 export function InformationDialog() {
   return (
-    <dialog className="modal" id="infoModal">
+    <dialog
+      className="modal"
+      id="infoModal"
+      aria-labelledby="modalTitle"
+      aria-describedby="modalText"
+    >
       <button
         aria-label="Tutup"
         className="modal-close"

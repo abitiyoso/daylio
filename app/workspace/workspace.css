@@ -198,19 +198,31 @@
 }
 
 .workspace.auth {
+  box-sizing: border-box;
   width: calc(100% - 32px);
   margin: 7vh auto;
-  padding: 36px;
+  padding: clamp(18px, 5vw, 36px);
   background: white;
   border: 1px solid #e9edf3;
   box-shadow: 0 20px 65px #1533580c;
+  overflow-wrap: anywhere;
+}
+.workspace.auth .wordmark img {
+  display: block;
+  width: min(156px, 100%);
+  height: auto;
+}
+.workspace.auth h1 {
+  font-size: clamp(24px, 6vw, 32px);
 }
 .workspace.auth form {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 8px;
 }
 .workspace.auth input {
   max-width: none;
+  min-width: 0;
 }
 .workspace.auth form > button {
   background: #f46f82;
@@ -259,7 +271,6 @@
 }
 @media (max-width: 600px) {
   .workspace.auth {
-    padding: 24px;
     margin: 24px auto;
   }
 }

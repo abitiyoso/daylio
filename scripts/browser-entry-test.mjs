@@ -56,6 +56,23 @@ try {
     await page
       .getByRole("heading", { name: "Selamat datang", exact: true })
       .waitFor();
+    for (const width of [320, 390]) {
+      await page.setViewportSize({ width, height: 844 });
+      assert.ok(
+        await page.locator(".workspace.auth").evaluate((card) => {
+          const bounds = card.getBoundingClientRect();
+          const viewport = document.documentElement.clientWidth;
+          return (
+            bounds.left >= 12 &&
+            bounds.right <= viewport - 12 &&
+            document.documentElement.scrollWidth <= viewport
+          );
+        }),
+        `Sign-in card and its padding must fit at ${width}px`,
+      );
+    }
+    if (role === "owner")
+      await page.setViewportSize({ width: 1440, height: 900 });
     const denied = await context.request.get(
       base + "/api/v1/workspace/context",
       {

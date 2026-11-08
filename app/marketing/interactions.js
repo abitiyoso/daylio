@@ -11,18 +11,20 @@ export function initializeMarketing() {
   // Navigation: usable with keyboard and screen readers.
   const menuToggle = $("#menuToggle");
   const mobileMenu = $("#mobileMenu");
-  listen(menuToggle, "click", () => {
-    const open = mobileMenu.hidden;
+  function setMenu(open) {
     mobileMenu.hidden = !open;
     menuToggle.setAttribute("aria-expanded", String(open));
     menuToggle.setAttribute("aria-label", open ? "Tutup menu" : "Buka menu");
+  }
+  listen(menuToggle, "click", () => setMenu(mobileMenu.hidden));
+  listen(document, "keydown", (event) => {
+    if (event.key === "Escape" && !mobileMenu.hidden) {
+      setMenu(false);
+      menuToggle.focus();
+    }
   });
-  $$(".mobile-menu a").forEach((a) =>
-    listen(a, "click", () => {
-      mobileMenu.hidden = true;
-      menuToggle.setAttribute("aria-expanded", "false");
-    }),
-  );
+  listen(matchMedia("(max-width: 960px)"), "change", () => setMenu(false));
+  $$(".mobile-menu a").forEach((a) => listen(a, "click", () => setMenu(false)));
 
   const data = {
     business: {

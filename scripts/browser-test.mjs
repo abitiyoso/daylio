@@ -22,17 +22,66 @@ assert.equal(
 );
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const evidence = [];
+const visualRoot =
+  process.env.DAYLIO_MARKETING_EVIDENCE || "evidence/screenshots";
+await mkdir(visualRoot, { recursive: true });
 try {
   const page = await browser.newPage();
   page.setDefaultNavigationTimeout(60000);
-  for (const width of [390, 768, 1440]) {
+  const marketingErrors = [];
+  page.on("pageerror", (error) => marketingErrors.push(error.message));
+  for (const width of [320, 390, 620, 768, 960, 1024, 1180, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto(base, { waitUntil: "networkidle" });
-    await page
-      .locator(".hero-photo img,.hero-visual img")
-      .first()
-      .waitFor({ state: "visible" })
-      .catch(() => {});
+    await page.locator(".hero-photo img").waitFor({ state: "visible" });
+    await page.locator("#leoQuestions button").first().waitFor();
+    await page.waitForFunction(() => document.fonts.status === "loaded", null, {
+      timeout: 15000,
+    });
+    await page.waitForFunction(
+      () =>
+        [...document.querySelectorAll(".v20-site img")].every(
+          (image) =>
+            image.loading === "lazy" ||
+            !image.getClientRects().length ||
+            image.complete,
+        ),
+      null,
+      { timeout: 15000 },
+    );
+    const layout = await page.evaluate(() => {
+      const images = [...document.querySelectorAll(".v20-site img")].filter(
+        (image) =>
+          image.getClientRects().length &&
+          (image.loading !== "lazy" || image.complete),
+      );
+      const clipped = [
+        ...document.querySelectorAll(
+          "main > section, .stat, .graph-box, .leo20-layout, .leo20-questions button",
+        ),
+      ].filter((element) => element.scrollWidth > element.clientWidth + 1);
+      const heroCopy = document
+        .querySelector(".hero-copy")
+        .getBoundingClientRect();
+      const heroPhoto = document
+        .querySelector(".hero-photo")
+        .getBoundingClientRect();
+      return {
+        clipped: clipped.map((element) => element.id || element.className),
+        broken: images
+          .filter((image) => !image.naturalWidth)
+          .map((image) => image.src),
+        heroStacked: heroPhoto.top >= heroCopy.bottom - 1,
+      };
+    });
+    assert.deepEqual(
+      layout.clipped,
+      [],
+      `Clipped sections or preview content at ${width}px`,
+    );
+    assert.deepEqual(layout.broken, [], `Broken images at ${width}px`);
+    if (width <= 960)
+      assert.equal(layout.heroStacked, true, `Hero at ${width}px`);
     assert.equal(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth,
@@ -41,21 +90,59 @@ try {
       `Horizontal overflow ${width}`,
     );
     assert.equal(await page.locator("main>section").count(), 8);
-    await page.locator("#leoQuestions button").first().waitFor();
+    assert.equal(await page.locator(".nav-login").isVisible(), true);
     await page.locator('[data-solution="care"]').click();
     assert.equal(
       await page.locator("#dashboardTitle").textContent(),
       "Care & Family",
     );
-    await page.evaluate(() => scrollTo(0, 0));
-    await saveBrowserScreenshot(page, {
-      path: `evidence/screenshots/marketing-${width}.png`,
-      fullPage: false,
-    });
+    if ([320, 390, 768, 1440].includes(width)) {
+      await page.evaluate(() => scrollTo(0, 0));
+      await saveBrowserScreenshot(page, {
+        path: `${visualRoot}/marketing-${width}.png`,
+      });
+    }
     evidence.push(
-      `Marketing ${width}px: no overflow; V20 platform interaction; screenshot captured`,
+      `Marketing ${width}px: no clipped panels or broken visible images; solutions switch and login is visible`,
     );
   }
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.locator("#menuToggle").click();
+  assert.equal(await page.locator("#mobileMenu").isVisible(), true);
+  await page.keyboard.press("Escape");
+  assert.equal(await page.locator("#mobileMenu").isVisible(), false);
+  assert.equal(
+    await page.locator("#menuToggle").getAttribute("aria-expanded"),
+    "false",
+  );
+  await page.locator('[data-event="offline"]').click();
+  assert.match(await page.locator("#scenarioTitle").innerText(), /berhenti/);
+  await page.locator('[data-leo="parent"]').click();
+  assert.equal(await page.locator("#leoRoleLabel").innerText(), "Orang Tua");
+  await page.locator("#leoMessageInput").fill("Contoh pertanyaan bebas");
+  await page.locator("#leoChatForm button").click();
+  assert.match(await page.locator("#leoResponse").innerText(), /simulasi/i);
+  await page.locator('[data-plan="Growth"]').click();
+  assert.equal(
+    await page.getByRole("dialog", { name: "Paket Growth" }).isVisible(),
+    true,
+  );
+  assert.match(
+    await page.locator("#modalLink").getAttribute("href"),
+    /^https:\/\/wa\.me\//,
+  );
+  await page.keyboard.press("Escape");
+  assert.equal(await page.locator("#infoModal").isVisible(), false);
+  await page.locator(".nav-login").click();
+  await page.getByRole("heading", { name: "Selamat datang" }).waitFor();
+  await page.getByRole("link", { name: /Kembali ke beranda/ }).click();
+  await page
+    .getByRole("heading", { level: 1, name: /Daycare Lebih Dipercaya/ })
+    .waitFor();
+  assert.deepEqual(marketingErrors, []);
+  evidence.push(
+    "Mobile journey at 320px: menu and Escape, CCTV scenario, LEO role and chat simulation, pricing dialog and WhatsApp destination, sign-in and back to homepage",
+  );
   async function login(role) {
     const context = await browser.newContext();
     const p = await context.newPage();

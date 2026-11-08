@@ -845,7 +845,10 @@ export default function Workspace({
     return (
       <main className="workspace auth">
         <a href="/" className="wordmark">
-          Daylio <small>by Elenio</small>
+          <img
+            alt="Daylio by Elenio"
+            src="/approved-assets/d35189c84fe287f2fae0.png"
+          />
         </a>
         <h1>
           {authMode === "recover"

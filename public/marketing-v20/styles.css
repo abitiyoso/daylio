@@ -368,3 +368,173 @@
 .v20-site .monitor .camera-video img {object-fit:contain}
 .v20-site .visual-note {font-size:11px;color:#667d8b;line-height:1.6;margin:14px 0 0}
 .v20-site .monitor .monitor-photo {aspect-ratio:auto}
+
+/* The live landing page reflows instead of shrinking desktop panels. */
+.v20-site {
+  --page-gutter: clamp(16px, 3.5vw, 32px);
+  --muted: #496277;
+}
+.v20-site .container {
+  width: min(var(--max), calc(100% - 2 * var(--page-gutter)));
+}
+.v20-site main > section[id] {
+  scroll-margin-top: 84px;
+}
+.v20-site .section,
+.v20-site .cctv-section {
+  padding-block: clamp(44px, 6vw, 76px);
+}
+.v20-site .hero h1 span { white-space: normal; }
+.v20-site .hero-copy > p,
+.v20-site .section-heading p,
+.v20-site .cctv-copy p,
+.v20-site .leo20-subtitle { font-size: 15px; }
+.v20-site .hero-benefits > div,
+.v20-site .pain-content p,
+.v20-site .solution-feature p,
+.v20-site .role-body li,
+.v20-site .price-card li { font-size: 13px; }
+.v20-site .btn,
+.v20-site .hero .actions .btn,
+.v20-site .cctv-copy .actions .btn,
+.v20-site .closing-copy .actions .btn,
+.v20-site .segmented button,
+.v20-site .leo20-tabs button {
+  min-height: 44px;
+  font-size: 13px;
+  white-space: normal;
+}
+.v20-site .nav-actions .btn { min-height: 44px; font-size: 13px; }
+.v20-site .desktop-nav { gap: clamp(12px, 1.65vw, 25px); }
+.v20-site .desktop-nav a { font-size: 12px; }
+.v20-site .demo-warning {
+  position: static;
+  grid-column: 1 / -1;
+  justify-self: end;
+  margin: 0;
+  font-size: 11px;
+}
+.v20-site .dashboard-demo-label {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.v20-site .stat small,
+.v20-site .stat strong,
+.v20-site .graph-box > strong,
+.v20-site .donut-row li { white-space: normal; }
+.v20-site .stat strong { overflow-wrap: anywhere; }
+.v20-site .bars { gap: clamp(3px, 1vw, 9px); }
+.v20-site .bars i { flex: 0 1 14px; min-width: 0; }
+.v20-site .monitor .camera-video {
+  height: auto;
+  aspect-ratio: 16 / 9;
+  align-self: center;
+}
+.v20-site .monitor-header { flex-wrap: wrap; row-gap: 4px; }
+.v20-site .monitor-header small,
+.v20-site .scenario-review dt,
+.v20-site .scenario-review-note { font-size: 11px; }
+.v20-site .scenario-review p,
+.v20-site .scenario-review dd { font-size: 13px; }
+.v20-site .leo20-halo { inset-inline: 0; }
+.v20-site .leo20-questions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.v20-site .leo20-questions button {
+  min-width: 0;
+  min-height: 44px;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.v20-site .leo20-questions button:hover { transform: none; }
+.v20-site .leo20-message p { font-size: 13px; }
+.v20-site .leo20-privacy,
+.v20-site .leo20-demo-caption { font-size: 12px; color: var(--muted); }
+.v20-site .leo20-composer input { font-size: 16px; }
+.v20-site .leo20-composer button,
+.v20-site .modal-close { width: 44px; height: 44px; }
+.v20-site .modal { max-height: calc(100dvh - 32px); }
+.v20-site .footer-inner nav { flex-wrap: wrap; }
+
+@media (max-width: 1180px) {
+  .v20-site .cctv-layout { grid-template-columns: minmax(0, 1fr); }
+  .v20-site .monitor { width: 100%; max-width: none; }
+}
+
+@media (max-width: 960px) {
+  .v20-site .site-header .desktop-nav { display: none; }
+  .v20-site .nav-shell { gap: 12px; height: 64px; }
+  .v20-site .nav-actions .nav-login { display: inline-flex; padding-inline: 12px; }
+  .v20-site .nav-actions .nav-demo { display: none; }
+  .v20-site .menu-toggle { display: flex; width: 44px; height: 44px; }
+  .v20-site .mobile-menu { max-height: calc(100dvh - 65px); overflow-y: auto; }
+  .v20-site .mobile-menu a { font-size: 14px; }
+  .v20-site .hero { display: flex; flex-direction: column; }
+  .v20-site .hero,
+  .v20-site .hero-inner { min-height: 0; }
+  .v20-site .hero-inner { order: -1; display: block; padding: 0; }
+  .v20-site .hero-copy { width: 100%; padding: clamp(32px, 5vw, 48px) 0 24px; }
+  .v20-site .hero h1 { font-size: clamp(29px, 5.4vw, 42px); max-width: 100%; }
+  .v20-site .hero-photo {
+    position: relative;
+    inset: auto;
+    z-index: 0;
+    width: min(var(--max), calc(100% - 2 * var(--page-gutter)));
+    height: auto;
+    max-height: 390px;
+    aspect-ratio: 16 / 9;
+    margin: 0 auto 24px;
+    border-radius: 16px;
+  }
+  .v20-site .hero-photo::before,
+  .v20-site .hero-media { display: none; }
+  .v20-site .hero-benefits { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: none; padding-bottom: 0; margin-top: 22px; }
+}
+
+@media (min-width: 701px) and (max-width: 1180px) {
+  .v20-site .monitor .monitor-photo { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+  .v20-site .scenario-review dl { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  .v20-site .brand-link img { width: clamp(112px, 34vw, 144px); height: auto; }
+  .v20-site .hero-photo { aspect-ratio: 4 / 3; }
+  .v20-site .hero-benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .v20-site .hero-benefits > div { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; text-align: start; }
+  .v20-site .hero-benefits .circle-ic { margin: 0; flex: none; }
+  .v20-site .pain-grid,
+  .v20-site .roles-grid,
+  .v20-site .pricing-grid { grid-template-columns: minmax(0, 1fr); }
+  .v20-site .pain-image { aspect-ratio: 16 / 9; }
+  .v20-site .pain-content { padding: 16px; }
+  .v20-site .pain-content h3,
+  .v20-site .role-body h3 { font-size: 16px; }
+  .v20-site .role-card { display: flex; flex-direction: column; }
+  .v20-site .role-card > img { height: auto !important; min-height: 0 !important; aspect-ratio: 16 / 9; }
+  .v20-site .role-body .btn { font-size: 13px; }
+  .v20-site .dashboard-frame { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .v20-site .dashboard-sidebar,
+  .v20-site .dashboard-toolbar { display: none; }
+  .v20-site .dashboard-main { padding: 0 14px 14px; }
+  .v20-site .dash-head { flex-wrap: wrap; }
+  .v20-site .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .v20-site .stat:last-child { grid-column: 1 / -1; }
+  .v20-site .stat { min-height: 0; padding: 11px; }
+  .v20-site .stat small,
+  .v20-site .stat em { font-size: 12px; }
+  .v20-site .graph-grid { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .v20-site .graph-box { padding: 12px; }
+  .v20-site .graph-box > strong,
+  .v20-site .donut-row li { font-size: 12px; }
+  .v20-site .leo20-layout { grid-template-columns: minmax(0, 1fr); }
+  .v20-site .leo20-phone-inner { height: clamp(480px, 64dvh, 555px); }
+  .v20-site .monitor-events { grid-template-columns: minmax(0, 1fr); }
+  .v20-site .footer-inner nav { justify-content: flex-start; gap: 8px 16px; }
+  .v20-site .footer-inner nav a,
+  .v20-site .footer-right { font-size: 12px; }
+}
+
+@media (max-width: 375px) {
+  .v20-site .hero .actions > a { flex: 1 1 100%; }
+  .v20-site .leo20-questions { grid-template-columns: minmax(0, 1fr); }
+}

@@ -1,6 +1,10 @@
 # Implementation status — Daylio F01–F42
 
-Updated 25 October 2026 (Asia/Bangkok). This is an evidence ledger, not a production release certificate. Every function remains listed. **The full 42-function definition of done is not yet satisfied.** Rows marked local verified identify the tested subset; the final column identifies remaining acceptance work. No row is represented as deployed.
+Updated 8 November 2026 (Asia/Bangkok). This is an evidence ledger, not a production release certificate. Every function remains listed. **The full 42-function definition of done is not yet satisfied.** Rows marked local verified identify the tested subset; the final column identifies remaining acceptance work. No row is represented as deployed.
+
+## Responsive landing and workspace entry — 8 November 2026
+
+F01, F02 and F03: tablet and mobile hero, dashboard preview, CCTV, LEO, pricing, and sign-in card were reviewed on the public domain and corrected in the repository. Responsive regression covers eight widths from 320 to 1440 px. Owner, Manager, Caregiver, and Parent reached authenticated workspaces using isolated test data. Public hosting returned HTTP 404 for the homepage, workspace, readiness endpoint, and CSS during the audit. See `docs/RESPONSIVE_JOURNEY_2026_11_08.md` and `evidence/responsive-20261108/` for visual and end-to-end evidence.
 
 ## Visual polish and deploy-readiness review — 25 October 2026
 
