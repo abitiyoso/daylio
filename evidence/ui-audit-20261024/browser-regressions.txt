@@ -1,0 +1,48 @@
+Running subscription, iteration 1, isolated database/media
+Subscription cancellation, independent verification and next-period change passed across roles.
+Running v10, iteration 1, isolated database/media
+Owner signup and branch passed
+Verified invitations passed
+Planner and enrollment passed
+Owner registration UI → provider-contract email verification → authenticated tenant + branch; no unverified tenant bootstrap.
+Owner invites manager and caregiver through Access UI; each verifies a one-use email proof and creates its own private password.
+Manager configures classroom/capacity; owner records real future staff shift + trial through planner UI; transactional enrollment replaces reserved prospective seat and verified guardian gets only its child.
+New tenant: caregiver attendance + care draft → manager publication → guardian Daily Story; recurring family invoice → independent staff verification → own-family payment receipt.
+SaaS invoice remains pending until platform-admin manual verification; customer cannot activate itself. Essential entitlement denies paid CRM API while preserving parent care/story/billing history. No real payment or external message.
+Running legacy, iteration 1, isolated database/media
+Marketing 390px: no overflow; V20 platform interaction; screenshot captured
+Marketing 768px: no overflow; V20 platform interaction; screenshot captured
+Marketing 1440px: no overflow; V20 platform interaction; screenshot captured
+Public demo persisted and deduplicated; daycare inquiry issues private prospect token; survey request stays requested until staff confirmation
+Caregiver group logging submitted through the browser form and rendered from persisted API records
+Browser login with isolated identity fixture for owner, caregiver, parent and unrelated guardian
+Real API + persistent PostgreSQL engine: draft hidden, private photo upload/resize, publish, linked parent timeline on reload, signed media access, cross-user URL denied, owner counts, LEO citation, unavailable CCTV, CSRF rejection
+Revoked guardian cannot use a previously issued media grant; synthetic link restored after test
+Running care, iteration 1, isolated database/media
+Browser exceptions: []
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.waitFor: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for getByText('SANDBOX · Data sintetis') to be visible[22m
+
+    at login (C:\Users\Abi Tiyoso\Documents\ChatGPT\daylio\scripts\browser-v3-test.mjs:36:71)
+    at async file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/browser-v3-test.mjs:39:17 {
+  log: [
+    "  - waiting for getByText('SANDBOX · Data sintetis') to be visible"
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.22.1
+file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/run-browser-regressions.mjs:173
+      if (code !== 0) throw Error(`${name} failed`);
+                            ^
+
+Error: care failed
+    at file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/run-browser-regressions.mjs:173:29
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+Node.js v24.22.1

@@ -1,0 +1,386 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ [
++   'landing console: Failed to load resource: the server responded with a status of 404 (Not Found)',
++   "landing console: A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n" +
++     '\n' +
++     "- A server/client branch `if (typeof window !== 'undefined')`.\n" +
++     "- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n" +
++     "- Date formatting in a user's locale which doesn't match the server.\n" +
++     '- External changing data without sending a snapshot of it along with the HTML.\n' +
++     '- Invalid HTML tag nesting.\n' +
++     '\n' +
++     'It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n' +
++     '\n' +
++     '%s%s https://react.dev/link/hydration-mismatch \n' +
++     '\n' +
++     '  ...\n' +
++     '    <LoadingBoundary name="/" loading={null}>\n' +
++     '      <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>\n' +
++     '        <HTTPAccessFallbackErrorBoundary pathname="/" notFound={{...}} forbidden={undefined} unauthorized={undefined} ...>\n' +
++     '          <RedirectBoundary>\n' +
++     '            <RedirectErrorBoundary router={{...}}>\n' +
++     '              <InnerLayoutRouter url="/" tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>\n' +
++     '                <SegmentViewNode type="page" pagePath="page.tsx">\n' +
++     '                  <SegmentTrieNode>\n' +
++     '                  <Home>\n' +
++     '                    <Landing>\n' +
++     '                      <div className="v20-site">\n' +
++     '                        <link>\n' +
++     '                        <ApprovedIcons>\n' +
++     '                        <Header>\n' +
++     '                          <header className="site-header">\n' +
++     '                            <div className="container ...">\n' +
++     '                              <a aria-label="Daylio ber..." className="brand-link" href="#beranda">\n' +
++     '                                <img\n' +
++     '                                  alt="Daylio by Elenio"\n' +
++     '                                  decoding="async"\n' +
++     '                                  src="/approved-assets/d35189c84fe287f2fae0.png"\n' +
++     '-                                 loading="eager"\n' +
++     '                                >\n' +
++     '                              ...\n' +
++     '                            ...\n' +
++     '                        <Main>\n' +
++     '                          <main>\n' +
++     '                            <Hero>\n' +
++     '                              <section className="hero" id="beranda">\n' +
++     '                                <div className="hero-photo">\n' +
++     '                                  <img\n' +
++     '                                    alt="Pengasuh mendampingi dua anak bermain di daycare"\n' +
++     '                                    decoding="async"\n' +
++     '                                    fetchPriority="high"\n' +
++     '                                    src="/approved-assets/64e5ee3c2f2264119234.webp"\n' +
++     '-                                   loading="eager"\n' +
++     '                                  >\n' +
++     '                                <div className="container ...">\n' +
++     '                                  <div>\n' +
++     '                                  <div>\n' +
++     '                                  <div aria-label="Preview si..." className="hero-media">\n' +
++     '                                    <div className="float-cam">\n' +
++     '                                      <div>\n' +
++     '                                      <div className="float-image">\n' +
++     '                                        <img\n' +
++     '                                          alt="Simulasi video kegiatan daycare"\n' +
++     '                                          decoding="async"\n' +
++     '                                          height="1024"\n' +
++     '                                          src="/approved-assets/361aa5ea4bcebaa12fca.webp"\n' +
++     '                                          width="1536"\n' +
++     '-                                         loading="eager"\n' +
++     '                                        >\n' +
++     '                                        ...\n' +
++     '                                      ...\n' +
++     '                                    <div className="float-alert">\n' +
++     '                                      <div>\n' +
++     '                                      <div className="float-image">\n' +
++     '                                        <img\n' +
++     '                                          alt="Cuplikan contoh event analitik"\n' +
++     '                                          decoding="async"\n' +
++     '                                          height="1024"\n' +
++     '                                          src="/approved-assets/361aa5ea4bcebaa12fca.webp"\n' +
++     '                                          width="1536"\n' +
++     '-                                         loading="eager"\n' +
++     '                                        >\n' +
++     '                                        ...\n' +
++     '                                      ...\n' +
++     '                                    ...\n' +
++     '                                  ...\n' +
++     '                                ...\n' +
++     '                            ...\n' +
++     '                              <div className="pain-grid">\n' +
++     '                                <article className="pain-card">\n' +
++     '                                  <div className="pain-image">\n' +
++     '                                    <img\n' +
++     '                                      alt="Ilustrasi pengelola daycare menangani berkas pendaftaran dan kunjungan kelu..."\n' +
++     '                                      decoding="async"\n' +
++     '                                      height="512"\n' +
++     '                                      src="/marketing-refined/inquiry.webp"\n' +
++     '                                      width="768"\n' +
++     '-                                     loading="eager"\n' +
++     '                                    >\n' +
++     '                                    ...\n' +
++     '                                  ...\n' +
++     '                                <article className="pain-card">\n' +
++     '                                  <div className="pain-image">\n' +
++     '                                    <img\n' +
++     '                                      alt="Ilustrasi pengasuh mengisi catatan kertas saat rutinitas makan"\n' +
++     '                                      decoding="async"\n' +
++     '                                      height="512"\n' +
++     '                                      src="/marketing-refined/carelog.webp"\n' +
++     '                                      width="768"\n' +
++     '-                                     loading="eager"\n' +
++     '                                    >\n' +
++     '                                    ...\n' +
++     '                                  ...\n' +
++     '                                <article className="pain-card">\n' +
++     '                                  <div className="pain-image">\n' +
++     '                                    <img\n' +
++     '                                      alt="Ilustrasi orang tua menunggu kabar saat penjemputan daycare"\n' +
++     '                                      decoding="async"\n' +
++     '                                      height="512"\n' +
++     '                                      src="/marketing-refined/parentupdate.webp"\n' +
++     '                                      width="768"\n' +
++     '-                                     loading="eager"\n' +
++     '                                    >\n' +
++     '                                    ...\n' +
++     '                                  ...\n' +
++     '                                <article className="pain-card">\n' +
++     '                                  <div className="pain-image">\n' +
++     '                                    <img\n' +
++     '                                      alt="Ilustrasi rekonsiliasi absensi, jadwal staf dan bukti pembayaran daycare"\n' +
++     '                                      decoding="async"\n' +
++     '                                      height="512"\n' +
++     '                                      src="/marketing-refined/operations.webp"\n' +
++     '                                      width="768"\n' +
++     '-                                     loading="eager"\n' +
++     '                                    >\n' +
++     '                                    ...\n' +
++     '                                  ...\n' +
++     '                                ...\n' +
++     '                            ...\n' +
++     '                              <div className="solution-l...">\n' +
++     '                                <div>\n' +
++     '                                <div className="dashboard-...">\n' +
++     '                                  <div className="dashboard-...">\n' +
++     '                                    <img\n' +
++     '                                      alt="Ilustrasi pengalaman penggunaan Daylio"\n' +
++     '                                      decoding="async"\n' +
++     '                                      src="/approved-assets/d35189c84fe287f2fae0.png"\n' +
++     '-                                     loading="eager"\n' +
++     '                                    >\n' +
++     '                                    ...\n' +
++     '                                  ...\n' +
++     '                            ...\n' +
++     '                              <div className="monitor" data-scenario="area">\n' +
++     '                                <div>\n' +
++     '                                <div className="monitor-photo">\n' +
++     '                                  <div className="camera-video">\n' +
++     '                                    <img\n' +
++     '                                      alt="Ilustrasi sudut kamera keamanan daycare: area bermain dan pintu servis deng..."\n' +
++     '                                      decoding="async"\n' +
++     '                                      width="1536"\n' +
++     '                                      height="864"\n' +
++     '                                      src="/marketing-refined/cctv.webp"\n' +
++     '-                                     loading="eager"\n' +
++     '                                    >\n' +
++     '                                    ...\n' +
++     '                                  ...\n' +
++     '                                ...\n' +
++     '                            ...\n' +
++     '                              <div className="container">\n' +
++     '                                <div>\n' +
++     '                                <div className="roles-grid">\n' +
++     '                                  <article className="role-card">\n' +
++     '                                    <img\n' +
++     '                                      alt="Pemilik daycare memeriksa dashboard bisnis"\n' +
++     '                                      decoding="async"\n' +
++     '                                      height="1024"\n' +
++     '                                      src="/approved-assets/3cf693758750aaca2e0e.webp"\n' +
++     '                                      width="1536"\n' +
++     '-                                     loading="eager"\n' +
++     '                                    >\n' +
++     '                                    ...\n' +
++     '                                  <article className="role-card">\n' +
++     '                                    <img\n' +
++     '                                      alt="Pengasuh mencatat aktivitas anak menggunakan tablet"\n' +
++     '                                      decoding='... 3226 more characters
++ ]
+- []
+
+    at file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/capture-refinement.mjs:162:10 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [
+    'landing console: Failed to load resource: the server responded with a status of 404 (Not Found)',
+    "landing console: A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n" +
+      '\n' +
+      "- A server/client branch `if (typeof window !== 'undefined')`.\n" +
+      "- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n" +
+      "- Date formatting in a user's locale which doesn't match the server.\n" +
+      '- External changing data without sending a snapshot of it along with the HTML.\n' +
+      '- Invalid HTML tag nesting.\n' +
+      '\n' +
+      'It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n' +
+      '\n' +
+      '%s%s https://react.dev/link/hydration-mismatch \n' +
+      '\n' +
+      '  ...\n' +
+      '    <LoadingBoundary name="/" loading={null}>\n' +
+      '      <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>\n' +
+      '        <HTTPAccessFallbackErrorBoundary pathname="/" notFound={{...}} forbidden={undefined} unauthorized={undefined} ...>\n' +
+      '          <RedirectBoundary>\n' +
+      '            <RedirectErrorBoundary router={{...}}>\n' +
+      '              <InnerLayoutRouter url="/" tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>\n' +
+      '                <SegmentViewNode type="page" pagePath="page.tsx">\n' +
+      '                  <SegmentTrieNode>\n' +
+      '                  <Home>\n' +
+      '                    <Landing>\n' +
+      '                      <div className="v20-site">\n' +
+      '                        <link>\n' +
+      '                        <ApprovedIcons>\n' +
+      '                        <Header>\n' +
+      '                          <header className="site-header">\n' +
+      '                            <div className="container ...">\n' +
+      '                              <a aria-label="Daylio ber..." className="brand-link" href="#beranda">\n' +
+      '                                <img\n' +
+      '                                  alt="Daylio by Elenio"\n' +
+      '                                  decoding="async"\n' +
+      '                                  src="/approved-assets/d35189c84fe287f2fae0.png"\n' +
+      '-                                 loading="eager"\n' +
+      '                                >\n' +
+      '                              ...\n' +
+      '                            ...\n' +
+      '                        <Main>\n' +
+      '                          <main>\n' +
+      '                            <Hero>\n' +
+      '                              <section className="hero" id="beranda">\n' +
+      '                                <div className="hero-photo">\n' +
+      '                                  <img\n' +
+      '                                    alt="Pengasuh mendampingi dua anak bermain di daycare"\n' +
+      '                                    decoding="async"\n' +
+      '                                    fetchPriority="high"\n' +
+      '                                    src="/approved-assets/64e5ee3c2f2264119234.webp"\n' +
+      '-                                   loading="eager"\n' +
+      '                                  >\n' +
+      '                                <div className="container ...">\n' +
+      '                                  <div>\n' +
+      '                                  <div>\n' +
+      '                                  <div aria-label="Preview si..." className="hero-media">\n' +
+      '                                    <div className="float-cam">\n' +
+      '                                      <div>\n' +
+      '                                      <div className="float-image">\n' +
+      '                                        <img\n' +
+      '                                          alt="Simulasi video kegiatan daycare"\n' +
+      '                                          decoding="async"\n' +
+      '                                          height="1024"\n' +
+      '                                          src="/approved-assets/361aa5ea4bcebaa12fca.webp"\n' +
+      '                                          width="1536"\n' +
+      '-                                         loading="eager"\n' +
+      '                                        >\n' +
+      '                                        ...\n' +
+      '                                      ...\n' +
+      '                                    <div className="float-alert">\n' +
+      '                                      <div>\n' +
+      '                                      <div className="float-image">\n' +
+      '                                        <img\n' +
+      '                                          alt="Cuplikan contoh event analitik"\n' +
+      '                                          decoding="async"\n' +
+      '                                          height="1024"\n' +
+      '                                          src="/approved-assets/361aa5ea4bcebaa12fca.webp"\n' +
+      '                                          width="1536"\n' +
+      '-                                         loading="eager"\n' +
+      '                                        >\n' +
+      '                                        ...\n' +
+      '                                      ...\n' +
+      '                                    ...\n' +
+      '                                  ...\n' +
+      '                                ...\n' +
+      '                            ...\n' +
+      '                              <div className="pain-grid">\n' +
+      '                                <article className="pain-card">\n' +
+      '                                  <div className="pain-image">\n' +
+      '                                    <img\n' +
+      '                                      alt="Ilustrasi pengelola daycare menangani berkas pendaftaran dan kunjungan kelu..."\n' +
+      '                                      decoding="async"\n' +
+      '                                      height="512"\n' +
+      '                                      src="/marketing-refined/inquiry.webp"\n' +
+      '                                      width="768"\n' +
+      '-                                     loading="eager"\n' +
+      '                                    >\n' +
+      '                                    ...\n' +
+      '                                  ...\n' +
+      '                                <article className="pain-card">\n' +
+      '                                  <div className="pain-image">\n' +
+      '                                    <img\n' +
+      '                                      alt="Ilustrasi pengasuh mengisi catatan kertas saat rutinitas makan"\n' +
+      '                                      decoding="async"\n' +
+      '                                      height="512"\n' +
+      '                                      src="/marketing-refined/carelog.webp"\n' +
+      '                                      width="768"\n' +
+      '-                                     loading="eager"\n' +
+      '                                    >\n' +
+      '                                    ...\n' +
+      '                                  ...\n' +
+      '                                <article className="pain-card">\n' +
+      '                                  <div className="pain-image">\n' +
+      '                                    <img\n' +
+      '                                      alt="Ilustrasi orang tua menunggu kabar saat penjemputan daycare"\n' +
+      '                                      decoding="async"\n' +
+      '                                      height="512"\n' +
+      '                                      src="/marketing-refined/parentupdate.webp"\n' +
+      '                                      width="768"\n' +
+      '-                                     loading="eager"\n' +
+      '                                    >\n' +
+      '                                    ...\n' +
+      '                                  ...\n' +
+      '                                <article className="pain-card">\n' +
+      '                                  <div className="pain-image">\n' +
+      '                                    <img\n' +
+      '                                      alt="Ilustrasi rekonsiliasi absensi, jadwal staf dan bukti pembayaran daycare"\n' +
+      '                                      decoding="async"\n' +
+      '                                      height="512"\n' +
+      '                                      src="/marketing-refined/operations.webp"\n' +
+      '                                      width="768"\n' +
+      '-                                     loading="eager"\n' +
+      '                                    >\n' +
+      '                                    ...\n' +
+      '                                  ...\n' +
+      '                                ...\n' +
+      '                            ...\n' +
+      '                              <div className="solution-l...">\n' +
+      '                                <div>\n' +
+      '                                <div className="dashboard-...">\n' +
+      '                                  <div className="dashboard-...">\n' +
+      '                                    <img\n' +
+      '                                      alt="Ilustrasi pengalaman penggunaan Daylio"\n' +
+      '                                      decoding="async"\n' +
+      '                                      src="/approved-assets/d35189c84fe287f2fae0.png"\n' +
+      '-                                     loading="eager"\n' +
+      '                                    >\n' +
+      '                                    ...\n' +
+      '                                  ...\n' +
+      '                            ...\n' +
+      '                              <div className="monitor" data-scenario="area">\n' +
+      '                                <div>\n' +
+      '                                <div className="monitor-photo">\n' +
+      '                                  <div className="camera-video">\n' +
+      '                                    <img\n' +
+      '                                      alt="Ilustrasi sudut kamera keamanan daycare: area bermain dan pintu servis deng..."\n' +
+      '                                      decoding="async"\n' +
+      '                                      width="1536"\n' +
+      '                                      height="864"\n' +
+      '                                      src="/marketing-refined/cctv.webp"\n' +
+      '-                                     loading="eager"\n' +
+      '                                    >\n' +
+      '                                    ...\n' +
+      '                                  ...\n' +
+      '                                ...\n' +
+      '                            ...\n' +
+      '                              <div className="container">\n' +
+      '                                <div>\n' +
+      '                                <div className="roles-grid">\n' +
+      '                                  <article className="role-card">\n' +
+      '                                    <img\n' +
+      '                                      alt="Pemilik daycare memeriksa dashboard bisnis"\n' +
+      '                                      decoding="async"\n' +
+      '                                      height="1024"\n' +
+      '                                      src="/approved-assets/3cf693758750aaca2e0e.webp"\n' +
+      '                                      width="1536"\n' +
+      '-                                     loading="eager"\n' +
+      '                                    >\n' +
+      '                                    ...\n' +
+      '                                  <article className="role-card">\n' +
+      '                                    <img\n' +
+      '                                      alt="Pengasuh mencatat aktivitas anak menggunakan tablet"\n' +
+      '                                      decoding='... 3226 more characters
+  ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.1

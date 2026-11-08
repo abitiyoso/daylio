@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-24T04:27:01.120Z",
+  "previewUnchanged": true,
+  "teardown": "Temporary database, media and build directory removed, including on failure.",
+  "results": [
+    {
+      "suite": "business",
+      "iteration": 1,
+      "passed": false,
+      "elapsedMs": 62982,
+      "output": "[]\nnode:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nlocator.click: Timeout 30000ms exceeded.\r\nCall log:\r\n\u001b[2m  - waiting for locator('.v10-additional-nav summary')\u001b[22m\r\n\r\n    at nav (C:\\Users\\Abi Tiyoso\\Documents\\ChatGPT\\daylio\\scripts\\browser-v3-business-test.mjs:65:63)\r\n    at async file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/browser-v3-business-test.mjs:201:3 {\r\n  log: [ \"  - waiting for locator('.v10-additional-nav summary')\" ],\r\n  name: 'TimeoutError'\r\n}\r\n\r\nNode.js v24.22.1\r\n"
+    }
+  ]
+}

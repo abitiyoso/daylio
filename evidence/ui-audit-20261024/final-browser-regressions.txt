@@ -1,0 +1,45 @@
+Running subscription, iteration 1, isolated database/media
+Subscription cancellation, independent verification and next-period change passed across roles.
+Running v10, iteration 1, isolated database/media
+Owner signup and branch passed
+Verified invitations passed
+Planner and enrollment passed
+Owner registration UI → provider-contract email verification → authenticated tenant + branch; no unverified tenant bootstrap.
+Owner invites manager and caregiver through Access UI; each verifies a one-use email proof and creates its own private password.
+Manager configures classroom/capacity; owner records real future staff shift + trial through planner UI; transactional enrollment replaces reserved prospective seat and verified guardian gets only its child.
+New tenant: caregiver attendance + care draft → manager publication → guardian Daily Story; recurring family invoice → independent staff verification → own-family payment receipt.
+SaaS invoice remains pending until platform-admin manual verification; customer cannot activate itself. Essential entitlement denies paid CRM API while preserving parent care/story/billing history. No real payment or external message.
+Running legacy, iteration 1, isolated database/media
+Marketing 390px: no overflow; V20 platform interaction; screenshot captured
+Marketing 768px: no overflow; V20 platform interaction; screenshot captured
+Marketing 1440px: no overflow; V20 platform interaction; screenshot captured
+Public demo persisted and deduplicated; daycare inquiry issues private prospect token; survey request stays requested until staff confirmation
+Caregiver group logging submitted through the browser form and rendered from persisted API records
+Browser login with isolated identity fixture for owner, caregiver, parent and unrelated guardian
+Real API + persistent PostgreSQL engine: draft hidden, private photo upload/resize, publish, linked parent timeline on reload, signed media access, cross-user URL denied, owner counts, LEO citation, unavailable CCTV, CSRF rejection
+Revoked guardian cannot use a previously issued media grant; synthetic link restored after test
+Running care, iteration 1, isolated database/media
+Caregiver UI: six present children preselected, absent child excluded, individual exception, 6 persisted drafts; HTTP idempotency replay returns identical record. Parent cannot read drafts.
+Manager UI publishes reviewed group; linked parent receives only 2 own-child records. Parent morning note acknowledged from caregiver UI; switching siblings replaces meal and notes without mixing children.
+Routine pickup UI: linked guardian approval without repeated manager review, physical identity check, explicit real handover confirmation, persisted evidence plus atomic attendance out. Substitute UI: request → manager approval → physical verification → single-use handover; preapproval bypass denied.
+Daily Closing UI persists unresolved snapshot and keeps incident open.
+Four authenticated role dashboards at 1440/820/390px: no horizontal overflow; mobile navigation opens and returns to workspace; 12 screenshots captured.
+Running business, iteration 1, isolated database/media
+Care Passport UI: parent proposal → manager confirmed version → assigned caregiver read, with actual persisted emergency/allergy information.
+Development UI: configured age/curriculum rubric → educator observation → submit → manager source review → human report draft → sign-off/publication → linked parent read and private PDF generated.
+CRM UI: manual inquiry → age/schedule/class/package qualification → saved unsent WhatsApp draft → confirmed class slot/price/emergency contact → atomic child/enrollment and guardian invitation. Optional tour/trial skipped explicitly; capacity enforced by shared existing enrollment service. No external messages sent.
+LEO UI works for actual parent, assigned caregiver and owner sessions in explicit verified-records mode.
+Running entry, iteration 1, isolated database/media
+owner: authenticated dashboard, scoped persisted API, responsive entry
+manager: authenticated dashboard, scoped persisted API, responsive entry
+caregiver: authenticated dashboard, scoped persisted API, responsive entry
+parent: authenticated dashboard, scoped persisted API, responsive entry
+Running access, iteration 1, isolated database/media
+Access UI loaded
+Form filled
+Admin UI creates persistent parent invitation; provider receives verification request; membership not activated before verification.
+Unverified identity denied; email link → verified session → invitation acceptance → private password → linked-child-only parent dashboard on mobile.
+Provider rejection returns explicit 503 without claiming delivery; successful request and invitation acceptance leave persistent audit evidence.
+Chosen password login works; used email proof rejected; wrong-account acceptance, revoked email send, parent privilege escalation and manager-to-manager invite denied.
+Three labeled V20 LEO simulation roles; separate login entry; desktop/mobile login screenshots.
+All selected browser suites passed; showcase unchanged; temporary data removed.

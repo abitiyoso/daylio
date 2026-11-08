@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-25T11:21:51.260Z",
+  "previewFingerprintBefore": "12a9552d42254df0c6e6fd76a6c357f2",
+  "previewFingerprintAfter": "12a9552d42254df0c6e6fd76a6c357f2",
+  "previewUnchanged": true,
+  "teardown": "Temporary database, media and build directory removed, including on failure.",
+  "results": [
+    {
+      "suite": "ux",
+      "iteration": 1,
+      "passed": true,
+      "elapsedMs": 42172,
+      "output": "Search UX passed: four roles at desktop/390/320, profile navigation, delayed-response dismissal, empty states and cross-tenant denial.\n"
+    }
+  ]
+}

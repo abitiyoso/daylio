@@ -1,0 +1,3 @@
+Running roles, iteration 1, isolated database/media
+32 role/screen/viewport cases passed: passports, access shell and conditional fields, planning, finance, review, care, pickup, handoff and family messages. Public CCTV illustration checked at desktop/mobile without repeated frames or fabricated detections.
+All selected browser suites passed; showcase unchanged; temporary data removed.

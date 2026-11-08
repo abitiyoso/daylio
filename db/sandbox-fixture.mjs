@@ -70,4 +70,78 @@ export async function seedSandbox(db) {
     "insert into platform_admins(user_id) values($1) on conflict do nothing",
     [s.admin],
   );
+  // Versioned synthetic fixture only. Never imported by the production database.
+  const [version] = (
+    await q("select version from schema_migrations where version=1003")
+  ).rows;
+  if (!version) {
+    const day = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Jakarta",
+    }).format(new Date());
+    await q("update classrooms set capacity=12,caregiver_ratio=4 where id=$1", [
+      s.room,
+    ]);
+    for (let index = 1; index <= 7; index++) {
+      const childId =
+        index === 1
+          ? s.child
+          : `50000000-0000-4000-8000-${String(index + 10).padStart(12, "0")}`;
+      await q(
+        "insert into children(id,organization_id,classroom_id,name) values($1,$2,$3,$4) on conflict do nothing",
+        [childId, s.org, s.room, `Anak Uji ${index}`],
+      );
+      await q("update children set name=$1 where id=$2", [
+        `Anak Uji ${index}`,
+        childId,
+      ]);
+      await q(
+        "insert into staff_assignments(organization_id,child_id,user_id) values($1,$2,$3) on conflict do nothing",
+        [s.org, childId, s.caregiver],
+      );
+      if (index <= 2)
+        await q(
+          "insert into guardian_child_links(organization_id,child_id,user_id) values($1,$2,$3) on conflict do nothing",
+          [s.org, childId, s.parent],
+        );
+      if (index <= 6)
+        await q(
+          "insert into records(organization_id,child_id,kind,data,state,created_by) values($1,$2,'attendance',$3,'recorded',$4)",
+          [
+            s.org,
+            childId,
+            JSON.stringify({ type: "in", fixtureVersion: 3, date: day }),
+            s.caregiver,
+          ],
+        );
+    }
+    await q(
+      "insert into records(organization_id,kind,data,state,created_by) values($1,'settings',$2,'configured',$3)",
+      [
+        s.org,
+        JSON.stringify({
+          hours: "07:00–18:00",
+          timezone: "Asia/Jakarta",
+          routinePublishing: "manager-review",
+          substituteReview: true,
+          managerCrm: true,
+          managerFinance: false,
+        }),
+        s.owner,
+      ],
+    );
+    await q(
+      "insert into records(organization_id,child_id,kind,data,state,created_by) values($1,$2,'consent',$3,'draft',$4)",
+      [
+        s.org,
+        s.child,
+        JSON.stringify({
+          scope: "media",
+          version: "sandbox-v3",
+          granted: true,
+        }),
+        s.parent,
+      ],
+    );
+    await q("insert into schema_migrations(version) values(1003)");
+  }
 }

@@ -1,0 +1,11 @@
+✔ Paid renewal and plan changes append nonoverlapping terms, preserve purchased time and resolve entitlements at the exact boundary (3406.3558ms)
+✔ Only the owning tenant can cancel a pending invoice; cancellation is audited, stable on retry and cannot cancel or forge payment (71.0976ms)
+✔ Due paid terms apply without a worker: renewal can bill, downgrade preserves an over-limit roster and blocks new admissions/finance (153.2637ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3971.6589

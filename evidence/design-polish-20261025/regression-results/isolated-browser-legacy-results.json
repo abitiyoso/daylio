@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-17T14:06:35.402Z",
+  "previewFingerprintBefore": "ab33f2c97938838b917bf032d7254fd6",
+  "previewFingerprintAfter": "ab33f2c97938838b917bf032d7254fd6",
+  "previewUnchanged": true,
+  "teardown": "Temporary database, media and build directory removed, including on failure.",
+  "results": [
+    {
+      "suite": "legacy",
+      "iteration": 1,
+      "passed": true,
+      "elapsedMs": 44709,
+      "output": "Marketing 390px: no overflow; FAQ keyboard-native details; screenshot captured\nMarketing 768px: no overflow; FAQ keyboard-native details; screenshot captured\nMarketing 1440px: no overflow; FAQ keyboard-native details; screenshot captured\nPublic demo persisted and deduplicated; daycare inquiry issues private prospect token; survey request stays requested until staff confirmation\nCaregiver group logging submitted through the browser form and rendered from persisted API records\nBrowser login with isolated identity fixture for owner, caregiver, parent and unrelated guardian\nReal API + persistent PostgreSQL engine: draft hidden, private photo upload/resize, publish, linked parent timeline on reload, signed media access, cross-user URL denied, owner counts, LEO citation, unavailable CCTV, CSRF rejection\nRevoked guardian cannot use a previously issued media grant; synthetic link restored after test\n"
+    }
+  ]
+}

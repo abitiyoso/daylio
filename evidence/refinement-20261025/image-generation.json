@@ -1,0 +1,54 @@
+{
+  "tool": "Built-in image_gen",
+  "kind": "Fictional illustrative photography; no real customer or camera evidence",
+  "assets": [
+    {
+      "name": "inquiry",
+      "prompt": "Use case: photorealistic-natural. Create one wide 3:2 documentary photograph for an Indonesian daycare software website's problem card: a daycare manager at a small reception desk arranging real unbranded enrollment folders, a paper waiting list and ringing smartphone while a visiting parent with a toddler waits nearby. Focus on the messy handoff of inquiries, not a generic professional smiling at laptop. Candid Indonesian people, modest lived-in daycare, daylight, realistic skin and paper texture, restrained warm tones. No text, logos, watermarks, screens with legible personal information. No staged corporate stock-photo poses.",
+      "source": "C:\\Users\\Abi Tiyoso\\.codex\\generated_images\\01a148f5-b378-7d63-8f09-f9c74fd85944\\exec-89dbef1a-ad5c-4760-ac21-d3ecaa64f67d.png",
+      "final": "public/marketing-refined/inquiry.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "name": "carelog",
+      "prompt": "Use case: photorealistic-natural. One wide 3:2 documentary photograph in a modest Indonesian daycare at snack time. A caregiver has to pause to mark a paper daily-care checklist on a clipboard beside small bowls and cups, with two toddlers seated at a low table in the background and a second caregiver supervising them. Emphasize the physical paper record, crayons, meal routine and interruption; not a smiling tablet advertisement. Natural candid posture, warm daylight, realistic textures. No readable names, no logos, no embedded text, no watermarks.",
+      "source": "C:\\Users\\Abi Tiyoso\\.codex\\generated_images\\01a148f5-b378-7d63-8f09-f9c74fd85944\\exec-35d60ba6-b445-4d3a-bf30-b0857a3fa15d.png",
+      "final": "public/marketing-refined/carelog.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "name": "parentupdate",
+      "prompt": "Use case: photorealistic-natural. One wide 3:2 intimate editorial photograph: Indonesian parent in everyday clothes checking an unbranded smartphone beside a child's small yellow backpack, lunchbox and daycare pickup belongings, a caregiver visible out of focus at the classroom doorway in background. Focus on waiting for today's update and the real daycare pickup context, not a generic cafe phone portrait. Candid, natural daylight, documentary texture, no readable screen text, no logos, no watermarks.",
+      "source": "C:\\Users\\Abi Tiyoso\\.codex\\generated_images\\01a148f5-b378-7d63-8f09-f9c74fd85944\\exec-cb2ff7d8-0f23-4d6c-9d27-9c6a7857c4b9.png",
+      "final": "public/marketing-refined/parentupdate.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "name": "operations",
+      "prompt": "Use case: photorealistic-natural. One wide 3:2 editorial close-up inside an Indonesian daycare back office: a manager's hands reconcile a paper classroom attendance tally, a wall weekly staff roster in soft focus, calculator and receipt slips with a stack of child cubby labels blurred behind. Show the tangible operational work of matching class capacity, staff coverage and bills. Avoid generic man at laptop. Natural lived-in desk, candid daylight, realistic paper and skin texture. No legible private data or readable words, no logos, no watermarks.",
+      "source": "C:\\Users\\Abi Tiyoso\\.codex\\generated_images\\01a148f5-b378-7d63-8f09-f9c74fd85944\\exec-7d4e10d7-0b31-4cb9-87e2-2d4847eec84d.png",
+      "final": "public/marketing-refined/operations.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "name": "welcome",
+      "prompt": "Use case: photorealistic-natural. Create a high resolution wide 3:2 crisp documentary photograph for the closing call-to-action of an Indonesian daycare website. A friendly Indonesian female caregiver crouches naturally at eye level to welcome a toddler wearing a small mustard yellow backpack at the daycare entrance, the child's parent standing beside them cropped naturally. Contemporary modest warm daycare with cubbies and children's drawings behind, natural morning daylight, sincere candid expressions, realistic skin and cloth texture, sharply resolved details suitable for a large 650px website image at 2x density. No text or logos. Avoid artificial plastic skin or stock corporate poses.",
+      "source": "C:\\Users\\Abi Tiyoso\\.codex\\generated_images\\01a148f5-b378-7d63-8f09-f9c74fd85944\\exec-746ec677-aae0-4ffe-b2fd-6a53afaab252.png",
+      "final": "public/marketing-refined/welcome.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "name": "cctv",
+      "prompt": "Use case: photorealistic-natural. Create a sharp wide 16:9 fictional daycare surveillance demonstration frame. Camera mounted high in the upper room corner at about 2.7 metres, slightly wide-angle 100-degree perspective, natural security camera viewpoint (not cinematic eye level), restrained desaturated daylight. Indonesian daycare playroom with four toddlers and two adult caregivers. LEFT and CENTER: three toddlers and one caregiver doing floor puzzles on a mat. RIGHT: one toddler approaches a closed childproof safety gate and an adult caregiver stands nearby supervising. The gate is at the right wall leading to a service corridor and occupies the rightmost quarter of the image. Safe, calm everyday situation, fully clothed children, no distress. Cubby storage and low tables, tidy but lived-in, realistic texture. No overlays, no bounding boxes, no timestamp, no logos, no words. This will be labeled by the website as a generated scenario, not actual camera footage; do not embed any interface or text.",
+      "source": "C:\\Users\\Abi Tiyoso\\.codex\\generated_images\\01a148f5-b378-7d63-8f09-f9c74fd85944\\exec-fa3f0290-d017-4945-93c0-a7583feb859c.png",
+      "final": "public/marketing-refined/cctv.webp",
+      "width": 1672,
+      "height": 941
+    }
+  ]
+}

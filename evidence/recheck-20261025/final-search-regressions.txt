@@ -1,0 +1,3 @@
+Running ux, iteration 1, isolated database/media
+Search UX passed: four roles at desktop/390/320, profile navigation, delayed-response dismissal, empty states and cross-tenant denial.
+All selected browser suites passed; showcase unchanged; temporary data removed.

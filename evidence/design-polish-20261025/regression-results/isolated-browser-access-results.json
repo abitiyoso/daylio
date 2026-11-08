@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-24T08:12:06.917Z",
+  "previewFingerprintBefore": "12a9552d42254df0c6e6fd76a6c357f2",
+  "previewFingerprintAfter": "12a9552d42254df0c6e6fd76a6c357f2",
+  "previewUnchanged": true,
+  "teardown": "Temporary database, media and build directory removed, including on failure.",
+  "results": [
+    {
+      "suite": "access",
+      "iteration": 1,
+      "passed": true,
+      "elapsedMs": 83004,
+      "output": "Access UI loaded\nForm filled\nAdmin UI creates persistent parent invitation; provider receives verification request; membership not activated before verification.\nUnverified identity denied; email link → verified session → invitation acceptance → private password → linked-child-only parent dashboard on mobile.\nProvider rejection returns explicit 503 without claiming delivery; successful request and invitation acceptance leave persistent audit evidence.\nChosen password login works; used email proof rejected; wrong-account acceptance, revoked email send, parent privilege escalation and manager-to-manager invite denied.\nThree labeled V20 LEO simulation roles; separate login entry; desktop/mobile login screenshots.\n"
+    }
+  ]
+}

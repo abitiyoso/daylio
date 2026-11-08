@@ -1,0 +1,6 @@
+Running entry, iteration 1, isolated database/media
+owner: authenticated dashboard, scoped persisted API, responsive entry
+manager: authenticated dashboard, scoped persisted API, responsive entry
+caregiver: authenticated dashboard, scoped persisted API, responsive entry
+parent: authenticated dashboard, scoped persisted API, responsive entry
+All selected browser suites passed; showcase unchanged; temporary data removed.

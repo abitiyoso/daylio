@@ -1,0 +1,44 @@
+✔ F01 v4 hierarchy, eight FAQ topics and unmodified official asset copy (7.4353ms)
+✔ F03 identity verifies token with provider; invalid, expired and unverified denied (25.8382ms)
+✔ F14 signed private media grants are user-bound, expiring and tamper resistant (1.136ms)
+✔ F37 role boundaries and strict per-domain validation (3.6394ms)
+✔ F42 bounded read retries, circuit breaker, cooldown and no blind session retry (14.7722ms)
+✔ F40 embedded PostgreSQL backup can be restored with persisted data (3370.8934ms)
+✔ V3 Quick Care: present assigned class batch, one exception, persisted drafts, policy review and bundled delivery (2787.4885ms)
+✔ V3 parent today and Daily Story contain published same-child sources only (48.4482ms)
+✔ V3 morning handover requires linked guardian, caregiver acknowledgment and immutable history (59.7465ms)
+✔ V3 routine pickup: guardian authorization, real in-person evidence, atomic checkout and duplicate protection (88.6747ms)
+✔ V3 substitute pickup: review, physical ID, expiry, revocation and single use (107.9501ms)
+✔ V3 closing snapshots open incidents and children without hiding unresolved exceptions (42.724ms)
+✔ V3 finance/CRM capabilities default denied in service AND RLS, explicit owner delegation (110.2156ms)
+✔ V3 passport changes require guardian proposal and manager sign-off with version history (42.4026ms)
+✔ V3 development: separate observations, configurable rubric, review, human publication, guardian PDF scope (73.1687ms)
+✔ V3 media requires guardian consent for every depicted child and withdrawal blocks access (29.3596ms)
+✔ V3 replay cannot expose records after role or guardian link changes (6.9298ms)
+✔ V3 LEO reads authorized records with explicit provider state and never executes stored note instructions (11.1468ms)
+✔ V3 owner metrics use configured capacity and real branch/date scope; missing shift evidence remains actionable (96.8918ms)
+✔ F04/F07/F08/F09 DB RLS prevents tenant and child URL bypass (2563.4585ms)
+✔ F10/F12/F13/F15/F16/F18/F21 caregiver-to-parent persisted publish loop (111.9559ms)
+✔ F11 pickup requires management approval and staff identity verification (81.8987ms)
+✔ F19 incident escalation, append-only history, resolution, no guardian internal details (39.6691ms)
+✔ F23/F24/F25/F26 tours and atomic retry-safe enrollment (86.3193ms)
+✔ F27/F28/F29/F42 external integration fails closed; no invented stream (6.5189ms)
+✔ F30/F31 LEO scoped facts with source/time and unknown, never evaluates notes (30.8385ms)
+✔ F33/F34 manual payment requires explicit manager confirmation and audit (20.0732ms)
+✔ F38/F39 consent withdrawal, immutable audit and immediate assignment/link revocation (32.1879ms)
+✔ F05/F06 invitation activation, expired/revoked token rejection and limited manager role (38.4169ms)
+✔ F09/F20 shifts and restricted handoff acknowledgment (17.1835ms)
+✔ F17 announcement publication and notification deduplication (52.1665ms)
+✔ F22/F41 exported totals and bounded pagination API contracts (27.3948ms)
+✔ F35/F36 plan caps preserve essential care and support approval stays health-only (31.2307ms)
+✔ F38/F39 data export needs approval; published facts only and guardian scope preserved (29.0434ms)
+✔ F32 caregiver summaries remain drafts until explicitly reviewed (26.9894ms)
+✔ F18/F26/F39/F40 worker deduplicates deliveries and followups; bounded retention preserves audit (38.6132ms)
+ℹ tests 36
+ℹ suites 0
+ℹ pass 36
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3886.7106

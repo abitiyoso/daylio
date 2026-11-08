@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-25T01:37:50.859Z",
+  "previewFingerprintBefore": "12a9552d42254df0c6e6fd76a6c357f2",
+  "previewFingerprintAfter": "12a9552d42254df0c6e6fd76a6c357f2",
+  "previewUnchanged": true,
+  "teardown": "Temporary database, media and build directory removed, including on failure.",
+  "results": [
+    {
+      "suite": "roles",
+      "iteration": 1,
+      "passed": true,
+      "elapsedMs": 39630,
+      "output": "40 role/screen/viewport cases passed: unified administration, passports, access shell and conditional fields, planning, finance, review, care, pickup, handoff and family messages. Public CCTV scenarios checked at desktop/mobile with explicit demo annotation and no fabricated live evidence.\n"
+    }
+  ]
+}

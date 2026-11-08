@@ -1,0 +1,296 @@
+{
+  "at": "2026-10-24T04:21:19.977Z",
+  "method": "Actual Chromium chrome://settings/appearance #zoomLevel on an owned temporary profile; devicePixelRatio verifies native browser zoom. No CSS transform or CSS zoom.",
+  "results": [
+    {
+      "physicalViewport": 1440,
+      "zoom": 100,
+      "metrics": {
+        "inner": 1440,
+        "outer": 1440,
+        "dpr": 1,
+        "scroll": 1440,
+        "phone": {
+          "width": 330,
+          "height": 561
+        },
+        "broken": []
+      },
+      "passed": true
+    },
+    {
+      "physicalViewport": 1280,
+      "zoom": 100,
+      "metrics": {
+        "inner": 1280,
+        "outer": 1440,
+        "dpr": 1,
+        "scroll": 1280,
+        "phone": {
+          "width": 330,
+          "height": 561
+        },
+        "broken": []
+      },
+      "passed": true
+    },
+    {
+      "physicalViewport": 1024,
+      "zoom": 100,
+      "metrics": {
+        "inner": 1024,
+        "outer": 1440,
+        "dpr": 1,
+        "scroll": 1024,
+        "phone": {
+          "width": 330,
+          "height": 561
+        },
+        "broken": []
+      },
+      "passed": true
+    },
+    {
+      "physicalViewport": 768,
+      "zoom": 100,
+      "metrics": {
+        "inner": 768,
+        "outer": 1440,
+        "dpr": 1,
+        "scroll": 768,
+        "phone": {
+          "width": 306,
+          "height": 544
+        },
+        "broken": []
+      },
+      "passed": true
+    },
+    {
+      "physicalViewport": 390,
+      "zoom": 100,
+      "metrics": {
+        "inner": 390,
+        "outer": 1440,
+        "dpr": 1,
+        "scroll": 390,
+        "phone": {
+          "width": 306,
+          "height": 561
+        },
+        "broken": []
+      },
+      "passed": true
+    },
+    {
+      "physicalViewport": 320,
+      "zoom": 100,
+      "metrics": {
+        "inner": 320,
+        "outer": 1440,
+        "dpr": 1,
+        "scroll": 320,
+        "phone": {
+          "width": 284,
+          "height": 556
+        },
+        "broken": []
+      },
+      "passed": true
+    },
+    {
+      "physicalViewport": 1440,
+      "zoom": 125,
+      "metrics": {
+        "inner": 1152,
+        "outer": 1440,
+        "dpr": 1.25,
+        "scroll": 1152,
+        "phone": {
+          "width": 330,
+          "height": 560.6000366210938
+        },
+        "broken": []
+      },
+      "passed": true
+    },
+    {
+      "physicalViewport": 1280,
+      "zoom": 125,
+      "metrics": {
+        "inner": 1024,
+        "outer": 1440,
+        "dpr": 1.25,
+        "scroll": 1024,
+        "phone": {
+          "width": 330,
+          "height": 560.6000366210938
+        },
+        "broken": []
+      },
+      "passed": true
+    },
+    {
+      "physicalViewport": 1024,
+      "zoom": 125,
+      "metrics": {
+        "inner": 819,
+        "outer": 1440,
+        "dpr": 1.25,
+        "scroll": 819,
+        "phone": {
+          "width": 306,
+          "height": 543.6000366210938
+        },
+        "broken": []
+      },
+      "passed": true
+    },
+    {
+      "physicalViewport": 768,
+      "zoom": 125,
+      "metrics": {
+        "inner": 614,
+        "outer": 1440,
+        "dpr": 1.25,
+        "scroll": 614,
+        "phone": {
+          "width": 306,
+          "height": 560.6000366210938
+        },
+        "broken": []
+      },
+      "passed": true
+    },
+    {
+      "physicalViewport": 390,
+      "zoom": 125,
+      "metrics": {
+        "inner": 312,
+        "outer": 1440,
+        "dpr": 1.25,
+        "scroll": 312,
+        "phone": {
+          "width": 276,
+          "height": 555.6000366210938
+        },
+        "broken": []
+      },
+      "passed": true
+    },
+    {
+      "physicalViewport": 320,
+      "zoom": 125,
+      "metrics": {
+        "inner": 256,
+        "outer": 1440,
+        "dpr": 1.25,
+        "scroll": 256,
+        "phone": {
+          "width": 220,
+          "height": 555.6000366210938
+        },
+        "broken": []
+      },
+      "passed": true
+    },
+    {
+      "physicalViewport": 1440,
+      "zoom": 150,
+      "metrics": {
+        "inner": 960,
+        "outer": 1440,
+        "dpr": 1.5,
+        "scroll": 960,
+        "phone": {
+          "width": 330,
+          "height": 560.3333740234375
+        },
+        "broken": []
+      },
+      "passed": true
+    },
+    {
+      "physicalViewport": 1280,
+      "zoom": 150,
+      "metrics": {
+        "inner": 853,
+        "outer": 1440,
+        "dpr": 1.5,
+        "scroll": 853,
+        "phone": {
+          "width": 330,
+          "height": 560.3333740234375
+        },
+        "broken": []
+      },
+      "passed": true
+    },
+    {
+      "physicalViewport": 1024,
+      "zoom": 150,
+      "metrics": {
+        "inner": 683,
+        "outer": 1440,
+        "dpr": 1.5,
+        "scroll": 683,
+        "phone": {
+          "width": 283.3333435058594,
+          "height": 543.3333740234375
+        },
+        "broken": []
+      },
+      "passed": true
+    },
+    {
+      "physicalViewport": 768,
+      "zoom": 150,
+      "metrics": {
+        "inner": 512,
+        "outer": 1440,
+        "dpr": 1.5,
+        "scroll": 512,
+        "phone": {
+          "width": 306,
+          "height": 560.3333740234375
+        },
+        "broken": []
+      },
+      "passed": true
+    },
+    {
+      "physicalViewport": 390,
+      "zoom": 150,
+      "metrics": {
+        "inner": 260,
+        "outer": 1440,
+        "dpr": 1.5,
+        "scroll": 260,
+        "phone": {
+          "width": 224,
+          "height": 555.3333740234375
+        },
+        "broken": []
+      },
+      "passed": true
+    },
+    {
+      "physicalViewport": 320,
+      "zoom": 150,
+      "metrics": {
+        "inner": 213,
+        "outer": 1440,
+        "dpr": 1.5,
+        "scroll": 213,
+        "phone": {
+          "width": 177.33334350585938,
+          "height": 555.3333740234375
+        },
+        "broken": []
+      },
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

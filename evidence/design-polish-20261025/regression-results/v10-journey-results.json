@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-25T12:21:15.002Z",
+  "environment": "Disposable QA database + isolated localhost identity/email-contract fixture; no real inbox or bank transaction",
+  "passed": [
+    "Owner registration UI → provider-contract email verification → authenticated tenant + branch; no unverified tenant bootstrap.",
+    "Owner invites manager and caregiver through Access UI; each verifies a one-use email proof and creates its own private password.",
+    "Manager configures classroom/capacity; owner records real future staff shift + trial through planner UI; transactional enrollment replaces reserved prospective seat and verified guardian gets only its child.",
+    "New tenant: caregiver attendance + care draft → manager publication → guardian Daily Story; recurring family invoice → independent staff verification → own-family payment receipt.",
+    "SaaS invoice remains pending until platform-admin manual verification; customer cannot activate itself. Essential entitlement denies paid CRM API while preserving parent care/story/billing history. No real payment or external message."
+  ],
+  "errors": []
+}

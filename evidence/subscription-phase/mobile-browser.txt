@@ -1,0 +1,3 @@
+Running subscription, iteration 1, isolated database/media
+Subscription cancellation, independent verification and next-period change passed across roles.
+All selected browser suites passed; showcase unchanged; temporary data removed.

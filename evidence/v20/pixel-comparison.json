@@ -1,0 +1,341 @@
+{
+  "method": "Raw RGBA channel comparison, >10 difference threshold. Dynamic interaction states are checked separately; no alignment/rescaling in measurements.",
+  "rows": [
+    {
+      "width": 1440,
+      "section": "beranda",
+      "equalDimensions": true,
+      "meanChannelDifference": 0.010543602003642988,
+      "changedChannelPercent": 0.00011384335154826958
+    },
+    {
+      "width": 1440,
+      "section": "masalah",
+      "equalDimensions": true,
+      "meanChannelDifference": 0.0176302707833733,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1440,
+      "section": "solusi",
+      "equalDimensions": true,
+      "meanChannelDifference": 0.005201109570041609,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1440,
+      "section": "cctv",
+      "equalDimensions": true,
+      "meanChannelDifference": 0.05949736711902742,
+      "changedChannelPercent": 0.0003313189143341815
+    },
+    {
+      "width": 1440,
+      "section": "pengalaman",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1440,
+      "section": "leo",
+      "equalDimensions": true,
+      "meanChannelDifference": 0.0046641791044776115,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1440,
+      "section": "harga",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1440,
+      "section": "kontak",
+      "equalDimensions": true,
+      "meanChannelDifference": 0.01171875,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1280,
+      "section": "beranda",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1280,
+      "section": "masalah",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1280,
+      "section": "solusi",
+      "equalDimensions": true,
+      "meanChannelDifference": 0.005237430167597765,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1280,
+      "section": "cctv",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1280,
+      "section": "pengalaman",
+      "equalDimensions": true,
+      "meanChannelDifference": 0.00541907514450867,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1280,
+      "section": "leo",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1280,
+      "section": "harga",
+      "equalDimensions": true,
+      "meanChannelDifference": 0.005804953560371517,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1280,
+      "section": "kontak",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1024,
+      "section": "beranda",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1024,
+      "section": "masalah",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1024,
+      "section": "solusi",
+      "equalDimensions": true,
+      "meanChannelDifference": 0.005380200860832138,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1024,
+      "section": "cctv",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1024,
+      "section": "pengalaman",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1024,
+      "section": "leo",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1024,
+      "section": "harga",
+      "equalDimensions": true,
+      "meanChannelDifference": 0.005850234009360375,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 1024,
+      "section": "kontak",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 768,
+      "section": "beranda",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 768,
+      "section": "masalah",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 768,
+      "section": "solusi",
+      "equalDimensions": true,
+      "meanChannelDifference": 0.004107338444687842,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 768,
+      "section": "cctv",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 768,
+      "section": "pengalaman",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 768,
+      "section": "leo",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 768,
+      "section": "harga",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 768,
+      "section": "kontak",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 390,
+      "section": "beranda",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 390,
+      "section": "masalah",
+      "equalDimensions": true,
+      "meanChannelDifference": 0.005274261603375527,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 390,
+      "section": "solusi",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 390,
+      "section": "cctv",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 390,
+      "section": "pengalaman",
+      "equalDimensions": true,
+      "meanChannelDifference": 0.022222222222222223,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 390,
+      "section": "leo",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 390,
+      "section": "harga",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 390,
+      "section": "kontak",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 320,
+      "section": "beranda",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 320,
+      "section": "masalah",
+      "equalDimensions": true,
+      "meanChannelDifference": 0.0048828125,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 320,
+      "section": "solusi",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 320,
+      "section": "cctv",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 320,
+      "section": "pengalaman",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 320,
+      "section": "leo",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 320,
+      "section": "harga",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    },
+    {
+      "width": 320,
+      "section": "kontak",
+      "equalDimensions": true,
+      "meanChannelDifference": 0,
+      "changedChannelPercent": 0
+    }
+  ]
+}

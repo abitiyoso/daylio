@@ -1,0 +1,146 @@
+{
+  "results": [
+    {
+      "role": "owner",
+      "width": 1440,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "owner",
+      "width": 1024,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "owner",
+      "width": 768,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "owner",
+      "width": 390,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "owner",
+      "width": 320,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "manager",
+      "width": 1440,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "manager",
+      "width": 1024,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "manager",
+      "width": 768,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "manager",
+      "width": 390,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "manager",
+      "width": 320,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "caregiver",
+      "width": 1440,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "caregiver",
+      "width": 1024,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "caregiver",
+      "width": 768,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "caregiver",
+      "width": 390,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "caregiver",
+      "width": 320,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "parent",
+      "width": 1440,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "parent",
+      "width": 1024,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "parent",
+      "width": 768,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "parent",
+      "width": 390,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    },
+    {
+      "role": "parent",
+      "width": 320,
+      "oneHeading": true,
+      "noOverflow": true,
+      "secondaryTextAtLeast13": true
+    }
+  ],
+  "errors": [],
+  "scope": "Four role homes at five widths; real authenticated disposable fixture. Parent morning form inspected without submission."
+}

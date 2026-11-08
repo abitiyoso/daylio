@@ -56,6 +56,22 @@ async function handler(
           },
           { status: 404 },
         );
+      for (const childId of [
+        ...new Set([row.child_id, ...(row.data.depictedChildIds || [])]),
+      ]) {
+        const [{ allowed }] =
+          await tx`select media_consent(${childId}) allowed`;
+        if (!allowed)
+          return Response.json(
+            {
+              error: {
+                code: "MEDIA_CONSENT_REQUIRED",
+                message: "Persetujuan foto belum tersedia atau telah dicabut.",
+              },
+            },
+            { status: 403, headers: { "Cache-Control": "no-store" } },
+          );
+      }
       const directory = resolve(
         process.env.MEDIA_DIRECTORY || "data/media",
         org,

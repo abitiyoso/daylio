@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-24T12:00:34.973Z",
+  "previewFingerprintBefore": "12a9552d42254df0c6e6fd76a6c357f2",
+  "previewFingerprintAfter": "12a9552d42254df0c6e6fd76a6c357f2",
+  "previewUnchanged": true,
+  "teardown": "Temporary database, media and build directory removed, including on failure.",
+  "results": [
+    {
+      "suite": "subscription",
+      "iteration": 1,
+      "passed": true,
+      "elapsedMs": 65251,
+      "output": "Subscription cancellation, independent verification and next-period change passed across roles.\n"
+    },
+    {
+      "suite": "v10",
+      "iteration": 1,
+      "passed": true,
+      "elapsedMs": 52228,
+      "output": "Owner signup and branch passed\nVerified invitations passed\nPlanner and enrollment passed\nOwner registration UI → provider-contract email verification → authenticated tenant + branch; no unverified tenant bootstrap.\nOwner invites manager and caregiver through Access UI; each verifies a one-use email proof and creates its own private password.\nManager configures classroom/capacity; owner records real future staff shift + trial through planner UI; transactional enrollment replaces reserved prospective seat and verified guardian gets only its child.\nNew tenant: caregiver attendance + care draft → manager publication → guardian Daily Story; recurring family invoice → independent staff verification → own-family payment receipt.\nSaaS invoice remains pending until platform-admin manual verification; customer cannot activate itself. Essential entitlement denies paid CRM API while preserving parent care/story/billing history. No real payment or external message.\n"
+    },
+    {
+      "suite": "legacy",
+      "iteration": 1,
+      "passed": true,
+      "elapsedMs": 50880,
+      "output": "Marketing 390px: no overflow; V20 platform interaction; screenshot captured\nMarketing 768px: no overflow; V20 platform interaction; screenshot captured\nMarketing 1440px: no overflow; V20 platform interaction; screenshot captured\nPublic demo persisted and deduplicated; daycare inquiry issues private prospect token; survey request stays requested until staff confirmation\nCaregiver group logging submitted through the browser form and rendered from persisted API records\nBrowser login with isolated identity fixture for owner, caregiver, parent and unrelated guardian\nReal API + persistent PostgreSQL engine: draft hidden, private photo upload/resize, publish, linked parent timeline on reload, signed media access, cross-user URL denied, owner counts, LEO citation, unavailable CCTV, CSRF rejection\nRevoked guardian cannot use a previously issued media grant; synthetic link restored after test\n"
+    },
+    {
+      "suite": "care",
+      "iteration": 1,
+      "passed": false,
+      "elapsedMs": 64961,
+      "output": "Browser exceptions: []\nnode:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nlocator.waitFor: Timeout 30000ms exceeded.\r\nCall log:\r\n\u001b[2m  - waiting for getByText('SANDBOX · Data sintetis') to be visible\u001b[22m\r\n\r\n    at login (C:\\Users\\Abi Tiyoso\\Documents\\ChatGPT\\daylio\\scripts\\browser-v3-test.mjs:36:71)\r\n    at async file:///C:/Users/Abi%20Tiyoso/Documents/ChatGPT/daylio/scripts/browser-v3-test.mjs:39:17 {\r\n  log: [\r\n    \"  - waiting for getByText('SANDBOX · Data sintetis') to be visible\"\r\n  ],\r\n  name: 'TimeoutError'\r\n}\r\n\r\nNode.js v24.22.1\r\n"
+    }
+  ]
+}

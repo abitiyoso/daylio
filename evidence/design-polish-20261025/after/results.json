@@ -1,0 +1,133 @@
+{
+  "before": "12a9552d42254df0c6e6fd76a6c357f2",
+  "after": "12a9552d42254df0c6e6fd76a6c357f2",
+  "unchanged": true,
+  "results": [
+    {
+      "role": "owner",
+      "width": 1440,
+      "captured": true
+    },
+    {
+      "role": "owner",
+      "width": 390,
+      "captured": true
+    },
+    {
+      "role": "manager",
+      "width": 1440,
+      "captured": true
+    },
+    {
+      "role": "manager",
+      "width": 390,
+      "captured": true
+    },
+    {
+      "role": "caregiver",
+      "width": 1440,
+      "captured": true
+    },
+    {
+      "role": "caregiver",
+      "width": 390,
+      "captured": true
+    },
+    {
+      "role": "parent",
+      "width": 1440,
+      "captured": true
+    },
+    {
+      "role": "parent",
+      "width": 390,
+      "captured": true
+    },
+    {
+      "surface": "landing",
+      "width": 1440,
+      "sizes": [
+        {
+          "src": "/marketing-refined/inquiry.webp",
+          "naturalWidth": 1536,
+          "renderedWidth": 305.25,
+          "loaded": true
+        },
+        {
+          "src": "/marketing-refined/carelog.webp",
+          "naturalWidth": 1536,
+          "renderedWidth": 305.25,
+          "loaded": true
+        },
+        {
+          "src": "/marketing-refined/parentupdate.webp",
+          "naturalWidth": 1536,
+          "renderedWidth": 305.25,
+          "loaded": true
+        },
+        {
+          "src": "/marketing-refined/operations.webp",
+          "naturalWidth": 1536,
+          "renderedWidth": 305.25,
+          "loaded": true
+        },
+        {
+          "src": "/marketing-refined/cctv.webp",
+          "naturalWidth": 1672,
+          "renderedWidth": 460.25,
+          "loaded": true
+        },
+        {
+          "src": "/marketing-refined/welcome.webp",
+          "naturalWidth": 1536,
+          "renderedWidth": 576,
+          "loaded": true
+        }
+      ]
+    },
+    {
+      "surface": "landing",
+      "width": 390,
+      "sizes": [
+        {
+          "src": "/marketing-refined/inquiry.webp",
+          "naturalWidth": 1536,
+          "renderedWidth": 169.5,
+          "loaded": true
+        },
+        {
+          "src": "/marketing-refined/carelog.webp",
+          "naturalWidth": 1536,
+          "renderedWidth": 169.5,
+          "loaded": true
+        },
+        {
+          "src": "/marketing-refined/parentupdate.webp",
+          "naturalWidth": 1536,
+          "renderedWidth": 169.5,
+          "loaded": true
+        },
+        {
+          "src": "/marketing-refined/operations.webp",
+          "naturalWidth": 1536,
+          "renderedWidth": 169.5,
+          "loaded": true
+        },
+        {
+          "src": "/marketing-refined/cctv.webp",
+          "naturalWidth": 1672,
+          "renderedWidth": 334,
+          "loaded": true
+        },
+        {
+          "src": "/marketing-refined/welcome.webp",
+          "naturalWidth": 1536,
+          "renderedWidth": 354,
+          "loaded": true
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "policy": "Read-only showcase captures; only existing synthetic identity login/refresh allowed. No business record mutation."
+}

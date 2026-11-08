@@ -87,6 +87,7 @@ add("public/demo-requests", "post", {
     "Persist contact consent + lead; honeypot, rate limit and fingerprint dedup. Returns recorded, never claims WhatsApp sent.",
 });
 for (const action of [
+  "session",
   "signup",
   "login",
   "recover",
@@ -118,6 +119,10 @@ add("public/tours/{organizationId}", "post", {
   publicRoute: true,
   description:
     "Private prospect token authorizes a requested survey; staff confirmation is separate.",
+});
+add("invitations/{id}/email", "post", {
+  description:
+    "Manager/owner requests provider verification email for a valid invitation; activation requires verified matching identity.",
 });
 add("staff/{id}", "patch");
 add("staff-assignments", "get,post");
@@ -231,6 +236,104 @@ add("payments/provider-webhook", "post", {
   publicRoute: true,
   description:
     "Disabled (503) until payment provider is selected and signature, amount, currency, replay and reconciliation checks are verified.",
+});
+// Backend v3 commands retain the same authenticated /api/v1 boundary.
+for (const path of [
+  "workspace/context",
+  "care/today",
+  "care/policy",
+  "manager/exceptions",
+  "manager/closing",
+  "owner/business-pulse",
+  "parent/today",
+  "passports/{childId}",
+  "crm/overview",
+  "development-reports/{id}/pdf",
+])
+  add(path, "get");
+for (const path of [
+  "morning-notes",
+  "daily-stories",
+  "pickup-authorizations",
+  "passport-changes",
+  "observations",
+  "development-reports",
+  "development-rubrics",
+])
+  add(path, "get,post", {
+    description:
+      "Backend v3 scoped workflow. See docs/BACKEND_V3_API.md for strict command payloads, permissions and transitions.",
+  });
+for (const path of ["morning-notes/{id}", "daily-stories/{id}"])
+  add(path, "patch");
+for (const path of [
+  "activities/batches/{batchId}/publish",
+  "morning-notes/{id}/acknowledge",
+  "manager/closing",
+  "daily-stories/{id}/publish",
+  "pickup-authorizations/{id}/approve",
+  "pickup-authorizations/{id}/revoke",
+  "pickups/{id}/verify-handover",
+  "passport-changes/{id}/approve",
+  "passport-changes/{id}/reject",
+  "observations/{id}/submit",
+  "observations/{id}/approve",
+  "observations/{id}/reject",
+  "development-reports/{id}/publish",
+  "crm/leads/{id}/qualify",
+  "crm/leads/{id}/whatsapp-draft",
+  "crm/leads/{id}/confirm-enrollment",
+  "crm/whatsapp-drafts/{id}/copy",
+  "crm/whatsapp-drafts/{id}/open",
+  "leo/caregiver/query",
+])
+  add(path, "post", {
+    description:
+      "Strict authenticated command; server-side permission and state checks. See docs/BACKEND_V3_API.md.",
+  });
+for (const [path, methods] of [
+  ["owner/summary", "get"],
+  ["workspace/search", "get"],
+  ["care/handoff-options", "get"],
+  ["planner/overview", "get"],
+  ["planner/history/{id}", "get"],
+  ["planner/bookings", "post"],
+  ["planner/bookings/{id}", "patch"],
+  ["planner/bookings/{id}/cancel", "post"],
+  ["planner/shifts", "post"],
+  ["planner/shifts/{id}", "patch"],
+  ["planner/shifts/{id}/cancel", "post"],
+  ["commercial/context", "get"],
+  ["commercial/invoices", "post"],
+  ["commercial/invoices/{id}/cancel", "post"],
+  ["commercial/addons", "post"],
+  ["billing/overview", "get"],
+  ["billing/recurring", "get,post"],
+  ["billing/recurring/{id}/generate", "post"],
+  ["billing/recurring/{id}/stop", "post"],
+  ["family/billing", "get"],
+  ["family/receipts/{id}", "get"],
+  ["platform/saas-invoices", "get"],
+  ["platform/saas-invoices/{id}/verify", "post"],
+  ["integrations/overview", "get"],
+  ["integrations/registry", "post"],
+  ["integrations/registry/{id}/disable", "post"],
+  ["integrations/events/{id}/review", "post"],
+  ["integrations/events/{id}/link-incident", "post"],
+  ["leo/work-items", "get,post"],
+  ...["draft", "approve", "execute", "cancel"].map((action) => [
+    "leo/work-items/{id}/" + action,
+    "post",
+  ]),
+])
+  add(path, methods, {
+    description:
+      "Authenticated v10 workflow. Role, plan, RLS and state checks apply; strict request DTO and provider limitations: docs/BACKEND_V10_API.md.",
+  });
+add("integrations/elenio/events", "post", {
+  publicRoute: true,
+  description:
+    "Disabled by default Daylio metadata bridge proposal; requires configured HMAC signature and timestamp, registered camera and deduplicated provider event ID. Not an official verified Elenio contract. See docs/BACKEND_V10_API.md.",
 });
 const spec = {
   openapi: "3.1.0",

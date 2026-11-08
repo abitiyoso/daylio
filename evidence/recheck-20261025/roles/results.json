@@ -1,0 +1,287 @@
+{
+  "at": "2026-10-25T11:15:05.388Z",
+  "environment": "Disposable local fixture only; no real email or permission mutation in this audit.",
+  "results": [
+    {
+      "role": "owner",
+      "view": "Anak & Keluarga",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "owner",
+      "view": "Anak & Keluarga",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "owner",
+      "view": "Akun & hak akses",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "owner",
+      "view": "Akun & hak akses",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "owner",
+      "view": "Jadwal & Booking",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "owner",
+      "view": "Jadwal & Booking",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "owner",
+      "view": "Tagihan Orang Tua",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "owner",
+      "view": "Tagihan Orang Tua",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "owner",
+      "view": "Administrasi daycare",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "owner",
+      "view": "Administrasi daycare",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "manager",
+      "view": "Data Anak",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "manager",
+      "view": "Data Anak",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "manager",
+      "view": "Akun & hak akses",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "manager",
+      "view": "Akun & hak akses",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "manager",
+      "view": "Control Tower",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "manager",
+      "view": "Control Tower",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "manager",
+      "view": "Aktivitas & Review",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "manager",
+      "view": "Aktivitas & Review",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "manager",
+      "view": "Administrasi daycare",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "manager",
+      "view": "Administrasi daycare",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "caregiver",
+      "view": "Anak Asuhan",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "caregiver",
+      "view": "Anak Asuhan",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "caregiver",
+      "view": "Catat Aktivitas",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "caregiver",
+      "view": "Catat Aktivitas",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "caregiver",
+      "view": "Penjemputan",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "caregiver",
+      "view": "Penjemputan",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "caregiver",
+      "view": "Serah Terima Shift",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "caregiver",
+      "view": "Serah Terima Shift",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "caregiver",
+      "view": "Administrasi daycare",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "caregiver",
+      "view": "Administrasi daycare",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "parent",
+      "view": "Care Passport",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "parent",
+      "view": "Care Passport",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "parent",
+      "view": "Anakku Hari Ini",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "parent",
+      "view": "Anakku Hari Ini",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "parent",
+      "view": "Izin Penjemputan",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "parent",
+      "view": "Izin Penjemputan",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "parent",
+      "view": "Pesan Daycare",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "parent",
+      "view": "Pesan Daycare",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "parent",
+      "view": "Cerita Harian",
+      "width": 1440,
+      "noOverflow": true,
+      "noLeakedValues": true
+    },
+    {
+      "role": "parent",
+      "view": "Cerita Harian",
+      "width": 390,
+      "noOverflow": true,
+      "noLeakedValues": true
+    }
+  ],
+  "errors": []
+}

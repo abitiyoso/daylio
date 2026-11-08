@@ -1,0 +1,9 @@
+Running access, iteration 1, isolated database/media
+Access UI loaded
+Form filled
+Admin UI creates persistent parent invitation; provider receives verification request; membership not activated before verification.
+Unverified identity denied; email link → verified session → invitation acceptance → private password → linked-child-only parent dashboard on mobile.
+Provider rejection returns explicit 503 without claiming delivery; successful request and invitation acceptance leave persistent audit evidence.
+Chosen password login works; used email proof rejected; wrong-account acceptance, revoked email send, parent privilege escalation and manager-to-manager invite denied.
+Three labeled V20 LEO simulation roles; separate login entry; desktop/mobile login screenshots.
+All selected browser suites passed; showcase unchanged; temporary data removed.
